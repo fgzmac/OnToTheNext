@@ -37,14 +37,16 @@ The product direction connects three jobs:
 
 | Priority | Goal | Boundaries |
 | --- | --- | --- |
-| Immediate | Develop and test the app for a November Japan-trip pilot with two travelers. | Comes first. Year, exact dates, cities, readiness deadline, devices, and detailed feature specifications remain open; confirmed capability choices apply. |
+| Immediate | Develop and test the app for a Japan-trip pilot including Tokyo, with two travelers and a late-November to early-December travel window. | Comes first. Month/day endpoints supplied in chat, not published here. Year, app-ready target, additional cities, devices, and detailed specifications remain unconfirmed; existing capability decisions apply. |
 | Ultimate | Launch commercially through a mobile app store or as a SaaS product, earning subscription and ad revenue. | Distribution approach, pricing, ad behavior, implementation timing, and launch date remain open. |
 
-See decisions **D-006 through D-010** in the [decision register](planning/decisions.md).
+See decisions **D-006 through D-011** in the [decision register](planning/decisions.md).
 
-The pilot is not a public-launch deadline. Japan is the first testing context, not a promise of nationwide coverage or a permanent Japan-only product. A successful trip would provide pilot evidence, not automatically validate customer demand or subscription revenue.
+The pilot is not a public-launch deadline. Japan is the first testing context, not a promise of nationwide coverage or a permanent Japan-only product. Tokyo is confirmed, but a Tokyo-only trip is not. A successful trip would provide pilot evidence, not automatically validate customer demand or subscription revenue.
 
-**Next discussion:** Q-004 — what date, including the year, should the app be ready for the first full test before the trip? The pilot group/count, project objective, revenue direction, and both hotel/transport support paths are answered; do not ask them again.
+**Timing:** The travel window spans approximately two weeks and crosses a month boundary. The year is provisionally assumed to be 2026 from the current planning context; it was not explicitly stated. A first complete test approximately two weeks before travel is PROPOSED, not approved and not a delivery guarantee. Exact private travel dates stay in the chat.
+
+**Next discussion:** Q-004 — review the proposed pre-trip test target using the concrete proposed date in the chat, with the year assumption explicit. The pilot group/count, project objective, revenue direction, both hotel/transport support paths, Tokyo destination, and supplied travel month/day endpoints are answered; do not ask them again.
 
 ## Planning workflow
 
@@ -86,7 +88,7 @@ Future implementation should use the approved planning documents as its basis. P
 
 No technology stack, database, authentication system, AI model, data provider, companion-permission model, sharing-access policy, complete pilot scope, or final commercial-release scope has been selected. Individual confirmed first-version capabilities, including D-010, must be preserved while those remaining decisions are made.
 
-The pilot's Japan context and two-traveler group are confirmed; its exact destination coverage and multi-city needs are not. Organizer-led collaboration remains a proposal. Google Places, Google Routes, and Ticketmaster were examples in the supplied concept, not selected integrations; their current capabilities, terms, coverage, and cost would need evaluation when relevant. Hotel and transport coverage does not select accommodation, transport-timetable, reservation, or price-comparison providers.
+The pilot's Japan/Tokyo context, month/day travel window, and two-traveler group are confirmed; additional destinations, multi-city needs, and local arrival/departure times are not. Calendar dates alone do not establish hotel nights or full activity days. Organizer-led collaboration remains a proposal. Google Places, Google Routes, and Ticketmaster were examples in the supplied concept, not selected integrations; their current capabilities, terms, coverage, and cost would need evaluation when relevant. Hotel and transport coverage does not select accommodation, transport-timetable, reservation, or price-comparison providers.
 
 Subscription and ad revenue are confirmed intentions, not a finalized free/paid tier model or authorization to implement billing/ads now. A pilot without monetization is a proposed scope boundary to review, not an already approved feature exclusion. App-store or SaaS delivery has not settled the pilot's platform or technical architecture.
 
@@ -94,7 +96,7 @@ A proposed exclusion of in-app booking/payment does not exclude organizing exist
 
 ## Public repository
 
-This repository is public. Record only minimum non-sensitive milestone context and anonymous pilot profiles. Keep credentials, detailed private travel schedules, companion names, private booking information, identifying research responses, and other sensitive material out of commits. Use fictional or redacted examples for planning and testing.
+This repository is public. Record only minimum non-sensitive milestone context and anonymous pilot profiles. Keep exact private travel dates, detailed schedules, credentials, companion names, private booking information, identifying research responses, and other sensitive material out of commits. Use fictional or redacted examples for planning and testing. Omitted private dates are not missing user input; consult the planning conversation rather than asking the owner to repeat them.
 
 ## Update rules
 
