@@ -17,12 +17,14 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 | D-003 | Complete the design phase before using Codex for implementation. | CONFIRMED | 2026-09-19 |
 | D-004 | Maintain planning documents in `fgzmac/OnToTheNext`. | CONFIRMED | 2026-09-19 |
 | D-005 | Use the supplied Discover / Organize / Delight concept as the product's starting direction. | CONFIRMED at concept level | 2026-09-19 |
-| D-006 | Prioritize developing and testing the app for a November Japan-trip pilot before commercial launch. | CONFIRMED; timing clarified in D-011 | 2026-09-19 |
+| D-006 | Prioritize developing and testing the app for a November Japan-trip pilot before commercial launch. | CONFIRMED; timing clarified in D-011 through D-013 | 2026-09-19 |
 | D-007 | Ultimately launch commercially through a mobile app store or as SaaS, with subscriptions and ads as intended revenue sources. | CONFIRMED direction; platform and implementation OPEN | 2026-09-19 |
 | D-008 | The initial pilot audience is a couple: two travelers total, one organizer and one companion. | CONFIRMED for pilot | 2026-09-19 |
 | D-009 | The app/service must account for hotels and transportation as well as activities. | CONFIRMED; support paths clarified in D-010 | 2026-09-19 |
 | D-010 | For both hotels and transportation, the first version must organize existing bookings and recommend options before booking. | CONFIRMED at capability level | 2026-09-19 |
-| D-011 | Tokyo is a confirmed pilot destination; the stated travel window spans late November through early December. | CONFIRMED context; year and app-ready target not confirmed | 2026-09-19 |
+| D-011 | Tokyo is a confirmed pilot destination; the stated travel window spans late November through early December. | CONFIRMED context; planning calendar and target subsequently settled in D-012 | 2026-09-19 |
+| D-012 | Target November 10, 2026 for the first complete pre-trip test. | CONFIRMED planning target, not a delivery guarantee | 2026-09-19 |
+| D-013 | Tokyo-local arrival/departure times have been supplied; the pilot includes partial arrival and departure days. | CONFIRMED user-supplied context; exact details retained in chat | 2026-09-19 |
 
 ## D-001 — Sequential blueprint planning
 
@@ -64,7 +66,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Source:** The owner's instruction that Codex will be used once the design phase is done.
 
-**Boundaries:** No application stack, database, authentication model, API provider, or AI component is selected by this decision. The present planning setup is documentation-only, not permission to scaffold or deploy the app.
+**Boundaries:** No application stack, database, authentication model, API provider, or AI component is selected by this decision. The present planning setup is documentation-only, not permission to scaffold or deploy the app. Approval of the test target in D-012 does not itself approve the transition to implementation.
 
 **Working interpretation:** Design completion means sufficiently defined direction, first-release scope, main experiences, important constraints/risks, and first buildable feature, followed by explicit approval of the transition. It does not require fully specifying all future features. This interpretation should be reviewed with the owner before transition.
 
@@ -80,7 +82,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Verified repository facts at setup:** Default branch `main`; visibility public. These are observations of repository metadata on 2026-09-19, not immutable product decisions.
 
-**Boundaries:** The repository name does not automatically become the final app name. Public repository visibility does not authorize public user itineraries or publication of sensitive information. No credentials, personal booking details, or identifying research responses should be committed.
+**Boundaries:** The repository name does not automatically become the final app name. Public repository visibility does not authorize public user itineraries or publication of sensitive information. No credentials, personal booking details, exact private travel dates/times, or identifying research responses should be committed. An approved software-testing milestone may be recorded without publishing a flight schedule.
 
 **Current organization:** README, the reusable blueprint, the active product brief, this decision register, and the open-question register. Additional section documents are added when needed.
 
@@ -110,9 +112,9 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Reason:** The owner has selected a concrete real-use scenario for the first test.
 
-**Confirmed implications:** The project owner is the initial organizer/tester. Japan is the initial pilot context. Planning should distinguish the pilot from a public commercial release. D-003 still applies: design precedes implementation with Codex. The companion group, originally open, was subsequently confirmed under D-008; hotel/transport capabilities were clarified under D-009/D-010. D-011 subsequently confirms Tokyo and a travel window extending into December; the exact month/day endpoints were supplied in the chat and are deliberately omitted from the public record.
+**Confirmed implications:** The project owner is the initial organizer/tester. Japan is the initial pilot context. Planning should distinguish the pilot from a public commercial release. D-003 still applies: design precedes implementation with Codex. The companion group, originally open, was subsequently confirmed under D-008; hotel/transport capabilities were clarified under D-009/D-010. D-011 confirms Tokyo and a travel window extending into December. D-012 confirms the dated 2026 testing target; D-013 records receipt of local travel times. Exact private travel dates/times are deliberately omitted from the public record.
 
-**Boundaries:** The year, app-ready target, additional destinations, local arrival/departure times, detailed feature specifications, data coverage, device support, and pilot distribution mechanism are not explicitly confirmed. The trip is not a public-launch deadline. The choice does not promise all-Japan coverage, permanently restrict the app to Japan, approve single-city limitations, or require subscriptions/ads in the pilot.
+**Boundaries:** Additional destinations, airports, transfer durations, detailed feature specifications, data coverage, device support, and pilot distribution mechanism remain open. The trip is not a public-launch deadline. The choice does not promise all-Japan coverage, permanently restrict the app to Japan, approve single-city limitations, or require subscriptions/ads in the pilot.
 
 **Evidence limits:** A selected trip is a testing opportunity, not a completed test. It does not establish broader demand, willingness to pay, or technical feasibility.
 
@@ -120,7 +122,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Affected documents:** Product brief, README, decision register, open-question register. Later sections should use this priority when resolving scope and risks.
 
-**Related questions:** Q-002 resolved; Q-003 subsequently resolved for the pilot under D-008; Q-004 and Q-008 partially informed; Q-005 and the remaining detailed Q-301/Q-302 scope still open.
+**Related questions:** Q-002 resolved; Q-003 resolved for the pilot under D-008; Q-004 timing target subsequently approved under D-012; Q-004 budget/capacity and Q-008 partially open; Q-005 and the remaining detailed Q-301/Q-302 scope still open.
 
 **Revisit when:** Trip needs, timing, evidence, or the owner's explicit priorities change.
 
@@ -213,7 +215,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Affected documents:** Product brief, README, decision register, open-question register.
 
-**Related questions:** Q-009 resolved. Remaining detailed behavior in Q-209; coverage and acceptance conditions in Q-301/Q-302/Q-305; sourcing and concepts in Q-402/Q-404. Q-004's pilot-ready target remains the active discussion.
+**Related questions:** Q-009 resolved. Remaining detailed behavior in Q-209; coverage and acceptance conditions in Q-301/Q-302/Q-305; sourcing and concepts in Q-402/Q-404. Q-004's target was subsequently approved in D-012; its budget and capacity questions remain open.
 
 **Revisit when:** The owner changes the requirement or evidence requires an explicit scope decision.
 
@@ -225,15 +227,51 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Source:** The owner's travel-date clarification following the question about a first full test. No external booking data was accessed or published.
 
-**Year:** Not explicitly stated. 2026 is an ASSUMPTION from the current planning context, not a confirmed user decision.
+**Year and target history:** At this decision, the year was unstated and 2026 was a working assumption; a pre-trip test was proposed but not approved. D-012 subsequently records explicit acceptance of November 10, 2026 as the first complete test target and establishes the 2026 pilot planning calendar. D-013 subsequently records supplied Tokyo-local travel times.
 
-**Boundaries:** The travel dates are not an approved software-readiness date or a public-launch commitment. Tokyo being named does not establish a Tokyo-only itinerary, a particular airport, flight timing, accommodation nights, or full sightseeing days. Additional destinations remain open.
+**Boundaries:** Travel dates alone did not approve a software target; the approval is separately recorded in D-012. Neither establishes a public-launch commitment. Tokyo being named does not establish a Tokyo-only itinerary, a particular airport, accommodation nights, transfer durations, or full sightseeing days. Additional destinations remain open.
 
-**Proposed next step:** A first full test approximately two weeks before travel, with time for fixes and repeat testing afterward. The concrete proposed date is in the chat; neither that target nor any delivery guarantee has been approved.
+**Related questions:** Q-004 timing target is now settled under D-012; budget and capacity remain open. Q-301 has Tokyo and a month-spanning pilot context; remaining coverage and detailed scheduling are open. Do not re-ask supplied travel endpoints simply because they are omitted from the public repository.
 
-**Related questions:** Q-004 is partially answered; readiness, year, budget, and capacity remain to be settled. Q-301 now has Tokyo and a month-spanning pilot context; remaining coverage and detailed scheduling remain open. Do not re-ask the supplied month/day endpoints simply because they are omitted from the public repository.
+**Revisit when:** The owner changes the test target, adds destinations, or changes travel plans.
 
-**Revisit when:** The owner confirms the year/testing target, adds destinations, or changes travel plans.
+## D-012 — Approved first complete test target
+
+**Question:** Does November 10, 2026 work as the target for the first complete test?
+
+**Decision:** Yes. Target **November 10, 2026** for the first complete pre-trip test.
+
+**Source of explicit approval:** The owner's “Yes” immediately following the dated milestone question. The previous response made the 2026 planning year explicit.
+
+**Reason:** Establish a concrete pre-trip testing milestone and leave a period for fixes and repeat testing before real use.
+
+**Calendar effect:** Use 2026 for this pilot's planning timeline; the prior year assumption and unapproved testing target are superseded at the planning level. Exact flight dates/times remain in the conversation rather than this public repository.
+
+**Boundaries:** This is an approved planning target, not a delivery guarantee, evidence of feasibility, a public release date, approval of every suggested feature, or permission to start implementation before the design transition under D-003. Scope, capacity, budget, acceptance criteria, and dependency feasibility still need evaluation. No reminder, calendar event, or automated task is requested or created by this decision.
+
+**Affected documents:** Product brief, README, decision register, open-question register. The blueprint's current-section status stays DRAFT.
+
+**Related questions:** Q-004 timing subquestion resolved. Next discuss the monthly budget for running/testing the app; remaining one-time costs and development/maintenance capacity stay open. Q-304 and Q-501/Q-502 will later define how the full test is evaluated.
+
+**Revisit when:** Scope or feasibility evidence requires an explicit target tradeoff, or the owner changes the milestone.
+
+## D-013 — Supplied Tokyo-local travel times
+
+**Question:** What time-of-day context must the pilot plan respect?
+
+**Confirmed context:** The owner supplied the arrival and departure clock times and explicitly described both as Tokyo local time. The arrival is late in the day and departure is around midday. Exact values and private date/time pairs remain in the planning conversation, not in repository files or commit messages.
+
+**Source:** The owner's timing clarification accompanying approval of D-012. These are user-supplied plans, not a live airline schedule check. Do not ask the owner to repeat the values just because they are absent from GitHub.
+
+**Proposed product implications:** Plan for partial arrival and departure days. Keep flight arrival distinct from reaching the hotel and being ready for activities. Keep flight departure distinct from leaving the hotel and reaching the airport. Determine transfers, airport-procedure buffers, check-in/out, and any rest preference when the needed information is available. Preserve the supplied destination-local time meaning rather than treating it as the organizer's home/browser time.
+
+**Boundaries:** No airport, airline, flight number, transfer mode/duration, check-in deadline, hotel, or sightseeing allocation is inferred. No booking access, location tracking, flight monitoring, reminder, or scheduling action is authorized. Exact buffer and scheduling rules remain proposals for later sections, not approved implementation specifications.
+
+**Affected documents:** Product brief, README, decision register, open-question register. Carry the timing distinctions into journey, scope, and test planning later without starting those sections now.
+
+**Related questions:** Timing context for Q-004 is supplied; detailed behavior in Q-201/Q-209, scheduling limits in Q-305, and representative tests in Q-352.
+
+**Revisit when:** Travel times change or routing/airport/hotel information makes a planning assumption more precise.
 
 ## Approval register
 
@@ -245,8 +283,9 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 | Pilot group: couple, two travelers | CONFIRMED for pilot | D-008 |
 | Hotels and transportation in product coverage | CONFIRMED at capability level | D-009 |
 | First-version hotel/transport organization and recommendations | CONFIRMED at capability level | D-010 |
-| Tokyo and stated month/day travel window | CONFIRMED context; exact private dates omitted | D-011 |
-| Calendar year and pre-trip testing target | NOT CONFIRMED — assumption/proposal | None |
+| Tokyo and stated travel window | CONFIRMED context; exact private dates omitted | D-011 |
+| First complete test: November 10, 2026 | APPROVED planning target; not a delivery guarantee | D-012 |
+| Tokyo-local arrival/departure timing | CONFIRMED user-supplied context; exact times omitted | D-013 |
 | Sections 2–15 | NOT STARTED | None |
 | Complete pilot and first-public-release feature scope | NOT APPROVED; individual decisions above apply | None for complete scope |
 | Technical architecture and stack | NOT SELECTED | None |
@@ -255,9 +294,9 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 ## Proposals that must not be mistaken for decisions
 
-Organizer-led editing with companion suggestions; shared links that show only published updates; private unfinished edits; companion access without installation or accounts; Keep as interest rather than mandatory scheduling; explicit must-dos and locked commitments; the exact limited-destination scope; Just exploring mode; provider choices; AI involvement; advanced same-day changes; multi-city support; booking/payment integrations; an ads/billing-free pilot; pricing and ad placements; native or web-first delivery; booking imports, supported transport modes, recommendation criteria, and exact scheduling rules; the pre-trip test target. The calendar year remains a working assumption.
+Organizer-led editing with companion suggestions; shared links that show only published updates; private unfinished edits; companion access without installation or accounts; Keep as interest rather than mandatory scheduling; explicit must-dos and locked commitments; the exact limited-destination scope; Just exploring mode; provider choices; AI involvement; advanced same-day changes; multi-city support; booking/payment integrations; an ads/billing-free pilot; pricing and ad placements; native or web-first delivery; booking imports, supported transport modes, recommendation criteria, exact scheduling rules, and airport/transfer buffers.
 
-Many are coherent with the base idea. Coherence is not approval. Their detailed behavior, initial scope, and evidence will be addressed in the appropriate section. The Japan pilot, subscription/ad intent, two-traveler pilot, hotel/transport inclusion, both first-version support paths, and Tokyo/travel-window context are confirmed under D-006 through D-011, but do not finalize those detailed choices.
+Many are coherent with the base idea. Coherence is not approval. Their detailed behavior, initial scope, and evidence will be addressed in the appropriate section. The Japan pilot, subscription/ad intent, two-traveler pilot, hotel/transport inclusion, both first-version support paths, Tokyo/travel context, and dated test target are confirmed under D-006 through D-013, but do not finalize those detailed choices.
 
 ## New decision template
 
