@@ -4,9 +4,9 @@
 **Owner:** Project owner (`fgzmac`); assistant facilitates drafting.  
 **Phase:** Product design.  
 **Last updated:** 2026-09-19.  
-**Source:** The project owner's supplied travel-app concept, organizer-to-companion use case, Japan-pilot and commercial objectives, two-traveler pilot profile, and confirmation that hotels and transportation need both existing-booking organization and recommendations in the first version.  
+**Source:** The project owner's supplied travel-app concept, organizer-to-companion use case, Japan-pilot and commercial objectives, two-traveler pilot profile, confirmation of both hotel/transport support paths, and subsequent Tokyo/travel-window clarification.  
 **Related framework:** [Blueprint, Section 1](blueprint.md#1-product-vision-and-problem-brief).  
-**Next review trigger:** The owner's answer about the desired pilot-ready date, including the year (Q-004).  
+**Next review trigger:** The owner's response to the proposed first full test approximately two weeks before travel; calendar year remains a working assumption (Q-004).  
 **Approval record:** None yet.
 
 > Saving this draft does not approve every proposal it contains. CONFIRMED decisions, PROPOSED directions, ASSUMPTIONS, and OPEN questions are different states.
@@ -56,13 +56,15 @@ Our hypothesis is that organizers would benefit from completing these tasks in a
 
 The base scenario is an organizer preparing an upcoming trip with other people and moving from general ideas to a plan everyone can understand and use.
 
-**Confirmed initial testing context:** A Japan-trip pilot in November is the immediate development and testing goal. This takes priority over commercial launch. The travel year, exact dates, trip duration, cities, and pilot-ready deadline have not yet been explicitly confirmed; do not invent a public-launch deadline from the month alone. See D-006 and Q-004.
+**Confirmed initial testing context:** A Japan-trip pilot takes priority over commercial launch. Tokyo is a confirmed destination. The owner has supplied the outbound and return month/day endpoints in the planning conversation; the window begins in late November and ends in early December, with an approximately two-week calendar span. Exact private travel dates are deliberately not reproduced in this public repository. See D-006, D-011, and Q-004.
+
+The year was not explicitly stated. **2026 is a working assumption based on the current planning context, not a confirmed date.** The travel window does not set an approved app-testing target or public-launch deadline. Other destinations and actual arrival/departure times remain open; do not assume the entire trip is spent in Tokyo or that every calendar day is available for activities.
 
 The experience continues after sharing. During the trip, the group needs to consult the plan and may need to adjust an activity.
 
 A **Just exploring** mode could support people without dates, with date-specific verification when they commit. Its first-release inclusion remains undecided.
 
-**Status:** Upcoming group-trip planning and the Japan pilot are CONFIRMED. Exploring mode is PROPOSED.
+**Status:** Upcoming group-trip planning, Tokyo, and the stated month/day travel window are CONFIRMED. The year is an ASSUMPTION; the testing target and exploring mode remain PROPOSED or OPEN.
 
 ## 1.6 Current workaround
 
@@ -167,7 +169,7 @@ Mentioning an extension here does not commit it to the pilot or first commercial
 
 ### Immediate Japan pilot
 
-**Confirmed goal:** Develop and test the app for the November Japan trip before prioritizing a commercial launch. The pilot involves two travelers (D-008). This is a real-use testing milestone, not a commitment to publicly release a monetized app by November.
+**Confirmed goal:** Develop and test the app for the Japan trip beginning in November and ending in December before prioritizing a commercial launch. Tokyo is confirmed (D-011); the pilot involves two travelers (D-008). This is a real-use testing milestone, not a commitment to publicly release a monetized app by November.
 
 **Proposed pilot promise incorporating confirmed capabilities:**
 
@@ -177,19 +179,19 @@ The proposed complete test preserves all three product jobs: Discover, Organize,
 
 The first test does not necessarily require elaborate animation or many presentation styles. A minimum meaningful reveal and a usable trip view could test the principle.
 
-Japan is the confirmed pilot context, not a promise of nationwide coverage or a permanent Japan-only product. The actual cities, single-city versus multi-city needs, trip duration, scheduling guarantees, and supported devices are still OPEN. The two hotel/transport support paths are selected; exact modes, coverage, and behavior remain for later scope decisions. Do not silently exclude a required capability or trip need based on an earlier generic scope suggestion.
+Japan is the confirmed pilot context, not a promise of nationwide coverage or a permanent Japan-only product. Tokyo is included; additional cities, single-city versus multi-city needs, local activity-day availability, scheduling guarantees, and supported devices are still OPEN. The two hotel/transport support paths are selected; exact modes, coverage, and behavior remain for later scope decisions. Do not silently exclude a required capability or trip need based on an earlier generic scope suggestion.
 
 ### First commercial release
 
 The public release is a separate milestone. Its date, audience, platform, wider destination coverage, production requirements, and monetization behavior are not yet approved.
 
-**Status:** Pilot priority/group and both hotel/transport support paths are CONFIRMED at capability level (D-006, D-008, D-009, D-010). The complete pilot promise, detailed feature specifications, and first-commercial-release scope remain PROPOSED or OPEN. See Q-005, Q-301, Q-302, and Q-306.
+**Status:** Pilot priority/group, Tokyo, the stated travel window, and both hotel/transport support paths are CONFIRMED at context/capability level (D-006, D-008, D-009, D-010, D-011). The complete pilot promise, detailed feature specifications, and first-commercial-release scope remain PROPOSED or OPEN. See Q-005, Q-301, Q-302, and Q-306.
 
 ## 1.13 Explicit non-goals and presentation boundaries
 
 **Proposed first-release exclusions:** Broad worldwide coverage, complex multi-city travel, unrestricted group editing, group voting, advanced same-day replanning, and in-app booking/payment.
 
-These exclusions require approval; they are not already recorded as rejected features. In particular, the Japan pilot's city-to-city needs must be understood before deciding how much multi-city support is necessary.
+These exclusions require approval; they are not already recorded as rejected features. In particular, the Japan pilot's city-to-city needs must be understood before deciding how much multi-city support is necessary. Tokyo being named does not confirm a Tokyo-only trip.
 
 **Hotel/transport clarification:** A proposed exclusion of in-app booking/payment does not exclude organizing existing hotel stays or journeys, or recommending options. Those first-version capabilities are confirmed in D-010. Their inclusion does not approve selling, changing, or canceling reservations. Existing-plan organization, recommendations, and transactional booking are separate capabilities.
 
@@ -207,7 +209,7 @@ These boundaries will need observable criteria in later feature specifications.
 
 ## 1.14 Evidence and important assumptions
 
-**Established in this planning record:** The owner's concept, the three product responsibilities, the primary organizer-to-companion use case, the sequential planning process, the GitHub repository, the intended later implementation workflow, the Japan-first pilot priority, the longer-term subscription/ad-supported commercial ambition, the two-traveler couple pilot, and first-version support for both organizing existing hotel/transport bookings and recommending options.
+**Established in this planning record:** The owner's concept, the three product responsibilities, the primary organizer-to-companion use case, the sequential planning process, the GitHub repository, the intended later implementation workflow, the Japan-first pilot priority, the longer-term subscription/ad-supported commercial ambition, the two-traveler couple pilot, first-version support for both organizing existing hotel/transport bookings and recommending options, and the Tokyo/travel-window clarification.
 
 **Not documented:** Interviews, observed planning sessions, prototype findings, willingness to pay, comparative product research, real provider tests, or scheduling evaluation results. Choosing a real trip as the pilot does not mean testing has already happened.
 
@@ -230,7 +232,7 @@ These will become specific experiments in Section 5. No demand, cost, coverage, 
 
 | Priority | Objective | Status |
 | --- | --- | --- |
-| Immediate | Develop and test the app for the November Japan trip. | CONFIRMED — D-006 |
+| Immediate | Develop and test the app for the Japan trip beginning in November and ending in December. | CONFIRMED — D-006, clarified in D-011 |
 | Ultimate | Launch a commercial mobile app-store or SaaS product and earn subscription and advertising revenue. | CONFIRMED direction — D-007 |
 
 **Order of work:** The Japan pilot comes first. The commercial ambition should inform later design decisions without turning the pilot into a requirement to ship the entire commercial business at once.
@@ -247,25 +249,29 @@ These will become specific experiments in Section 5. No demand, cost, coverage, 
 
 **Confirmed process constraints:** Complete the blueprint sequentially; keep this workflow in design; maintain the planning documents in `fgzmac/OnToTheNext`; use Codex for implementation after the design phase.
 
-**Confirmed immediate context:** The November Japan pilot takes priority and has two travelers. Month, country, and anonymous pilot group are established; year, exact dates, pre-trip readiness date, and cities are not explicitly confirmed. Store only the minimum milestone information in this public repository; do not commit names, bookings, addresses, or detailed private travel schedules.
+**Confirmed immediate context:** The Japan pilot takes priority, includes Tokyo, and has two travelers. The owner supplied the travel month/day endpoints in the chat; the public planning record retains only a late-November to early-December, approximately two-week window. Do not ask for those endpoints again or interpret their absence from the repository as missing user input. Actual local arrival/departure times, nights of accommodation, and additional destinations are not established by these dates.
+
+**Working calendar assumption:** 2026, inferred from the current planning context. The owner has not explicitly confirmed the year. An assumption must not be promoted to a confirmed deadline.
+
+**Proposed readiness target:** First full end-to-end test approximately two weeks before the stated outbound date, followed by a period for fixes and repeat testing before travel. The concrete proposed date is discussed in the chat; it has not been approved. This is a planning target, not a guarantee of delivery or a public-launch date. Scope, capacity, and feasibility still need assessment. Do not reproduce exact private travel dates in this public repository.
 
 **Confirmed capability constraint:** The first version includes both existing-booking organization and recommendations for hotels and transportation (D-010). Exact transport modes, destination coverage, sourcing, and workflow detail are still open; they must be sized without quietly dropping either selected path.
 
-**Open delivery constraints:** Available development time, budget, maintenance capacity, supported devices, operating-cost limits, detailed pilot coverage, and commercial launch timing. See Q-004, Q-209, and Q-301/Q-302.
+**Open delivery constraints:** Available development time, budget, maintenance capacity, supported devices, operating-cost limits, remaining pilot coverage, and commercial launch timing. See Q-004, Q-209, and Q-301/Q-302.
 
 **Unselected technical decisions:** Stack, database, identity/access system, AI components, and external data providers. See Q-401.
 
 Google Places, Google Routes, and Ticketmaster in the supplied concept are candidates to investigate, not approved dependencies. Any actual selection requires current provider documentation, coverage, cost, and content-use evaluation. No accommodation, transport-timetable, reservation, or price-comparison provider has been selected either.
 
-**Repository visibility:** The repository was verified as public on 2026-09-19. Use fictional/redacted examples; do not commit credentials, private booking details, or identifying research responses. Public visibility does not mean the eventual app or its itineraries should be public.
+**Repository visibility:** The repository was verified as public on 2026-09-19. Use fictional/redacted examples; do not commit credentials, private booking details, exact private travel schedules, or identifying research responses. Public visibility does not mean the eventual app or its itineraries should be public.
 
 ## 1.17 Completion and next discussion
 
-This section is drafted, not finalized. The project objective, immediate priority, intended revenue direction, initial pilot group/count, hotel/transport coverage, and both first-version support paths are now confirmed. The broader commercial audience, practical constraints, evidence, and exact pilot/public-release promises still require decisions or explicit deferral.
+This section is drafted, not finalized. The project objective, immediate priority, intended revenue direction, initial pilot group/count, hotel/transport coverage, both first-version support paths, Tokyo destination, and travel month/day window are confirmed. The broader commercial audience, remaining constraints, evidence, and exact pilot/public-release promises still require decisions or explicit deferral.
 
-The immediate next question is the readiness portion of Q-004: **What date, including the year, should the app be ready for the first full test before the November trip?** This establishes a requested planning target, not a delivery guarantee or public-launch deadline. Exact travel timing, budget, and available development time can be addressed afterward within the same constraints topic; do not ask for all of them at once.
+The immediate next question remains the readiness portion of Q-004: **Does the proposed first complete test approximately two weeks before travel work as the planning target?** Ask using the concrete proposed date in the chat and make the 2026 assumption explicit. The travel-date answer does not automatically approve that target. Budget and available development time can be addressed afterward within the same constraints topic; do not ask for all of them at once.
 
-Continue through the remaining Section 1 questions one at a time. Do not re-ask Q-002, the pilot group/count in Q-003, the high-level Q-007, or the resolved Q-009. The broader-audience portion of Q-003 is tracked separately as Q-010. Do not jump to companion permissions or implementation. When the owner approves this section, update the approval record, decision register, question register, and blueprint tracker together.
+Continue through the remaining Section 1 questions one at a time. Do not re-ask the supplied travel month/day endpoints, Q-002, the pilot group/count in Q-003, the high-level Q-007, or the resolved Q-009. The broader-audience portion of Q-003 is tracked separately as Q-010. Do not jump to companion permissions or implementation. When the owner approves this section, update the approval record, decision register, question register, and blueprint tracker together.
 
 ## Revision record
 
@@ -275,3 +281,4 @@ Continue through the remaining Section 1 questions one at a time. Do not re-ask 
 | 2026-09-19 | Recorded the November Japan pilot as the first priority and commercial launch with subscriptions and ads as the ultimate goal; separated pilot and public-release decisions. | D-006 and D-007 confirmed; the section remains DRAFT. |
 | 2026-09-19 | Recorded the two-person couple pilot and required hotel/transport coverage; updated the proposed promise and queued the support-depth question. | D-008 and D-009 confirmed; detailed hotel/transport scope and the whole section remain unapproved. |
 | 2026-09-19 | Confirmed both existing-booking organization and recommendations for hotels and transportation in the first version; resolved Q-009 and moved the next discussion to the pilot-ready date. | D-010 confirmed at capability level; detailed specifications and Section 1 approval remain open. |
+| 2026-09-19 | Recorded Tokyo and the month-spanning travel window without publishing exact private dates; separated travel timing from the proposed pre-trip test target. | D-011 records confirmed context; year remains an assumption, test target proposed, and Section 1 DRAFT. |
