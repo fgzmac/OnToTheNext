@@ -17,6 +17,8 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 | D-003 | Complete the design phase before using Codex for implementation. | CONFIRMED | 2026-09-19 |
 | D-004 | Maintain planning documents in `fgzmac/OnToTheNext`. | CONFIRMED | 2026-09-19 |
 | D-005 | Use the supplied Discover / Organize / Delight concept as the product's starting direction. | CONFIRMED at concept level | 2026-09-19 |
+| D-006 | Prioritize developing and testing the app for a November Japan-trip pilot before commercial launch. | CONFIRMED | 2026-09-19 |
+| D-007 | Ultimately launch commercially through a mobile app store or as SaaS, with subscriptions and ads as intended revenue sources. | CONFIRMED direction; platform and implementation OPEN | 2026-09-19 |
 
 ## D-001 — Sequential blueprint planning
 
@@ -94,22 +96,72 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Revisit when:** The owner refines the vision or evidence challenges a core product assumption.
 
+## D-006 — Japan pilot comes first
+
+**Question:** What is the immediate objective, and how does it rank against commercial launch?
+
+**Decision:** Develop and test the app for a Japan trip in November. This is the immediate goal and takes priority over the ultimate commercial objective in D-007.
+
+**Source:** The owner's explicit statement that the app should first be developed and tested for the November Japan trip and that this immediate goal comes first.
+
+**Reason:** The owner has selected a concrete real-use scenario for the first test.
+
+**Confirmed implications:** The project owner is the initial organizer/tester. Japan is the initial pilot context. Planning should distinguish the pilot from a public commercial release. D-003 still applies: design precedes implementation with Codex.
+
+**Boundaries:** The year, exact trip dates, pilot-ready deadline, cities, duration, companion group, feature scope, data coverage, device support, and pilot distribution mechanism are not explicitly confirmed. November is not a public-launch deadline. The choice does not promise all-Japan coverage, permanently restrict the app to Japan, approve single-city limitations, or require subscriptions/ads in the pilot.
+
+**Evidence limits:** A selected trip is a testing opportunity, not a completed test. It does not establish broader demand, willingness to pay, or technical feasibility.
+
+**Public-record boundary:** Record the country and month as milestone context only. Do not add names, bookings, addresses, or detailed private travel schedules.
+
+**Affected documents:** Product brief, README, decision register, open-question register. Later sections should use this priority when resolving scope and risks.
+
+**Related questions:** Q-002 resolved; Q-003, Q-004, and Q-008 partially informed; Q-005 and Q-301/Q-302 still open.
+
+**Revisit when:** Trip needs, timing, evidence, or the owner's explicit priorities change.
+
+## D-007 — Commercial goal and intended revenue sources
+
+**Question:** What is the ultimate business objective?
+
+**Decision:** Launch the app commercially through a mobile app store or as a SaaS offering and make money from subscriptions and ads. The owner has not chosen between the distribution approaches.
+
+**Source:** The owner's explicit statement that the ultimate goal is app-store or SaaS launch with subscription and advertising revenue.
+
+**Reason:** Commercialization and revenue are the stated long-term goals, not merely portfolio or personal-use objectives.
+
+**Priority:** D-006 comes first. Commercial ambitions inform later design without authorizing immediate commercial implementation.
+
+**Confirmed versus unconfirmed:** Subscription and ad revenue are confirmed intentions. Pricing, billing intervals, free/paid entitlements, ad formats/placements, ad-free plans, vendors, implementation order, and when monetization enters the product remain OPEN. No extra revenue stream has been selected.
+
+**Distribution boundaries:** No operating system, native/web architecture, pilot delivery mechanism, platform order, app-store listing, hosting plan, or launch date is selected. App-store distribution and a SaaS business are not being treated as a settled technical architecture.
+
+**Evidence limits:** The goal is not a claim of profitability, customer demand, retention, or willingness to pay. Those require evaluation beyond the owner's own trip.
+
+**Affected documents:** Product brief, README, decision register, open-question register.
+
+**Related questions:** Q-002 and high-level Q-007 resolved. Detailed monetization is tracked in Q-306; validation in Q-354; platform/delivery in Q-401 and Q-407.
+
+**Revisit when:** Pilot findings, customer research, operating costs, applicable platform requirements, or the owner's priorities justify a business-model decision.
+
 ## Approval register
 
 | Item | Status | Approval evidence |
 | --- | --- | --- |
 | Blueprint as planning framework | Adopted | D-001 |
 | Section 1 completed product brief | NOT APPROVED — draft | None |
+| Immediate pilot priority and ultimate business direction | CONFIRMED at objective level | D-006 and D-007 |
 | Sections 2–15 | NOT STARTED | None |
-| First-release scope | NOT APPROVED | None |
+| Pilot and first-public-release feature scope | NOT APPROVED | None |
 | Technical architecture and stack | NOT SELECTED | None |
+| Monetization details and platform selection | NOT SELECTED | None |
 | Design-to-implementation transition | NOT APPROVED | None |
 
 ## Proposals that must not be mistaken for decisions
 
-Organizer-led editing with companion suggestions; shared links that show only published updates; private unfinished edits; companion access without installation or accounts; Keep as interest rather than mandatory scheduling; explicit must-dos and locked commitments; a limited-destination first release; Just exploring mode; provider choices; AI involvement; advanced same-day changes; multi-city support; booking/payment integrations.
+Organizer-led editing with companion suggestions; shared links that show only published updates; private unfinished edits; companion access without installation or accounts; Keep as interest rather than mandatory scheduling; explicit must-dos and locked commitments; the exact limited-destination scope; Just exploring mode; provider choices; AI involvement; advanced same-day changes; multi-city support; booking/payment integrations; an ads/billing-free pilot; pricing and ad placements; native or web-first delivery.
 
-Many are coherent with the base idea. Coherence is not approval. Their detailed behavior, initial scope, and evidence will be addressed in the appropriate section.
+Many are coherent with the base idea. Coherence is not approval. Their detailed behavior, initial scope, and evidence will be addressed in the appropriate section. The pilot's Japan context and commercial subscription/ad intent are confirmed under D-006/D-007, but do not finalize those detailed choices.
 
 ## New decision template
 
