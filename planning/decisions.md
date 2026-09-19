@@ -20,7 +20,8 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 | D-006 | Prioritize developing and testing the app for a November Japan-trip pilot before commercial launch. | CONFIRMED | 2026-09-19 |
 | D-007 | Ultimately launch commercially through a mobile app store or as SaaS, with subscriptions and ads as intended revenue sources. | CONFIRMED direction; platform and implementation OPEN | 2026-09-19 |
 | D-008 | The initial pilot audience is a couple: two travelers total, one organizer and one companion. | CONFIRMED for pilot | 2026-09-19 |
-| D-009 | The app/service must account for hotels and transportation as well as activities. | CONFIRMED product requirement; support depth OPEN | 2026-09-19 |
+| D-009 | The app/service must account for hotels and transportation as well as activities. | CONFIRMED; support paths clarified in D-010 | 2026-09-19 |
+| D-010 | For both hotels and transportation, the first version must organize existing bookings and recommend options before booking. | CONFIRMED at capability level | 2026-09-19 |
 
 ## D-001 — Sequential blueprint planning
 
@@ -108,9 +109,9 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Reason:** The owner has selected a concrete real-use scenario for the first test.
 
-**Confirmed implications:** The project owner is the initial organizer/tester. Japan is the initial pilot context. Planning should distinguish the pilot from a public commercial release. D-003 still applies: design precedes implementation with Codex. The companion group, originally open, was subsequently confirmed under D-008.
+**Confirmed implications:** The project owner is the initial organizer/tester. Japan is the initial pilot context. Planning should distinguish the pilot from a public commercial release. D-003 still applies: design precedes implementation with Codex. The companion group, originally open, was subsequently confirmed under D-008; hotel/transport capabilities were clarified under D-009/D-010.
 
-**Boundaries:** The year, exact trip dates, pilot-ready deadline, cities, duration, feature scope, data coverage, device support, and pilot distribution mechanism are not explicitly confirmed. November is not a public-launch deadline. The choice does not promise all-Japan coverage, permanently restrict the app to Japan, approve single-city limitations, or require subscriptions/ads in the pilot.
+**Boundaries:** The year, exact trip dates, pilot-ready deadline, cities, duration, detailed feature specifications, data coverage, device support, and pilot distribution mechanism are not explicitly confirmed. November is not a public-launch deadline. The choice does not promise all-Japan coverage, permanently restrict the app to Japan, approve single-city limitations, or require subscriptions/ads in the pilot.
 
 **Evidence limits:** A selected trip is a testing opportunity, not a completed test. It does not establish broader demand, willingness to pay, or technical feasibility.
 
@@ -118,7 +119,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Affected documents:** Product brief, README, decision register, open-question register. Later sections should use this priority when resolving scope and risks.
 
-**Related questions:** Q-002 resolved; Q-003 subsequently resolved for the pilot under D-008; Q-004 and Q-008 partially informed; Q-005 and Q-301/Q-302 still open.
+**Related questions:** Q-002 resolved; Q-003 subsequently resolved for the pilot under D-008; Q-004 and Q-008 partially informed; Q-005 and the remaining detailed Q-301/Q-302 scope still open.
 
 **Revisit when:** Trip needs, timing, evidence, or the owner's explicit priorities change.
 
@@ -174,7 +175,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Reason:** The owner expanded the product direction to include where travelers stay and how they move through the trip.
 
-**Confirmed versus open:** Inclusion is confirmed. Whether the first version organizes existing bookings, recommends options, or does both remains Q-009. Detailed pilot coverage, transport modes, cost tracking, and scheduling behavior will be specified after that product-level answer.
+**Confirmed versus open:** Inclusion was confirmed here. The initial choice between existing-booking organization and recommendations was left open as Q-009 and was subsequently resolved by D-010: both capabilities are required for both hotels and transportation in the first version. Detailed coverage, transport modes, cost tracking, and scheduling behavior remain open.
 
 **Proposed interpretation, not approved detail:** Hotel locations and stay dates could anchor the schedule; fixed journeys could constrain available activity time; local travel could connect stops; lodging and transport could contribute to the visible trip budget. These are planning considerations to discuss, not a completed feature specification.
 
@@ -182,9 +183,38 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Affected documents:** Product brief, README, decision register, open-question register. Carry the requirement into journeys, scope, risks, conceptual data, and integration planning when those sections begin; they remain NOT STARTED.
 
-**Related questions:** Q-009 is next; detailed behavior in Q-209, scope in Q-302/Q-303/Q-305, and sources/concepts in Q-402/Q-404.
+**Related questions:** Q-009 resolved under D-010; detailed behavior in Q-209, scope in Q-302/Q-303/Q-305, and sources/concepts in Q-402/Q-404.
 
-**Revisit when:** The owner clarifies the desired support level or feasibility evidence requires a scope tradeoff.
+**Revisit when:** The owner changes the desired support level or feasibility evidence requires an explicit scope tradeoff.
+
+## D-010 — Both existing-booking organization and recommendations
+
+**Question:** For hotels and transportation, should the first version organize bookings already made, recommend options before booking, or do both?
+
+**Decision:** Both. The first version must support existing-booking organization and recommendations for both hotels and transportation.
+
+**Source of explicit approval:** The owner's answer, “both,” to the immediately preceding question specifying these two capabilities for hotels and transportation. No different answer was supplied for either area.
+
+**Reason:** The owner selected support for planning around existing arrangements as well as finding options that have not yet been booked.
+
+**Required capability matrix:**
+
+| Area | Organize existing bookings | Recommend options before booking |
+| --- | --- | --- |
+| Hotels | Included in first version. | Included in first version. |
+| Transportation | Included in first version. | Included in first version. |
+
+**Boundaries:** This does not approve in-app booking, payments, reservation changes/cancellation, email or booking-account access, automatic imports, live prices/availability, a particular transport mode, a provider, an affiliate/commission model, or all-destination coverage. Entry methods, recommendation criteria, data verification, and booking handoffs remain to be specified. A recommendation is not confirmation that a booking has been made.
+
+**Scope effect:** Do not silently treat recommendations as a future-only capability or reduce the first version to a booking organizer. If later feasibility or timing requires a change, surface that tradeoff and obtain an explicit decision. This confirms capability inclusion, not the full feature specification or approval of Section 1.
+
+**Evidence limits:** This is a product choice, not a verified statement about data availability, recommendation quality, or development effort.
+
+**Affected documents:** Product brief, README, decision register, open-question register.
+
+**Related questions:** Q-009 resolved. Remaining detailed behavior in Q-209; coverage and acceptance conditions in Q-301/Q-302/Q-305; sourcing and concepts in Q-402/Q-404. Q-004's pilot-ready target is the next discussion.
+
+**Revisit when:** The owner changes the requirement or evidence requires an explicit scope decision.
 
 ## Approval register
 
@@ -195,17 +225,18 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 | Immediate pilot priority and ultimate business direction | CONFIRMED at objective level | D-006 and D-007 |
 | Pilot group: couple, two travelers | CONFIRMED for pilot | D-008 |
 | Hotels and transportation in product coverage | CONFIRMED at capability level | D-009 |
+| First-version hotel/transport organization and recommendations | CONFIRMED at capability level | D-010 |
 | Sections 2–15 | NOT STARTED | None |
-| Pilot and first-public-release feature scope | NOT APPROVED | None |
+| Complete pilot and first-public-release feature scope | NOT APPROVED; individual decisions above apply | None for complete scope |
 | Technical architecture and stack | NOT SELECTED | None |
 | Monetization details and platform selection | NOT SELECTED | None |
 | Design-to-implementation transition | NOT APPROVED | None |
 
 ## Proposals that must not be mistaken for decisions
 
-Organizer-led editing with companion suggestions; shared links that show only published updates; private unfinished edits; companion access without installation or accounts; Keep as interest rather than mandatory scheduling; explicit must-dos and locked commitments; the exact limited-destination scope; Just exploring mode; provider choices; AI involvement; advanced same-day changes; multi-city support; booking/payment integrations; an ads/billing-free pilot; pricing and ad placements; native or web-first delivery; hotel/transport recommendations, booking imports, supported transport modes, and exact scheduling rules.
+Organizer-led editing with companion suggestions; shared links that show only published updates; private unfinished edits; companion access without installation or accounts; Keep as interest rather than mandatory scheduling; explicit must-dos and locked commitments; the exact limited-destination scope; Just exploring mode; provider choices; AI involvement; advanced same-day changes; multi-city support; booking/payment integrations; an ads/billing-free pilot; pricing and ad placements; native or web-first delivery; booking imports, supported transport modes, recommendation criteria, and exact scheduling rules.
 
-Many are coherent with the base idea. Coherence is not approval. Their detailed behavior, initial scope, and evidence will be addressed in the appropriate section. The Japan pilot, subscription/ad intent, two-traveler pilot, and hotel/transport inclusion are confirmed under D-006 through D-009, but do not finalize those detailed choices.
+Many are coherent with the base idea. Coherence is not approval. Their detailed behavior, initial scope, and evidence will be addressed in the appropriate section. The Japan pilot, subscription/ad intent, two-traveler pilot, hotel/transport inclusion, and both first-version support paths are confirmed under D-006 through D-010, but do not finalize those detailed choices.
 
 ## New decision template
 
