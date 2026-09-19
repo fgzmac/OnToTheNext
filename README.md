@@ -5,6 +5,7 @@
 **Phase:** Product design and planning  
 **Current blueprint section:** 1 — Product Vision and Problem Brief  
 **Current section status:** Draft; not yet approved  
+**First complete test target:** November 10, 2026 — approved planning target  
 **Implementation:** Not started through this planning workflow  
 **Last updated:** 2026-09-19
 
@@ -37,16 +38,16 @@ The product direction connects three jobs:
 
 | Priority | Goal | Boundaries |
 | --- | --- | --- |
-| Immediate | Develop and test the app for a Japan-trip pilot including Tokyo, with two travelers and a late-November to early-December travel window. | Comes first. Month/day endpoints supplied in chat, not published here. Year, app-ready target, additional cities, devices, and detailed specifications remain unconfirmed; existing capability decisions apply. |
+| Immediate | First complete test targeted for November 10, 2026, ahead of the Japan-trip pilot including Tokyo and two travelers. | Target approved, not a delivery guarantee. Detailed feature specifications, capacity, costs, additional cities, and devices remain open. |
 | Ultimate | Launch commercially through a mobile app store or as a SaaS product, earning subscription and ad revenue. | Distribution approach, pricing, ad behavior, implementation timing, and launch date remain open. |
 
-See decisions **D-006 through D-011** in the [decision register](planning/decisions.md).
+See decisions **D-006 through D-013** in the [decision register](planning/decisions.md).
 
 The pilot is not a public-launch deadline. Japan is the first testing context, not a promise of nationwide coverage or a permanent Japan-only product. Tokyo is confirmed, but a Tokyo-only trip is not. A successful trip would provide pilot evidence, not automatically validate customer demand or subscription revenue.
 
-**Timing:** The travel window spans approximately two weeks and crosses a month boundary. The year is provisionally assumed to be 2026 from the current planning context; it was not explicitly stated. A first complete test approximately two weeks before travel is PROPOSED, not approved and not a delivery guarantee. Exact private travel dates stay in the chat.
+**Timing:** The owner approved **November 10, 2026** for the first complete test (D-012), establishing the 2026 pilot planning calendar. The late-November to early-December trip spans approximately two weeks and crosses a month boundary. The owner supplied Tokyo-local arrival/departure times (D-013): the pilot includes a late-day arrival and a midday departure. Exact private travel dates and clock times remain in the chat. The proposed scheduling approach should distinguish airport events, hotel arrival/departure, transfers, and usable activity time; exact rules and buffers remain open.
 
-**Next discussion:** Q-004 — review the proposed pre-trip test target using the concrete proposed date in the chat, with the year assumption explicit. The pilot group/count, project objective, revenue direction, both hotel/transport support paths, Tokyo destination, and supplied travel month/day endpoints are answered; do not ask them again.
+**Next discussion:** Q-004 — the monthly budget for running and testing the app, separate from the travel budget. The approved testing target/year, supplied travel timing, pilot group/count, project objective, revenue direction, and both hotel/transport support paths are answered; do not ask them again.
 
 ## Planning workflow
 
@@ -80,7 +81,7 @@ A confirmed product choice is not automatically a validated market assumption. A
 
 Codex will be used to implement the app after the design phase. Until that phase is explicitly approved as complete, work through this planning workflow is documentation-only: do not scaffold the app, choose a stack, install dependencies, provision services, implement endpoints, or create a database merely to fill a planning gap.
 
-Design completion means the product direction, first-release scope, main journeys, important constraints and risks, and first buildable delivery slice are sufficiently defined. It does **not** mean specifying every future feature.
+Design completion means the product direction, first-release scope, main journeys, important constraints and risks, and first buildable delivery slice are sufficiently defined. It does **not** mean specifying every future feature. Approval of a testing target is not approval of the design-to-implementation transition.
 
 Future implementation should use the approved planning documents as its basis. Proposed features, unresolved permissions, example providers, and hypothetical technical choices are not implementation instructions. Conflicts or missing product decisions must be surfaced rather than silently invented.
 
@@ -88,7 +89,7 @@ Future implementation should use the approved planning documents as its basis. P
 
 No technology stack, database, authentication system, AI model, data provider, companion-permission model, sharing-access policy, complete pilot scope, or final commercial-release scope has been selected. Individual confirmed first-version capabilities, including D-010, must be preserved while those remaining decisions are made.
 
-The pilot's Japan/Tokyo context, month/day travel window, and two-traveler group are confirmed; additional destinations, multi-city needs, and local arrival/departure times are not. Calendar dates alone do not establish hotel nights or full activity days. Organizer-led collaboration remains a proposal. Google Places, Google Routes, and Ticketmaster were examples in the supplied concept, not selected integrations; their current capabilities, terms, coverage, and cost would need evaluation when relevant. Hotel and transport coverage does not select accommodation, transport-timetable, reservation, or price-comparison providers.
+The pilot's Japan/Tokyo context, date window, local arrival/departure times, two-traveler group, and dated testing target are supplied or confirmed. Additional destinations, airports, transfer durations, hotel check-in/out, and practical activity windows are not. Flight times alone do not establish hotel-ready times or when to leave the hotel. Organizer-led collaboration remains a proposal. Google Places, Google Routes, and Ticketmaster were examples in the supplied concept, not selected integrations; their current capabilities, terms, coverage, and cost would need evaluation when relevant. Hotel and transport coverage does not select accommodation, transport-timetable, reservation, or price-comparison providers.
 
 Subscription and ad revenue are confirmed intentions, not a finalized free/paid tier model or authorization to implement billing/ads now. A pilot without monetization is a proposed scope boundary to review, not an already approved feature exclusion. App-store or SaaS delivery has not settled the pilot's platform or technical architecture.
 
@@ -96,7 +97,7 @@ A proposed exclusion of in-app booking/payment does not exclude organizing exist
 
 ## Public repository
 
-This repository is public. Record only minimum non-sensitive milestone context and anonymous pilot profiles. Keep exact private travel dates, detailed schedules, credentials, companion names, private booking information, identifying research responses, and other sensitive material out of commits. Use fictional or redacted examples for planning and testing. Omitted private dates are not missing user input; consult the planning conversation rather than asking the owner to repeat them.
+This repository is public. Record only minimum non-sensitive milestone context and anonymous pilot profiles. Keep exact private travel dates/times, detailed schedules, credentials, companion names, private booking information, identifying research responses, and other sensitive material out of commits. Use fictional or redacted examples for planning and testing. Omitted private travel values are not missing user input; consult the planning conversation rather than asking the owner to repeat them. The software-testing target is a project milestone, not a published flight schedule.
 
 ## Update rules
 
