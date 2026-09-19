@@ -15,7 +15,7 @@
 | Document | Purpose | Status |
 | --- | --- | --- |
 | [Planning blueprint](planning/blueprint.md) | The detailed, reusable framework for progressing from product vision to a buildable first release. | Adopted planning framework; not approval of every proposed feature. |
-| [Product vision and problem brief](planning/00-product-brief.md) | The current section, populated from the supplied app concept. | Draft for discussion. |
+| [Product vision and problem brief](planning/00-product-brief.md) | The current section, populated from the supplied app concept and confirmed objectives. | Draft for discussion. |
 | [Decision register](planning/decisions.md) | Explicitly confirmed decisions, with their reasoning and boundaries. | Maintained as decisions are made. |
 | [Open questions](planning/open-questions.md) | Unresolved questions organized by blueprint section. | Only the current section's questions are active. |
 
@@ -28,6 +28,19 @@ The product direction connects three jobs:
 - **Discover:** Help the organizer find experiences that fit the group.
 - **Organize:** Turn selected possibilities into realistic, enjoyable days.
 - **Delight:** Make receiving the itinerary personal and exciting without making practical trip details difficult to access.
+
+## Confirmed priorities
+
+| Priority | Goal | Boundaries |
+| --- | --- | --- |
+| Immediate | Develop and test the app for a November Japan-trip pilot. | Comes first. Year, exact dates, cities, readiness deadline, devices, and feature scope remain open. |
+| Ultimate | Launch commercially through a mobile app store or as a SaaS product, earning subscription and ad revenue. | Distribution approach, pricing, ad behavior, implementation timing, and launch date remain open. |
+
+See decisions **D-006** and **D-007** in the [decision register](planning/decisions.md).
+
+The pilot is not a public-launch deadline. Japan is the first testing context, not a promise of nationwide coverage or a permanent Japan-only product. A successful trip would provide pilot evidence, not automatically validate customer demand or subscription revenue.
+
+**Next discussion:** The initial pilot's companion group and traveler count (Q-003). The project objective and high-level revenue direction are answered; do not ask them again.
 
 ## Planning workflow
 
@@ -67,13 +80,15 @@ Future implementation should use the approved planning documents as its basis. P
 
 ## Current boundaries
 
-No technology stack, database, authentication system, AI model, data provider, companion-permission model, sharing-access policy, or final first-release scope has been selected.
+No technology stack, database, authentication system, AI model, data provider, companion-permission model, sharing-access policy, detailed pilot scope, or final commercial-release scope has been selected.
 
-A limited-destination first release and organizer-led collaboration are proposals, not confirmed commitments. Google Places, Google Routes, and Ticketmaster were examples in the supplied concept, not selected integrations; their current capabilities, terms, coverage, and cost would need evaluation when relevant.
+The pilot's Japan context is confirmed; its exact destination coverage and multi-city needs are not. Organizer-led collaboration remains a proposal. Google Places, Google Routes, and Ticketmaster were examples in the supplied concept, not selected integrations; their current capabilities, terms, coverage, and cost would need evaluation when relevant.
+
+Subscription and ad revenue are confirmed intentions, not a finalized free/paid tier model or authorization to implement billing/ads now. A pilot without monetization is a proposed scope boundary to review, not an already approved feature exclusion. App-store or SaaS delivery has not settled the pilot's platform or technical architecture.
 
 ## Public repository
 
-This repository is public. Keep credentials, personal travel details, private booking information, personal research responses, and other sensitive material out of commits. Use fictional or redacted examples for planning and testing.
+This repository is public. Record only minimum non-sensitive milestone context. Keep credentials, detailed private travel schedules, companion names, private booking information, identifying research responses, and other sensitive material out of commits. Use fictional or redacted examples for planning and testing.
 
 ## Update rules
 
