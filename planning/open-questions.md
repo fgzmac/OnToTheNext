@@ -3,7 +3,7 @@
 **Purpose:** Keep unresolved decisions visible without asking about every future feature at once.  
 **Current section:** 1 — Product Vision and Problem Brief.  
 **Last updated:** 2026-09-19.  
-**Next question to discuss:** Q-002 — primary project objective.
+**Next question to discuss:** Q-003 — the initial pilot's companion group and traveler count.
 
 Questions are grouped by their relevant blueprint stage. Later-stage questions are parked for sequencing; this does not mean the owner has approved deferring the associated feature from the release. Do not implement an unanswered question as an assumed default.
 
@@ -11,18 +11,20 @@ Questions are grouped by their relevant blueprint stage. Later-stage questions a
 
 Ask and resolve these one at a time. Use existing answers before asking for information again. The listed options are examples, not forced choices.
 
+**Already answered:** The immediate goal is developing and testing for a November Japan trip; the ultimate goal is commercial app-store or SaaS launch with subscription and ad revenue. See resolved Q-002/Q-007 and D-006/D-007. Do not re-ask those high-level choices.
+
 | ID | Question | Why it matters | Status |
 | --- | --- | --- | --- |
-| Q-002 | What is the primary goal of building this app: commercial launch, personal use, portfolio/learning, or a combination? If combined, which leads? | Guides scope, validation, cost limits, and launch expectations. | OPEN — next discussion |
-| Q-003 | Which organizers and companions should the first version serve especially well? | Narrows the initial audience without assuming friends, couples, families, or a demographic. | OPEN — Section 1 queue |
-| Q-004 | What development budget, ongoing cost limit, available time, launch expectations, and maintenance capacity should shape planning? | Establishes realistic project constraints without fabricating estimates. | OPEN — Section 1 queue |
-| Q-005 | Is the proposed first-release promise in the brief the right high-level outcome? What must be protected? | Aligns on the complete experience before the detailed scope section. | OPEN — Section 1 queue |
-| Q-006 | What real planning examples, observed frustrations, or potential tester access can inform the problem hypothesis? Which pain point is most important? | Separates the owner's concept from evidence of a user need. | OPEN — Section 1 queue |
-| Q-007 | Is there an initial business-model hypothesis, or should that decision explicitly remain open with a review trigger? | Prevents assumed subscriptions, ads, or booking commissions. | OPEN — Section 1 queue |
-| Q-008 | How should the first organizers and companions discover or test the product? | Establishes an initial distribution and validation path. | OPEN — Section 1 queue |
+| Q-003 | For the first pilot, what kind of companion group will use the itinerary, and how many travelers are there including the organizer? Which broader audience should eventually be served? | Defines the real first-use audience without assuming friends, couples, families, or a demographic. Names are unnecessary. | PARTIALLY ANSWERED — owner is initial organizer/tester; companion type/count is next discussion; commercial segment remains open |
+| Q-004 | What year, trip dates, and pre-trip readiness date define the November pilot target? What development budget, operating-cost limit, available time, and maintenance capacity apply? | Turns a month-level pilot target into usable constraints without inventing a deadline or publishing a private schedule. | PARTIALLY ANSWERED — November pilot first; year, exact dates, readiness deadline, budget, and capacity remain OPEN |
+| Q-005 | Is the proposed Japan-pilot promise in the brief the right high-level outcome? What must be protected, and what belongs only in a public release? | Aligns on the complete experience before the detailed scope section. | OPEN — Section 1 queue |
+| Q-006 | What real planning examples, observed frustrations, or potential tester access can inform the problem hypothesis? Which pain point is most important? | Separates the owner's concept from evidence of a user need. | OPEN — Japan trip supplies a context, not completed research |
+| Q-008 | How will the pilot be tested, how will companions participate, and how should later external testers or customers find the product? | Distinguishes first-use testing from broader validation and acquisition. | PARTIALLY ANSWERED — owner will test on Japan trip; companion participation, external testing, and acquisition remain OPEN |
 | Q-001 | Is OnToTheNext intended to be the app name, or only the repository name? | Avoids treating a repository label as an approved brand. | OPEN — not a reason to block product planning |
 
 The one-sentence description, problem statement, positioning, evidence gaps, non-goals, and long-term vision also require review before the section is approved. A short answer to one question does not automatically approve the rest of the brief.
+
+Detailed monetization choices are parked in Q-306, commercial validation in Q-354, and delivery/platform questions in Q-401/Q-407. Do not delay the current audience discussion by attempting to design billing or ads now.
 
 ## Section 2 — Users, Roles, and Ownership
 
@@ -52,19 +54,21 @@ The one-sentence description, problem statement, positioning, evidence gaps, non
 
 | ID | Question | Status |
 | --- | --- | --- |
-| Q-301 | What destinations, trip lengths, group sizes, date ranges, languages, and devices are initially supported? | OPEN — parked for Section 4 |
-| Q-302 | Which capabilities belong in the first complete test, first real release, and later backlog? | OPEN — parked for Section 4 |
-| Q-303 | Are multi-city travel, voting, advanced replanning, and booking/payments excluded initially? | OPEN — exclusions are proposals, not approved deferrals |
+| Q-301 | Which Japanese cities, trip lengths, group sizes, date ranges, languages, and devices must the pilot support? What differs for public release? | PARTIALLY INFORMED — Japan pilot confirmed; actual coverage/limits OPEN |
+| Q-302 | Which capabilities belong in the first complete test, working Japan pilot, first commercial release, and later backlog? | OPEN — milestones distinguished; feature allocation not approved |
+| Q-303 | Are multi-city travel, voting, advanced replanning, and booking/payments excluded initially? Which multi-city needs arise from the pilot? | OPEN — exclusions are proposals; do not assume the Japan trip is single-city |
 | Q-304 | Which completion, companion-usability, scheduling-quality, effort, and cost measures will be tracked? | OPEN — parked for Section 4 |
 | Q-305 | What does realistic scheduling promise, and which unknowns or manual checks must be disclosed? | OPEN — parked for Section 4 |
+| Q-306 | When should subscriptions and ads be implemented? What pricing, billing intervals, free/paid features, trials, ad placements, and ad-free behavior fit the approved release? | OPEN — subscription/ad intent confirmed; pilot inclusion and details not approved |
 
 ## Section 5 — Risks and Experiments
 
 | ID | Question | Status |
 | --- | --- | --- |
 | Q-351 | What observation would support or challenge the proposed value of personalized sharing? | OPEN — parked for Section 5 |
-| Q-352 | What real-data samples and manually checked itineraries should be used for feasibility tests? | OPEN — parked for Section 5 |
+| Q-352 | What real-data samples and manually checked itineraries should be used for feasibility tests? | OPEN — Japan pilot informs context; exact samples and tests remain OPEN |
 | Q-353 | Which risks must be resolved before implementation, and what are their test/fallback criteria? | OPEN — parked for Section 5 |
+| Q-354 | Beyond the owner's pilot, what evidence is needed for broader demand, recurring subscription value, willingness to pay, acceptable advertising, and sustainable operating costs? | OPEN — commercial objective is a goal, not validated revenue |
 
 ## Sections 6–8 — System, Dependencies, and API Capabilities
 
@@ -76,6 +80,7 @@ The one-sentence description, problem statement, positioning, evidence gaps, non
 | Q-404 | Which logical concepts and persistent states are needed, including saved activities, scheduled occurrences, and published versions? | OPEN — Section 6; schema later |
 | Q-405 | What performance, reliability, accessibility, privacy, retention, deletion, and abuse controls are required? | OPEN — Section 7 |
 | Q-406 | Which backend capabilities support the approved initial journeys? | OPEN — Section 8 |
+| Q-407 | How will the pilot be delivered, and which app-store/SaaS distribution path should the commercial product use? What platform, billing, and advertising requirements apply when relevant? | OPEN — evaluate current primary-source requirements later; do not assume native, web-first, operating system, or vendors |
 
 ## Sections 9–15 — Delivery Planning and Handoff
 
@@ -96,9 +101,11 @@ The one-sentence description, problem statement, positioning, evidence gaps, non
 | R-002 | Which planning process should be used? | The adopted blueprint, filled out sequentially in this chat. | D-001 |
 | R-003 | Where will planning be maintained? | `fgzmac/OnToTheNext`. | D-004 |
 | R-004 | When will Codex implementation begin? | After the design phase and explicit transition approval; no build date selected. | D-003 |
+| Q-002 | What is the primary project objective and priority? | Develop and test for the November Japan trip first; ultimately launch commercially through a mobile app store or as SaaS. Pilot and public launch are separate milestones. | D-006, D-007 — resolved 2026-09-19 |
+| Q-007 | What is the intended business-model direction? | Earn revenue from subscriptions and ads. Pricing, feature tiers, ad behavior, vendors, and implementation timing remain in Q-306/Q-407. | D-007 — direction resolved 2026-09-19 |
 
 ## Resolution procedure
 
 For each answer, record the answer in the active section. If it is an explicit choice, add the decision ID to the decision register. Mark the matching question answered and preserve its history. If the owner intentionally leaves something open, record why, who is responsible, and what will trigger review. Do not call a section approved until the owner approves that section.
 
-**Current next step:** Discuss Q-002, then continue the Section 1 brief one question at a time.
+**Current next step:** Discuss the pilot companion group and traveler count under Q-003, then continue the Section 1 brief one question at a time. Dates/year and readiness planning remain in Q-004; request only the information necessary for planning and keep detailed private travel schedules out of the public repository.
