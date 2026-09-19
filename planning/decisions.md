@@ -25,6 +25,8 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 | D-011 | Tokyo is a confirmed pilot destination; the stated travel window spans late November through early December. | CONFIRMED context; planning calendar and target subsequently settled in D-012 | 2026-09-19 |
 | D-012 | Target November 10, 2026 for the first complete pre-trip test. | CONFIRMED planning target, not a delivery guarantee | 2026-09-19 |
 | D-013 | Tokyo-local arrival/departure times have been supplied; the pilot includes partial arrival and departure days. | CONFIRMED user-supplied context; exact details retained in chat | 2026-09-19 |
+| D-014 | Use the supplied low/high trip-spending range excluding plane tickets; do not apply it to app-running costs. | Range/exclusion CONFIRMED; currency and per-person/group basis OPEN | 2026-09-19 |
+| D-015 | Account for events and restaurants that require reservations. | CONFIRMED planning requirement; detailed behavior OPEN | 2026-09-19 |
 
 ## D-001 — Sequential blueprint planning
 
@@ -82,7 +84,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Verified repository facts at setup:** Default branch `main`; visibility public. These are observations of repository metadata on 2026-09-19, not immutable product decisions.
 
-**Boundaries:** The repository name does not automatically become the final app name. Public repository visibility does not authorize public user itineraries or publication of sensitive information. No credentials, personal booking details, exact private travel dates/times, or identifying research responses should be committed. An approved software-testing milestone may be recorded without publishing a flight schedule.
+**Boundaries:** The repository name does not automatically become the final app name. Public repository visibility does not authorize public user itineraries or publication of sensitive information. No credentials, personal booking details, exact private travel dates/times, personal spending amounts, or identifying research responses should be committed. An approved software-testing milestone may be recorded without publishing a flight schedule.
 
 **Current organization:** README, the reusable blueprint, the active product brief, this decision register, and the open-question register. Additional section documents are added when needed.
 
@@ -122,7 +124,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Affected documents:** Product brief, README, decision register, open-question register. Later sections should use this priority when resolving scope and risks.
 
-**Related questions:** Q-002 resolved; Q-003 resolved for the pilot under D-008; Q-004 timing target subsequently approved under D-012; Q-004 budget/capacity and Q-008 partially open; Q-005 and the remaining detailed Q-301/Q-302 scope still open.
+**Related questions:** Q-002 resolved; Q-003 resolved for the pilot under D-008; Q-004 timing target approved under D-012; Q-004 app budget/capacity and Q-008 partially open; Q-005 and detailed Q-301/Q-302 scope still open. The supplied trip-spending range is separately recorded in D-014.
 
 **Revisit when:** Trip needs, timing, evidence, or the owner's explicit priorities change.
 
@@ -160,11 +162,11 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Reason:** This is the actual first-use group selected for the Japan pilot.
 
-**Boundaries:** This does not make the commercial product couples-only, impose a permanent two-person limit, assume identical interests, select a romantic theme, or decide who may edit, approve, or view information. The companion's actual participation in testing is still to be arranged.
+**Boundaries:** This does not make the commercial product couples-only, impose a permanent two-person limit, assume identical interests, select a romantic theme, or decide who may edit, approve, or view information. The companion's actual participation in testing is still to be arranged. It also does not determine whether a supplied spending range is per person or shared.
 
 **Affected documents:** Product brief, README, decision register, open-question register.
 
-**Related questions:** Q-003 resolved for the pilot; its broader commercial-audience question is retained as Q-010. Q-008, Q-101, and Q-106 remain open.
+**Related questions:** Q-003 resolved for the pilot; its broader commercial-audience question is retained as Q-010. Q-008, Q-101, Q-106, and budget basis in Q-011 remain open.
 
 **Revisit when:** Pilot participation changes or the owner chooses the wider target audience.
 
@@ -178,9 +180,9 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Reason:** The owner expanded the product direction to include where travelers stay and how they move through the trip.
 
-**Confirmed versus open:** Inclusion was confirmed here. The initial choice between existing-booking organization and recommendations was left open as Q-009 and was subsequently resolved by D-010: both capabilities are required for both hotels and transportation in the first version. Detailed coverage, transport modes, cost tracking, and scheduling behavior remain open.
+**Confirmed versus open:** Inclusion was confirmed here. The initial choice between existing-booking organization and recommendations was left open as Q-009 and was subsequently resolved by D-010: both capabilities are required for both hotels and transportation in the first version. Detailed coverage, transport modes, cost tracking, and scheduling behavior remain open. D-014 later provides range-based trip-budget input with airfare excluded, but does not approve every cost rule.
 
-**Proposed interpretation, not approved detail:** Hotel locations and stay dates could anchor the schedule; fixed journeys could constrain available activity time; local travel could connect stops; lodging and transport could contribute to the visible trip budget. These are planning considerations to discuss, not a completed feature specification.
+**Proposed interpretation, not approved detail:** Hotel locations and stay dates could anchor the schedule; fixed journeys could constrain available activity time; local travel could connect stops; lodging and transport could contribute to the visible trip budget. These are planning considerations, not a completed feature specification.
 
 **Boundaries:** This does not authorize making, modifying, or canceling reservations; taking payments; accessing booking accounts or email; promising live prices/availability; selecting providers; or adding a commission model. Planning around a booking and purchasing that booking are different capabilities. A proposed exclusion of in-app booking/payment does not exclude hotel/transport planning.
 
@@ -215,7 +217,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Affected documents:** Product brief, README, decision register, open-question register.
 
-**Related questions:** Q-009 resolved. Remaining detailed behavior in Q-209; coverage and acceptance conditions in Q-301/Q-302/Q-305; sourcing and concepts in Q-402/Q-404. Q-004's target was subsequently approved in D-012; its budget and capacity questions remain open.
+**Related questions:** Q-009 resolved. Remaining detailed behavior in Q-209; coverage and acceptance conditions in Q-301/Q-302/Q-305; sourcing and concepts in Q-402/Q-404. Q-004's target was approved in D-012; its app budget and capacity remain open.
 
 **Revisit when:** The owner changes the requirement or evidence requires an explicit scope decision.
 
@@ -231,7 +233,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Boundaries:** Travel dates alone did not approve a software target; the approval is separately recorded in D-012. Neither establishes a public-launch commitment. Tokyo being named does not establish a Tokyo-only itinerary, a particular airport, accommodation nights, transfer durations, or full sightseeing days. Additional destinations remain open.
 
-**Related questions:** Q-004 timing target is now settled under D-012; budget and capacity remain open. Q-301 has Tokyo and a month-spanning pilot context; remaining coverage and detailed scheduling are open. Do not re-ask supplied travel endpoints simply because they are omitted from the public repository.
+**Related questions:** Q-004 timing target is settled under D-012; app budget and capacity remain open. Q-301 has Tokyo and a month-spanning pilot context; remaining coverage and detailed scheduling are open. Do not re-ask supplied travel endpoints simply because they are omitted from the public repository.
 
 **Revisit when:** The owner changes the test target, adds destinations, or changes travel plans.
 
@@ -251,7 +253,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Affected documents:** Product brief, README, decision register, open-question register. The blueprint's current-section status stays DRAFT.
 
-**Related questions:** Q-004 timing subquestion resolved. Next discuss the monthly budget for running/testing the app; remaining one-time costs and development/maintenance capacity stay open. Q-304 and Q-501/Q-502 will later define how the full test is evaluated.
+**Related questions:** Q-004 timing subquestion resolved. Monthly app-running costs, one-time costs, and development/maintenance capacity remain open. D-014's later trip-spending answer does not resolve those app costs. Q-304 and Q-501/Q-502 will define how the full test is evaluated.
 
 **Revisit when:** Scope or feasibility evidence requires an explicit target tradeoff, or the owner changes the milestone.
 
@@ -263,7 +265,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Source:** The owner's timing clarification accompanying approval of D-012. These are user-supplied plans, not a live airline schedule check. Do not ask the owner to repeat the values just because they are absent from GitHub.
 
-**Proposed product implications:** Plan for partial arrival and departure days. Keep flight arrival distinct from reaching the hotel and being ready for activities. Keep flight departure distinct from leaving the hotel and reaching the airport. Determine transfers, airport-procedure buffers, check-in/out, and any rest preference when the needed information is available. Preserve the supplied destination-local time meaning rather than treating it as the organizer's home/browser time.
+**Proposed product implications:** Plan for partial arrival and departure days. Keep flight arrival distinct from reaching the hotel and being ready for activities. Keep flight departure distinct from leaving the hotel and reaching the airport. Determine transfers, airport-procedure buffers, check-in/out, and any rest preference when the needed information is available. Preserve destination-local time meaning rather than treating it as the organizer's home/browser time.
 
 **Boundaries:** No airport, airline, flight number, transfer mode/duration, check-in deadline, hotel, or sightseeing allocation is inferred. No booking access, location tracking, flight monitoring, reminder, or scheduling action is authorized. Exact buffer and scheduling rules remain proposals for later sections, not approved implementation specifications.
 
@@ -272,6 +274,50 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 **Related questions:** Timing context for Q-004 is supplied; detailed behavior in Q-201/Q-209, scheduling limits in Q-305, and representative tests in Q-352.
 
 **Revisit when:** Travel times change or routing/airport/hotel information makes a planning assumption more precise.
+
+## D-014 — Trip-spending range with plane tickets excluded
+
+**Question:** How should the new spending-range answer be recorded?
+
+**Confirmed input:** The owner requested a range, supplied lower and upper dollar-denominated amounts in chat, and explicitly excluded plane tickets. Preserve that input without inventing its currency or per-person/group basis. The numerical amounts stay in the conversation/private pilot configuration, not this public record.
+
+**Context and interpretation:** This answer followed a question about monthly app-running costs. The explicit airfare exclusion indicates trip spending instead. Record it as a traveler budget input, not an infrastructure allowance. The monthly app budget in Q-004 remains unanswered. This interpretation is visible to the owner and can be corrected; do not authorize spending based on it.
+
+**Product direction:** Support the chosen range and exclusion in the pilot's planning input. Do not silently replace the range with a single amount, assign it to app costs, or assume included categories beyond what the owner has specified.
+
+**Still OPEN:** Currency, whether the amount covers both travelers together or each person, whether it is total-trip or remaining spending, all category inclusions, upper-bound firmness, lower-bound meaning, and cost-display/calculation behavior. Q-011 addresses the immediate basis/currency ambiguity; Q-211 covers later detailed behavior.
+
+**Proposed safeguards:** Configurable inputs rather than hardcoded personal amounts; do not treat the lower bound as a required minimum spend; clarify before using the upper bound as a hard cap; show estimates and unknown prices honestly; separate shared/per-person and paid/remaining amounts; avoid counting deposits twice. Excluding airfare from a budget does not remove flight times from itinerary planning. These safeguards are proposals, not a complete accounting specification.
+
+**Evidence limits and boundaries:** No affordability conclusion, currency conversion, nightly/daily allowance, category allocation, or permission to spend is established. No provider, pricing source, expense-tracking integration, or financial transaction is selected.
+
+**Affected documents:** Product brief, README, decision register, open questions. Public records preserve the requirement and unresolved basis, not personal financial figures.
+
+**Related questions:** Q-004 app budget remains OPEN; Q-011 is next; detailed budget behavior in Q-211, scope in Q-308, and data/test considerations in Q-402/Q-404/Q-352.
+
+**Revisit when:** The owner clarifies the budget basis, included costs, or spending preferences.
+
+## D-015 — Reservation-aware events and restaurants
+
+**Question:** Should the plan account for events and restaurants that require reservations?
+
+**Decision:** Yes. Account for reservation requirements when planning events and restaurants.
+
+**Source:** The owner's explicit instruction to take into account events or restaurants requiring reservations, supplied with the spending-range answer.
+
+**Scope effect:** Carry the requirement into discovery, scheduling, and pilot scope. Do not silently treat reservation-dependent event/dining planning as unrelated future-only work. Detailed coverage, automation, and feature depth remain to be agreed.
+
+**Proposed product implications:** Distinguish reservation requirement, traveler booking state, and payment state. Show trusted booking instructions and known release/deadline information with local-time/source context; unknown is not available or booked. Keep an unconfirmed suggested slot tentative, protect confirmed timed commitments during replanning, and surface alternatives when booking is unavailable. Consider relevant deposits/fees without double-counting. Exact fields, rules, UI, sources, and acceptance criteria remain proposals.
+
+**Boundaries:** No automatic or in-app reservations, payments, cancellations, modifications, account/email access, availability guarantee, provider choice, release-date monitoring, notifications, or reminders are authorized by this requirement. No specific event/restaurant has been selected or externally verified, and no reservation has been made. An organizer's entered status and provider-verified status are not the same evidence.
+
+**Evidence limits:** This is a planning requirement, not proof that all required booking-window or availability data can be obtained, or that the requested scope fits the test target. Later feasibility findings may require an explicit tradeoff.
+
+**Affected documents:** Product brief, README, decision register, open questions; later journeys, scope, data, and verification planning.
+
+**Related questions:** Q-210 reservation behavior, Q-307 pilot depth, Q-305 scheduling, Q-355 data feasibility, and Q-402/Q-404 data sources and concepts. Inclusion itself is answered; do not re-ask it.
+
+**Revisit when:** The owner refines the reservation experience or source/coverage evidence requires an explicit scope decision.
 
 ## Approval register
 
@@ -286,6 +332,9 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 | Tokyo and stated travel window | CONFIRMED context; exact private dates omitted | D-011 |
 | First complete test: November 10, 2026 | APPROVED planning target; not a delivery guarantee | D-012 |
 | Tokyo-local arrival/departure timing | CONFIRMED user-supplied context; exact times omitted | D-013 |
+| Trip-budget range excluding plane tickets | INPUT RECORDED; currency and person/group basis OPEN | D-014 |
+| Event/restaurant reservation consideration | CONFIRMED planning requirement; details OPEN | D-015 |
+| Monthly app-running/testing budget | UNANSWERED; trip budget is not an app allowance | Q-004 |
 | Sections 2–15 | NOT STARTED | None |
 | Complete pilot and first-public-release feature scope | NOT APPROVED; individual decisions above apply | None for complete scope |
 | Technical architecture and stack | NOT SELECTED | None |
@@ -294,9 +343,9 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 ## Proposals that must not be mistaken for decisions
 
-Organizer-led editing with companion suggestions; shared links that show only published updates; private unfinished edits; companion access without installation or accounts; Keep as interest rather than mandatory scheduling; explicit must-dos and locked commitments; the exact limited-destination scope; Just exploring mode; provider choices; AI involvement; advanced same-day changes; multi-city support; booking/payment integrations; an ads/billing-free pilot; pricing and ad placements; native or web-first delivery; booking imports, supported transport modes, recommendation criteria, exact scheduling rules, and airport/transfer buffers.
+Organizer-led editing with companion suggestions; shared links showing only published updates; private unfinished edits; companion access without installation/accounts; Keep as interest rather than mandatory scheduling; must-dos/locked commitments; exact destination scope; Just exploring; provider/AI choices; advanced replanning; multi-city support; booking/payment integrations; an ads/billing-free pilot; pricing/ad placements; native or web-first delivery; imports; transport modes; recommendation criteria; scheduling and airport/transfer buffers; budget calculation/allocation rules; exact reservation/payment states; reminder/notification features.
 
-Many are coherent with the base idea. Coherence is not approval. Their detailed behavior, initial scope, and evidence will be addressed in the appropriate section. The Japan pilot, subscription/ad intent, two-traveler pilot, hotel/transport inclusion, both first-version support paths, Tokyo/travel context, and dated test target are confirmed under D-006 through D-013, but do not finalize those detailed choices.
+The confirmed concepts and inputs under D-006 through D-015 do not approve all detailed behavior. Trip-budget values are not an infrastructure allowance, and reservation awareness is not permission to make bookings. Coherent suggestions remain proposals until decided.
 
 ## New decision template
 
