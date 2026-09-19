@@ -31,20 +31,20 @@ The product direction connects three jobs:
 
 **Initial pilot audience:** A couple, **two travelers total**: one organizer and one companion (D-008). This does not make the commercial service couples-only, impose a two-person product limit, or decide companion permissions.
 
-**Hotels and transportation:** Inclusion in the app/service is confirmed (D-009). Organizing existing bookings, recommending options, and purchasing reservations are distinct capabilities; the initial support level has not been selected. No provider, live-price/availability guarantee, booking import, or direct transaction capability is approved by this requirement.
+**Hotels and transportation:** Both areas are included (D-009), and each must support **organizing existing bookings and recommending options before booking in the first version** (D-010). Purchasing reservations is a separate, undecided capability. No provider, live-price/availability guarantee, automatic booking import, or direct transaction capability is selected by these decisions.
 
 ## Confirmed priorities
 
 | Priority | Goal | Boundaries |
 | --- | --- | --- |
-| Immediate | Develop and test the app for a November Japan-trip pilot with two travelers. | Comes first. Year, exact dates, cities, readiness deadline, devices, and detailed feature scope remain open. |
+| Immediate | Develop and test the app for a November Japan-trip pilot with two travelers. | Comes first. Year, exact dates, cities, readiness deadline, devices, and detailed feature specifications remain open; confirmed capability choices apply. |
 | Ultimate | Launch commercially through a mobile app store or as a SaaS product, earning subscription and ad revenue. | Distribution approach, pricing, ad behavior, implementation timing, and launch date remain open. |
 
-See decisions **D-006 through D-009** in the [decision register](planning/decisions.md).
+See decisions **D-006 through D-010** in the [decision register](planning/decisions.md).
 
 The pilot is not a public-launch deadline. Japan is the first testing context, not a promise of nationwide coverage or a permanent Japan-only product. A successful trip would provide pilot evidence, not automatically validate customer demand or subscription revenue.
 
-**Next discussion:** Q-009 — should the first version organize existing hotel/transport bookings, recommend options to choose from, or do both? The pilot group/count, project objective, high-level revenue direction, and inclusion of hotels/transport are answered; do not ask them again.
+**Next discussion:** Q-004 — what date, including the year, should the app be ready for the first full test before the trip? The pilot group/count, project objective, revenue direction, and both hotel/transport support paths are answered; do not ask them again.
 
 ## Planning workflow
 
@@ -84,13 +84,13 @@ Future implementation should use the approved planning documents as its basis. P
 
 ## Current boundaries
 
-No technology stack, database, authentication system, AI model, data provider, companion-permission model, sharing-access policy, detailed pilot scope, or final commercial-release scope has been selected.
+No technology stack, database, authentication system, AI model, data provider, companion-permission model, sharing-access policy, complete pilot scope, or final commercial-release scope has been selected. Individual confirmed first-version capabilities, including D-010, must be preserved while those remaining decisions are made.
 
 The pilot's Japan context and two-traveler group are confirmed; its exact destination coverage and multi-city needs are not. Organizer-led collaboration remains a proposal. Google Places, Google Routes, and Ticketmaster were examples in the supplied concept, not selected integrations; their current capabilities, terms, coverage, and cost would need evaluation when relevant. Hotel and transport coverage does not select accommodation, transport-timetable, reservation, or price-comparison providers.
 
 Subscription and ad revenue are confirmed intentions, not a finalized free/paid tier model or authorization to implement billing/ads now. A pilot without monetization is a proposed scope boundary to review, not an already approved feature exclusion. App-store or SaaS delivery has not settled the pilot's platform or technical architecture.
 
-A proposed exclusion of in-app booking/payment is not an exclusion of hotel or transportation planning. The latter is a confirmed product requirement; the initial depth is the next product-level discussion.
+A proposed exclusion of in-app booking/payment does not exclude organizing existing hotel/transport bookings or recommending options. Both are confirmed first-version capabilities. Exact entry methods, recommendation behavior, modes, coverage, and data verification remain open. Do not silently defer one selected capability to a later release; any change requires an explicit scope decision.
 
 ## Public repository
 
