@@ -69,7 +69,7 @@ Whole Section 1 remains unapproved. The detailed brief and main register retain 
 
 | ID | Question | Status |
 | --- | --- | --- |
-| Q-201 | Smallest useful guided phone start/resume; suggestions before exhaustive input; unknown hotels/dates/time/budget and hotel-base question? | D-030 principle confirmed; exact flow/defaults/required inputs open. D-031/D-032 illustrate accepted choices leading to the next useful step without re-asking. |
+| Q-201 | Smallest useful guided start/resume; suggestions before exhaustive input; unknown hotels/dates/time/budget? | RESOLVED D-045 at journey level: short setup, immediate visual recommendations, progressive refinement. Exact copy/fields/states remain UI detail. |
 | Q-202 | Main-city selection/review/completion before optional destinations; route/day-trip/overnight previews? | D-027/D-028 confirmed; gate/navigation open. Personal baseline approved D-032; no universal city-night template. Core review is not all bookings paid. |
 | Q-203 | Keep/Replace/Must-do/Lock/Undo/completed/skipped and correction behavior? | OPEN; no automatic completion detection or broad dislike inference. |
 | Q-204 | Reasons, evidence, culture, value, time/effort, costs/reservations/uncertainty on phone? | OPEN controls; no invented badges/endorsements/discounts/live-price claims. |
