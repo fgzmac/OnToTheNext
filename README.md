@@ -3,7 +3,7 @@
 > An app that helps people discover experiences their travel group will enjoy, turn their choices into a realistic trip, and share a personalized itinerary that builds excitement and remains useful while traveling.
 
 **Phase:** Product design and planning  
-**Current blueprint section:** 1 — Product Vision and Problem Brief; DRAFT, not yet approved  
+**Current blueprint section:** 1 — Product Vision and Problem Brief; IN REVIEW, awaiting explicit approval  
 **Core interaction principle:** Offer useful ideas and refine them through user reactions rather than requiring users to invent the plan  
 **Immediate priority:** Build the actual Japan itinerary around the recorded must-do anchors and reservation-sensitive items without waiting for the app  
 **Core-city schedule:** Proposed Tokyo → Kyoto → Osaka → Tokyo baseline and night allocation approved under D-032; dated personal details remain in chat  
