@@ -4,7 +4,7 @@
 **Owner:** Project owner (`fgzmac`).  
 **Last updated:** 2026-09-19.  
 **Current phase:** Product design.  
-**Source:** Explicit statements in the planning conversation. Prior pricing references are in [App Budget Policy and Options](00-app-budget-options.md). Ranked standards, preference examples, and proposed evaluations are in [Product Success Standards](00-product-success-standards.md). No user testing or live provider integration test is recorded.
+**Source:** Explicit statements in the planning conversation. Prior pricing references are in [App Budget Policy and Options](00-app-budget-options.md). Ranked standards, preference examples, format choices, and proposed evaluations are in [Product Success Standards](00-product-success-standards.md). No user testing or live provider integration test is recorded.
 
 A commit is not a product approval. Recommendations copied into the base idea do not automatically become requirements. Each decision records only the part supported by the owner's actual direction.
 
@@ -30,7 +30,8 @@ A commit is not a product approval. Recommendations copied into the base idea do
 | D-016 | Trip-budget range is per person. | CONFIRMED basis; other meanings open | 2026-09-19 |
 | D-017 | Free first; flexible $100/$150 references; necessary spending reviewed; greater investment after owner acceptance. | CONFIRMED policy; no purchase approved | 2026-09-19 |
 | D-018 | Rank suggestion quality first, same-day nearby discovery/on-the-fly planning second, seamless functionality third. Same-day capability belongs in first version. | CONFIRMED priorities/capability; tests and acceptance open | 2026-09-19 |
-| D-019 | Initial organizer favors scenic, participatory, locally distinctive and multi-part experiences over the supplied novelty-object and standalone-statue examples. | STATED PREFERENCE RECORDED; not a universal rule or excursion-format decision | 2026-09-19 |
+| D-019 | Initial organizer favors scenic, participatory, locally distinctive and multi-part experiences over the supplied novelty-object and standalone-statue examples. | STATED PREFERENCE RECORDED; not a universal rule; formats subsequently settled by D-020 | 2026-09-19 |
+| D-020 | Offer both ready-made provider excursions and app-assembled combinations of separate activities. | CONFIRMED formats; shorter/all-day options are a user proposal, not fixed duration rules | 2026-09-19 |
 
 ## D-001 — Sequential blueprint planning
 
@@ -72,7 +73,7 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 **Source:** Owner's instruction to use Codex once the design phase is done.
 
-**Boundaries:** No stack, database, identity system, API provider, or AI component selected. This workflow remains documentation-only. Test-target, spending-policy, or quality-standard approval does not authorize implementation.
+**Boundaries:** No stack, database, identity system, API provider, or AI component selected. This workflow remains documentation-only. Test-target, spending-policy, quality-standard, or format approval does not authorize implementation.
 
 **Working interpretation:** Sufficiently define direction, first-release scope, main journeys, constraints/risks, and first buildable feature, followed by explicit transition approval. Do not specify all future features upfront. Review this interpretation with the owner at transition.
 
@@ -120,7 +121,7 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 **Reason:** A concrete real-use scenario for the first test.
 
-**Confirmed implications:** Owner is first organizer/tester. D-008 supplies two-person audience; D-009/D-010 supply hotel/transport support; D-011 clarifies Tokyo and a December end; D-012 confirms test target/calendar; D-013 supplies local travel times. Exact private values stay in chat. D-018 further defines first-version standards.
+**Confirmed implications:** Owner is first organizer/tester. D-008 supplies two-person audience; D-009/D-010 supply hotel/transport support; D-011 clarifies Tokyo and a December end; D-012 confirms test target/calendar; D-013 supplies local travel times. Exact private values stay in chat. D-018 further defines first-version standards; D-020 confirms both experience formats.
 
 **Boundaries:** Additional destinations, airports, transfers, detailed specifications, data coverage, devices, and delivery mechanism remain open. No nationwide/Japan-only promise, single-city restriction, public-launch deadline, or mandatory pilot billing/ads.
 
@@ -357,7 +358,7 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 **Acceptance gate:** D-018 subsequently defines the three standards and order; D-019 supplies initial organizer taste examples. Detailed tests/thresholds and acceptance remain open under Q-304/Q-502. A functioning demo, attractive screens, mock tests, or a calendar milestone do not establish acceptance. This gate is not satisfied merely by defining it.
 
-**Scope/evidence:** Preserve confirmed capabilities, now including D-018 same-day discovery. Free-first changes cost sequence, not requirements. Label simulations; they do not prove live event coverage, durable storage, correct routes, or travel readiness. Investigate paid dependencies early and surface quality/cost/scope conflicts. No unsafe data handling or false availability claims to maintain a free label.
+**Scope/evidence:** Preserve confirmed capabilities, including D-018 same-day discovery and D-020 experience formats. Free-first changes cost sequence, not requirements. Label simulations; they do not prove live event coverage, durable storage, correct routes, or travel readiness. Investigate paid dependencies early and surface quality/cost/scope conflicts. No unsafe data handling or false availability claims to maintain a free label.
 
 **Separate expenses:** Development subscriptions/overages, domains, enrollment, hardware, one-time purchases, and unpriced licenses outside runtime reference. Travel funds/rules unaffected; existing subscriptions are not reclassified as free.
 
@@ -423,19 +424,49 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 **Destination/evidence boundary:** No claim that snorkeling, ATV trips, or the illustrative combination is available or appropriate for the actual Tokyo pilot dates. No specific operator, event, itinerary, restaurant, inclusion, price, or reservation has been verified. The phrase about something local expresses the desired appeal; it is not permission to invent exclusivity or unsupported claims that an attraction exists nowhere else.
 
-**Capability clarification still OPEN — Q-012:** Recommending a ready-made provider excursion and assembling a suggested sequence of separate activities are different capabilities. The examples do not yet select one or both. The existing hotel/transport 'both' answer in D-010 was about different capabilities and must not be reused as approval of this new question.
+**Capability history — Q-012:** The examples alone did not settle ready-made provider excursions versus app-assembled sequences; that was left open here. D-020 subsequently records the owner's explicit selection of both. The earlier hotel/transport answer in D-010 was about a different question and was not used as approval of the excursion formats.
 
 **Proposed planning safeguards:** Clearly distinguish a real excursion product from an app-created combination. Check advertised inclusions for the former; for the latter show separate components, time/travel fit, cost basis, booking needs, and uncertainty. Combining options does not establish one ticket, one reservation, included food, or simultaneous availability. The same-day experience must still fit the time and commitments that apply.
 
-**Scope effect:** Refines the highest-priority quality standard without replacing D-018's order or removing other confirmed requirements. Does not approve package booking, automatic bundling, a recommendation algorithm, new sources, paid services, or implementation.
+**Scope effect:** Refines the highest-priority quality standard without replacing D-018's order or removing other confirmed requirements. This preference input alone did not approve package booking, automatic bundling, an algorithm, new sources, paid services, or implementation. D-020 now confirms both recommendation formats; those implementation boundaries remain.
 
 **Evidence limit:** Stated preferences from one organizer, not observed app use, attended experiences, a complete benchmark, market validation, or owner acceptance of a working product.
 
 **Affected:** Product brief, standards note, README, decision register, and open questions. Section 1 remains DRAFT.
 
-**Related questions:** Q-006 example subquestion answered; current workarounds and broader validation still open. Q-012 experience-format capability is next. Q-106 companion preferences, Q-204/Q-209/Q-210 presentation and reservation detail, Q-304/Q-352 recommendation evaluation, and Q-404 data distinctions remain for their later sections.
+**Related questions:** Q-006 example subquestion answered; current workarounds and broader validation still open. Q-012 subsequently resolved under D-020. Q-106 companion preferences, Q-204/Q-209/Q-210 presentation and reservation detail, Q-304/Q-352 recommendation evaluation, and Q-404 data distinctions remain for their later sections.
 
-**Revisit:** The owner clarifies experience format or preferences, the companion contributes their own tastes, or actual testing challenges the interpretation.
+**Revisit:** The owner clarifies preferences, the companion contributes their own tastes, or actual testing challenges the interpretation.
+
+## D-020 — Offer both experience formats; explore duration options
+
+**Question:** Should recommendations offer ready-made excursions, app-assembled combinations of separate activities, or both?
+
+**Decision:** Offer **both** ready-made provider excursions and app-assembled combinations. This resolves Q-012 at the capability level.
+
+**Source:** The owner's direct answer: “Offer both. Maybe shorter activities and all day activities.” The first sentence is an explicit format choice; the second is a tentative duration suggestion.
+
+**Reason:** Preserve the ability to discover an existing organized experience and to form a connected plan from separate activities, rather than choosing only one approach.
+
+**Format distinction:** A ready-made excursion is an actual provider offering with advertised inclusions and conditions. An app-assembled combination is a proposed sequence of independently sourced stops. Do not portray it as a single operator product, combined price, guaranteed availability, or one confirmed booking. No transaction capability follows from recommending either type.
+
+**Duration proposal, not a fixed requirement:** Explore shorter activities and all-day activities. No exact hour cutoffs, intermediate category, number of stops, default, or screen/filter has been chosen. Duration is independent of provider versus app-assembled format; neither format is inherently short or full-day. Do not interpret this as making every day full or excluding strong single activities.
+
+**Proposed fit checks:** Consider the user's usable time window, travel to/from relevant locations, included transfers, activity duration, breaks, entry times, reservations, and later commitments. Avoid double-counting travel already included by an operator. Do not truncate a fixed provider itinerary to force it to fit or claim precise total duration when material information is unknown. These are considerations for later journey and scheduling design, not a completed specification.
+
+**Scope effect:** Carry both confirmed formats into product and first-version planning; detailed minimum coverage and implementation still need sizing. Do not silently leave one out. Shorter/all-day options remain a proposal to evaluate when defining the experience, not a verified coverage promise or an approved set of buckets.
+
+**Boundaries:** No provider, API, ranking ratio, booking integration, automatic whole-trip changes, shared editing permission, paid service, current-trip recommendation, or implementation approval. Free-first policy D-017 and ranked standards D-018 are unchanged. The full Section 1 brief and product acceptance remain unapproved.
+
+**Evidence limit:** A product choice and a duration idea, not proof that suitable excursions or combinations exist for particular dates, or that both formats have real-time inventory. No external excursion/event lookup or reservation was performed.
+
+**Affected:** Product brief, standards note, README, decision register, and open questions. Section 1 remains DRAFT; later sections remain NOT STARTED.
+
+**Related questions:** Q-012 resolved; Q-006 current discovery/workarounds next. Q-212 covers duration and format presentation in Section 3. Q-302/Q-305 cover minimum depth and timing; Q-402/Q-404 cover evidence and conceptual distinctions; Q-304/Q-352 cover evaluation.
+
+**Supersedes:** The earlier open choice between these two experience formats. Does not turn the tentative duration suggestion into fixed scheduling or UI rules.
+
+**Revisit:** The owner refines duration needs, actual data reveals a scope tradeoff, or tests show that the distinction is unclear.
 
 ## Approval register
 
@@ -454,7 +485,8 @@ A commit is not a product approval. Recommendations copied into the base idea do
 | Ranked success standards | CONFIRMED priorities | D-018 |
 | First-version same-day nearby discovery | CONFIRMED capability; details open | D-018 |
 | Initial organizer's appealing/rejectable experience examples | RECORDED stated preference, not a global rule | D-019 |
-| Ready-made excursions versus app-assembled combinations | NOT SELECTED | Q-012 |
+| Ready-made excursions and app-assembled combinations | BOTH CONFIRMED; details open | D-020, Q-012 resolved |
+| Shorter and all-day duration options | USER PROPOSAL; cutoffs and behavior open | D-020, Q-212 |
 | Working product meets standards | NOT DEMONSTRATED OR ACCEPTED | Later tests and owner judgment required |
 | Numeric acceptance/freshness/latency criteria | NOT SELECTED | Q-304/Q-309 |
 | Sections 2–15 | NOT STARTED | None |
@@ -465,9 +497,9 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 ## Proposals not to mistake for decisions
 
-Organizer-led suggestion approval; publication/draft model; account-free access; exact Keep/Must-do/Lock behavior; detailed coverage; date-free exploration; provider/AI choices; automated whole-trip replanning; multi-city complexity; booking/payment integrations; pilot billing/ad exclusions; price tiers/ad placement; native/web-first delivery; imports; transport modes; detailed recommendation ranking; scheduling/airport buffers; trip cost formulas; reservation/payment state model; monitoring/reminders; numeric quality, coverage, and response targets; proposed cost controls; excursion-format selection and automatic activity bundling.
+Organizer-led suggestion approval; publication/draft model; account-free access; exact Keep/Must-do/Lock behavior; detailed coverage; date-free exploration; provider/AI choices; automated whole-trip replanning; multi-city complexity; booking/payment integrations; pilot billing/ad exclusions; price tiers/ad placement; native/web-first delivery; imports; transport modes; detailed recommendation ranking; scheduling/airport buffers; trip cost formulas; reservation/payment state model; monitoring/reminders; numeric quality, coverage, and response targets; proposed cost controls; duration buckets/filters and the exact activity-combination algorithm.
 
-Basic same-day nearby discovery is no longer a mere proposal. D-019's examples express the organizer's taste, not a universal definition of quality or the companion's preferences. Neither ranking nor flexible budget authorizes spending, data collection, transactions, or implementation. The original fixed-ceiling proposal is superseded. Preserve historical decisions while using later clarifications as the current direction.
+Basic same-day discovery and both experience formats are confirmed capabilities. D-019's examples express the organizer's taste, not a universal definition of quality or the companion's preferences. D-020's duration idea is still tentative. Neither ranking nor flexible budget authorizes spending, data collection, transactions, or implementation. The original fixed-ceiling proposal is superseded. Preserve historical decisions while using later clarifications as the current direction.
 
 ## New decision template
 
@@ -492,4 +524,4 @@ Related open questions:
 
 ## Maintenance rule
 
-Update affected documents/questions when an answer settles a choice. Update the section tracker only when the owner approves the section. Preserve superseded decisions and their reasoning rather than silently replacing history. A standard, milestone, or documentation commit is not product acceptance.
+Update affected documents/questions when an answer settles a choice. Update the section tracker only when the owner approves the section. Preserve superseded decisions and their reasoning rather than silently replacing history. A standard, milestone, format, or documentation commit is not product acceptance.
