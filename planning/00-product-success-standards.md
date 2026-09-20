@@ -1,14 +1,14 @@
 # Section 1 Supporting Note — Product Success Standards
 
-**Status:** Priority order, first-version same-day capability, and both experience formats CONFIRMED; owner preference examples RECORDED; shorter/all-day duration options PROPOSED; detailed behavior, metrics, and acceptance thresholds OPEN.  
+**Status:** Priority order, first-version same-day capability, and both experience formats CONFIRMED; owner preference examples and discovery sources RECORDED; shorter/all-day duration options PROPOSED; detailed behavior, metrics, and acceptance thresholds OPEN.  
 **Owner:** Project owner (`fgzmac`).  
 **Recorded:** 2026-09-19.  
-**Decisions:** D-018; D-019 clarifies the initial organizer's taste; D-020 confirms both recommendation formats.  
-**Related section:** [Product Vision and Problem Brief](00-product-brief.md), especially 1.7, 1.9, 1.12, and 1.16.  
-**Related questions:** Q-005, Q-006, resolved Q-012, Q-207, Q-212, Q-304, Q-309, Q-356.  
-**Source:** The owner's ranked standards, appealing/rejectable examples, and answer: “Offer both. Maybe shorter activities and all day activities.”  
-**Next discussion:** Current discovery sources and the most frustrating part of finding worthwhile experiences (Q-006).  
-**Evidence status:** These are stated preferences and product choices, not observed behavior. No product test, recommendation evaluation, live event search, or owner acceptance has been completed by writing this note.
+**Decisions:** D-018; D-019 clarifies the initial organizer's taste; D-020 confirms both recommendation formats; D-021 records valued discovery sources.  
+**Related section:** [Product Vision and Problem Brief](00-product-brief.md), especially 1.6, 1.7, 1.9, 1.12, and 1.16.  
+**Related questions:** Q-005, Q-006, resolved Q-012, Q-207, Q-212, Q-304, Q-309, Q-356, Q-402, Q-403.  
+**Source:** The owner's ranked standards, appealing/rejectable examples, format choice, duration idea, and account of discovery sources.  
+**Next discussion:** The most frustrating part of finding, checking, or organizing worthwhile experiences; the discovery-source portion of Q-006 is answered.  
+**Evidence status:** These are stated preferences and reported practices, not observed behavior. No product test, recommendation evaluation, live event search, or owner acceptance has been completed by writing this note.
 
 ## Confirmed order of importance
 
@@ -48,7 +48,7 @@ The owner has chosen quality as the highest priority. These dimensions are a pro
 | Decision usefulness | Is there enough concise information to accept or reject the option without reconstructing the recommendation from scratch? |
 | Useful variety | Are the choices meaningfully different and relevant rather than duplicates or filler? |
 
-Do not silently equate quality with popularity, high ratings, novelty, luxury, local authenticity, or hidden gems. A famous attraction can be a strong personal fit; an unusual event can be a poor fit. D-019 supplies initial organizer examples below; it does not establish universal ranking weights.
+Do not silently equate quality with popularity, high ratings, novelty, luxury, local authenticity, or hidden gems. A famous attraction can be a strong personal fit; an unusual event can be a poor fit. D-019 supplies initial organizer examples below; D-021 adds valued review and destination-highlight signals without establishing universal ranking weights.
 
 ### Initial organizer preference examples — D-019
 
@@ -66,6 +66,26 @@ Do not silently equate quality with popularity, high ratings, novelty, luxury, l
 **Single experiences and variety:** Do not automatically reject a strong single activity because it is not a bundle. Do not turn every free hour into a packed adventure sequence. Exact weighting and the desired mix remain open. A historical setting that hosts an engaging experience should not be discarded solely because it also contains a statue; the owner's willingness to choose it would still need evaluation.
 
 **Recommendation explanation proposal:** Describe what the traveler will actually do and see, why it fits their stated preferences, and what makes the setting distinctive when supported by evidence. Do not use generic excitement language or claim something exists nowhere else without support. Local distinctiveness does not automatically mean an obscure or exclusive attraction.
+
+### Discovery sources and evidence preferences — D-021
+
+The owner reports finding activities through **real experiences, positive Reddit posts, highly rated reviews, calendars covering relevant dates, and popular must-see or must-experience events associated with the destination**. Record these five inputs without replacing them with a generic search-only strategy. They describe sources and signals the owner values, not a completed integration design.
+
+| Reported source or signal | Proposed contribution to recommendations | Proposed verification or interpretation boundary |
+| --- | --- | --- |
+| Real experiences / firsthand accounts | Understand what someone actually did and what made it worthwhile. | Distinguish an account from a verified visit; the owner has not specified whether this means their own experiences, other travelers' accounts, or both. Do not invent a particular past trip. |
+| Positive posts on Reddit | Discover recommendations, practical details, and reasons travelers enjoyed an experience. | Check context, relevant dates, and whether the described activity/operator matches. Upvotes or positive sentiment alone do not establish current quality or availability. |
+| Highly rated reviews | Look for supporting evidence of a worthwhile experience. | Consider review content, recency, volume, and relevant caveats rather than only the average score. No star threshold, minimum count, or review platform is selected. |
+| Calendars for a particular time frame | Identify actual event occurrences during the trip or on the day being planned. | Distinguish publication date, event date/year, recurring editions, local admission windows, and cancellation information. A calendar listing does not establish ticket availability. |
+| Popular destination-related must-see experiences/events | Surface meaningful destination highlights, not only lesser-known options. | Explain why the experience fits this traveler. Popularity is evidence to consider, not mandatory itinerary inclusion or an instruction to reverse D-019's personal dislikes. |
+
+**Proposed sourcing approach:** Discover candidates from these sources; evaluate personal appeal; verify material logistics using current organizer, venue, operator, or booking information where appropriate; check practical fit; then present a concise recommendation with evidence and uncertainty. This is a proposal, not a selected supplier hierarchy or algorithm.
+
+Community praise can support perceived appeal while an organizer's current information supports dates and entry rules. Keep these evidence roles separate. Do not imply that Reddit posts or reviews confirm current reservations, nor that an official listing guarantees personal enjoyment. No single recommendation is required to have all five source types.
+
+**Proposed quality safeguards:** Retain useful critical caveats even when discovery begins from positive posts; avoid counting copied mentions as independent support; distinguish different editions or operators; disclose material conflicts and unknowns. Do not manufacture testimonials, ratings, source counts, or labels such as "Reddit recommended" without supporting retrieved evidence. Exact credibility rules, weighting, source display, and freshness thresholds remain open.
+
+**Access boundary:** Naming Reddit, reviews, or calendars does not approve scraping, paid APIs, account access, importing a user's history, copying posts/photos into the product, or training on community content. Evaluate suitable access, rights, attribution, retention, coverage, and cost in the dependency section. No posts, calendars, review records, or actual events were fetched or verified in this update.
 
 ### Both ready-made excursions and app-assembled plans — D-020
 
@@ -115,7 +135,7 @@ Open same-day discovery
 
 Location permission with a manual-area alternative remains a proposed design, not a grant of location access. Do not require a fully built multi-day itinerary merely to investigate a same-day option; the exact entry requirements remain to be decided.
 
-**Candidate information for each result:** What the experience is; why it fits; where it occurs; the event's relevant date and start/end or admission window; travel effort; estimated visit length and cost with their basis; reservation or ticket needs; a source; and freshness/verification context when available. D-020 adds the distinction between provider offerings and app-assembled plans; Q-212 covers duration presentation.
+**Candidate information for each result:** What the experience is; why it fits; where it occurs; the event's relevant date and start/end or admission window; travel effort; estimated visit length and cost with their basis; reservation or ticket needs; a source; and freshness/verification context when available. D-020 adds the distinction between provider offerings and app-assembled plans; Q-212 covers duration presentation. D-021 identifies valued discovery evidence, not guaranteed live event coverage.
 
 **Information distinctions to preserve in later specifications:**
 
@@ -143,11 +163,11 @@ These are proposed behaviors, not a finalized screen inventory or an assertion t
 
 **Candidate evaluation tasks:** Start planning, judge a suggestion, distinguish a provider excursion from an app-created plan, assess its time requirements, keep or replace an option, find something for today, preview a plan change, reopen saved work, and open the companion-facing itinerary. Existing hotel/transport and reservation-related requirements must also remain understandable.
 
-Observe completion, hesitation, repeated input, requests for help, errors, recovery, and the user's judgment of effort. Response-time and task-duration targets should be based on chosen journeys and then explicitly agreed. No number of taps, seconds, or screens is approved here.
+Observe completion, hesitation, repeated input, requests for help, errors, recovery, and the user's judgment of effort. Response-time and task-duration targets should be based on chosen journeys and then explicitly agreed. No number of taps, seconds, or screens is approved here. D-021 supplies reported discovery sources, but the owner's specific frustrations and actual organization process are still to be described.
 
 ## Free-first spending and evidence
 
-D-017 remains unchanged: prefer suitable free approaches and review any necessary spending specifically. These standards and format choices do not select providers or authorize purchases.
+D-017 remains unchanged: prefer suitable free approaches and review any necessary spending specifically. These standards, source preferences, and format choices do not select providers or authorize purchases.
 
 However, do not defer finding out whether adequate event data exists until after polishing the entire interface. The early feasibility question is whether we can obtain enough genuinely useful, timely local options for the supported pilot area under acceptable access, use, and cost conditions. Festivals and pop-ups are requirements to investigate, not claims of coverage by a particular service. Real excursion listings and app-assembled components also require suitable evidence.
 
@@ -155,12 +175,12 @@ Prepared-data prototypes and live-data checks answer different questions. A free
 
 ## Outstanding decisions and next step
 
-**Answered:** Ranked standards; first-version same-day discovery; initial organizer preference examples (D-019); offer both ready-made excursions and app-assembled combinations (D-020/Q-012).
+**Answered:** Ranked standards; first-version same-day discovery; initial organizer preference examples (D-019); offer both ready-made excursions and app-assembled combinations (D-020/Q-012); valued discovery sources and signals (D-021).
 
-**Proposed:** Shorter and all-day duration options, as suggested tentatively by the owner. Cutoffs, time-input controls, and total-time handling remain for Q-212.
+**Proposed:** Shorter/all-day duration options, time controls, source-checking workflow, review interpretation, and evidence presentation. Their detailed rules are not approved.
 
-**Open:** Detailed preference weights and companion preferences; minimum useful event/excursion coverage; location behavior; scheduling constraints; freshness/response targets; quantitative acceptance thresholds; and how the companion participates in validation. Current planning workarounds and broader demand still lack evidence.
+**Open:** The owner's specific current planning frustration and organization process; detailed preference weights and companion preferences; minimum event/excursion coverage; source access and verification; location behavior; scheduling constraints; freshness/response targets; quantitative acceptance; and companion validation. Self-reported sources are not observed task evidence or broader demand validation.
 
-The next Section 1 prompt is Q-006: **Where does the owner currently find experiences they like, and what is the most frustrating part of finding or organizing them?** This fills the current-workaround/problem evidence gap without repeating the supplied taste examples or the resolved format choice.
+The next Section 1 question is the remaining Q-006 pain point: **Which part takes the most effort now: finding worthwhile options, checking dates and booking requirements, or combining them into a practical plan?** These are examples, not assumed problems. Do not re-ask the sources, taste examples, or format choice.
 
-No app code, external event/excursion search, paid service, booking, or live test was created by this documentation update. Section 1 remains DRAFT, and later blueprint sections remain NOT STARTED.
+No app code, external event/excursion search, Reddit/review/calendar retrieval, paid service, booking, or live test was created by this documentation update. Section 1 remains DRAFT, and later blueprint sections remain NOT STARTED.
