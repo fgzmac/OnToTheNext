@@ -1,14 +1,14 @@
 # Section 1 Supporting Note — Product Success Standards
 
-**Status:** Priority order and first-version same-day capability CONFIRMED; detailed behavior, metrics, and acceptance thresholds PROPOSED / OPEN.  
+**Status:** Priority order and first-version same-day capability CONFIRMED; owner preference examples RECORDED; detailed behavior, metrics, and acceptance thresholds PROPOSED / OPEN.  
 **Owner:** Project owner (`fgzmac`).  
 **Recorded:** 2026-09-19.  
-**Decision:** D-018.  
+**Decisions:** D-018; D-019 clarifies the initial organizer's taste, not every traveler's preferences.  
 **Related section:** [Product Vision and Problem Brief](00-product-brief.md), especially 1.7, 1.9, 1.12, and 1.16.  
-**Related questions:** Q-005, Q-006, Q-207, Q-304, Q-309, Q-356.  
-**Source:** The owner's ordered answer to the question about the three most important things the first version must do well.  
-**Next discussion:** What makes an individual suggestion worth adding, and what makes the owner reject it?  
-**Evidence status:** No product test, recommendation evaluation, live event search, or owner acceptance has been completed by writing this note.
+**Related questions:** Q-005, Q-006, Q-012, Q-207, Q-304, Q-309, Q-356.  
+**Source:** The owner's ranked success standards and subsequent examples of appealing and rejectable experiences.  
+**Next discussion:** Ready-made excursions, app-assembled combinations of separate activities, or both (Q-012).  
+**Evidence status:** These are stated preferences, not observed behavior. No product test, recommendation evaluation, live event search, or owner acceptance has been completed by writing this note.
 
 ## Confirmed order of importance
 
@@ -46,9 +46,36 @@ The owner has chosen quality as the highest priority. These dimensions are a pro
 | Decision usefulness | Is there enough concise information to accept or reject the option without reconstructing the recommendation from scratch? |
 | Useful variety | Are the choices meaningfully different and relevant rather than duplicates or filler? |
 
-Do not silently equate quality with popularity, high ratings, novelty, luxury, local authenticity, or hidden gems. A famous attraction can be a strong personal fit; an unusual event can be a poor fit. The owner's specific quality criteria still need examples under Q-006.
+Do not silently equate quality with popularity, high ratings, novelty, luxury, local authenticity, or hidden gems. A famous attraction can be a strong personal fit; an unusual event can be a poor fit. D-019 supplies initial organizer examples below; it does not establish universal ranking weights.
+
+### Initial organizer preference examples — D-019
+
+| Stated response | Generalized example supplied by the owner | Interpretation to use carefully |
+| --- | --- | --- |
+| Would consider adding | An excursion combining a breathtaking beach view, snorkeling, and an oceanside dinner. | Positive signal for a connected sequence combining scenery, participation, and a meal. |
+| Would consider adding | An ATV excursion through scenic views with something distinctive to that area. | Positive signal for active exploration, scenery, and a locally distinctive element. |
+| Would reject | The world's largest rubber band. | Negative example of a novelty object as the main attraction for this organizer. |
+| Would reject | A historical statue. | Negative example of a standalone, primarily observational stop for this organizer. |
+
+**Working interpretation:** For this initial organizer, favor opportunities to experience and participate in a place, especially with memorable scenery and a meaningful combination of activities, over stand-alone novelty or monument stops. The user supplied examples of things they would consider, not bookings, guaranteed attendance, or a requirement that every suggestion contain all these elements.
+
+**Personalization boundaries:** These are one organizer's preferences, not a product-wide ban on monuments, history, museums, or sightseeing. They do not establish the companion's taste, willingness to pay, physical ability, skill, risk tolerance, preferred exertion level, or availability for an all-day tour. A preference for snorkeling or ATV examples is not a request to find those activities in Tokyo on the pilot dates. No provider, actual excursion, location, season, route, or reservation has been verified by this answer.
+
+**Single experiences and variety:** Do not automatically reject a strong single activity because it is not a bundle. Do not turn every free hour into a packed adventure sequence. Exact weighting and the desired mix remain open. A historical setting that hosts an engaging experience should not be discarded solely because it also contains a statue; the owner's willingness to choose it would still need evaluation.
+
+**Recommendation explanation proposal:** Describe what the traveler will actually do and see, why it fits their stated preferences, and what makes the setting distinctive when supported by evidence. Do not use generic excitement language or claim something exists nowhere else without support. Local distinctiveness does not automatically mean an obscure or exclusive attraction.
+
+### Ready-made excursions versus app-assembled plans — open capability distinction
+
+An **existing provider excursion** may combine multiple activities under one advertised product. An **app-assembled sequence** combines separately sourced stops into a proposed plan. Q-012 asks whether discovery should explicitly support ready-made excursions, app-assembled combinations, or both; the examples alone do not settle that choice.
+
+Do not represent an app-created sequence as an actual bookable package. For a real excursion, verify advertised inclusions, timing, booking route, and price basis. For a proposed combination, evaluate each component's availability, travel, total time, costs, and reservation requirements separately; label estimates, unknowns, and separate booking steps. No combined availability, single price, included dinner, provider endorsement, or reservation is established merely by putting cards together.
+
+For the same-day experience, avoid a combined suggestion whose attractive parts cannot fit the remaining time or whose required reservations cannot be secured. This connects D-019's quality examples to D-018 and D-015 without approving automatic booking or fixed scheduling rules.
 
 **Candidate measurements for Section 4:** Number of seriously considered options within a defined shortlist; voluntary saves/additions; reasons for rejection; discovered factual or feasibility errors; and whether the selected experience remained worthwhile after use. A save is evidence of interest, not proof of attendance or satisfaction. Do not optimize for clicks or completed bookings as the sole measure of quality.
+
+Use the positive and negative examples as an initial preference-evaluation reference, not a complete benchmark or a shortcut that labels all adventurous items good and all landmarks bad. Evaluate both appeal and practical fit. A visually impressive but infeasible bundle is not a successful recommendation.
 
 Evaluate against the same user context and declared constraints. Do not claim a recommendation success rate without defining the sample, denominator, and evaluation procedure. No arbitrary percentage threshold is approved here.
 
@@ -109,10 +136,10 @@ Prepared-data prototypes and live-data checks answer different questions. A free
 
 ## Outstanding decisions and next step
 
-**Answered:** The three standards and their priority order; same-day nearby discovery/on-the-fly planning belongs in the first version.
+**Answered:** The three standards and their priority order; same-day nearby discovery/on-the-fly planning belongs in the first version; initial organizer examples of appealing and rejectable recommendations (D-019).
 
-**Open:** What distinguishes an appealing versus rejectable recommendation; minimum useful event coverage; current-location versus chosen-area behavior; scheduling constraints; real-time freshness/response targets; quantitative acceptance thresholds; and how the companion participates in validation.
+**Open:** Ready-made excursions versus app-assembled combinations; detailed preference weights and companion preferences; minimum useful event coverage; current-location versus chosen-area behavior; scheduling constraints; real-time freshness/response targets; quantitative acceptance thresholds; and how the companion participates in validation. Current planning workarounds and broader demand still lack evidence.
 
-The next Section 1 prompt is: **Give one example of an experience you would immediately add to a trip and one you would reject, and explain what makes the difference.** Names, bookings, and other private details are unnecessary in the public record.
+The next Section 1 prompt is Q-012: **Should the app recommend ready-made excursions, put together its own combinations of separate activities, or offer both?** This is a capability clarification, not authorization to make bookings or present a proposed combination as a provider's package.
 
 No app code, external event search, paid service, or live test was created by this documentation update. Section 1 remains DRAFT, and later blueprint sections remain NOT STARTED.
