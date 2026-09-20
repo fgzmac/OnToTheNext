@@ -4,7 +4,7 @@
 **Owner:** Project owner (`fgzmac`).  
 **Last updated:** 2026-09-19.  
 **Current phase:** Product design.  
-**Source:** Explicit statements in the planning conversation. Prior pricing references are in [App Budget Policy and Options](00-app-budget-options.md). Ranked standards and proposed evaluations are in [Product Success Standards](00-product-success-standards.md). No user testing or live provider integration test is recorded.
+**Source:** Explicit statements in the planning conversation. Prior pricing references are in [App Budget Policy and Options](00-app-budget-options.md). Ranked standards, preference examples, and proposed evaluations are in [Product Success Standards](00-product-success-standards.md). No user testing or live provider integration test is recorded.
 
 A commit is not a product approval. Recommendations copied into the base idea do not automatically become requirements. Each decision records only the part supported by the owner's actual direction.
 
@@ -30,6 +30,7 @@ A commit is not a product approval. Recommendations copied into the base idea do
 | D-016 | Trip-budget range is per person. | CONFIRMED basis; other meanings open | 2026-09-19 |
 | D-017 | Free first; flexible $100/$150 references; necessary spending reviewed; greater investment after owner acceptance. | CONFIRMED policy; no purchase approved | 2026-09-19 |
 | D-018 | Rank suggestion quality first, same-day nearby discovery/on-the-fly planning second, seamless functionality third. Same-day capability belongs in first version. | CONFIRMED priorities/capability; tests and acceptance open | 2026-09-19 |
+| D-019 | Initial organizer favors scenic, participatory, locally distinctive and multi-part experiences over the supplied novelty-object and standalone-statue examples. | STATED PREFERENCE RECORDED; not a universal rule or excursion-format decision | 2026-09-19 |
 
 ## D-001 — Sequential blueprint planning
 
@@ -171,7 +172,7 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 **Affected:** Product brief, README, decisions, questions.
 
-**Related:** Q-003 resolved for pilot; commercial audience Q-010; participation Q-008; permissions Q-101; preference input Q-106; remaining budget meanings Q-011.
+**Related:** Q-003 resolved for pilot; commercial audience Q-010; participation Q-008; permissions Q-101; preference input Q-106; remaining budget meanings Q-011. D-019's organizer examples do not supply the companion's preferences.
 
 **Revisit:** Pilot participation or wider target changes.
 
@@ -354,7 +355,7 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 **Necessary spending versus investment:** Review any blocked requirement/test, free alternatives, smallest useful paid option, recurring/usage/overage costs, and consequences of waiting before a specific spending decision. Necessary limited spending may precede overall acceptance; discretionary expansion follows owner judgment of a working product. No automatic billing enrollment or subscription authority.
 
-**Acceptance gate:** D-018 subsequently defines the three standards and order. Detailed tests/thresholds and acceptance remain open under Q-304/Q-502. A functioning demo, attractive screens, mock tests, or a calendar milestone do not establish acceptance. This gate is not satisfied merely by defining it.
+**Acceptance gate:** D-018 subsequently defines the three standards and order; D-019 supplies initial organizer taste examples. Detailed tests/thresholds and acceptance remain open under Q-304/Q-502. A functioning demo, attractive screens, mock tests, or a calendar milestone do not establish acceptance. This gate is not satisfied merely by defining it.
 
 **Scope/evidence:** Preserve confirmed capabilities, now including D-018 same-day discovery. Free-first changes cost sequence, not requirements. Label simulations; they do not prove live event coverage, durable storage, correct routes, or travel readiness. Investigate paid dependencies early and surface quality/cost/scope conflicts. No unsafe data handling or false availability claims to maintain a free label.
 
@@ -388,7 +389,7 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 **Relationship to existing idea:** Preserve Discover/Organize/Delight, hotel/transport recommendations and organization, budget context, and reservation requirements. Personalized sharing remains; extra reveal effects cannot compensate for poor suggestions or difficult use. Ranking does not waive essential correctness, privacy, reliability, or accessibility.
 
-**What remains OPEN:** Meaningful quality factors and examples; exact preference inputs; supported areas/event coverage; requested-time and location behavior; what fits available time; freshness and latency targets; scheduling/preview/permission rules; numerical pass criteria; and the owner's acceptance of the implementation.
+**What remains OPEN:** Detailed quality factors and weights; exact preference inputs; supported areas/event coverage; requested-time and location behavior; what fits available time; freshness and latency targets; scheduling/preview/permission rules; numerical pass criteria; and the owner's acceptance of the implementation. Initial organizer examples previously requested here are now recorded under D-019, not missing input.
 
 **Proposed evaluations:** Assess serious consideration of options, voluntary additions, rejection reasons, factual/feasibility errors, valid current-event coverage and known omissions, and task completion/effort. These are not approved numeric targets or a finalized test suite. See [Product Success Standards](00-product-success-standards.md).
 
@@ -400,11 +401,41 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 **Affected:** README, product brief, decision register, question register, and new Section 1 standards note. Cost policy retained. Later blueprint sections remain NOT STARTED.
 
-**Related questions:** Q-005 priority subquestion resolved; complete promise remains open. Q-006 examples next. Q-207 workflow; Q-309 minimum same-day capability; Q-304 measurements; Q-305 scheduling; Q-356 data/quality feasibility; Q-402/Q-404 data concepts; Q-502/Q-503 tests and simulations.
+**Related questions:** Q-005 priority subquestion resolved; complete promise remains open. Q-006 examples subsequently supplied in D-019. Q-207 workflow; Q-309 minimum same-day capability; Q-304 measurements; Q-305 scheduling; Q-356 data/quality feasibility; Q-402/Q-404 data concepts; Q-502/Q-503 tests and simulations.
 
 **Supersedes:** Any earlier proposed treatment of basic same-day nearby discovery/on-the-fly planning as optional later work, and the statement that the owner has not ranked success standards. Does not approve unrelated advanced automation or the complete Section 1 brief.
 
 **Revisit:** Owner refines quality examples/criteria, changes priority order, or feasibility evidence requires an explicit scope decision.
+
+## D-019 — Initial organizer's experiential recommendation preferences
+
+**Question:** What experience would the owner consider adding to a trip, and what would they reject?
+
+**Stated positive examples:** An excursion combining a breathtaking beach view, snorkeling, and an oceanside dinner; an ATV excursion through scenic views that exposes something distinctive to the area.
+
+**Stated negative examples:** The world's largest rubber band; a historical statue.
+
+**Source:** The owner's examples in direct response to Q-006's quality clarification. These are hypothetical preference examples, not actual offerings, bookings, or a request for destination-specific research.
+
+**Recorded interpretation:** For the initial organizer, the examples favor participating in a memorable setting, scenery, a distinctive local element, and connected experiences with multiple appealing components over standalone novelty or monument viewing. This is a working interpretation of their examples, not a quantitative scoring model.
+
+**Personalization boundary:** Treat these as one organizer's stated taste. Do not globally ban statues, historical attractions, museums, sightseeing, or popular places; do not assign the same preferences to the companion or all future users. Do not assume a romantic theme, luxury budget, risk tolerance, skill, physical ability, preferred exertion, or desire for an all-day excursion. A good single activity is not automatically a poor suggestion merely because the examples combine several things.
+
+**Destination/evidence boundary:** No claim that snorkeling, ATV trips, or the illustrative combination is available or appropriate for the actual Tokyo pilot dates. No specific operator, event, itinerary, restaurant, inclusion, price, or reservation has been verified. The phrase about something local expresses the desired appeal; it is not permission to invent exclusivity or unsupported claims that an attraction exists nowhere else.
+
+**Capability clarification still OPEN — Q-012:** Recommending a ready-made provider excursion and assembling a suggested sequence of separate activities are different capabilities. The examples do not yet select one or both. The existing hotel/transport 'both' answer in D-010 was about different capabilities and must not be reused as approval of this new question.
+
+**Proposed planning safeguards:** Clearly distinguish a real excursion product from an app-created combination. Check advertised inclusions for the former; for the latter show separate components, time/travel fit, cost basis, booking needs, and uncertainty. Combining options does not establish one ticket, one reservation, included food, or simultaneous availability. The same-day experience must still fit the time and commitments that apply.
+
+**Scope effect:** Refines the highest-priority quality standard without replacing D-018's order or removing other confirmed requirements. Does not approve package booking, automatic bundling, a recommendation algorithm, new sources, paid services, or implementation.
+
+**Evidence limit:** Stated preferences from one organizer, not observed app use, attended experiences, a complete benchmark, market validation, or owner acceptance of a working product.
+
+**Affected:** Product brief, standards note, README, decision register, and open questions. Section 1 remains DRAFT.
+
+**Related questions:** Q-006 example subquestion answered; current workarounds and broader validation still open. Q-012 experience-format capability is next. Q-106 companion preferences, Q-204/Q-209/Q-210 presentation and reservation detail, Q-304/Q-352 recommendation evaluation, and Q-404 data distinctions remain for their later sections.
+
+**Revisit:** The owner clarifies experience format or preferences, the companion contributes their own tastes, or actual testing challenges the interpretation.
 
 ## Approval register
 
@@ -422,6 +453,8 @@ A commit is not a product approval. Recommendations copied into the base idea do
 | Free-first flexible app budget | CONFIRMED policy; no purchase | D-017 |
 | Ranked success standards | CONFIRMED priorities | D-018 |
 | First-version same-day nearby discovery | CONFIRMED capability; details open | D-018 |
+| Initial organizer's appealing/rejectable experience examples | RECORDED stated preference, not a global rule | D-019 |
+| Ready-made excursions versus app-assembled combinations | NOT SELECTED | Q-012 |
 | Working product meets standards | NOT DEMONSTRATED OR ACCEPTED | Later tests and owner judgment required |
 | Numeric acceptance/freshness/latency criteria | NOT SELECTED | Q-304/Q-309 |
 | Sections 2–15 | NOT STARTED | None |
@@ -432,9 +465,9 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 ## Proposals not to mistake for decisions
 
-Organizer-led suggestion approval; publication/draft model; account-free access; exact Keep/Must-do/Lock behavior; detailed coverage; date-free exploration; provider/AI choices; automated whole-trip replanning; multi-city complexity; booking/payment integrations; pilot billing/ad exclusions; price tiers/ad placement; native/web-first delivery; imports; transport modes; detailed recommendation ranking; scheduling/airport buffers; trip cost formulas; reservation/payment state model; monitoring/reminders; numeric quality, coverage, and response targets; proposed cost controls.
+Organizer-led suggestion approval; publication/draft model; account-free access; exact Keep/Must-do/Lock behavior; detailed coverage; date-free exploration; provider/AI choices; automated whole-trip replanning; multi-city complexity; booking/payment integrations; pilot billing/ad exclusions; price tiers/ad placement; native/web-first delivery; imports; transport modes; detailed recommendation ranking; scheduling/airport buffers; trip cost formulas; reservation/payment state model; monitoring/reminders; numeric quality, coverage, and response targets; proposed cost controls; excursion-format selection and automatic activity bundling.
 
-Basic same-day nearby discovery is no longer a mere proposal. Neither ranking nor flexible budget authorizes spending, data collection, transactions, or implementation. The original fixed-ceiling proposal is superseded. Preserve historical decisions while using later clarifications as the current direction.
+Basic same-day nearby discovery is no longer a mere proposal. D-019's examples express the organizer's taste, not a universal definition of quality or the companion's preferences. Neither ranking nor flexible budget authorizes spending, data collection, transactions, or implementation. The original fixed-ceiling proposal is superseded. Preserve historical decisions while using later clarifications as the current direction.
 
 ## New decision template
 
