@@ -5,7 +5,7 @@
 **Phase:** Product design and planning  
 **Current blueprint section:** 1 — Product Vision and Problem Brief; DRAFT, not yet approved  
 **Core interaction principle:** Offer useful ideas and refine them through user reactions rather than requiring users to invent the plan  
-**Immediate priority:** Prepare the actual Japan itinerary and reservation plan without waiting for the app  
+**Immediate priority:** Build the actual Japan itinerary around the recorded must-do anchors and reservation-sensitive items without waiting for the app  
 **Core-city schedule:** Proposed Tokyo → Kyoto → Osaka → Tokyo baseline and night allocation approved under D-032; dated personal details remain in chat  
 **Hotel strategy:** Separate main-city stays; upscale, comfortable, convenient, value-conscious; no hostels for this traveler; accepted USD per-room nightly search reference under D-031  
 **Booking baseline:** Flights only, as last reported; itinerary approval is not a booking  
