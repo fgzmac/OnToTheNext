@@ -4,7 +4,7 @@
 **Owner:** Project owner (`fgzmac`).  
 **Last updated:** 2026-09-19.  
 **Current phase:** Product design.  
-**Source:** Explicit statements in the planning conversation. No user research or provider evaluation has yet been recorded.
+**Source:** Explicit statements in the planning conversation. Targeted pricing research is separately recorded in [App Budget Options](00-app-budget-options.md); no user testing or live provider integration test has yet been recorded.
 
 A GitHub commit is not a product approval. Recommendations copied into the base idea do not automatically become approved requirements. Each decision below records only the part supported by the owner's actual direction.
 
@@ -25,8 +25,9 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 | D-011 | Tokyo is a confirmed pilot destination; the stated travel window spans late November through early December. | CONFIRMED context; planning calendar and target subsequently settled in D-012 | 2026-09-19 |
 | D-012 | Target November 10, 2026 for the first complete pre-trip test. | CONFIRMED planning target, not a delivery guarantee | 2026-09-19 |
 | D-013 | Tokyo-local arrival/departure times have been supplied; the pilot includes partial arrival and departure days. | CONFIRMED user-supplied context; exact details retained in chat | 2026-09-19 |
-| D-014 | Use the supplied low/high trip-spending range excluding plane tickets; do not apply it to app-running costs. | Range/exclusion CONFIRMED; currency and per-person/group basis OPEN | 2026-09-19 |
+| D-014 | Use the supplied low/high trip-spending range excluding plane tickets; do not apply it to app-running costs. | Range/exclusion CONFIRMED; per-person basis subsequently settled in D-016; currency OPEN | 2026-09-19 |
 | D-015 | Account for events and restaurants that require reservations. | CONFIRMED planning requirement; detailed behavior OPEN | 2026-09-19 |
+| D-016 | The supplied trip-budget range is per person, not a combined two-traveler total. | CONFIRMED basis; other budget meanings remain OPEN | 2026-09-19 |
 
 ## D-001 — Sequential blueprint planning
 
@@ -86,7 +87,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Boundaries:** The repository name does not automatically become the final app name. Public repository visibility does not authorize public user itineraries or publication of sensitive information. No credentials, personal booking details, exact private travel dates/times, personal spending amounts, or identifying research responses should be committed. An approved software-testing milestone may be recorded without publishing a flight schedule.
 
-**Current organization:** README, the reusable blueprint, the active product brief, this decision register, and the open-question register. Additional section documents are added when needed.
+**Current organization:** README, the reusable blueprint, the active product brief, this decision register, and the open-question register. Additional section documents and supporting notes are added when needed. The app-cost comparison is a Section 1 research note, not a completed architecture section.
 
 **Revisit when:** The owner changes the repository, visibility, or documentation workflow.
 
@@ -124,7 +125,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Affected documents:** Product brief, README, decision register, open-question register. Later sections should use this priority when resolving scope and risks.
 
-**Related questions:** Q-002 resolved; Q-003 resolved for the pilot under D-008; Q-004 timing target approved under D-012; Q-004 app budget/capacity and Q-008 partially open; Q-005 and detailed Q-301/Q-302 scope still open. The supplied trip-spending range is separately recorded in D-014.
+**Related questions:** Q-002 resolved; Q-003 resolved for the pilot under D-008; Q-004 timing target approved under D-012; Q-004 app budget/capacity and Q-008 partially open; Q-005 and detailed Q-301/Q-302 scope still open. The supplied trip-spending range is separately recorded in D-014 and clarified in D-016.
 
 **Revisit when:** Trip needs, timing, evidence, or the owner's explicit priorities change.
 
@@ -162,11 +163,11 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Reason:** This is the actual first-use group selected for the Japan pilot.
 
-**Boundaries:** This does not make the commercial product couples-only, impose a permanent two-person limit, assume identical interests, select a romantic theme, or decide who may edit, approve, or view information. The companion's actual participation in testing is still to be arranged. It also does not determine whether a supplied spending range is per person or shared.
+**Boundaries:** This does not make the commercial product couples-only, impose a permanent two-person limit, assume identical interests, select a romantic theme, or decide who may edit, approve, or view information. The companion's actual participation in testing is still to be arranged. This decision itself did not determine the spending-range basis; D-016 later confirms per person.
 
 **Affected documents:** Product brief, README, decision register, open-question register.
 
-**Related questions:** Q-003 resolved for the pilot; its broader commercial-audience question is retained as Q-010. Q-008, Q-101, Q-106, and budget basis in Q-011 remain open.
+**Related questions:** Q-003 resolved for the pilot; its broader commercial-audience question is retained as Q-010. Q-008, Q-101, Q-106, and remaining budget meanings in Q-011 remain open; the per-person basis must not be re-asked.
 
 **Revisit when:** Pilot participation changes or the owner chooses the wider target audience.
 
@@ -233,7 +234,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Boundaries:** Travel dates alone did not approve a software target; the approval is separately recorded in D-012. Neither establishes a public-launch commitment. Tokyo being named does not establish a Tokyo-only itinerary, a particular airport, accommodation nights, transfer durations, or full sightseeing days. Additional destinations remain open.
 
-**Related questions:** Q-004 timing target is settled under D-012; app budget and capacity remain open. Q-301 has Tokyo and a month-spanning pilot context; remaining coverage and detailed scheduling are open. Do not re-ask supplied travel endpoints simply because they are omitted from the public repository.
+**Related questions:** Q-004 timing target is now settled under D-012; budget and capacity remain open. Q-301 has Tokyo and a month-spanning pilot context; remaining coverage and detailed scheduling are open. Do not re-ask supplied travel endpoints simply because they are omitted from the public repository.
 
 **Revisit when:** The owner changes the test target, adds destinations, or changes travel plans.
 
@@ -279,23 +280,23 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Question:** How should the new spending-range answer be recorded?
 
-**Confirmed input:** The owner requested a range, supplied lower and upper dollar-denominated amounts in chat, and explicitly excluded plane tickets. Preserve that input without inventing its currency or per-person/group basis. The numerical amounts stay in the conversation/private pilot configuration, not this public record.
+**Confirmed input:** The owner requested a range, supplied lower and upper dollar-denominated amounts in chat, and explicitly excluded plane tickets. The numerical amounts stay in the conversation/private pilot configuration, not this public record. Currency and basis were initially open; D-016 subsequently confirms **per person**. Currency remains open.
 
-**Context and interpretation:** This answer followed a question about monthly app-running costs. The explicit airfare exclusion indicates trip spending instead. Record it as a traveler budget input, not an infrastructure allowance. The monthly app budget in Q-004 remains unanswered. This interpretation is visible to the owner and can be corrected; do not authorize spending based on it.
+**Context and interpretation:** This answer followed a question about monthly app-running costs. The explicit airfare exclusion indicated trip spending instead. Record it as a traveler budget input, not an infrastructure allowance. The owner subsequently distinguished the app-cost question by requesting a tier comparison. Q-004 is still awaiting an operating-budget choice; no paid spending is authorized.
 
 **Product direction:** Support the chosen range and exclusion in the pilot's planning input. Do not silently replace the range with a single amount, assign it to app costs, or assume included categories beyond what the owner has specified.
 
-**Still OPEN:** Currency, whether the amount covers both travelers together or each person, whether it is total-trip or remaining spending, all category inclusions, upper-bound firmness, lower-bound meaning, and cost-display/calculation behavior. Q-011 addresses the immediate basis/currency ambiguity; Q-211 covers later detailed behavior.
+**Still OPEN:** Currency, whether it is total-trip or remaining spending, all category inclusions, upper-bound firmness, lower-bound meaning, and cost-display/calculation behavior. Per-person basis is resolved by D-016, not an open question. Q-011 retains the remaining meanings; Q-211 covers detailed behavior.
 
 **Proposed safeguards:** Configurable inputs rather than hardcoded personal amounts; do not treat the lower bound as a required minimum spend; clarify before using the upper bound as a hard cap; show estimates and unknown prices honestly; separate shared/per-person and paid/remaining amounts; avoid counting deposits twice. Excluding airfare from a budget does not remove flight times from itinerary planning. These safeguards are proposals, not a complete accounting specification.
 
 **Evidence limits and boundaries:** No affordability conclusion, currency conversion, nightly/daily allowance, category allocation, or permission to spend is established. No provider, pricing source, expense-tracking integration, or financial transaction is selected.
 
-**Affected documents:** Product brief, README, decision register, open questions. Public records preserve the requirement and unresolved basis, not personal financial figures.
+**Affected documents:** Product brief, README, decision register, open questions. Public records preserve the requirement and remaining questions, not personal financial figures.
 
-**Related questions:** Q-004 app budget remains OPEN; Q-011 is next; detailed budget behavior in Q-211, scope in Q-308, and data/test considerations in Q-402/Q-404/Q-352.
+**Related questions:** Q-004 operating-budget selection is next following the requested comparison; Q-011 retains currency/category questions; detailed budget behavior in Q-211, scope in Q-308, and data/test considerations in Q-402/Q-404/Q-352.
 
-**Revisit when:** The owner clarifies the budget basis, included costs, or spending preferences.
+**Revisit when:** The owner clarifies included costs, currency, or spending preferences.
 
 ## D-015 — Reservation-aware events and restaurants
 
@@ -319,6 +320,26 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Revisit when:** The owner refines the reservation experience or source/coverage evidence requires an explicit scope decision.
 
+## D-016 — Travel-budget range is per person
+
+**Question:** Is the previously supplied travel-spending range for both travelers combined or for each person?
+
+**Decision:** The range is **per person**. The existing plane-ticket exclusion in D-014 remains in place.
+
+**Source of explicit approval:** The owner's answer, “it is for per person,” followed by a separate request for app-budget tiers, possibilities, pros, and cons.
+
+**Reason:** Clarify the basis of the pilot's spending input so it is not mistakenly treated as a shared total.
+
+**Boundaries:** The answer does not explicitly confirm currency, category inclusions, total versus remaining spending, a required equal division of shared expenses, minimum spend, or upper-limit enforcement. Private numerical bounds and derived personal totals remain in the chat. Do not count a shared hotel price twice simply because budgets are per person.
+
+**Separate app-budget request:** Researching and comparing app-cost tiers is not selecting a tier, authorizing purchases, choosing providers, approving a stack, or beginning implementation. The researched options and the assistant's proposed $100/month target / $150 ceiling are in [App Budget Options](00-app-budget-options.md), with exclusions and evidence limits. Q-004 remains OPEN for the owner's choice.
+
+**Affected documents:** Product brief, README, decision register, open-question register; new Section 1 budget-options supporting note.
+
+**Related questions:** Q-011's basis subquestion resolved. Remaining Q-011 questions stay open; Q-004 operating-envelope selection is the next discussion. Detailed budget behavior remains Q-211/Q-308.
+
+**Revisit when:** The owner changes the travel budget's basis or supplies additional budget meanings.
+
 ## Approval register
 
 | Item | Status | Approval evidence |
@@ -332,9 +353,9 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 | Tokyo and stated travel window | CONFIRMED context; exact private dates omitted | D-011 |
 | First complete test: November 10, 2026 | APPROVED planning target; not a delivery guarantee | D-012 |
 | Tokyo-local arrival/departure timing | CONFIRMED user-supplied context; exact times omitted | D-013 |
-| Trip-budget range excluding plane tickets | INPUT RECORDED; currency and person/group basis OPEN | D-014 |
+| Trip-budget range excluding plane tickets | INPUT RECORDED; per-person basis confirmed; currency/details OPEN | D-014, D-016 |
 | Event/restaurant reservation consideration | CONFIRMED planning requirement; details OPEN | D-015 |
-| Monthly app-running/testing budget | UNANSWERED; trip budget is not an app allowance | Q-004 |
+| Monthly app-running/testing budget | OPTIONS RESEARCHED; no tier, target, or ceiling approved | Q-004 and budget-options note |
 | Sections 2–15 | NOT STARTED | None |
 | Complete pilot and first-public-release feature scope | NOT APPROVED; individual decisions above apply | None for complete scope |
 | Technical architecture and stack | NOT SELECTED | None |
@@ -343,9 +364,9 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 ## Proposals that must not be mistaken for decisions
 
-Organizer-led editing with companion suggestions; shared links showing only published updates; private unfinished edits; companion access without installation/accounts; Keep as interest rather than mandatory scheduling; must-dos/locked commitments; exact destination scope; Just exploring; provider/AI choices; advanced replanning; multi-city support; booking/payment integrations; an ads/billing-free pilot; pricing/ad placements; native or web-first delivery; imports; transport modes; recommendation criteria; scheduling and airport/transfer buffers; budget calculation/allocation rules; exact reservation/payment states; reminder/notification features.
+Organizer-led editing with companion suggestions; shared links showing only published updates; private unfinished edits; companion access without installation/accounts; Keep as interest rather than mandatory scheduling; must-dos/locked commitments; exact destination scope; Just exploring; provider/AI choices; advanced replanning; multi-city support; booking/payment integrations; an ads/billing-free pilot; pricing/ad placements; native or web-first delivery; imports; transport modes; recommendation criteria; scheduling and airport/transfer buffers; budget calculation/allocation rules; exact reservation/payment states; reminder/notification features; the operating tiers and $100 target / $150 ceiling in the budget comparison.
 
-The confirmed concepts and inputs under D-006 through D-015 do not approve all detailed behavior. Trip-budget values are not an infrastructure allowance, and reservation awareness is not permission to make bookings. Coherent suggestions remain proposals until decided.
+The confirmed concepts and inputs under D-006 through D-016 do not approve all detailed behavior. Trip-budget values are not an infrastructure allowance, reservation awareness is not permission to make bookings, and a researched price example is not a provider selection. Coherent suggestions remain proposals until decided.
 
 ## New decision template
 
