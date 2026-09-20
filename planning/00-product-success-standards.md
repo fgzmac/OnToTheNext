@@ -1,14 +1,14 @@
 # Section 1 Supporting Note — Product Success Standards
 
-**Status:** Priority order and first-version same-day capability CONFIRMED; owner preference examples RECORDED; detailed behavior, metrics, and acceptance thresholds PROPOSED / OPEN.  
+**Status:** Priority order, first-version same-day capability, and both experience formats CONFIRMED; owner preference examples RECORDED; shorter/all-day duration options PROPOSED; detailed behavior, metrics, and acceptance thresholds OPEN.  
 **Owner:** Project owner (`fgzmac`).  
 **Recorded:** 2026-09-19.  
-**Decisions:** D-018; D-019 clarifies the initial organizer's taste, not every traveler's preferences.  
+**Decisions:** D-018; D-019 clarifies the initial organizer's taste; D-020 confirms both recommendation formats.  
 **Related section:** [Product Vision and Problem Brief](00-product-brief.md), especially 1.7, 1.9, 1.12, and 1.16.  
-**Related questions:** Q-005, Q-006, Q-012, Q-207, Q-304, Q-309, Q-356.  
-**Source:** The owner's ranked success standards and subsequent examples of appealing and rejectable experiences.  
-**Next discussion:** Ready-made excursions, app-assembled combinations of separate activities, or both (Q-012).  
-**Evidence status:** These are stated preferences, not observed behavior. No product test, recommendation evaluation, live event search, or owner acceptance has been completed by writing this note.
+**Related questions:** Q-005, Q-006, resolved Q-012, Q-207, Q-212, Q-304, Q-309, Q-356.  
+**Source:** The owner's ranked standards, appealing/rejectable examples, and answer: “Offer both. Maybe shorter activities and all day activities.”  
+**Next discussion:** Current discovery sources and the most frustrating part of finding worthwhile experiences (Q-006).  
+**Evidence status:** These are stated preferences and product choices, not observed behavior. No product test, recommendation evaluation, live event search, or owner acceptance has been completed by writing this note.
 
 ## Confirmed order of importance
 
@@ -33,6 +33,8 @@ Older proposals to postpone advanced same-day replanning must not be used to pos
 - **Not selected by this answer:** Continuous location tracking, automatic notifications, background monitoring, automatic whole-trip rewriting, live seat/room guarantees, reservation transactions, paid providers, or an AI architecture.
 
 Basic permanent-place suggestions may complement events, but a generic list of nearby landmarks is not sufficient evidence that event discovery works. Likewise, an event occurring today is not necessarily occurring now, reachable in time, open for entry, or bookable.
+
+D-020 also confirms offering both ready-made provider excursions and app-assembled combinations. Their detailed coverage and release implementation remain to be scoped; neither should be silently removed. Duration options were suggested tentatively and are not an approved set of time limits.
 
 ## 1. Recommendation quality — proposed evaluation framework
 
@@ -65,13 +67,30 @@ Do not silently equate quality with popularity, high ratings, novelty, luxury, l
 
 **Recommendation explanation proposal:** Describe what the traveler will actually do and see, why it fits their stated preferences, and what makes the setting distinctive when supported by evidence. Do not use generic excitement language or claim something exists nowhere else without support. Local distinctiveness does not automatically mean an obscure or exclusive attraction.
 
-### Ready-made excursions versus app-assembled plans — open capability distinction
+### Both ready-made excursions and app-assembled plans — D-020
 
-An **existing provider excursion** may combine multiple activities under one advertised product. An **app-assembled sequence** combines separately sourced stops into a proposed plan. Q-012 asks whether discovery should explicitly support ready-made excursions, app-assembled combinations, or both; the examples alone do not settle that choice.
+**Confirmed:** Offer both formats. Q-012 is resolved by the owner's “Offer both,” not inferred from the earlier hotel/transport answer.
 
-Do not represent an app-created sequence as an actual bookable package. For a real excursion, verify advertised inclusions, timing, booking route, and price basis. For a proposed combination, evaluate each component's availability, travel, total time, costs, and reservation requirements separately; label estimates, unknowns, and separate booking steps. No combined availability, single price, included dinner, provider endorsement, or reservation is established merely by putting cards together.
+| Format | Meaning | Boundary |
+| --- | --- | --- |
+| Ready-made provider excursion | An existing operator's advertised experience, potentially with several included activities. | Show actual advertised inclusions, conditions, price basis, and booking route; selection does not reserve it. |
+| App-assembled combination | A suggested sequence of separately sourced experiences or stops that work together as a plan. | Do not imply one operator, combined availability, one price, or one booking unless independently established. |
 
-For the same-day experience, avoid a combined suggestion whose attractive parts cannot fit the remaining time or whose required reservations cannot be secured. This connects D-019's quality examples to D-018 and D-015 without approving automatic booking or fixed scheduling rules.
+For a real excursion, verify advertised inclusions, timing, booking route, and price basis. For an app-created combination, evaluate each component's availability, travel, total time, costs, and reservation requirements separately; label estimates, unknowns, and separate booking steps. No included dinner, provider endorsement, or reservation is established merely by putting cards together.
+
+For the same-day experience, avoid a combination whose attractive parts cannot fit the remaining time or whose required reservations cannot be secured. Both formats must meet D-018's recommendation-quality standard. Specific operators, integrations, ranking balance, editing behavior, transactions, and data access remain undecided.
+
+### Shorter and all-day options — proposed duration direction
+
+The owner added, “Maybe shorter activities and all day activities.” Record this as a **user-proposed range of durations**, not approval of exact buckets, hours, a mandatory all-day schedule, or an added half-day category.
+
+Duration and recommendation format are separate dimensions. A provider-led experience may be short or long; an app-assembled plan may cover a short outing or most of a day. Do not equate short with self-guided, all-day with a provider package, or length with quality. These are design possibilities, not verified availability in every format/duration combination.
+
+**Proposed behavior:** Let a traveler express the time they have, using simple duration choices or an exact available window. Show activity duration separately from total time needed to reach it, participate, transfer between components, and reach the next commitment or chosen endpoint. Avoid double-counting transfers already included in a provider's advertised duration. Where necessary timing is unknown, label it rather than claiming a precise fit.
+
+A full-day option should leave room for appropriate breaks rather than fill every minute. A shorter option should still be worth choosing, not filler. For today, use the remaining usable window and entry/booking constraints rather than the duration label alone. Do not shorten a provider's fixed itinerary or remove included stops to force it to fit without evidence that such a variant exists.
+
+Exact cutoffs, whether an intermediate duration is useful, default filters, start/end locations, buffer rules, and whether to present both formats together remain Q-212 and the scope/scheduling questions. These details can wait for journey design; no need to re-ask Q-012.
 
 **Candidate measurements for Section 4:** Number of seriously considered options within a defined shortlist; voluntary saves/additions; reasons for rejection; discovered factual or feasibility errors; and whether the selected experience remained worthwhile after use. A save is evidence of interest, not proof of attendance or satisfaction. Do not optimize for clicks or completed bookings as the sole measure of quality.
 
@@ -96,7 +115,7 @@ Open same-day discovery
 
 Location permission with a manual-area alternative remains a proposed design, not a grant of location access. Do not require a fully built multi-day itinerary merely to investigate a same-day option; the exact entry requirements remain to be decided.
 
-**Candidate information for each result:** What the experience is; why it fits; where it occurs; the event's relevant date and start/end or admission window; travel effort; estimated visit length and cost with their basis; reservation or ticket needs; a source; and freshness/verification context when available.
+**Candidate information for each result:** What the experience is; why it fits; where it occurs; the event's relevant date and start/end or admission window; travel effort; estimated visit length and cost with their basis; reservation or ticket needs; a source; and freshness/verification context when available. D-020 adds the distinction between provider offerings and app-assembled plans; Q-212 covers duration presentation.
 
 **Information distinctions to preserve in later specifications:**
 
@@ -122,24 +141,26 @@ The confirmed standard is that the app feels seamless and useful rather than bur
 
 These are proposed behaviors, not a finalized screen inventory or an assertion that the smallest number of taps always produces the best result. Necessary permission or booking checks should not be hidden merely to appear seamless.
 
-**Candidate evaluation tasks:** Start planning, judge a suggestion, keep or replace an option, find something for today, preview a plan change, reopen saved work, and open the companion-facing itinerary. Existing hotel/transport and reservation-related requirements must also remain understandable.
+**Candidate evaluation tasks:** Start planning, judge a suggestion, distinguish a provider excursion from an app-created plan, assess its time requirements, keep or replace an option, find something for today, preview a plan change, reopen saved work, and open the companion-facing itinerary. Existing hotel/transport and reservation-related requirements must also remain understandable.
 
 Observe completion, hesitation, repeated input, requests for help, errors, recovery, and the user's judgment of effort. Response-time and task-duration targets should be based on chosen journeys and then explicitly agreed. No number of taps, seconds, or screens is approved here.
 
 ## Free-first spending and evidence
 
-D-017 remains unchanged: prefer suitable free approaches and review any necessary spending specifically. These standards do not select providers or authorize purchases.
+D-017 remains unchanged: prefer suitable free approaches and review any necessary spending specifically. These standards and format choices do not select providers or authorize purchases.
 
-However, do not defer finding out whether adequate event data exists until after polishing the entire interface. The early feasibility question is whether we can obtain enough genuinely useful, timely local options for the supported pilot area under acceptable access, use, and cost conditions. Festivals and pop-ups are requirements to investigate, not claims of coverage by a particular service.
+However, do not defer finding out whether adequate event data exists until after polishing the entire interface. The early feasibility question is whether we can obtain enough genuinely useful, timely local options for the supported pilot area under acceptable access, use, and cost conditions. Festivals and pop-ups are requirements to investigate, not claims of coverage by a particular service. Real excursion listings and app-assembled components also require suitable evidence.
 
 Prepared-data prototypes and live-data checks answer different questions. A free demo is not a completed test of current recommendations. If reliable coverage requires paid access or the free approach falls short, report the evidence and proposed tradeoff; do not silently weaken the standard, fabricate information, or treat the flexible budget as permission to spend.
 
 ## Outstanding decisions and next step
 
-**Answered:** The three standards and their priority order; same-day nearby discovery/on-the-fly planning belongs in the first version; initial organizer examples of appealing and rejectable recommendations (D-019).
+**Answered:** Ranked standards; first-version same-day discovery; initial organizer preference examples (D-019); offer both ready-made excursions and app-assembled combinations (D-020/Q-012).
 
-**Open:** Ready-made excursions versus app-assembled combinations; detailed preference weights and companion preferences; minimum useful event coverage; current-location versus chosen-area behavior; scheduling constraints; real-time freshness/response targets; quantitative acceptance thresholds; and how the companion participates in validation. Current planning workarounds and broader demand still lack evidence.
+**Proposed:** Shorter and all-day duration options, as suggested tentatively by the owner. Cutoffs, time-input controls, and total-time handling remain for Q-212.
 
-The next Section 1 prompt is Q-012: **Should the app recommend ready-made excursions, put together its own combinations of separate activities, or offer both?** This is a capability clarification, not authorization to make bookings or present a proposed combination as a provider's package.
+**Open:** Detailed preference weights and companion preferences; minimum useful event/excursion coverage; location behavior; scheduling constraints; freshness/response targets; quantitative acceptance thresholds; and how the companion participates in validation. Current planning workarounds and broader demand still lack evidence.
 
-No app code, external event search, paid service, or live test was created by this documentation update. Section 1 remains DRAFT, and later blueprint sections remain NOT STARTED.
+The next Section 1 prompt is Q-006: **Where does the owner currently find experiences they like, and what is the most frustrating part of finding or organizing them?** This fills the current-workaround/problem evidence gap without repeating the supplied taste examples or the resolved format choice.
+
+No app code, external event/excursion search, paid service, booking, or live test was created by this documentation update. Section 1 remains DRAFT, and later blueprint sections remain NOT STARTED.
