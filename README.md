@@ -5,7 +5,8 @@
 **Phase:** Product design and planning  
 **Current blueprint section:** 1 — Product Vision and Problem Brief; DRAFT, not yet approved  
 **Immediate priority:** Prepare the actual Japan itinerary and reservation plan without waiting for the app  
-**Starting Japan cities:** Tokyo, Kyoto, Osaka; exact order, nights, and additions remain open  
+**Starting Japan cities:** Tokyo, Kyoto, Osaka; complete their core itinerary before optional destination expansion  
+**Booking baseline:** Only plane tickets booked, as reported by the owner; exact private details remain in chat  
 **Initial device focus:** Phones; operating system and native/web delivery not selected  
 **Discovery testing:** Spontaneous nearby discovery in San Jose, California  
 **First complete software-test target:** November 10, 2026; not the itinerary-preparation or booking deadline  
@@ -22,41 +23,50 @@
 
 **[D-027 — Japan starting cities and worthwhile lesser-known destinations](planning/decisions/D-027-core-cities-and-worthwhile-detours.md)** records Tokyo, Kyoto, and Osaka as the starting city set, and adds experience-led recommendations for lesser-known destinations. The city list is not an approved order or allocation of nights. Public research examples are candidates, not selected stops or bookings.
 
-Read these amendments before older next-step prompts. The phone/computer question and initial main-city question have been answered.
+**[D-028 — Main cities first and flights-only booking baseline](planning/decisions/D-028-main-cities-first-and-booking-baseline.md)** refines the order: build the main-city itinerary and address its booking needs first, then offer optional additional destinations. Only flights have been booked. The precise core-plan completion rule remains open; it does not automatically mean all reservations must be purchased first.
+
+Read these amendments before older next-step prompts. Phone focus, main cities, and the existing-booking inventory have been answered.
 
 | Document | Purpose | Status |
 | --- | --- | --- |
-| [Current destination decision](planning/decisions/D-027-core-cities-and-worthwhile-detours.md) | Starting cities, worthwhile-detour requirement, preliminary public research, and route constraints to clarify. | D-027 direction confirmed; additional stops/order/nights open. |
+| [Current sequencing decision](planning/decisions/D-028-main-cities-first-and-booking-baseline.md) | Main-city-first flow, optional expansion afterward, flights-only booking baseline. | D-028 sequence confirmed; exact completion rules, order, nights, and lodging open. |
+| [Destination decision](planning/decisions/D-027-core-cities-and-worthwhile-detours.md) | Starting cities, worthwhile-detour requirement, preliminary public research. | Read with D-028: extra destinations considered after the core itinerary. |
 | [Priority decision](planning/decisions/D-026-phone-first-and-japan-priority.md) | Phone focus, immediate Japan reservation planning, San Jose discovery tests, generic booking-action template. | D-026 confirmed; implementation and bookings open. |
 | [Planning blueprint](planning/blueprint.md) | Framework and sequential progress tracker. | Adopted framework, not blanket approval. |
-| [Product vision and problem brief](planning/00-product-brief.md) | Detailed Section 1 draft through D-025. | Read with D-026/D-027; full section not approved. |
+| [Product vision and problem brief](planning/00-product-brief.md) | Detailed Section 1 draft through D-025. | Read with D-026 through D-028; full section not approved. |
 | [Product success standards](planning/00-product-success-standards.md) | Standards, preferences, sources, formats, balanced days, proposed evaluations. | Detailed thresholds open; amendments and question register govern current direction. |
 | [App budget policy and options](planning/00-app-budget-options.md) | Free-first policy, retained cost scenarios, access risks. | D-017 confirmed; no vendor or purchase selected. |
-| [Decision register](planning/decisions.md) | Historical decisions/inputs through D-025. | Extended by standalone D-026/D-027; preserve earlier reasoning. |
-| [Open questions](planning/open-questions.md) | Remaining questions and next actionable choice. | Next: Q-015 already-fixed arrangements before allocating city dates. |
+| [Decision register](planning/decisions.md) | Historical decisions/inputs through D-025. | Extended by standalone D-026 through D-028; preserve earlier reasoning. |
+| [Open questions](planning/open-questions.md) | Remaining questions and next actionable choice. | Next: Q-014 main-city hotel-base preference, then order/nights. Q-015 answered. |
 
 ## Current priorities — independent workstreams
 
 | Workstream | Immediate purpose | Does not require |
 | --- | --- | --- |
-| Actual Japan itinerary | Research worthwhile experiences, route structure, reservation-sensitive arrangements, and booking actions now. | Finished app, beta, simulations, or public distribution. |
+| Actual Japan itinerary | Build the main-city plan and research its reservation-sensitive arrangements now; consider extra destinations afterward. | Finished app, beta, simulations, or public distribution. |
 | Phone-first spontaneous discovery | Continue design; later test useful current nearby experiences and optional outings in San Jose. | Nationwide U.S. coverage, a local hotel booking, or automatic tracking. |
 
 The owner wants the Japan plan soon enough to act on advance reservations. Determine actual release windows for chosen items, not a universal booking horizon or November 10 default. D-025's former local-first/beta/Japan-simulation sequence cannot block real trip preparation. Japan software rehearsals can still follow a beta; they are separate from planning the actual trip now.
 
 Phones are the initial focus; desktop parity is not the priority. No OS, native/web architecture, browser matrix, offline guarantee, framework, deployment, provider, or store submission selected.
 
-## Japan city direction and discovery beyond familiar destinations — D-027
+## Main-city foundation, then optional destinations — D-027/D-028
 
-**Starting set:** Tokyo, Kyoto, and Osaka. Their order in the owner's answer does not establish the itinerary order. Extra destinations are possible, not mandatory.
+**Starting set:** Tokyo, Kyoto, and Osaka. Their order in the owner's answer does not establish itinerary order. Under D-028, focus planning and booking decisions on these main cities first; branch out once their itinerary is established.
 
-**Confirmed product inclusion:** Recommend lesser-known cities when specific attractions, events, or experiences make them worth considering. Do not restrict discovery to cities the traveler already knows. Do not equate obscurity with quality or require a detour merely to make the route different.
+**Proposed flow:** Establish city order/nights → build main-city stays, transport, experiences, and reservation actions → review the core itinerary → consider worthwhile additional destinations → preview changes → accept or keep the core plan. The main-city-first sequence is confirmed; detailed substeps and the review/completion rule remain open.
 
-**Proposed decision support:** Explain what is worth doing, why it fits the traveler and dates, whether it works as a day trip or overnight, added travel/cost/lodging effort, reservations, and what the addition would displace. Protect desired free time and show tradeoffs before changing the plan. No fixed extra-city quota, maximum hotel count, algorithm, or ranking weights approved.
+**Booking baseline:** The owner reports only plane tickets booked. Hotels, intercity journeys, and timed experiences are not yet booked. Q-015 is resolved; do not request the same inventory again. Flight constraints remain in the private conversation. No live booking verification, route, stay allocation, or purchase authority is implied.
 
-D-027 records preliminary official-source examples: Chichibu for a date-led festival possibility, Uji for a hands-on tea outing, and Kinosaki Onsen for a possible overnight combining lodging, food, and downtime. **None is selected or booked.** Annual festival dates are distinct from a verified current-year program or available tickets. Transport estimates are not dated train schedules; advertised experiences are not date-specific availability. Consult the linked record for sources and verification limits.
+**Completed plan versus paid reservations:** Do not assume that every hotel and activity must be purchased before optional suggestions can appear. A reviewed core draft with clearly identified unbooked items is a proposed interpretation for later design. Selected, tentative, confirmed, and paid arrangements must not be conflated. Main-city reservation research should proceed as needed without waiting for the app.
 
-**Next — Q-015:** Are any hotels, intercity journeys, or timed experiences already booked that constrain city dates, or is the route still flexible between the supplied arrival and departure? Personal booking details stay outside this public repository. Do not repeat known dates/times, traveler count, spending bounds, or the three main cities.
+**Confirmed product inclusion:** Recommend lesser-known cities when specific attractions, events, or experiences make them worth considering, now sequenced after core-city planning. Do not equate obscurity with quality or require a detour merely to make the route different. This is not removal of D-027 or deferral to an unspecified future release.
+
+**Proposed expansion support:** Explain appeal, relevance to dates, day trip versus overnight, added travel/cost/lodging effort, reservations, and what would change in the established plan. Preserve desired free time and confirmed commitments unless the traveler explicitly approves a change. A larger detour can be considered with its consequences visible; no automatic rewriting or extra-city quota is selected. Keeping only the main cities is a valid complete outcome.
+
+D-027 records preliminary official-source examples: Chichibu, Uji, and Kinosaki Onsen. The owner likes these ideas, but **none is selected or booked; keep them optional until the main-city itinerary is ready**. Annual dates are not current-year program or inventory confirmation; transport estimates are not dated train schedules. Recheck the evidence when an option is actually considered.
+
+**Next — Q-014:** Is a separate hotel stay in each main city preferred, or fewer hotel changes with more travel from a base? Then propose the core order/nights within the supplied flights. This is a preference question, not a claim of route feasibility. Known private dates/times, traveler count, budget bounds, and cities must not be requested again.
 
 ## Core use case and product coverage
 
@@ -123,7 +133,7 @@ Ultimate app-store/SaaS commercialization with subscriptions/ads remains. Pricin
 
 ## Planning and implementation boundaries
 
-App design continues sequentially. Section 1 is DRAFT; the priority and destination answers do not approve later sections. Immediate actual-trip preparation can use research/manual planning before software exists; it does not authorize scaffolding, dependencies, infrastructure, schema, or deployment.
+App design continues sequentially. Section 1 is DRAFT; priority, destination, and booking-baseline answers do not approve later sections. Immediate actual-trip preparation can use research/manual planning before software exists; it does not authorize scaffolding, dependencies, infrastructure, schema, or deployment.
 
 Codex follows explicit design-transition approval. Design completion means sufficient direction, scope, journeys, risks, and first buildable slice, not every future feature.
 
@@ -133,6 +143,6 @@ Research is not permission to book/change/cancel/pay. Phone/radius focus is not 
 
 ## Public repository and maintenance
 
-Keep private finances, exact dates/times, detailed personal itineraries, booking references, credentials, identities, home addresses, and identifying research out of commits. Generic structures, city-level contexts, unselected public research examples, and software milestones are appropriate. Consult the conversation for already supplied private inputs.
+Keep private finances, exact dates/times, detailed personal itineraries, booking references, credentials, identities, home addresses, and identifying research out of commits. Generic structures, city-level contexts, non-identifying booking-status summaries, unselected public research examples, and software milestones are appropriate. Consult the conversation for already supplied private inputs.
 
-Read standalone D-026/D-027 alongside the historical register. Amend this overview and question tracker when priorities change; distinguish current decisions from historical prompts. Preserve earlier reasoning and unrelated files. Use `planning/blueprint.md` for section order and approval status.
+Read standalone D-026 through D-028 alongside the historical register. Amend this overview and question tracker when priorities change; distinguish current decisions from historical prompts. Preserve earlier reasoning and unrelated files. Use `planning/blueprint.md` for section order and approval status.
