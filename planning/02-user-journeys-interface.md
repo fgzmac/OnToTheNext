@@ -389,3 +389,21 @@ Formalize the hotel screen using the already-approved requirements:
 - full-stay price and booking terms,
 - Keep / Reject / Compare behavior,
 - richer web comparison and focused mobile cards.
+
+
+## Hotel Discovery & Comparison — D-049
+
+**Confirmed:** 4–5 factual hotel options per city when inventory supports it, configurable pricing, value/upscale tiers, useful room details/photos, amenities, itinerary-aware map/transit context, factual pros/cons, full-stay pricing, and Keep / Deny / Compare behavior.
+
+## Next decision — Reservations Center
+
+Formalize:
+- booking states,
+- urgency,
+- booking-open dates,
+- official provider links,
+- desired date/time,
+- confirmation details,
+- linked itinerary items,
+- check-back/reminder behavior,
+- and mobile/web layouts.
