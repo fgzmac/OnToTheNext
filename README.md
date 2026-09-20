@@ -6,168 +6,141 @@
 **Current blueprint section:** 1 — Product Vision and Problem Brief  
 **Current section status:** Draft; not yet approved  
 **First complete test target:** November 10, 2026 — approved planning target  
-**App spending policy:** Free first; flexible paid-operation reference; no paid service authorized  
+**App spending policy:** Free first; flexible paid-operation references; no paid service authorized  
 **Implementation:** Not started through this planning workflow  
 **Last updated:** 2026-09-19
 
-`OnToTheNext` is the repository name. The final product name has not been confirmed.
+`OnToTheNext` is the repository name. Final product branding remains open.
 
 ## Start here
 
 | Document | Purpose | Status |
 | --- | --- | --- |
-| [Planning blueprint](planning/blueprint.md) | Reusable framework and sequential progress tracker. | Adopted framework; examples are not blanket approval. |
-| [Product vision and problem brief](planning/00-product-brief.md) | Current section populated from the concept and explicit decisions. | Draft for discussion; latest local/cultural addition is detailed in the standards note and D-022. |
-| [Product success standards](planning/00-product-success-standards.md) | Ranked standards, same-day discovery, personal taste, formats, discovery evidence, local/cultural inclusion, and proposed evaluations/durations. | D-018/D-020/D-022 confirmed; D-019/D-021 inputs recorded; detailed behavior open. |
-| [App budget policy and options](planning/00-app-budget-options.md) | Free-first policy, prior tier comparisons, example costs, and data-access risks. | D-017 confirmed; providers, purchases, controls unselected. |
-| [Decision register](planning/decisions.md) | Confirmed decisions and recorded inputs, reasoning, and boundaries. | Maintained as choices are made. |
-| [Open questions](planning/open-questions.md) | Unresolved questions by blueprint section. | Only current-section questions active. |
+| [Planning blueprint](planning/blueprint.md) | Framework and sequential progress tracker. | Adopted framework, not blanket feature approval. |
+| [Product vision and problem brief](planning/00-product-brief.md) | Current Section 1, including owner-reported planning problems and local/cultural coverage. | Draft; decisions through D-023 incorporated. |
+| [Product success standards](planning/00-product-success-standards.md) | Ranked standards, taste, sources, formats, local/cultural inclusion, balanced-day needs, proposed evaluations. | Choices/inputs recorded; detailed behavior and thresholds open. |
+| [App budget policy and options](planning/00-app-budget-options.md) | Free-first policy, retained cost scenarios, and access risks. | D-017 confirmed; no vendor or purchase selected. |
+| [Decision register](planning/decisions.md) | Decisions and reported inputs, reasons, boundaries, history. | Maintained as planning progresses. |
+| [Open questions](planning/open-questions.md) | Remaining questions by section. | Next: Q-004 weekly capacity. |
 
 ## Confirmed core use case
 
-An organizer plans a trip they are taking and shares it with travel companions. The main experience is **“Look what I planned for us,”** rather than a fully secret trip for someone else.
+An organizer plans a trip they are taking and shares it with companions: **“Look what I planned for us,”** not primarily a fully secret trip for somebody else.
 
-The product connects three jobs:
+- **Discover:** Appealing experiences, relevant nearby events, local advice, and cultural opportunities.
+- **Organize:** Coherent, enjoyable days considering stays, travel, spending, reservations, effort, and free time.
+- **Delight:** Personal and exciting sharing without obstructing practical details.
 
-- **Discover:** Genuinely appealing experiences, including nearby events for same-day plans, local recommendations, and cultural experiences.
-- **Organize:** Realistic days accounting for hotels, transportation, spending, and reservation-dependent dining/events.
-- **Delight:** Personal, exciting sharing without obstructing practical trip details.
+**Pilot audience:** Couple, two travelers total (D-008); not a permanent size limit, couples-only market, identical preferences, or permission model.
 
-**Initial audience:** A couple, two travelers total, organizer and companion (D-008). Not a couples-only commercial product, permanent size limit, or permission model.
+**Hotels/transport:** Both organizing existing bookings and recommendations before booking belong in the first version (D-009/D-010). No transaction, import, provider, or live-availability guarantee selected.
 
-**Hotels and transportation:** Both organizing existing bookings and recommending options before booking belong in the first version (D-009/D-010). No transaction capability, provider, live-availability guarantee, or automatic import selected.
+**Trip budget:** Supplied low/high range excludes airfare (D-014), per person (D-016); private amounts in chat. Currency, total-versus-remaining meaning, and categories remain open. Not app funding or purchase authority.
 
-**Trip budget:** Supplied low/high range excludes plane tickets (D-014), per person (D-016). Personal numerical bounds stay in chat. Currency, total/remaining meaning, and category inclusions remain open. It is not app funding or permission to spend.
+**Reservations:** Account for events/restaurants requiring them (D-015). Requirement, booking state, and payment differ. Exact rules, transactions, monitoring, reminders, and notifications remain open.
 
-**Events and restaurants:** Account for reservation requirements (D-015). Requirement, booking state, and payment state need distinct meanings; exact rules open. No automatic booking, monitoring, reminders, notifications, or guaranteed availability approved.
+## Planning problems and desired day balance — D-023
+
+The owner reports difficulty deciding what to experience and where to go first; organizing choices sensibly; balancing demanding activities with free time for shopping and good food; finding events during the trip; and starting while coordinating travel, hotel proximity, and quality recommendations.
+
+**Proposed problem statement:** Help a traveler move from many interdependent choices to a worthwhile, logically ordered trip that fits dates and travel arrangements while balancing substantial experiences with flexibility, shopping, and food.
+
+These are recorded problems and desired outcomes, not measured results or an approved algorithm. The full [standards addition](planning/00-product-success-standards.md#current-planning-problems-and-desired-balance--d-023) separates proposed responses from confirmed input.
+
+**Proposed direction:** Make starting manageable, reuse known details, consider hotel/travel context, explain suggested order, evaluate the day as a whole, and preserve desired flexible time. Do not automatically choose nearest-first, pack all gaps, require an already-booked hotel, or assign an unsupported energy score. Shopping/dining are not inherently low-effort or reservation-free. Exact pacing controls, free-time allocations, and conflict handling are later design questions.
+
+Q-006's main problems, sources, and preference examples are answered. Exact organization tools and measured baseline remain research gaps, not reasons to repeat the broad frustration question.
 
 ## Ranked product standards — D-018
 
 | Rank | Standard | First-version meaning |
 | --- | --- | --- |
-| 1 | High-quality suggestions. | Things the intended traveler would genuinely consider adding. A polished unappealing list is not success. |
-| 2 | Real-time, on-the-fly planning. | Worthwhile nearby events and experiences for today, including festivals and pop-ups. |
+| 1 | High-quality suggestions. | Things the traveler genuinely wants to consider adding. |
+| 2 | Real-time, on-the-fly planning. | Worthwhile nearby events/experiences today, including festivals and pop-ups. |
 | 3 | Seamless functionality. | Useful tasks should be straightforward, not a chore. |
 
-Same-day discovery is a **core first-version capability**, not later-only. Older advanced-replanning deferral proposals must not remove it. Continuous tracking, whole-trip automation, refresh intervals, providers, guaranteed inventory, and paid services remain unselected.
+Basic same-day discovery is first-version work, not later-only. Whole-trip automation, ongoing GPS, refresh intervals, inventory guarantees, provider choices, and paid services remain open.
 
-Sharing remains part of the concept. Extra reveal effects do not take priority over these standards. Correctness, privacy, reliability, and accessibility remain necessary.
+Sharing remains; elaborate effects cannot compensate for poor recommendations. Correctness, privacy, reliability, and accessibility remain necessary. No accepted numerical quality, latency, coverage, energy, or usability threshold exists yet. A fetched listing is not automatically verified, and today's event is not automatically reachable/bookable.
 
-The [standards note](planning/00-product-success-standards.md) separates priorities from proposed tests. No quality score, response target, coverage minimum, or working-product acceptance established. Recently fetched does not mean recently verified; an event today is not necessarily reachable or bookable now.
+### Organizer taste — D-019
 
-### Organizer preference examples — D-019
+Positive examples: scenic beach/snorkeling/oceanside dinner; scenic ATV exploration with something locally distinctive. Standalone novelty-object and historical-statue examples are negative.
 
-Positive examples: scenic beach view, snorkeling, and oceanside dinner in one outing; scenic ATV exploration with a distinctive local element. Standalone novelty-object and historical-statue stops are negative examples.
+Interpretation: scenery, participation, local character, complementary experiences. Not a global history/sightseeing ban, companion taste, ability/risk assumption, or demand that every result be a multi-part adventure. D-023 now explicitly includes balance and free time. No actual Tokyo offering or seasonal availability verified.
 
-The interpretation favors scenery, participation, local character, and complementary experiences for this organizer. It is not a ban on history/sightseeing for everyone, not companion preferences, and not a requirement for every result to be a multi-part adventure. No actual offering or seasonal availability verified for the pilot.
+### Discovery sources — D-021
 
-### Discovery sources and evidence — D-021
+Owner reports real experiences, positive Reddit posts, highly rated reviews, date-relevant calendars, and destination highlights. Sources are recorded preferences, not integrations.
 
-The owner reports discovering activities through **real experiences, positive Reddit posts, highly rated reviews, calendars for relevant time frames, and popular destination-related must-see or must-experience events**. D-022 adds local recommendations and cultural experiences alongside these inputs.
+Proposed use: firsthand/community/reviews support appeal; calendars identify dated events; suitable current venue/operator/organizer evidence helps check logistics. Popularity does not replace personal fit; praise does not secure availability. Preserve critical caveats and distinguish duplicated/conflicting evidence.
 
-These are recorded source preferences, not selected integrations. The proposed approach is to use firsthand/community/review evidence to assess appeal, calendars to identify dated occurrences, and suitable current organizer/venue/operator information to verify material logistics. Positive feedback is not proof of present availability or a reservation. Popularity should inform, not override, personal fit.
-
-No review threshold, source weight, minimum count, subreddit, particular calendar, API, scraper, account import, paid access, or content-use permission chosen. Do not invent source-backed labels or testimonials. The full source-checking proposal and open questions are in the standards note. No actual posts, reviews, calendars, or events were fetched for this update.
-
-**Q-006 progress:** Discovery sources are answered. The most frustrating step and the process for organizing discoveries remain open; do not state assumed pain points as user-confirmed facts.
+No review cutoff, weight, source count, subreddit/calendar, API/scraper, private history, paid access, reproduction rights, or training use selected. Do not invent source-backed labels, testimonials, or ratings. No real source retrieval was performed for this documentation update.
 
 ### Local recommendations and cultural experiences — D-022
 
-**Confirmed:** Include both in discovery and trip planning. The [standards note](planning/00-product-success-standards.md#local-recommendations-and-cultural-experiences--d-022) contains the detailed addition.
+Both are included. Proposed distinction: advice from residents/guides/locally based sources versus the subject of an experience, such as food, crafts, performances, customs, or history.
 
-**Proposed distinction:** Local recommendations are advice from residents, local guides, community hosts, or locally based sources—not simply nearby places. Cultural experiences concern what a traveler can learn, do, or observe, such as food traditions, crafts, performances, or public festivals. Examples are possibilities to evaluate, not selected or verified offerings.
+Illustrative workshops/walks/festivals are not verified offerings or a fixed taxonomy. Local need not mean obscure; culture need not mean adventure. Support endorsement, visitor access, language, etiquette, participation, and booking information with evidence. Do not fabricate authenticity, exclusivity, community agreement, or permission to enter restricted activities.
 
-For this organizer, emphasize participation and meaningful context without making culture adventure-only or excluding history. Popular attractions can also be locally recommended. Support local-endorsement claims with actual source context; do not invent “locals love it,” authenticity, or exclusivity labels. Explain relevant language, participation, visitor access, etiquette, timing, and reservation requirements where supported.
+Specific sources, categories, labels, ranking, and coverage remain open. No guide marketplace, host accounts, partnerships, transactions, or account access approved.
 
-Specific sources, category boundaries, local-source verification, ranking, and pilot coverage remain open. This does not approve a guide marketplace, host accounts, paid partnerships, transactions, or source access. The existing Q-006 frustration question remains unanswered; inclusion itself does not need reconfirmation.
+### Formats and duration — D-020
 
-### Experience formats — D-020
+Offer both real provider excursions and app-assembled combinations. A proposed sequence is not automatically one package, price, jointly available set, or reservation. Verify operator inclusions and separate components' timing, travel, costs, and booking needs.
 
-**Confirmed:** Both ready-made provider excursions and app-assembled combinations. Q-012 resolved. An app-created sequence is not automatically one actual package, price, or reservation; verify operator inclusions and separate components' timing, costs, travel, and booking needs.
+Shorter/all-day options remain a tentative duration direction, not fixed hours, filters, or defaults. Format, length, and effort are separate. Proposed total-time checks should avoid double-counting included transfers or inventing shorter versions of fixed tours. Short is not filler; all-day does not mean every minute filled.
 
-**Proposed durations:** The owner suggested shorter/all-day activities tentatively. Hours, buckets, filters, and defaults remain Q-212. Format and duration are separate; either format may suit a short or longer outing, without a verified inventory promise.
-
-**Proposed planning:** Match total available time, including relevant travel and reservations, not merely advertised activity length. Short is not filler; all-day need not fill every minute. No automatic booking, algorithm, or alteration of a fixed operator itinerary approved.
-
-## Confirmed project priorities
+## Project priorities
 
 | Priority | Goal | Boundaries |
 | --- | --- | --- |
-| Immediate | First full test November 10, 2026, for the Japan pilot including Tokyo and two travelers. | Free-first; target, not guarantee. Detailed specifications, capacity, source access/coverage, other cities, and devices open. |
-| Ultimate | Commercial app-store/SaaS offering earning subscriptions and ad revenue. | Greater investment after owner acceptance. Distribution, pricing, ad behavior, public-launch date open. |
+| Immediate | First full test November 10, 2026, ahead of the two-person Japan pilot including Tokyo. | Free-first; target, not guarantee. Capacity, exact scope, data coverage, devices, and additional cities open. |
+| Ultimate | Commercial app-store/SaaS product earning subscriptions and ad revenue. | Greater investment after owner acceptance; distribution, pricing, ads, and public-launch date open. |
 
-See **D-006 through D-022** in the [decision register](planning/decisions.md).
+See decisions D-006 through D-023. Tokyo included does not mean Tokyo-only or nationwide coverage. The pilot is not public launch or proof of broad demand/revenue.
 
-The pilot is not public launch or a nationwide-coverage promise. Tokyo included does not mean Tokyo-only. A successful personal trip is evidence, not proof of broad demand or revenue.
+Private timing supplies late-November to early-December context with late-day arrival and midday departure in Tokyo-local time. Exact dates/times remain in chat. Do not confuse flights, transfers, hotel timing, and usable activity windows.
 
-**Timing:** November 10, 2026 is the approved test target (D-012). Private travel values establish a late-November to early-December window with a late-day arrival and midday departure in Tokyo-local time (D-013). Exact dates/times stay in chat. Airport events, transfers, hotels, and usable activity time must remain distinct; buffers/rules open.
+## Free-first budget — D-017
 
-## Adopted app budget rule — free first
+Aim for **$0 additional app-service cost** while suitable free options meet the need. Retain **$100/month and $150 as flexible paid-operation references**, not mandatory spending, fixed ceiling, automatic cutoff, or purchase authority.
 
-**D-017:** Prefer suitable free options until spending is necessary. Retain **$100/month as an initial paid-operation reference and $150 as a flexible upper reference**, not fixed ceiling, required spend, or purchasing authority.
+Before spending, review blocker, free alternatives, smallest useful paid choice, charges/limits, and consequence of waiting, then obtain a specific decision. Necessary earlier expenses are separate from greater discretionary investment after a working product earns owner acceptance. Tools, one-time purchases, enrollment, and unpriced agreements stay separate.
 
-Aim for $0 additional app-service costs while practical. Do not activate tiers because they appeared in comparisons. Development tools, one-time purchases, enrollment, and unpriced data agreements remain separate.
+Free-first does not remove requirements, imply free access to data, excuse unsafe handling, or make simulations verified evidence. Investigate dependencies early; disclose costs without activating services. Prior pricing examples require verification before selection or purchase.
 
-Before spending, identify the blocked requirement, free alternatives, charges/limits, and consequence of waiting; obtain a specific decision. Greater discretionary investment follows a working product judged against D-018, informed by D-019's preferences. Detailed acceptance remains open; necessary earlier expenses need separate decisions.
-
-Free-first does not remove capabilities, imply free access to Reddit/reviews/calendars/local sources, or turn simulations into current evidence. Investigate source rights, coverage, and costs before relying on them. Disclose paid dependencies without activating them.
-
-**Next discussion:** Q-006 — which part takes most effort: finding worthwhile options, checking dates/booking requirements, or combining them into a practical plan? These are examples, not assumed frustrations. Source preferences are recorded under D-021 and local/cultural inclusion under D-022; do not re-ask them. Duration detail remains for journeys; full promise, capacity, and measurable acceptance stay open.
+**Next discussion:** Q-004 — how many hours per week can the owner realistically devote to planning, reviewing Codex's work, and testing before November 10? The main planning-frustration question is answered. Do not re-ask sources, tastes, formats, local/cultural inclusion, ranking, supplied timing, budget basis, or free-first policy.
 
 ## Planning workflow
 
 ```text
 Draft one section
-    → Discuss its open questions
-    → Record decisions and evidence
+    → Discuss its remaining questions
+    → Record choices and evidence
     → Obtain section approval
-    → Update planning status
+    → Update progress
     → Move to the next section
 ```
 
-The chat is discussion; the repository is the maintained record. Sections proceed sequentially. Saving a draft does not approve proposals.
+Chat is discussion; GitHub is the maintained record. A saved draft is not approval of its proposals.
 
-### Decision labels
-
-| Label | Meaning |
-| --- | --- |
-| CONFIRMED | Explicitly selected or approved. |
-| PROPOSED | Suggested, awaiting a decision. |
-| ASSUMPTION | Belief needing evidence. |
-| OPEN | Unresolved question. |
-| DEFERRED | Explicitly postponed. |
-| REJECTED | Deliberately excluded. |
-
-Reported preferences and source practices are recorded inputs, not validated market or technical facts. Draft documents may contain confirmed decisions.
+**Labels:** CONFIRMED = explicit choice; RECORDED = self-report/input; PROPOSED = awaiting decision; ASSUMPTION = needs evidence; OPEN = unresolved; DEFERRED = explicitly postponed; REJECTED = deliberately excluded. User reports are not market validation or test results.
 
 ## Design before implementation
 
-Codex implementation follows explicit design-transition approval. Until then, this workflow is documentation-only: no scaffolding, dependency installation, provisioning, endpoints, or database creation to fill planning gaps.
+Codex follows explicit design-transition approval. Until then: documentation only, no scaffolding, dependency installation, infrastructure, endpoints, or database implementation to fill gaps.
 
-Design completion means sufficiently defined direction, first-release scope, journeys, constraints/risks, and first buildable slice—not every future feature. Dates, standards, preferences, formats, sources, or spending policy do not approve coding.
+Design completion means sufficient direction, scope, journeys, constraints/risks, and first buildable slice—not every future feature. Milestones, source preferences, budget rules, or problem reports do not approve coding.
 
-Base code on approved decisions. Surface missing product behavior or conflicts instead of silently choosing permissions, providers, or data guarantees.
+No stack, identity system, AI model, provider, permission/sharing model, complete pilot scope, or commercial scope selected. Preserve confirmed choices and surface conflicts instead of inventing behavior. Free-first does not decide web/native/local-only delivery.
 
-## Current boundaries
-
-No stack, database, identity system, AI model, data provider, permission model, sharing access, complete pilot scope, or commercial scope selected. Confirmed capabilities, including same-day planning, both formats, and local/cultural discovery, remain in place.
-
-Additional cities, airports, transfers, hotels, and practical activity windows open. Flight times do not establish hotel-ready times. Organizer-led collaboration proposed. Provider examples/prices need verification before selection; no hotel, event, reservation, timetable, excursion, review, local-guide, or price-comparison integration chosen. Naming Reddit is not choosing an access method or marketing channel.
-
-Subscription/ad intent does not authorize billing/ads now. Free-first is not automatic removal of monetization features. Delivery format open.
-
-Planning or recommending bookings does not authorize transactions, cancellations, or modifications. Same-day functionality does not authorize background tracking, notifications, or monitoring. App combinations are not automatically sold or booked together.
-
-Travel-budget estimates, paid amounts, bounds, and excluded costs remain distinct. Lower bound is not required minimum spending; upper firmness open. Per-person does not force equal split of every expense. App-budget flexibility does not imply travel-budget flexibility.
+Bookings are not authorized by planning around them. Same-day planning does not authorize ongoing tracking or monitoring. Community/cultural sources do not approve a marketplace. Revenue intent does not approve implementing billing/ads now. App-budget flexibility does not change travel-budget rules.
 
 ## Public repository
 
-Keep private financial amounts, exact travel dates/times, detailed schedules, credentials, companion identities, bookings, and identifying research responses out of commits. Use fictional/redacted examples. Omitted private inputs are not missing answers; consult the conversation. Milestones, generalized standards, source categories, and app cost references are planning material, not personal account histories.
+Keep private finances, precise travel dates/times, detailed schedules, credentials, companion identities, bookings, personal histories, and identifying research data out of commits. Use fictional/redacted examples. Missing public values are not missing user answers; consult the conversation. Generalized needs, project milestones, and app-cost references are planning material.
 
-## Update rules
+## Maintenance
 
-1. Update affected sections and resolve contradictions when choices change.
-2. Record decisions and update corresponding questions.
-3. Use `planning/blueprint.md` for section order and approval tracking.
-4. Keep later work broad; detail the next selected implementation slice only.
-5. Preserve application code and unrelated files during planning updates.
+Update affected sections and corresponding questions/decisions together. Preserve prior reasoning. Use `planning/blueprint.md` for section order and approval status. Keep later work broad; detail the next implementation slice only when appropriate. Preserve code and unrelated files during planning updates.
