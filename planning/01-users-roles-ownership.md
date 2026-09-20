@@ -197,4 +197,23 @@ Balanced alternative
 ✓ Moderate fit for both
 ```
 
-**Recommended direction:** individual preference profiles + transparent group-fit explanation + organizer final decision.
+**Confirmed direction — D-044:** individual preference profiles + transparent group-fit explanation + organizer final decision.
+
+## Section 2 status
+
+The core role/ownership model is now defined:
+
+- Organizer owns and administrates the trip.
+- Companions join through unique invite links with lightweight guest identity.
+- Companions can view, react, and suggest but do not directly overwrite confirmed plans by default.
+- Organizer can revoke access and unused invites expire.
+- Shared trip finances and the expense ledger are visible to companions.
+- Sensitive payment credentials and unrelated private data remain protected.
+- Expense history survives membership changes.
+- Each traveler retains distinct preferences and reactions.
+- Group-fit differences are shown rather than silently averaged.
+- Organizer retains the final itinerary decision.
+
+Remaining details such as exact invite expiry duration, expense-edit permissions, raw-preference visibility, deletion recovery, and ownership-transfer mechanics can be specified in later interface/data/security work.
+
+**Section 2 is ready for closeout review.**
