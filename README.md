@@ -6,6 +6,7 @@
 **Current blueprint section:** 1 — Product Vision and Problem Brief  
 **Current section status:** Draft; not yet approved  
 **First complete test target:** November 10, 2026 — approved planning target  
+**Testing direction:** Early versions in San Jose, California; Japan-focused simulations after a working beta  
 **App spending policy:** Free first; flexible paid-operation references; no paid service authorized  
 **Owner time commitment:** Flexible/as necessary; no numerical weekly allocation or unlimited-capacity assumption  
 **Implementation:** Not started through this planning workflow  
@@ -18,11 +19,11 @@
 | Document | Purpose | Status |
 | --- | --- | --- |
 | [Planning blueprint](planning/blueprint.md) | Framework and sequential progress tracker. | Adopted framework, not blanket feature approval. |
-| [Product vision and problem brief](planning/00-product-brief.md) | Current Section 1, including reported problems, local/cultural coverage, flexible effort, and example day flow. | Draft; decisions through D-024 incorporated. |
-| [Product success standards](planning/00-product-success-standards.md) | Standards, taste, sources, formats, balanced days, post-rest discovery example, and proposed evaluations. | Choices/inputs recorded; detailed behavior and thresholds open. |
+| [Product vision and problem brief](planning/00-product-brief.md) | Current Section 1, including reported problems, local/cultural coverage, flexible effort, example day flow, and staged testing. | Draft; decisions through D-025 incorporated. |
+| [Product success standards](planning/00-product-success-standards.md) | Standards, taste, sources, formats, balanced days, post-rest discovery example, and proposed evaluations. | Choices/inputs recorded; detailed behavior and thresholds open. Current testing sequence is D-025 below; current next question is in the question register. |
 | [App budget policy and options](planning/00-app-budget-options.md) | Free-first policy, retained cost scenarios, and access risks. | D-017 confirmed; no vendor or purchase selected. |
 | [Decision register](planning/decisions.md) | Decisions and reported inputs, reasons, boundaries, history. | Maintained as planning progresses. |
-| [Open questions](planning/open-questions.md) | Remaining questions by section. | Next: Q-008 companion testing participation. |
+| [Open questions](planning/open-questions.md) | Remaining questions by section. | Next: Q-013 early-test devices; testing direction Q-008 answered. |
 
 ## Confirmed core use case
 
@@ -110,14 +111,30 @@ Offer real provider excursions and app-assembled combinations. A sequence is not
 
 Shorter/all-day options are a tentative duration direction, not fixed hours, filters, or defaults. Format, length, and effort differ. Proposed time checks should avoid double-counted transfers or invented shorter operator variants. Short is not filler; all-day does not mean every minute filled.
 
+## Staged testing — D-025
+
+**Confirmed direction:** Test early versions in **San Jose, California**, then use **Japan-focused simulations once a working beta exists**. The owner's collective wording supports joint local testing with the companion; exact sessions and roles remain open. San Jose is a testing area in this public record, not a private address or a location-tracking permission.
+
+| Stage | Intended purpose | Status of detailed checks |
+| --- | --- | --- |
+| Early San Jose tests | Evaluate worthwhile suggestions, planning/sharing, and the main-outing → break → optional nearby discovery flow in a familiar area. | Candidate tasks; dates, devices, and pass criteria not yet chosen. |
+| Working-beta Japan simulations | Rehearse Japan-trip scenarios with destination-local timing, hotel/transport context, reservations, date-specific events, day balance, and spontaneous choices. | Sequence confirmed; exact scenario design and execution location open. |
+| Eventual Japan trip use | Apply the sufficiently tested product during the existing pilot trip. | Existing goal, not evidence that a beta already works or a release is ready. |
+
+A Japan rehearsal can be designed around a selected Japan location and scenario time without requiring physical presence there; that is a proposed test method, not a selected simulator or device-location spoofing mechanism. Keep controlled scenarios, historical examples, and current externally verified results clearly distinct. Changing a date does not establish future event availability, opening hours, prices, or reservations.
+
+**Evidence boundary:** Local usability or recommendation success does not prove Japan data coverage or quality. Test the Japan-specific sources separately. Research high-risk Japan dependencies early; the full scenario rehearsals can still follow the working beta as requested. No current events, sources, bookings, or test results have been verified by this planning update.
+
+The November 10, 2026 first complete test target, ranked standards, free-first policy, and design-before-code boundary remain unchanged. Local testing does not require nationwide U.S. coverage, a paid hotel stay, selected platforms, or a changed commercial audience. Details belong in later scope/test sections.
+
 ## Project priorities and effort
 
 | Priority | Goal | Boundaries |
 | --- | --- | --- |
-| Immediate | First full test November 10, 2026, before the two-person Japan pilot including Tokyo. | Free-first; target, not guarantee. Flexible effort recorded; exact scope, data coverage, devices, and additional cities open. |
+| Immediate | Early San Jose testing, then Japan-focused beta simulations toward the November 10, 2026 first full test and two-person Japan pilot including Tokyo. | Free-first; target, not guarantee. Exact scope, data coverage, devices, and additional Japan cities open. |
 | Ultimate | Commercial app-store/SaaS product earning subscriptions and ad revenue. | Greater investment after owner acceptance; distribution, pricing, ads, and public-launch date open. |
 
-See decisions D-006 through D-024. Tokyo included does not mean Tokyo-only or nationwide coverage. The pilot is not public launch or proof of broad demand/revenue.
+See decisions D-006 through D-025. Tokyo included does not mean Tokyo-only or nationwide coverage. San Jose is the early test area, not a nationwide U.S. launch commitment. The pilot is not public launch or proof of broad demand/revenue.
 
 **Time commitment (D-024):** The owner will devote as much time as necessary. Record flexible/as-needed effort, not a fixed weekly number, full-time schedule, or unlimited capacity. Do not ask the same availability question again to block planning. Estimate and measure actual task effort/progress later; no implementation transition has been approved.
 
@@ -131,7 +148,7 @@ Before spending, review blocker, free alternatives, smallest useful paid choice,
 
 Free-first does not remove requirements, imply free data, excuse unsafe handling, or make simulations verified evidence. Investigate dependencies early; disclose costs without activating services. Recheck prior pricing before selection or purchase.
 
-**Next discussion:** Q-008 — will the companion try early versions and provide feedback before travel, or will the organizer handle the first tests alone? This is testing participation, not shared-plan editing permissions. Flexible time commitment and main planning problems are answered; do not re-ask supplied preferences, formats, sources, timing, budget basis, or policy.
+**Next discussion:** Q-013 — should early tests focus on phones or support both phone and computer use? This is a device/use constraint, not a native/web/stack choice. Q-008's initial testing direction is answered under D-025; session roles, feedback collection, and broader recruitment remain open without repeating the broad participation question.
 
 ## Planning workflow
 
@@ -152,15 +169,15 @@ Chat is discussion; GitHub is the maintained record. A saved draft is not approv
 
 Codex follows explicit design-transition approval. Until then: documentation only, no scaffolding, dependency installation, infrastructure, endpoints, or database implementation to fill gaps.
 
-Design completion means sufficient direction, scope, journeys, constraints/risks, and first buildable slice—not every future feature. Milestones, source preferences, budget rules, flexible effort, and examples do not approve coding.
+Design completion means sufficient direction, scope, journeys, constraints/risks, and first buildable slice—not every future feature. Milestones, source preferences, budget rules, flexible effort, examples, and test-area choices do not approve coding.
 
-No stack, identity system, AI model, provider, permission/sharing model, complete pilot scope, or commercial scope selected. Preserve confirmed choices and surface conflicts. Free-first does not decide web/native/local-only delivery.
+No stack, identity system, AI model, provider, permission/sharing model, complete pilot scope, or commercial scope selected. Preserve confirmed choices and surface conflicts. Free-first and local testing do not decide web/native/local-only delivery.
 
 Bookings are not authorized by planning around them. Same-day planning does not authorize ongoing tracking/monitoring. Local/cultural sources do not approve a marketplace. Revenue intent does not approve implementing billing/ads now. App-budget flexibility does not change travel-budget rules.
 
 ## Public repository
 
-Keep private finances, precise travel dates/times, detailed schedules, credentials, companion identities, bookings, personal histories, and identifying research data out of commits. Use fictional/redacted examples. Missing public values are not missing answers; consult the conversation. Generalized needs/examples, project milestones, and app-cost references are planning material.
+Keep private finances, precise travel dates/times, detailed schedules, credentials, companion identities, bookings, home addresses, personal histories, and identifying research data out of commits. Use fictional/redacted examples. Missing public values are not missing answers; consult the conversation. Generalized needs/examples, city-level test areas, project milestones, and app-cost references are planning material.
 
 ## Maintenance
 
