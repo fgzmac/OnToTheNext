@@ -166,4 +166,35 @@ Recommended starting model:
 - Ownership can be transferred deliberately, but not accidentally.
 - Shared expenses remain visible even if a companion is removed until outstanding balances are resolved or explicitly handled.
 
-**Recommended direction:** Organizer controls membership, deletion, publishing, and ownership transfer; companions participate in planning/expenses without administrative control.
+**Confirmed direction — D-043:** Organizer controls membership, deletion, publishing, and deliberate ownership transfer; companions participate in planning/expenses without administrative control.
+
+Expense history and outstanding balances remain preserved even if a companion is removed.
+
+## Next decision
+
+**Q-106:** How should individual traveler preferences affect recommendations?
+
+Proposed starting model:
+- Each traveler can have their own preferences and reactions.
+- The app should keep those signals separate rather than collapsing them into one anonymous group profile.
+- Recommendations should show when something strongly fits everyone versus mainly one person.
+- The organizer still chooses the final itinerary.
+- When preferences conflict, the app should propose balanced alternatives rather than silently averaging away the disagreement.
+
+Example:
+
+```text
+Option A
+✓ Strong match for organizer
+✓ Strong match for companion
+
+Option B
+✓ Strong match for organizer
+△ Low interest from companion
+
+Option C
+Balanced alternative
+✓ Moderate fit for both
+```
+
+**Recommended direction:** individual preference profiles + transparent group-fit explanation + organizer final decision.
