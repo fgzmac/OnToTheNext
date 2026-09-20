@@ -1,13 +1,13 @@
 # Section 1 Supporting Note — Product Success Standards
 
-**Status:** Priority order, first-version same-day capability, both experience formats, and local/cultural inclusion CONFIRMED; owner preferences, sources, and planning problems RECORDED; detailed behaviors, metrics, and acceptance thresholds OPEN.  
+**Status:** Priority order, first-version same-day capability, both experience formats, and local/cultural inclusion CONFIRMED; owner preferences, sources, planning problems, flexible time commitment, and example day flow RECORDED; detailed behaviors, metrics, and acceptance thresholds OPEN.  
 **Owner:** Project owner (`fgzmac`).  
 **Recorded:** 2026-09-19.  
-**Decisions:** D-018 standards; D-019 personal taste; D-020 formats; D-021 sources; D-022 local/cultural inclusion; D-023 planning friction and desired day balance.  
+**Decisions:** D-018 standards; D-019 personal taste; D-020 formats; D-021 sources; D-022 local/cultural inclusion; D-023 planning friction and desired day balance; D-024 flexible effort and example planned/rest/spontaneous flow.  
 **Related section:** [Product Vision and Problem Brief](00-product-brief.md), especially 1.4, 1.6, 1.7, 1.9, 1.12, and 1.16.  
-**Related questions:** Q-004, Q-005, Q-006, resolved Q-012, Q-201, Q-207, Q-212, Q-213, Q-304, Q-305, Q-309, Q-356, Q-402, Q-403.  
-**Source:** The owner's ranked standards, preferences, format and coverage choices, discovery sources, and description of planning difficulties.  
-**Next discussion:** Available weekly development/review/testing time under Q-004. The main Q-006 pain points are now supplied; do not ask them again.  
+**Related questions:** Q-004, Q-005, Q-006, Q-008, resolved Q-012, Q-201, Q-207, Q-212, Q-213, Q-304, Q-305, Q-309, Q-356, Q-402, Q-403.  
+**Source:** The owner's ranked standards, preferences, format and coverage choices, discovery sources, planning difficulties, and proposed day-flow example.  
+**Next discussion:** Companion participation in testing under Q-008. Weekly effort is flexible/as necessary under D-024; do not require a numerical estimate to proceed.  
 **Evidence status:** Self-reports and product choices, not observed task performance. No product test, live event search, measured outcome, or acceptance of a working product has been completed by writing this note.
 
 ## Confirmed order of importance
@@ -24,7 +24,7 @@ Personalized sharing remains in D-005. Elaborate reveal effects cannot compensat
 
 ## Current planning problems and desired balance — D-023
 
-The owner has now described the actual planning difficulties, not only hypothetical quality criteria.
+The owner has described the actual planning difficulties, not only hypothetical quality criteria.
 
 | Reported problem | Desired outcome from the owner's account | Proposed design response, not yet an approved mechanism |
 | --- | --- | --- |
@@ -37,6 +37,34 @@ The owner has now described the actual planning difficulties, not only hypotheti
 **Proposed problem statement:** Help a traveler move from many interdependent choices to a worthwhile, logically ordered trip that fits their dates and travel arrangements while balancing demanding experiences with free time for shopping, food, and spontaneous choices.
 
 This is not a request for an itinerary maximizing stop count, minimizing distance at any cost, or packing every day with high-effort adventures. The existing priority ranking in D-018 is unchanged.
+
+### Example day: planned highlights, downtime, then optional discovery — D-024
+
+The owner proposed this flow:
+
+```text
+One or two main experiences for the day
+    → Finish the planned experiences
+    → Free time
+    → Rest and hang out at the hotel
+    → When interested, the traveler opens the app
+    → Find worthwhile experiences or events within a radius
+    → Choose and spontaneously do something nearby
+```
+
+**Recorded as an example, not a mandatory daily template.** One or two main experiences is not a product-wide maximum. A hotel break is part of this scenario, not required every day. This does not require two main experiences when one fills the available day, or an additional outing when the traveler prefers to remain at the hotel.
+
+**Planning implication:** Planned highlights and optional later discoveries should coexist. Free time remains available until the traveler chooses to use it; completion of an activity must not be interpreted as a request to automatically fill the rest of the day. The example is user-initiated: reopen the app when ready, not unsolicited alerts, automatic fatigue detection, or background location monitoring.
+
+**Proposed interaction detail for later design:** Reuse existing trip preferences and relevant bookings; establish the current/selected search area and time still available; offer radius-based nearby options; explain travel, timing, cost, booking needs, and uncertainty; preview the chosen addition without silently changing the remaining plan. Current-location access requires permission if selected; a manually chosen area or known hotel is a possible alternative, not an approved default or evidence that the traveler is currently there.
+
+**Radius and time are different checks.** No distance, unit, default radius, automatic expansion, travel mode, or maximum travel time has been selected. Being within a radius does not by itself establish a feasible route, acceptable journey, open admission, or available booking. A listed event occurring today is not necessarily usable at the moment the app is reopened. Include arrival and any needed onward travel when later specifying feasibility.
+
+**Optional means optional.** Staying at the hotel is a valid outcome. Proposed fallback behavior is to show no suitable matches honestly and offer changes to search area/time only by user choice, not pad the results or silently broaden the request. A ready-made excursion keeps its real departure and duration; do not invent a shortened variant to fit a spontaneous gap.
+
+**Candidate tests, not approved thresholds:** Resume after a break without repeating all setup; use a chosen radius; handle a denied location permission; exclude an option that would finish too late; preserve a later reservation; decline all suggestions and leave free time unchanged; find no suitable dated events without fabricating one. Completed, unfinished, skipped, optional, and reserved items may need distinct handling, but no state model or controls are selected here.
+
+This example makes D-018's same-day requirement concrete while preserving D-023's day balance. Detailed defaults and tests remain Q-207/Q-213/Q-304/Q-305/Q-309. No actual event search, location access, reservation, notification, or code is authorized by recording the flow.
 
 ### Proposed planning principles for later specification
 
@@ -62,13 +90,13 @@ Same-day nearby discovery and on-the-fly planning are **core first-version capab
 
 **Required at capability level:** Find worthwhile nearby options for today, including time-specific events, and help form a usable plan.
 
-**Still open:** Minimum areas/categories, adding versus replacing items, how much of a day changes, freshness/response targets, and precise constraint checks.
+**Still open:** Minimum areas/categories, adding versus replacing items, how much of a day changes, freshness/response targets, and precise constraint checks. D-024 supplies a requested scenario and radius-based discovery idea, not default distances or a finalized screen flow.
 
 **Not selected:** Continuous location tracking, notifications, background monitoring, automatic whole-trip rewriting, live inventory guarantees, reservation transactions, paid providers, or AI architecture.
 
 Permanent places may complement events, but a generic nearby list does not demonstrate event discovery. An event today is not necessarily still running, reachable, open for entry, or bookable.
 
-D-020 confirms both provider excursions and app-assembled combinations. D-022 adds local recommendations and cultural experiences. Neither should silently become later-only. Shorter/all-day duration categories remain proposed. D-023 refines the required usefulness of planning, not permission to choose an algorithm or begin implementation.
+D-020 confirms both provider excursions and app-assembled combinations. D-022 adds local recommendations and cultural experiences. Neither should silently become later-only. Shorter/all-day duration categories remain proposed. D-023/D-024 refine planning usefulness, not permission to choose an algorithm or begin implementation.
 
 ## 1. Recommendation quality — proposed evaluation framework
 
@@ -95,7 +123,7 @@ Do not equate quality solely with popularity, ratings, novelty, luxury, authenti
 
 Favor meaningful participation, scenery, and complementary experiences for this organizer without requiring every result to have all those elements. These are choices the owner would consider, not bookings or guaranteed attendance.
 
-**Personalization boundaries:** No global ban on history, museums, monuments, sightseeing, or popular places. Do not copy these tastes to the companion or infer willingness to pay, physical ability, skill, risk tolerance, or constant all-day availability. D-023 explicitly adds balance and free time, not a measured exertion limit. These examples do not request snorkeling or ATV trips in Tokyo or verify their availability there.
+**Personalization boundaries:** No global ban on history, museums, monuments, sightseeing, or popular places. Do not copy these tastes to the companion or infer willingness to pay, physical ability, skill, risk tolerance, or constant all-day availability. D-023/D-024 explicitly add balance and free time, not a measured exertion limit. These examples do not request snorkeling or ATV trips in Tokyo or verify their availability there.
 
 A strong single activity remains eligible. A historical setting can host an engaging experience. Do not pack every gap into an adventure sequence. Exact mix and weights remain open.
 
@@ -157,7 +185,7 @@ The owner's “Maybe shorter activities and all day activities” is tentative, 
 
 Format and duration are independent. Either format may cover a short outing or a longer day; that is a design possibility, not verified inventory. Duration does not determine quality or exertion.
 
-**Proposed behavior:** Reuse or ask the available window; distinguish activity length from travel, between-stop transfers, and reaching the next commitment/endpoint. Avoid double-counting operator-included transfers. Label unknown timing rather than claiming a precise fit. D-023 adds desired energy balance and free time to this discussion.
+**Proposed behavior:** Reuse or ask the available window; distinguish activity length from travel, between-stop transfers, and reaching the next commitment/endpoint. Avoid double-counting operator-included transfers. Label unknown timing rather than claiming a precise fit. D-023/D-024 add desired balance, free time, and a later optional outing.
 
 Full-day options need not fill every minute. Short options must not be filler. Do not truncate a fixed operator itinerary or invent shorter variants. Exact cutoffs, intermediate durations, controls, start/end locations, and buffers remain Q-212/Q-213/Q-305.
 
@@ -165,7 +193,7 @@ Full-day options need not fill every minute. Short options must not be filler. D
 
 Assess serious consideration within a defined shortlist, voluntary saves/additions, rejection reasons, factual/feasibility errors, and post-use value. Saves show interest, not attendance or satisfaction; clicks/bookings alone are not success.
 
-Use D-019 as initial preference examples, not a benchmark labeling all adventurous items good and all landmarks bad. Test both individual appeal and the complete day's fit using D-023. A beautiful but infeasible or unwantedly crowded combination is not success.
+Use D-019 as initial preference examples, not a benchmark labeling all adventurous items good and all landmarks bad. Test both individual appeal and the complete day's fit using D-023/D-024. A beautiful but infeasible or unwantedly crowded combination is not success.
 
 Define context, sample, denominator, and evaluation method before reporting a success rate. No numerical pass target is approved.
 
@@ -182,7 +210,7 @@ Open same-day discovery
     → Confirm the change
 ```
 
-Location permission and manual-area alternative are proposed, not permission to access location. A complete multi-day itinerary should not be assumed necessary to explore today. Exact entry requirements remain open. Existing flexible time must not automatically be interpreted as an instruction to fill it.
+D-024 supplies an example of entering this flow after main activities and hotel rest. Location permission and manual-area alternative are proposed, not permission to access location. A complete multi-day itinerary should not be assumed necessary to explore today. Exact entry requirements remain open. Existing flexible time must not automatically be interpreted as an instruction to fill it.
 
 **Candidate result information:** What it is, why it fits, location, event occurrence/admission window, travel, visit length, cost basis, booking needs, source, and freshness. D-020 adds format distinction; Q-212 covers duration; D-021/D-022 evidence and culture are not guaranteed coverage.
 
@@ -191,7 +219,7 @@ Location permission and manual-area alternative are proposed, not permission to 
 | Fetched recently. | Underlying organizer information recently updated or accurate. |
 | Happens today. | Still running, reachable before entry closes, or fitting the remaining day. |
 | Booking required. | Available inventory or an existing traveler booking. |
-| Geographically near. | Acceptable travel time by the selected mode. |
+| Geographically near or within a radius. | Acceptable travel time by the selected mode. |
 | Mentioned on multiple sites. | Distinct events or independent confirmation. |
 
 **Proposed safeguards:** Exclude known expired/canceled options from actionable results; preserve local occurrence time; distinguish events from venues; avoid duplicates; disclose conflicting/unverified information; preserve existing commitments on previews; explain reservation uncertainty. Exact checks/sources remain open.
@@ -206,7 +234,7 @@ When suitable events cannot be found, say so. Wider area, another time, or label
 
 Reuse provided preferences, ask only relevant next questions, make actions clear, preserve work, provide undo/recovery where appropriate, and allow practical access without replaying the reveal. These are proposals, not a screen inventory or a rule minimizing taps at the expense of essential checks.
 
-D-023 now confirms difficulty starting and coordinating variables, not just a general preference for simplicity. Candidate tasks include beginning with incomplete hotel information, narrowing choices, understanding suggested order, balancing an excursion with food/shopping/free time, judging a provider versus assembled plan, discovering today's events, previewing changes, reopening saved work, and accessing the companion view.
+D-023 confirms difficulty starting and coordinating variables, not just a general preference for simplicity. Candidate tasks include beginning with incomplete hotel information, narrowing choices, understanding suggested order, balancing an excursion with food/shopping/free time, judging a provider versus assembled plan, discovering today's events, resuming after a break (D-024), previewing changes, reopening saved work, and accessing the companion view.
 
 Observe completion, hesitation, repeated input, help needed, errors, recovery, and reported effort. Include hotel/transport and reservation tasks. No number of taps, seconds, energy points, or mandatory breaks has been approved. Self-reported pain points are not measured time savings.
 
@@ -220,12 +248,12 @@ Report necessary spending or a free approach's limitations with evidence and a p
 
 ## Outstanding decisions and next step
 
-**Answered:** Ranked standards, first-version same-day capability, initial organizer examples, both recommendation formats, reported discovery sources, local/cultural inclusion, and reported planning friction/day-balance priorities (D-023).
+**Answered:** Ranked standards, first-version same-day capability, initial organizer examples, both formats, reported sources, local/cultural inclusion, planning friction/day balance, and flexible/as-needed development effort. D-024 records an example flow from main experiences through free time/hotel rest to user-initiated radius-based discovery.
 
-**Proposed:** Duration buckets, gradual onboarding, hotel-informed ordering, effort estimation, flexible windows, sequence explanations, exact source checks, and evaluation methods.
+**Proposed:** Duration buckets, gradual onboarding, hotel-informed ordering, effort estimation, flexible windows, sequence explanations, exact source checks, the detailed day-flow controls, search-radius defaults, and evaluation methods. The example is not a universal one-or-two-event limit or mandatory hotel return.
 
-**Open:** Weekly development capacity, full pilot-promise approval, exact saving/organization tools and measured effort, companion input, scope/coverage, time/pace controls, sources, response/freshness targets, numerical acceptance, and product validation. Keep detailed journey questions in their assigned sections.
+**Open:** Companion testing participation, full pilot-promise approval, exact saving/organization tools and measured effort, scope/coverage, time/pace/radius controls, sources, freshness/response targets, numerical acceptance, and product validation. No quantified weekly capacity was supplied or should be invented; estimate and measure actual delivery effort later.
 
-Next under Q-004: **How many hours per week can the owner realistically devote to planning, reviewing Codex's work, and testing before the November 10 target?** No implementation start is approved. Do not ask for the already supplied main frustrations, sources, preference examples, formats, or budget policy again.
+**Next — Q-008:** Will the companion test early versions and offer feedback before travel, or will the organizer handle the initial testing alone? This concerns evaluation participation, not editing permissions. Do not re-ask weekly hours, main frustrations, sources, examples, formats, or budget policy.
 
-Section 1 remains DRAFT; later sections remain NOT STARTED. No code, booking, paid service, data integration, live event test, or automation was created by this documentation update.
+Section 1 remains DRAFT; later sections remain NOT STARTED. No code, booking, paid service, location access, integration, live event test, or automation was created by this documentation update.
