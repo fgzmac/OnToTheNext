@@ -18,7 +18,7 @@
 | --- | --- | --- |
 | [Planning blueprint](planning/blueprint.md) | The reusable framework and sequential progress tracker. | Adopted framework; examples are not blanket feature approval. |
 | [Product vision and problem brief](planning/00-product-brief.md) | The current section populated from the concept and explicit decisions. | Draft for discussion. |
-| [Product success standards](planning/00-product-success-standards.md) | Ranked quality standards, required same-day discovery, and proposed evaluation methods. | D-018 priorities/capability confirmed; measurements and detailed behavior open. |
+| [Product success standards](planning/00-product-success-standards.md) | Ranked quality standards, required same-day discovery, organizer taste examples, and proposed evaluations. | D-018 priorities/capability confirmed; D-019 personal examples recorded; measurements and detailed behavior open. |
 | [App budget policy and options](planning/00-app-budget-options.md) | Free-first policy plus retained tier comparisons, example costs, and data-access risks. | D-017 policy confirmed; providers, purchases, and detailed controls unselected. |
 | [Decision register](planning/decisions.md) | Confirmed decisions, reasoning, and boundaries. | Maintained as decisions are made. |
 | [Open questions](planning/open-questions.md) | Unresolved questions organized by blueprint section. | Only the current section's questions are active. |
@@ -55,6 +55,14 @@ Personalized sharing remains part of the concept. Extra reveal effects do not ta
 
 The [standards note](planning/00-product-success-standards.md) separates confirmed priorities from proposed tests. No quality score, latency target, minimum coverage, or owner acceptance of the product has yet been established. A recently retrieved event listing is not automatically accurate or currently bookable; an event today is not necessarily reachable in the time available.
 
+### Initial organizer's preference examples — D-019
+
+The organizer would consider an excursion combining a scenic beach view, snorkeling, and an oceanside dinner, or scenic ATV exploration with something distinctive to the area. Standalone novelty-object and historical-statue stops are negative examples.
+
+The working interpretation favors scenery, participation, local character, and connected experiences for this organizer. These are stated preferences, not a ban on history or sightseeing for all travelers, not the companion's preferences, and not a requirement that every recommendation be a multi-part adventure. No actual offering or seasonal availability has been verified for the Tokyo pilot.
+
+**Q-012 remains open:** Recommend ready-made provider excursions, assemble combinations of separate activities, or both? An app-created sequence is not automatically a real package with one price or one reservation. Inclusions, timing, travel, costs, and reservation needs require separate evidence. The earlier hotel/transport 'both' decision does not answer this new capability question.
+
 ## Confirmed project priorities
 
 | Priority | Goal | Boundaries |
@@ -62,7 +70,7 @@ The [standards note](planning/00-product-success-standards.md) separates confirm
 | Immediate | First complete test targeted for November 10, 2026, ahead of the Japan-trip pilot including Tokyo and two travelers. | Free-first. Target approved, not a delivery guarantee. Detailed specifications, capacity, data coverage, additional cities, and devices remain open. |
 | Ultimate | Commercial mobile app-store/SaaS offering earning subscription and ad revenue. | Greater investment follows a working product meeting owner standards. Distribution, pricing, ad behavior, and launch date remain open. |
 
-See decisions **D-006 through D-018** in the [decision register](planning/decisions.md).
+See decisions **D-006 through D-019** in the [decision register](planning/decisions.md).
 
 The pilot is not a public-launch deadline or a promise of nationwide coverage. Tokyo is confirmed, but Tokyo-only is not. A successful trip can supply useful evidence without proving broader demand or subscription revenue.
 
@@ -74,11 +82,11 @@ The pilot is not a public-launch deadline or a promise of nationwide coverage. T
 
 Aim for **$0 in additional app-service costs for as long as practical**. Do not activate paid tiers merely because they appeared in a comparison. Development tools, one-time purchases, store enrollment, and unpriced data agreements stay separate.
 
-Before a paid commitment, identify the blocked requirement, free alternatives, expected charges/limits, and consequence of waiting; obtain a specific spending decision. Greater discretionary spending follows a working product the owner judges to meet the standards now ranked in D-018. Detailed acceptance checks remain open; necessary earlier expenses are separate decisions, not blanket authorization.
+Before a paid commitment, identify the blocked requirement, free alternatives, expected charges/limits, and consequence of waiting; obtain a specific spending decision. Greater discretionary spending follows a working product the owner judges to meet the standards ranked in D-018 and informed by the personal examples in D-019. Detailed acceptance checks remain open; necessary earlier expenses are separate decisions, not blanket authorization.
 
 Free-first does not remove confirmed features or turn simulated data into evidence of current recommendations. Investigate timely event coverage and other data-access risks before polishing a complete interface around untested assumptions. Disclose any paid dependency; do not promise every production capability will be free.
 
-**Next discussion:** Q-006 — give an example of an experience worth adding and one worth rejecting, and explain the difference. Q-005's ranked standards are answered under D-018; the complete promise and measurable acceptance remain open. Do not re-ask the priority order, budget policy, or per-person travel-budget basis.
+**Next discussion:** Q-012 — ready-made excursions, app-assembled combinations of separate activities, or both? Q-006's initial positive/negative examples are recorded in D-019. Do not re-ask those examples, priority order, budget policy, or per-person travel-budget basis. Current workarounds, the complete promise, and measurable acceptance remain open.
 
 ## Planning workflow
 
@@ -110,7 +118,7 @@ A confirmed choice is not automatically a validated market or technical assumpti
 
 Codex implementation begins after the approved design transition. Until then this workflow is documentation-only: do not scaffold, install dependencies, provision services, create endpoints, or design a database merely to fill a planning gap.
 
-Design completion means sufficiently defined direction, first-release scope, main journeys, important constraints/risks, and the first buildable slice—not every future feature. Approving a date, standard, or spending policy does not approve implementation.
+Design completion means sufficiently defined direction, first-release scope, main journeys, important constraints/risks, and the first buildable slice—not every future feature. Approving a date, standard, personal preference, or spending policy does not approve implementation.
 
 Use approved decisions as the basis for future code. Do not silently decide proposed features, permissions, providers, freshness guarantees, or missing product behavior. Surface conflicts.
 
@@ -118,11 +126,11 @@ Use approved decisions as the basis for future code. Do not silently decide prop
 
 No stack, database, identity system, AI model, data provider, permission model, sharing-access policy, complete pilot scope, or commercial-release scope is selected. Confirmed capabilities, including D-018's same-day discovery, must be preserved while remaining decisions are made.
 
-Additional destinations, airports, transfers, hotels, and practical activity windows remain open. Flight times alone do not establish hotel-ready times. Organizer-led collaboration remains proposed. Provider examples and cost references require verification before selection; no hotel, event, reservation, timetable, or price-comparison integration has been chosen.
+Additional destinations, airports, transfers, hotels, and practical activity windows remain open. Flight times alone do not establish hotel-ready times. Organizer-led collaboration remains proposed. Provider examples and cost references require verification before selection; no hotel, event, reservation, timetable, excursion, or price-comparison integration has been chosen.
 
 Subscription and ad intent does not settle product tiers or authorize billing/ads now. Free-first development is not automatic exclusion of monetization features. Delivery format remains open.
 
-Organizing or recommending bookings and accounting for reservation requirements do not authorize making, changing, or canceling them. Same-day discovery likewise does not authorize background location collection, automated booking, notifications, or ongoing monitoring.
+Organizing or recommending bookings and accounting for reservation requirements do not authorize making, changing, or canceling them. Same-day discovery likewise does not authorize background location collection, automated booking, notifications, or ongoing monitoring. Combining activities in a proposed plan does not establish that they are sold or reserved together.
 
 Travel-budget bounds, estimates, paid amounts, and excluded costs must not be conflated. Lower bound is not a minimum-spend requirement; upper-bound firmness is open. Per-person input does not imply an equal split of every shared charge. D-017's flexibility applies to app spending, not automatically to trip spending.
 
