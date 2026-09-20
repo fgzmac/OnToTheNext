@@ -33,6 +33,7 @@ A commit is not a product approval. Recommendations copied into the base idea do
 | D-019 | Initial organizer favors scenic, participatory, locally distinctive and multi-part experiences over the supplied novelty-object and standalone-statue examples. | STATED PREFERENCE RECORDED; not universal; formats settled D-020 | 2026-09-19 |
 | D-020 | Offer both ready-made provider excursions and app-assembled combinations of separate activities. | CONFIRMED formats; shorter/all-day options are a proposal | 2026-09-19 |
 | D-021 | Discovery uses or values real experiences, positive Reddit posts, highly rated reviews, date-relevant calendars, and destination-related must-see experiences/events. | REPORTED SOURCES / PREFERENCES RECORDED; integrations and verification rules open | 2026-09-19 |
+| D-022 | Include local recommendations and cultural experiences in discovery and trip planning. | CONFIRMED inclusion; specific sources, categories, and verification methods open | 2026-09-19 |
 
 ## D-001 — Sequential blueprint planning
 
@@ -215,7 +216,7 @@ A commit is not a product approval. Recommendations copied into the base idea do
 | Hotels | Included in first version. | Included in first version. |
 | Transportation | Included in first version. | Included in first version. |
 
-**Boundaries:** Does not approve payments, booking transactions/changes/cancellations, account/email access, automatic imports, live availability, a transport mode/provider, affiliate revenue, or worldwide coverage. Entry, verification, criteria, and handoffs remain open. Recommendation is not booking confirmation.
+**Boundaries:** Does not approve payments, booking transactions/changes/cancellations, account/email access, automatic imports, live availability, a transport mode/provider, affiliate revenue, or worldwide coverage. Entry, verification,criteria, and handoffs remain open. Recommendation is not booking confirmation.
 
 **Scope effect:** Do not downgrade to a booking organizer or silently postpone recommendations. Explicit revision required if feasibility conflicts. Neither free-first nor later priority ranking removes either path. Full specifications and Section 1 approval remain open.
 
@@ -495,6 +496,28 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 **Revisit:** The owner describes the workflow or specific frustration, supplies concrete sources, or later access/quality tests require changes.
 
+## D-022 — Local recommendations and cultural experiences
+
+**Decision:** Include **local recommendations** and **cultural experiences** in the app's discovery and trip-planning coverage.
+
+**Source:** The owner's explicit addition: “I also want to add local reccomendations and cultural experiences.” Inclusion is confirmed; detailed interpretation and implementation remain for design.
+
+**Two distinct dimensions:** Local recommendations concern where a suggestion comes from; cultural experiences concern what the traveler can experience. The proposed interpretation of local recommendations is advice from residents, local guides, community hosts, or locally based sources—not merely places near the traveler. Cultural discovery could include food traditions, crafts, performances, public festivals, and opportunities to learn about a place. These are illustrative directions, not a fixed taxonomy or verified offerings.
+
+**Personalization:** For the initial organizer, propose emphasizing participation and meaningful local context, consistent with D-019. Their negative statue example does not exclude history or culture. Do not require every cultural option to be adventurous, participatory, obscure, or part of a bundle; other travelers and the companion can have different preferences. Popular highlights and local recommendations may overlap.
+
+**Proposed evidence and respect safeguards:** Identify the source and reason behind a local recommendation where supported. Nearby location, language, star ratings, or an anonymous opinion alone must not be presented as verified local endorsement. Avoid unsupported labels such as “locals love it,” “authentic,” or “exclusive.” Represent individual perspectives without claiming community-wide agreement. Where relevant, explain visitor access, participation, language, etiquette, booking requirements, and material commercial relationships using appropriate evidence. Do not imply access to private or restricted cultural activities.
+
+**Planning fit:** Carry these additions into pre-trip and same-day discovery, both experience formats, and later minimum-coverage decisions. Actual timing, travel, costs, and reservation feasibility still apply. A cultural event is not necessarily happening today or available for entry. Exact categories, sources, labels, ranking weights, local-source verification, and evaluation thresholds remain open.
+
+**Boundaries:** No local-guide marketplace, host accounts, user-review system, source partnership, paid access, scraping, account import, booking transaction, location collection, or implementation is selected. No actual local recommendation or cultural offering was researched or verified by this update. D-017's free-first policy and D-018's ranked standards are unchanged.
+
+**Related:** Refines D-021's discovery direction and extends experience coverage without answering Q-006's remaining frustration/workflow question. Later detail belongs in Q-204/Q-212 (presentation and formats), Q-302/Q-309 (coverage), Q-304/Q-352/Q-356 (evaluation), and Q-402/Q-403/Q-404 (evidence and sourcing). Inclusion itself must not be re-asked.
+
+**Status:** Confirmed product inclusion, not whole-section approval or proof of product success. Section 1 remains DRAFT.
+
+**Revisit:** The owner refines local/cultural scope, suitable sources are evaluated, or testing identifies a quality, access, or coverage tradeoff.
+
 ## Approval register
 
 | Item | Status | Evidence |
@@ -515,6 +538,7 @@ A commit is not a product approval. Recommendations copied into the base idea do
 | Ready-made excursions and app-assembled combinations | BOTH CONFIRMED; details open | D-020, Q-012 resolved |
 | Shorter and all-day duration options | USER PROPOSAL; rules open | D-020, Q-212 |
 | Discovery sources and valued evidence | RECORDED self-report/source preferences; access unselected | D-021 |
+| Local recommendations and cultural experiences | CONFIRMED inclusion; specific sourcing and behavior open | D-022 |
 | Specific current planning frustration/workflow | NOT YET DESCRIBED | Remaining Q-006 |
 | Working product meets standards | NOT DEMONSTRATED OR ACCEPTED | Tests and owner judgment required |
 | Numeric acceptance/freshness/latency criteria | NOT SELECTED | Q-304/Q-309 |
@@ -526,9 +550,9 @@ A commit is not a product approval. Recommendations copied into the base idea do
 
 ## Proposals not to mistake for decisions
 
-Organizer-led suggestion approval; publication/draft model; account-free access; exact Keep/Must-do/Lock behavior; detailed coverage; date-free exploration; provider/AI choices; automated whole-trip replanning; multi-city complexity; booking/payment integrations; pilot billing/ad exclusions; price tiers/ad placement; native/web-first delivery; imports; transport modes; detailed recommendation ranking; scheduling/airport buffers; trip cost formulas; reservation/payment state model; monitoring/reminders; numeric quality/coverage/response targets; cost controls; duration buckets/filters; exact activity-combination algorithm; source weights, review thresholds, verification hierarchy, and source-access methods.
+Organizer-led suggestion approval; publication/draft model; account-free access; exact Keep/Must-do/Lock behavior; detailed coverage; date-free exploration; provider/AI choices; automated whole-trip replanning; multi-city complexity; booking/payment integrations; pilot billing/ad exclusions; price tiers/ad placement; native/web-first delivery; imports; transport modes; detailed recommendation ranking; scheduling/airport buffers; trip cost formulas; reservation/payment state model; monitoring/reminders; numeric quality/coverage/response targets; cost controls; duration buckets/filters; exact activity-combination algorithm; source weights, review thresholds, verification hierarchy, source-access methods, local-endorsement verification, and cultural category taxonomy.
 
-Basic same-day discovery and both experience formats are confirmed. D-019's examples are personal taste; D-020's durations are tentative; D-021 records sources without validating or licensing their content. Neither ranking nor flexible budget authorizes spending, data collection, transactions, or implementation. The fixed-ceiling proposal is superseded. Preserve historical reasoning while applying later clarifications.
+Basic same-day discovery and both experience formats are confirmed. D-019's examples are personal taste; D-020's durations are tentative; D-021 records sources without validating or licensing their content. D-022 adds local recommendations and cultural experiences, not a host marketplace or verified source coverage. Neither ranking nor flexible budget authorizes spending, data collection, transactions, or implementation. The fixed-ceiling proposal is superseded. Preserve historical reasoning while applying later clarifications.
 
 ## New decision template
 
