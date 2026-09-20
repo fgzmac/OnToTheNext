@@ -27,27 +27,31 @@ An organizer plans a trip they are taking and shares the plan with their travel 
 The product direction connects three jobs:
 
 - **Discover:** Help the organizer find experiences that fit the group.
-- **Organize:** Turn selected possibilities into realistic, enjoyable days, accounting for hotels and transportation as well as activities.
+- **Organize:** Turn choices into realistic days, accounting for hotels, transportation, trip spending, and reservation-dependent events/restaurants as well as activities.
 - **Delight:** Make receiving the itinerary personal and exciting without making practical trip details difficult to access.
 
 **Initial pilot audience:** A couple, **two travelers total**: one organizer and one companion (D-008). This does not make the commercial service couples-only, impose a two-person product limit, or decide companion permissions.
 
-**Hotels and transportation:** Both areas are included (D-009), and each must support **organizing existing bookings and recommending options before booking in the first version** (D-010). Purchasing reservations is a separate, undecided capability. No provider, live-price/availability guarantee, automatic booking import, or direct transaction capability is selected by these decisions.
+**Hotels and transportation:** Both areas are included (D-009), and each must support **organizing existing bookings and recommending options before booking in the first version** (D-010). Purchasing reservations is a separate, undecided capability. No provider, live-price/availability guarantee, automatic booking import, or direct transaction capability is selected.
+
+**Trip budget:** The owner supplied a low/high dollar-denominated trip-spending range excluding plane tickets (D-014). The private numerical bounds stay in chat. Currency, combined-versus-per-person basis, remaining-versus-total meaning, and other category inclusions remain open. This is not a monthly app-running allowance; Q-004's app budget is still unanswered. Do not hardcode personal amounts or infer permission to spend.
+
+**Events and restaurants:** Planning must account for those requiring reservations (D-015). Reservation requirement, actual booking state, and payment state need distinct treatment; detailed labels/rules remain proposed. No automatic booking, reminder, notification, provider choice, or guaranteed availability is approved by that requirement.
 
 ## Confirmed priorities
 
 | Priority | Goal | Boundaries |
 | --- | --- | --- |
-| Immediate | First complete test targeted for November 10, 2026, ahead of the Japan-trip pilot including Tokyo and two travelers. | Target approved, not a delivery guarantee. Detailed feature specifications, capacity, costs, additional cities, and devices remain open. |
+| Immediate | First complete test targeted for November 10, 2026, ahead of the Japan-trip pilot including Tokyo and two travelers. | Target approved, not a delivery guarantee. Detailed specifications, capacity, app costs, additional cities, and devices remain open. |
 | Ultimate | Launch commercially through a mobile app store or as a SaaS product, earning subscription and ad revenue. | Distribution approach, pricing, ad behavior, implementation timing, and launch date remain open. |
 
-See decisions **D-006 through D-013** in the [decision register](planning/decisions.md).
+See decisions **D-006 through D-015** in the [decision register](planning/decisions.md).
 
 The pilot is not a public-launch deadline. Japan is the first testing context, not a promise of nationwide coverage or a permanent Japan-only product. Tokyo is confirmed, but a Tokyo-only trip is not. A successful trip would provide pilot evidence, not automatically validate customer demand or subscription revenue.
 
-**Timing:** The owner approved **November 10, 2026** for the first complete test (D-012), establishing the 2026 pilot planning calendar. The late-November to early-December trip spans approximately two weeks and crosses a month boundary. The owner supplied Tokyo-local arrival/departure times (D-013): the pilot includes a late-day arrival and a midday departure. Exact private travel dates and clock times remain in the chat. The proposed scheduling approach should distinguish airport events, hotel arrival/departure, transfers, and usable activity time; exact rules and buffers remain open.
+**Timing:** The owner approved **November 10, 2026** for the first complete test (D-012), establishing the 2026 planning calendar. The late-November to early-December trip spans approximately two weeks and crosses a month boundary. Supplied Tokyo-local times (D-013) establish late-day arrival and midday departure context. Exact private dates and clock times stay in chat. Proposed scheduling should distinguish airport events, hotel arrival/departure, transfers, and usable activity time; precise rules and buffers remain open.
 
-**Next discussion:** Q-004 — the monthly budget for running and testing the app, separate from the travel budget. The approved testing target/year, supplied travel timing, pilot group/count, project objective, revenue direction, and both hotel/transport support paths are answered; do not ask them again.
+**Next discussion:** Q-011 — is the supplied trip-budget range in U.S. dollars, and is it for both travelers combined or per person? The numerical bounds and airfare exclusion are already supplied. Do not re-ask them. The monthly app-running budget in Q-004 remains unanswered and will be revisited separately.
 
 ## Planning workflow
 
@@ -79,25 +83,29 @@ A confirmed product choice is not automatically a validated market assumption. A
 
 ## Design before implementation
 
-Codex will be used to implement the app after the design phase. Until that phase is explicitly approved as complete, work through this planning workflow is documentation-only: do not scaffold the app, choose a stack, install dependencies, provision services, implement endpoints, or create a database merely to fill a planning gap.
+Codex will be used to implement the app after the design phase. Until that phase is explicitly approved as complete, this workflow is documentation-only: do not scaffold the app, choose a stack, install dependencies, provision services, implement endpoints, or create a database merely to fill a planning gap.
 
 Design completion means the product direction, first-release scope, main journeys, important constraints and risks, and first buildable delivery slice are sufficiently defined. It does **not** mean specifying every future feature. Approval of a testing target is not approval of the design-to-implementation transition.
 
-Future implementation should use the approved planning documents as its basis. Proposed features, unresolved permissions, example providers, and hypothetical technical choices are not implementation instructions. Conflicts or missing product decisions must be surfaced rather than silently invented.
+Future implementation should use approved planning documents. Proposed features, unresolved permissions, example providers, and hypothetical technical choices are not implementation instructions. Conflicts or missing product decisions must be surfaced rather than silently invented.
 
 ## Current boundaries
 
-No technology stack, database, authentication system, AI model, data provider, companion-permission model, sharing-access policy, complete pilot scope, or final commercial-release scope has been selected. Individual confirmed first-version capabilities, including D-010, must be preserved while those remaining decisions are made.
+No technology stack, database, authentication system, AI model, data provider, companion-permission model, sharing-access policy, complete pilot scope, or final commercial-release scope has been selected. Individual confirmed requirements must be preserved while remaining decisions are made.
 
-The pilot's Japan/Tokyo context, date window, local arrival/departure times, two-traveler group, and dated testing target are supplied or confirmed. Additional destinations, airports, transfer durations, hotel check-in/out, and practical activity windows are not. Flight times alone do not establish hotel-ready times or when to leave the hotel. Organizer-led collaboration remains a proposal. Google Places, Google Routes, and Ticketmaster were examples in the supplied concept, not selected integrations; their current capabilities, terms, coverage, and cost would need evaluation when relevant. Hotel and transport coverage does not select accommodation, transport-timetable, reservation, or price-comparison providers.
+The pilot's Japan/Tokyo context, travel timing, two-person group, and dated test target are supplied or confirmed. Additional destinations, airports, transfers, hotel check-in/out, and practical activity windows are not. Flight times alone do not establish hotel-ready times or when to leave the hotel. Organizer-led collaboration remains a proposal. Google Places, Google Routes, and Ticketmaster are examples to evaluate, not selected integrations. No hotel, restaurant/event booking, timetable, reservation, or price-comparison provider is selected.
 
-Subscription and ad revenue are confirmed intentions, not a finalized free/paid tier model or authorization to implement billing/ads now. A pilot without monetization is a proposed scope boundary to review, not an already approved feature exclusion. App-store or SaaS delivery has not settled the pilot's platform or technical architecture.
+Subscription and ad revenue are intentions, not a finalized tier model or authority to implement billing/ads now. A pilot without monetization is a proposed boundary, not an approved exclusion. App-store or SaaS delivery has not settled the pilot platform or architecture.
 
-A proposed exclusion of in-app booking/payment does not exclude organizing existing hotel/transport bookings or recommending options. Both are confirmed first-version capabilities. Exact entry methods, recommendation behavior, modes, coverage, and data verification remain open. Do not silently defer one selected capability to a later release; any change requires an explicit scope decision.
+A proposed exclusion of in-app booking/payment does not exclude organizing existing bookings, recommending options, or accounting for restaurant/event reservation needs. These planning capabilities do not authorize making, changing, or canceling reservations. Exact data sources, workflows, verification, scheduling protection, and reminders remain open.
+
+Budget ranges, price estimates, paid amounts, category totals, and excluded costs must not be conflated. The lower bound is not an approved minimum-spend rule; the upper bound's firmness is undecided. The trip range must not be used for hosting, API, AI, or development spending, and airfare's budget exclusion does not remove flight timing from the plan.
+
+Do not silently defer a confirmed capability. Any scope reduction requires an explicit decision.
 
 ## Public repository
 
-This repository is public. Record only minimum non-sensitive milestone context and anonymous pilot profiles. Keep exact private travel dates/times, detailed schedules, credentials, companion names, private booking information, identifying research responses, and other sensitive material out of commits. Use fictional or redacted examples for planning and testing. Omitted private travel values are not missing user input; consult the planning conversation rather than asking the owner to repeat them. The software-testing target is a project milestone, not a published flight schedule.
+This repository is public. Record only minimum non-sensitive milestone context and anonymous pilot profiles. Keep personal spending amounts, exact travel dates/times, detailed schedules, credentials, companion names, private booking information, and identifying research responses out of commits. Use fictional or redacted examples. Omitted private inputs are not missing user input; consult the conversation rather than asking the owner to repeat them. The software-testing target is a project milestone, not a published flight schedule.
 
 ## Update rules
 
