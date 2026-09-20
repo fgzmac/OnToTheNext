@@ -35,6 +35,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 | D-021 | Real experiences, Reddit, reviews, date calendars, destination highlights inform discovery. | REPORTED SOURCES RECORDED | 2026-09-19 |
 | D-022 | Include local recommendations and cultural experiences. | CONFIRMED inclusion | 2026-09-19 |
 | D-023 | Planning is difficult to begin and organize; desired help includes worthwhile choices/order, hotel/travel context, date-specific events, and balancing effort with shopping, food, and free time. | REPORTED PROBLEMS / DESIRED OUTCOMES RECORDED; mechanisms open | 2026-09-19 |
+| D-024 | Owner will devote time as necessary; example day has one or two main experiences, free time/hotel rest, then user-initiated nearby discovery within a radius. | FLEXIBLE EFFORT AND FLOW EXAMPLE RECORDED; not quantified capacity or a mandatory daily rule | 2026-09-19 |
 
 ## D-001 — Sequential blueprint planning
 
@@ -62,7 +63,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Working interpretation:** Define direction, first-release scope, journeys, constraints/risks, and first buildable slice sufficiently, then obtain explicit transition approval. Do not specify every future feature upfront. Review this interpretation with the owner at transition.
 
-**Boundary:** Documentation-only now. No scaffolding, dependency installation, database, deployment, stack, identity, API provider, or AI choice follows from a milestone, preference, standard, source, format, or budget approval. No implementation transition recorded.
+**Boundary:** Documentation-only now. No scaffolding, dependency installation, database, deployment, stack, identity, API provider, or AI choice follows from a milestone, preference, standard, source, format, budget approval, flexible time commitment, or example flow. No implementation transition recorded.
 
 **Related/revisit:** Q-506; owner explicitly authorizes implementation or changes the workflow.
 
@@ -84,7 +85,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Boundary:** Does not automatically approve every recommendation in the supplied text: destination limits, suggestion approval, drafts/publication, email/text delivery, guest access, selection controls, providers, or AI remain explicit decisions.
 
-**Later clarification:** D-018 puts quality, same-day usefulness, and ease ahead of extra visual effects, without removing sharing. D-023 refines the organization problem.
+**Later clarification:** D-018 puts quality, same-day usefulness, and ease ahead of extra visual effects, without removing sharing. D-023 refines the organization problem; D-024 supplies an example day flow rather than a universal template.
 
 **Revisit:** Owner refines vision or evidence challenges its assumptions.
 
@@ -98,7 +99,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Evidence:** Chosen test context, not a completed test, proven feasibility, demand, or willingness to pay. Keep private schedule out of the public record.
 
-**Related/revisit:** Q-004 capacity, Q-005 full promise, Q-008 testing, Q-301/Q-302 scope; revisit if trip needs, evidence, or priorities change.
+**Related/revisit:** Q-004 actual effort/costs (flexible commitment supplied D-024), Q-005 full promise, Q-008 testing, Q-301/Q-302 scope; revisit if trip needs, evidence, or priorities change.
 
 ## D-007 — Commercial objective
 
@@ -116,7 +117,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Decision/source:** Owner travels with a significant other; two total. Record anonymous organizer/companion profile.
 
-**Boundary:** Not a permanent size limit, couples-only market, romantic theme, identical interests, or permissions. Companion testing remains open. D-016 later resolves budget basis; D-019/D-021/D-023 do not automatically describe the companion.
+**Boundary:** Not a permanent size limit, couples-only market, romantic theme, identical interests, or permissions. Companion testing remains open. D-016 later resolves budget basis; D-019/D-021/D-023/D-024 do not automatically describe the companion.
 
 **Related/revisit:** Q-003 pilot resolved; Q-008/Q-010/Q-101/Q-106 and remaining Q-011 open. Revisit when participation or audience changes.
 
@@ -167,7 +168,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Boundary:** Target, not guarantee, tested feasibility, public launch, blanket feature approval, or design-to-code permission. Scope, capacity, costs, tests, and dependencies need evaluation. No automation/calendar/reminder requested or created.
 
-**Related/revisit:** Timing portion Q-004 resolved; capacity still open; Q-304/Q-501/Q-502 define completion. Explicit owner or evidence-driven target changes.
+**Related/revisit:** Timing portion Q-004 resolved; D-024 later records flexible effort, not guaranteed capacity. Q-304/Q-501/Q-502 define completion. Explicit owner or evidence-driven target changes.
 
 ## D-013 — Tokyo-local travel times
 
@@ -223,7 +224,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Expense review:** Explain blocker, free alternatives, smallest useful paid option, recurring/usage/overage costs, and consequence of waiting; obtain specific approval. Necessary limited spending may precede full acceptance. Discretionary expansion follows owner judgment of a working product.
 
-**Acceptance:** D-018 defines priorities; D-019/D-021/D-023 supply preference/problem context. Detailed tests remain Q-304/Q-502. Demo, visual polish, mock tests, calendar target, or merely defined standards do not establish success.
+**Acceptance:** D-018 defines priorities; D-019/D-021/D-023/D-024 supply preference/problem/flow context. Detailed tests remain Q-304/Q-502. Demo, visual polish, mock tests, calendar target, or merely defined standards do not establish success.
 
 **Scope/evidence:** Preserve all confirmed capabilities. Free-first changes spending sequence, not features. Label simulations; they do not prove coverage, persistence, routes, quality, or readiness. Investigate paid dependencies early; surface quality/cost/scope conflicts, not unsafe handling or false claims.
 
@@ -231,7 +232,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Boundary/history:** No stack/vendor/native/web/deployment/metered billing/purchase/automation approved. Recheck reference prices before use. Supersedes fixed-$150-ceiling proposal and any idea of activating paid infrastructure immediately.
 
-**Related/revisit:** Q-004 policy resolved; capacity and actual costs open. Q-353/Q-355/Q-356/Q-403/Q-405/Q-503 cover feasibility/controls. Review on a necessary cost, measured usage, owner acceptance, or policy change; flexibility is not unlimited authority.
+**Related/revisit:** Q-004 policy resolved, flexible effort later D-024; actual capacity/expenses remain to evaluate. Q-353/Q-355/Q-356/Q-403/Q-405/Q-503 cover feasibility/controls. Review on a necessary cost, measured usage, owner acceptance, or policy change; flexibility is not unlimited authority.
 
 ## D-018 — Ranked standards and same-day planning
 
@@ -241,7 +242,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Relationship:** Preserve original sharing, hotels/transport, budgets, and reservations. Extra reveal effects cannot compensate for poor suggestions/use. Correctness, privacy, reliability, and accessibility are not waived.
 
-**Open:** Weights, preference inputs, areas/coverage, time/location handling, fit, freshness/response targets, previews/permissions, numerical tests, and acceptance. Later D-019 supplies taste, D-021 sources, D-023 problems; do not ask those again.
+**Open:** Weights, preference inputs, areas/coverage, time/location handling, fit, freshness/response targets, previews/permissions, numerical tests, and acceptance. D-019 supplies taste, D-021 sources, D-023 problems, and D-024 an example day; do not ask those again.
 
 **Proposed tests:** Serious consideration, additions, rejection reasons, factual/feasibility errors, valid events and known omissions, completion/effort. No thresholds or finalized suite approved.
 
@@ -277,7 +278,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Duration proposal:** Explore short and all-day options, not selected hour cutoffs, intermediate category, stop count, default, or controls. Duration and format are independent; neither implies exertion or quality. Do not fill every day or exclude single activities.
 
-**Proposed fit:** Usable window, travel/endpoints, included transfers, breaks, entry, reservations, later commitments. Avoid double-counting or inventing shortened operator variants. Label unknown timing; formulas remain open. D-023 later adds desired energy/free-time balance.
+**Proposed fit:** Usable window, travel/endpoints, included transfers, breaks, entry, reservations, later commitments. Avoid double-counting or inventing shortened operator variants. Label unknown timing; formulas remain open. D-023/D-024 add desired balance and an example optional later outing.
 
 **Scope/boundary:** Both formats belong in first-version planning; no silent deferral. No provider/API, ranking ratio, booking, whole-trip automation, permissions, paid service, real-trip recommendation, or implementation selected. Detailed inventory/coverage and acceptance unproven.
 
@@ -347,19 +348,47 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Scope relationship:** Refines organization and ease within the existing concept, preserves D-018's ranked priorities, and complements D-019's active-experience taste, D-020's formats, and D-022's local/cultural inclusion. It does not remove earlier requirements or approve a new full-automatic planning mode, algorithm, location monitoring, provider, transaction, purchase, or implementation.
 
-**Evidence limit:** The core problems are now self-reported, not merely assistant guesses. They are not observed behavior, measured effort, a complete workflow/tool inventory, evidence that the companion shares the same pace, or market validation. Do not mark the product as solving them before testing.
+**Evidence limit:** The core problems are self-reported, not merely assistant guesses. They are not observed behavior, measured effort, a complete workflow/tool inventory, evidence that the companion shares the same pace, or market validation. Do not mark the product as solving them before testing.
 
-**Question resolution:** Q-006's initial examples, sources, and main-frustration subquestions are answered across D-019/D-021/D-023. Saving/organization tools and measured baseline can remain later research gaps; do not repeat the broad frustration question or block progress on a complete workflow reconstruction.
+**Question resolution:** Q-006's initial examples, sources, and main-frustration subquestions are answered across D-019/D-021/D-023. Saving/organization tools and measured baseline can remain research gaps; do not repeat the broad question or block progress on a complete workflow reconstruction.
 
-**Next discussion:** Q-004 available weekly capacity, so the approved November 10 test target can be evaluated alongside remaining scope. No new implementation start date or commitment is inferred.
+**Discussion history:** This record originally queued Q-004 weekly capacity. D-024 subsequently records the owner's flexible/as-needed answer and a concrete day-flow example. No numeric capacity or implementation start is inferred.
 
-**Later detail:** Q-201 manageable start; Q-209 hotel/transport dependencies; Q-212 duration; new Q-213 effort balance and flexible time; Q-305 scheduling/tradeoffs; Q-304/Q-352 evaluations. Full Section 1 approval remains open.
+**Later detail:** Q-201 manageable start; Q-209 hotel/transport dependencies; Q-212 duration; Q-213 effort balance and flexible time; Q-305 scheduling/tradeoffs; Q-304/Q-352 evaluations. Full Section 1 approval remains open.
 
-**Affected:** Product brief, standards note, README, this register, and open questions. D-022 is also reconciled into the previously lagging brief/question summaries.
+**Affected:** Product brief, standards note, README, this register, and open questions. D-022 was also reconciled into the previously lagging brief/question summaries.
 
-**Supersedes:** Current-status statements that the owner's main planning frustration is unknown. Does not rewrite the historical uncertainty at earlier decisions or convert proposed mechanisms into requirements.
+**Supersedes:** Statements that the owner's main planning frustration is unknown. Does not rewrite historical uncertainty or convert proposed mechanisms into requirements.
 
 **Revisit:** Owner/companion pace input, actual task observations, usability tests, scheduling evidence, or an explicit change of product priorities.
+
+## D-024 — Flexible development effort and example day flow
+
+**Question:** What time can the owner devote before the first complete test, and what additional day-flow idea should guide planning?
+
+**Recorded effort:** The owner answered **“As much as necessary.”** Treat planning, later Codex review, and testing commitment as flexible/as needed. No fixed weekly number or hard time allocation was supplied. Do not repeatedly demand weekly hours or invent a full-time schedule, unlimited capacity, an effort estimate, or a guarantee that all scope will meet November 10.
+
+**Recorded flow idea:** One main event/experience or two for the day; after finishing, free time; rest and hang out at the hotel; when interested, the user opens the app to find what is happening within a radius and spontaneously chooses experiences or events.
+
+**Source/status:** Direct owner input on 2026-09-19. Flexible time commitment is recorded; the day flow is explicitly an example idea. It clarifies D-018/D-023, not an approved universal daily template or complete user-journey specification.
+
+**Meaning to preserve:** Planned highlights and spontaneous discovery coexist. Downtime is not automatically filled. Discovery in this example is initiated by the traveler after rest, not pushed because the app infers fatigue or notices an empty calendar. Staying at the hotel remains a valid outcome.
+
+**Not rigid:** One or two main experiences is not a maximum for every traveler/day; hotel return, break length, later outing, and timing are not mandatory. One all-day experience need not be followed by another main experience. No specific radius, unit, default, travel mode, search center, or automatic expansion is selected.
+
+**Proposed mechanisms for later design:** Reuse trip context, establish the relevant current or chosen area and available time, search within the requested radius, check dated occurrence/entry and practical travel, show costs/reservations/uncertainty, and preview a selected addition while preserving remaining commitments. Geographical radius and travel-time feasibility are separate. A known hotel is not proof of the traveler's current location; device location would require consent. Exact controls, persistence, activity states, editing permissions, refresh/latency targets, and no-result handling remain open.
+
+**Scope/boundaries:** The existing first-version same-day requirement remains. This example does not approve ongoing GPS, monitoring, notifications, automatic completion detection, health inference, full-trip rewrites, reservations, payments, source selection, spending, or implementation. Free-first D-017, priority order D-018, and test target D-012 remain unchanged.
+
+**Evidence:** An intended flow and effort commitment, not observed use, real event coverage, companion agreement, workload measurement, or acceptance of the app. No actual trip details beyond existing generalized context are needed in public files.
+
+**Question resolution:** Q-004's availability answer is recorded at the level supplied. Later work can estimate and measure effort against actual tasks; maintenance and specific costs remain open. Q-008 companion testing participation is next. Carry the example into Q-207/Q-213, scheduling Q-305, radius/coverage Q-309, and evaluation Q-304/Q-352 without starting those later sections now.
+
+**Affected:** Product brief, success standards, README, decisions, and open questions.
+
+**Supersedes:** Current prompts asking the owner to supply weekly hours. Does not supersede the balanced-day preference, free-first policy, or earlier confirmed features.
+
+**Revisit:** Actual delivery effort, a new time constraint, owner clarification of the example/default behavior, or usability and data-feasibility evidence.
 
 ## Approval register
 
@@ -381,9 +410,11 @@ A commit is not approval of the whole product. Copied recommendations are not au
 | Shorter/all-day categories | USER PROPOSAL; details open | D-020/Q-212 |
 | Discovery sources | RECORDED self-report; access open | D-021 |
 | Local/cultural discovery | CONFIRMED inclusion | D-022 |
-| Main planning problems and desired day balance | RECORDED self-report; solutions/test criteria open | D-023 |
-| Full current tool workflow/measured effort | NOT OBSERVED; remaining research gap | Q-006 |
-| Weekly development/review/testing capacity | NOT SUPPLIED; next question | Q-004 |
+| Main planning problems and desired day balance | RECORDED self-report; mechanisms open | D-023 |
+| Flexible development/review/testing effort | RECORDED as needed; not quantified or unlimited | D-024 |
+| Main experiences, hotel break, then optional radius-based discovery | OWNER FLOW EXAMPLE RECORDED; defaults and detailed behavior open | D-024 |
+| Full current tool workflow/measured effort | NOT OBSERVED; research gap | Q-006 |
+| Companion testing participation | NOT YET SELECTED; next discussion | Q-008 |
 | Working product meets standards | NOT DEMONSTRATED OR ACCEPTED | Tests and owner judgment required |
 | Numerical criteria and exact planning rules | NOT SELECTED | Q-304/Q-305/Q-309 |
 | Sections 2–15 | NOT STARTED | None |
@@ -393,9 +424,9 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 ## Proposals not to mistake for decisions
 
-Organizer-led suggestion approval, publication/drafts, account-free access, exact Keep/Must-do/Lock behavior, detailed source/destination coverage, date-free exploration, providers/AI, automatic whole-trip edits, multi-city depth, transactions, billing/ad exclusions, pricing/placements, native/web choice, imports, modes, source weighting, ratings thresholds, evidence hierarchies/access, local verification, cultural taxonomy, duration buckets, energy ratings, free-time allocations, onboarding rules, hotel-required rules, routing/combination algorithms, airport buffers, budget formulas, booking/payment state models, monitoring/reminders, quantitative acceptance, and exact cost controls all remain open unless separately approved.
+Organizer-led suggestion approval, publication/drafts, account-free access, exact Keep/Must-do/Lock behavior, detailed source/destination coverage, date-free exploration, providers/AI, automatic whole-trip edits, multi-city depth, transactions, billing/ad exclusions, pricing/placements, native/web choice, imports, modes, source weighting, ratings thresholds, evidence hierarchies/access, local verification, cultural taxonomy, duration buckets, energy ratings, free-time allocations, onboarding rules, hotel-required rules, routing/combination algorithms, airport buffers, budget formulas, booking/payment state models, monitoring/reminders, quantitative acceptance, and exact cost controls remain open unless separately approved. D-024 does not fix the daily count, break duration, radius size, units, search center, or location-access mechanism.
 
-Confirmed same-day, formats, local/cultural inclusion, and stated balanced-day needs must not silently disappear. Owner taste is not a universal category ban or companion preference. Source names are not licensed access; positive opinions are not current logistics. Flexible app references do not authorize payments. The old fixed-ceiling proposal is superseded.
+Confirmed same-day, formats, local/cultural inclusion, and stated balanced-day needs must not disappear. Owner taste is not a universal category ban or companion preference. Source names are not licensed access; opinions are not current logistics. Flexible app references do not authorize payments, and flexible effort does not guarantee delivery. The old fixed-ceiling proposal is superseded.
 
 ## New record template
 
@@ -417,4 +448,4 @@ Owner and date:
 
 ## Maintenance
 
-Update affected documents/questions together. Preserve historical reasoning and distinguish later clarifications from the state at the time. Change section completion only with explicit owner approval. A milestone, requirement, preference, problem report, or commit does not establish product acceptance.
+Update affected documents/questions together. Preserve historical reasoning and distinguish later clarifications from the state at the time. Change section completion only with explicit owner approval. A milestone, requirement, preference, problem report, example flow, or commit does not establish product acceptance.
