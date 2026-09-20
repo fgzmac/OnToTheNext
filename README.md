@@ -4,15 +4,14 @@
 
 **Phase:** Product design and planning  
 **Current blueprint section:** 1 — Product Vision and Problem Brief; DRAFT, not yet approved  
-**Core interaction principle:** Offer useful ideas and refine them through user reactions, rather than requiring users to invent the plan  
+**Core interaction principle:** Offer useful ideas and refine them through user reactions rather than requiring users to invent the plan  
 **Immediate priority:** Prepare the actual Japan itinerary and reservation plan without waiting for the app  
-**Starting Japan cities:** Tokyo, Kyoto, Osaka; complete their core itinerary before optional destination expansion  
-**Hotel-base preference:** Separate hotel stay in each main city; the app should ask travelers for their own preference  
-**Hotel style and budget:** Upscale, comfortable, conveniently located, value-conscious; no hostels for this traveler; initial USD per-room nightly search reference now approved under D-031  
-**Booking baseline:** Only plane tickets booked, as reported by the owner; exact private details remain in chat  
+**Core-city schedule:** Proposed Tokyo → Kyoto → Osaka → Tokyo baseline and night allocation approved under D-032; dated personal details remain in chat  
+**Hotel strategy:** Separate main-city stays; upscale, comfortable, convenient, value-conscious; no hostels for this traveler; accepted USD per-room nightly search reference under D-031  
+**Booking baseline:** Flights only, as last reported; itinerary approval is not a booking  
 **Initial device focus:** Phones; operating system and native/web delivery not selected  
 **Discovery testing:** Spontaneous nearby discovery in San Jose, California  
-**First complete software-test target:** November 10, 2026; not the itinerary-preparation or booking deadline  
+**First complete software-test target:** November 10, 2026; not a booking deadline  
 **Spending:** Free first; flexible paid-operation references; no purchase authorized  
 **Owner effort:** Flexible/as necessary; not quantified or assumed unlimited  
 **Implementation:** Not started through this planning workflow  
@@ -20,163 +19,131 @@
 
 `OnToTheNext` is the repository name. Final product branding remains open.
 
-## Start here: current amendments
+## Start here: latest approved baseline
 
-**[D-026 — Phone-first; Japan itinerary now; discovery testing in San Jose](planning/decisions/D-026-phone-first-and-japan-priority.md)** amends the earlier product brief and D-025 testing sequence. Actual Japan planning must not wait for a working beta, simulations, or the software milestone.
+**[D-032 — Core-city schedule approved](planning/decisions/D-032-core-city-schedule-approved.md)** records approval of the proposed city order and night allocation. Q-014's baseline-schedule question is answered. Actual date allocations remain in the conversation and are not missing inputs. Proceed to hotel comparisons and reservation-sensitive main-city experiences, not another broad route or budget question.
 
-**[D-027 — Japan starting cities and worthwhile lesser-known destinations](planning/decisions/D-027-core-cities-and-worthwhile-detours.md)** records Tokyo, Kyoto, and Osaka as the starting city set, and adds experience-led recommendations for lesser-known destinations. The city list is not an approved order or allocation of nights. Public research examples are candidates, not selected stops or bookings.
+The same record contains **proposed**, source-supported hotel search areas: Ginza/Higashi-Ginza in Tokyo; the Shijo–Kawaramachi/Karasuma area in Kyoto; Shinsaibashi/Namba in Osaka. These are starting recommendations, not approved neighborhoods, room offers, or reservations. Actual hotel-to-activity fit, room details, prices, and airport access still require evaluation.
 
-**[D-028 — Main cities first and flights-only booking baseline](planning/decisions/D-028-main-cities-first-and-booking-baseline.md)** refines the order: build the main-city itinerary and address its booking needs first, then offer optional additional destinations. Only flights have been booked. The precise core-plan completion rule remains open; it does not automatically mean all reservations must be purchased first.
+**Next input:** Q-017 — one shared large bed, two separate beds, or either for the two-adult room comparison. Do not infer bedding from couple status.
 
-**[D-029 — Per-city hotels and the traveler preference question](planning/decisions/D-029-per-city-hotels-and-stay-preference.md)** records a separate hotel stay in each main city for this trip and confirms that the app should ask users about separate city stays versus fewer bases. The trip preference is not a universal default. Exact question wording and placement remain proposed; properties, city order, and nights remain open.
-
-**[D-030 — Recommendation-led planning and hotel value](planning/decisions/D-030-recommendation-led-planning-and-hotel-value.md)** confirms that the app should continually offer useful ideas and refine them through user reactions. It records upscale, comfortable, conveniently located, reasonably priced hotels and no hostels for this traveler. Its budget comparison is historical: D-031 now approves the proposed initial search reference; other comparison points remain examples, not live quotes.
-
-**[D-031 — Initial hotel search reference approved](planning/decisions/D-031-hotel-search-reference-approved.md)** records the owner's acceptance of the proposed USD per-room nightly reference, including cheaper options that meet the same standards. This is not a booking, a required minimum spend, or unlimited upgrade authority. Specific room offers, taxes/fees, and full stay totals need checking. Move to a concrete main-city route/nights proposal rather than repeating the budget question.
-
-Read these amendments before older next-step prompts. Phone focus, main cities, booking inventory, hotel-base preference, hotel style, and the initial hotel search reference have been answered.
-
-| Document | Purpose | Status |
+| Document | Purpose | Current status |
 | --- | --- | --- |
-| [Approved hotel search reference](planning/decisions/D-031-hotel-search-reference-approved.md) | Accepted nightly room search reference and limits of that approval. | D-031 confirmed; exact private values in chat, properties/order/nights open. |
-| [Recommendation-led design and hotel value](planning/decisions/D-030-recommendation-led-planning-and-hotel-value.md) | Guided choices, hotel preferences, historical comparison proposal, and evidence boundaries. | Read with D-031: initial search reference approved; detailed behavior and other scenarios open. |
-| [Hotel-base preference decision](planning/decisions/D-029-per-city-hotels-and-stay-preference.md) | Separate city stays and a reusable traveler question. | Preference/question inclusion confirmed; exact UI and properties open. |
-| [Sequencing decision](planning/decisions/D-028-main-cities-first-and-booking-baseline.md) | Main-city-first flow, optional expansion, flights-only baseline. | Read with later lodging decisions; core completion, order, nights, and properties open. |
-| [Destination decision](planning/decisions/D-027-core-cities-and-worthwhile-detours.md) | Starting cities, worthwhile-detour requirement, preliminary public research. | Extra destinations follow the core itinerary. |
-| [Priority decision](planning/decisions/D-026-phone-first-and-japan-priority.md) | Phone focus, immediate Japan planning, San Jose tests, generic booking-action template. | Direction confirmed; implementation and bookings open. |
-| [Planning blueprint](planning/blueprint.md) | Framework and sequential progress tracker. | Adopted framework, not blanket approval. |
-| [Product vision and problem brief](planning/00-product-brief.md) | Detailed Section 1 draft through D-025. | Read with D-026 through D-031; full section not approved. |
-| [Product success standards](planning/00-product-success-standards.md) | Standards, preferences, sources, formats, balanced days, proposed evaluations. | Thresholds open; amendments and question register govern current direction. |
-| [App budget policy and options](planning/00-app-budget-options.md) | Free-first policy, prior cost scenarios, access risks. | D-017 confirmed; no vendor or purchase selected. |
-| [Decision register](planning/decisions.md) | Historical decisions/inputs through D-025. | Extended by standalone D-026 through D-031; preserve earlier reasoning. |
-| [Open questions](planning/open-questions.md) | Remaining questions and next actionable choice. | Next: Q-014 concrete main-city order/nights proposal. Q-016 style and starting search reference answered. |
+| [Approved city schedule](planning/decisions/D-032-core-city-schedule-approved.md) | Baseline approval, limits, proposed search areas, public sources, and next room-fit input. | Schedule confirmed; neighborhoods and properties not selected. |
+| [Approved hotel search reference](planning/decisions/D-031-hotel-search-reference-approved.md) | Accepted nightly room search reference and its limits. | Search reference confirmed, not a minimum spend or booking. |
+| [Recommendation-led design and hotel value](planning/decisions/D-030-recommendation-led-planning-and-hotel-value.md) | Guided choices, hotel preferences, historical price scenarios. | Principle/preferences confirmed; D-031 later approves the initial reference. |
+| [Per-city hotels and traveler question](planning/decisions/D-029-per-city-hotels-and-stay-preference.md) | Separate city stays and a reusable hotel-base question. | Preference/question inclusion confirmed; exact UI and properties open. |
+| [Main cities first](planning/decisions/D-028-main-cities-first-and-booking-baseline.md) | Core plan before optional destinations; flights-only baseline. | Sequence confirmed; full core-plan completion rule still open. |
+| [Destinations and worthwhile detours](planning/decisions/D-027-core-cities-and-worthwhile-detours.md) | Starting cities and experience-led expansion. | Additions follow core planning; initial city order subsequently settled by D-032. |
+| [Phone-first and Japan priority](planning/decisions/D-026-phone-first-and-japan-priority.md) | Immediate trip preparation and independent local product tests. | Actual trip must not wait for software. |
+| [Planning blueprint](planning/blueprint.md) | Framework and sequential section tracker. | Adopted framework, not blanket feature approval. |
+| [Product brief](planning/00-product-brief.md) | Detailed Section 1 draft through D-025. | Read with amendments D-026–D-032; section not approved. |
+| [Success standards](planning/00-product-success-standards.md) | Priorities, preferences, sources, formats, day balance, proposed evaluations. | Detailed thresholds open; latest amendments govern current direction. |
+| [App budget policy and options](planning/00-app-budget-options.md) | Free-first policy and retained cost comparisons. | D-017 confirmed; providers and purchases unselected. |
+| [Historical decision register](planning/decisions.md) | Records through D-025. | Extended by linked standalone D-026–D-032; preserve historical reasoning. |
+| [Open questions](planning/open-questions.md) | Current question and remaining design work. | Baseline route answered; room fit next, then actual comparisons. |
 
-## Core design principle — recommendations lead, the traveler decides
+## Core principle — recommendations lead, the traveler decides
 
-**D-030:** The app should provide concrete ideas that help travelers discover and refine what they want. Do not make a blank search box or an exhaustive questionnaire the only way to begin.
+D-030 requires useful concrete ideas and refinement through user reactions. A blank search box or exhaustive questionnaire alone is not enough.
 
-**Proposed loop:** Use known context → suggest a manageable set with reasons and tradeoffs → let the traveler choose, reject, compare, or refine → preserve accepted decisions and improve the next suggestions. Keep custom input and correction available. Exact number of choices, controls, learning rules, and algorithm remain open.
+**Proposed loop:** Use known context → present manageable options with reasons and tradeoffs → user chooses, rejects, compares, or refines → preserve accepted decisions and improve the next suggestions. Allow custom input, correction, undo, and stopping. Exact controls, option counts, algorithms, learning, and persistence remain open.
 
-Examples of useful refinements include closer, less expensive, more comfortable, less demanding, and more cultural. A rejection is not automatically a dislike of an entire category. Reuse answers and help the user reach a completed plan rather than an endless stream of choices.
+Useful possible refinements include closer, less expensive, more comfortable, less demanding, or more cultural. Rejection is not automatically dislike of a whole category. Reuse answered information and help finish the plan rather than create endless choices.
 
-Continually helpful does not mean interruptions, background notifications, tracking, automatic bookings, unwanted upselling, or filling free time. D-024's spontaneous search remains user-initiated; D-028 still puts main cities before optional expansions. User control and truthful source/price information remain necessary.
+Continually helpful does not mean unwanted notifications, tracking, automatic bookings, upselling, or filling downtime. D-024's spontaneous search remains user-initiated. D-028 still puts the main cities before optional expansion.
 
-## Current priorities — independent workstreams
+## Two independent workstreams
 
 | Workstream | Immediate purpose | Does not require |
 | --- | --- | --- |
-| Actual Japan itinerary | Build the main-city plan and research reservation-sensitive arrangements now; consider extra destinations afterward. | Finished app, beta, simulations, or public distribution. |
-| Phone-first spontaneous discovery | Continue design; later test useful current nearby experiences and optional outings in San Jose. | Nationwide U.S. coverage, a local hotel booking, or automatic tracking. |
+| Actual Japan itinerary | Use the approved city schedule to compare stays, experiences, transport, and reservation actions now. | Finished app, beta, simulations, or public distribution. |
+| Phone-first spontaneous discovery | Continue app design and later test useful nearby current experiences and optional outings in San Jose. | Nationwide U.S. coverage, a local hotel booking, or automatic tracking. |
 
-The owner wants the Japan plan soon enough to act on advance reservations. Determine actual release windows for chosen items, not a universal horizon or November 10 default. D-025's former local-first/beta/Japan-simulation sequence cannot block real trip preparation. Japan software rehearsals can still follow a beta; they are separate from actual planning.
+D-026 supersedes the interpretation that D-025's local testing → beta → Japan simulations sequence delays actual trip preparation. Software rehearsals can follow beta; real reservation research proceeds independently.
 
-Phones are the initial focus; desktop parity is not the priority. No OS, native/web architecture, browser matrix, offline guarantee, framework, deployment, provider, or store submission selected.
+Determine actual release windows for selected items, not a universal booking horizon or November 10 default. Phones are the initial focus; desktop parity is not the priority. No OS, native/web architecture, browser matrix, offline guarantee, framework, host, provider, or store submission chosen.
 
-## Main-city foundation, then optional destinations — D-027/D-028
+## Main-city foundation before optional additions
 
-**Starting set:** Tokyo, Kyoto, and Osaka. Their order in the owner's answer is not itinerary order. Under D-028, focus planning and booking decisions on the main cities first; branch out once their itinerary is established. D-029 selects separate stays, not properties or nights.
+The Tokyo → Kyoto → Osaka → Tokyo starting schedule and allocation are now approved (D-032). It includes separate Kyoto and Osaka stays and a return Tokyo stay before departure. Exact personal dates/nights remain in chat. Properties, activities, trains, and reservations are still unselected. Using the same Tokyo hotel twice remains an option, not an approved choice.
 
-**Proposed flow:** Recommend city order/nights using the hotel-base preference → build main-city stays, transport, experiences, and booking actions → review the core itinerary → consider worthwhile additional destinations → preview changes → accept or keep the core plan. Main-city-first and the preference question are confirmed; substeps, question placement, and completion rules remain open. D-030 calls for concrete recommendations rather than asking the traveler to invent the route.
+**Planning progression:** Approved core-city schedule → compare stays, transport, main experiences, and reservation actions → review the complete core plan → offer worthwhile extra destinations → preview impacts → accept a change or keep the plan.
 
-**Booking baseline:** Only plane tickets booked, as reported. Hotels, intercity journeys, and timed experiences are not yet booked. Q-015 is resolved; do not request the inventory again. Hotel preferences and budget approval do not create bookings. Private flight constraints remain in the conversation; no live verification or purchase authority implied.
+The user approved the city-date framework, not a detailed itinerary with every activity, and not a requirement to buy all reservations before optional discovery. A reviewed draft with visible unbooked items remains a proposed completion gate. Selected, tentative, confirmed, and paid states differ.
 
-**Completed plan versus paid reservations:** Do not assume every item must be purchased before optional suggestions can appear. A reviewed core draft with visible unbooked items is a proposed interpretation. Selected, tentative, confirmed, and paid arrangements differ. Reservation research need not wait for the app.
+Lesser-known destinations remain a required discovery capability when worthwhile experiences justify them, sequenced after core planning. Obscurity alone is not quality. Show appeal, date relevance, day trip/overnight choices, added travel/cost/lodging, booking needs, and what would change. Preserve accepted choices and free time; no automatic route rewrite or extra-city quota.
 
-**Lesser-known destinations:** Included when worthwhile attractions/events/experiences justify consideration, sequenced after the core-city plan. Obscurity is not quality or a mandatory detour; the capability has not been removed or deferred to an unspecified release.
+Chichibu, Uji, and Kinosaki Onsen remain preliminary ideas the owner liked, not selected additions. Do not let them silently change the approved core schedule. Annual dates are not current-year programs or available tickets; general transport estimates are not dated timetables. Recheck evidence when relevant.
 
-**Proposed expansion support:** Explain appeal, date relevance, day trip versus overnight, added travel/cost/lodging, reservations, and what changes. Preserve free time and commitments unless the traveler explicitly approves a change. No automatic rewriting, extra-city quota, or hotel-count maximum selected. Keeping only the main cities is a valid complete outcome.
+## Hotel comparison direction
 
-Chichibu, Uji, and Kinosaki Onsen remain preliminary D-027 candidates the owner liked, not selected stops or bookings. Consider them after the core plan. Annual dates are not current-year program/inventory confirmation; travel estimates are not dated train schedules. Recheck evidence when used.
+Retain separate stays, upscale comfort, convenient location, value, and no hostels for this traveler. Hostels may suit other app users; no global ban. Ask users about hotel-base strategy rather than hardcoding this owner's choice. Exact question wording, placement, defaults, and compare-both behavior remain proposed.
 
-## Hotel strategy and value — D-029/D-030/D-031
+D-031 approves the starting USD **per-room, per-night** search reference with cheaper matching options included. Private amounts remain in chat. The comparison basis is a two-adult room; bed configuration, actual room offer, and expense splitting remain open. This is not minimum spending, an unrestricted upgrade budget, or verified room availability.
 
-**For this trip:** Separate hotel stays in Tokyo, Kyoto, and Osaka; upscale, comfortable, conveniently located, and not overly expensive. Exclude hostels, including using a private hostel room as an unapproved substitute. Do not apply that exclusion to every traveler. Returning to a city need not mean a different property; exact properties, room types, order, and nights remain open.
+Compare actual room comfort, station/activity access, food/shopping opportunities, hotel-break practicality, full stay price, included/extra taxes and charges, breakfast, and cancellation terms. Room size, amenity thresholds, quietness, star labels, and walking limits are not new hard personal requirements unless selected. Evaluate them honestly rather than infer them from an attractive lobby or neighborhood reputation.
 
-**For the app:** Ask about separate city stays versus fewer bases instead of hardcoding the owner's choice. A compare-both option is proposed for undecided travelers. Explain the tradeoffs and offer hotel budget points so users can react to a useful starting recommendation.
+D-032's proposed areas supply a starting shortlist, not a decision to purchase hotels before establishing important experiences. Allow location and activity choices to inform each other. Airport identification remains necessary for a precise airport-transfer plan. A known hotel address is not proof of current traveler location.
 
-**Proposed use:** Ask relevant questions before finalizing accommodation/routing, without requiring bookings to begin discovery. Evaluate the offered room's comfort and the location's fit with actual activities, transport, food/shopping, and hotel breaks. Consider transfer/check-in/luggage time when planning. Keep preferences editable and preview impacts rather than changing bookings silently. No star cutoff, room size, walking limit, amenities, or default selected.
+## Product coverage and standards
 
-**Approved initial search reference — D-031:** The owner accepted the proposed USD per-room nightly search range, including cheaper options meeting the same preferences. Exact personal targets remain in chat. The preceding comparison concerned a two-adult shared room; bed configuration, offered room, and actual expense splitting remain open. The lower amount is not a minimum-spend requirement, and a higher-priced offer requires an explicit tradeoff rather than an automatic upgrade. This is a search reference, not guaranteed inventory or a live quote.
+An organizer takes the trip and shares it with companions: **“Look what I planned for us.”** The pilot is a couple, not a permanent two-person limit, couples-only market, shared-taste assumption, or permission model.
 
-Other D-030 comparison points remain illustrative, not approved alternate budgets or universal product bands. Show currency, room/person/bed basis, occupancy, complete stay cost, taxes/mandatory charges, inclusions, and cancellation terms for real offers. Identify amounts collected separately and unknown totals. Hotel-currency approval does not by itself settle the separate whole-trip budget's currency/categories/remaining-total meaning or change app-service funding. D-030's general guidance is not a live room offer.
+**Discover:** Personally appealing experiences, current nearby events, local advice, culture, and worthwhile destinations beyond familiar choices.
 
-**Next — Q-014:** Propose the main-city order and nights for review using the supplied flights and selected hotel strategy. Do not ask the owner to invent the schedule or re-ask Q-016. Route, nights, return-city hotel reuse, and any specific reservation remain unapproved until reviewed. Personal date allocations stay in chat rather than the public repository.
+**Organize:** Coherent days accounting for stays, transportation, budgets, reservations, effort, and free time.
 
-## Core use case and product coverage
+**Delight:** Personalized sharing connected to practical trip information.
 
-An organizer takes the trip and shares it with companions: **“Look what I planned for us,”** not primarily a secret trip for somebody else.
+Hotels and transportation must both organize existing arrangements and recommend options (D-009/D-010). Reservation-dependent restaurants/events are included (D-015). Offer actual provider excursions and app-assembled combinations (D-020); separate components do not become one package, price, booking, or jointly available set. Shorter/all-day choices are still tentative duration categories. Include local recommendations and cultural experiences (D-022), without implying a host marketplace or fabricated endorsement.
 
-- **Discover:** Appealing experiences, nearby events, local advice, culture, and worthwhile destinations beyond familiar ones.
-- **Organize:** Enjoyable days with stays, travel, spending, reservations, effort, and free time considered.
-- **Delight:** Personal, exciting sharing without obstructing practical details.
-
-The pilot is a couple, two travelers (D-008), not a permanent limit, couples-only market, or assumption of identical tastes.
-
-Hotel/transport support includes existing bookings and recommendations before booking (D-009/D-010). The hotel-base question (D-029), guided recommendations and budget comparisons (D-030), approved personal search reference (D-031), and reservation-aware dining/events (D-015) apply. Requirement, actual booking, and payment differ. No transaction, import, provider, or guaranteed inventory selected.
-
-The trip range is per person excluding airfare (D-014/D-016); amounts stay in chat. Whole-trip currency, categories, and total/remaining meaning remain open. Not app funding or permission to spend.
-
-Offer provider excursions and app combinations (D-020); a sequence is not automatically one product/price/reservation or jointly available. Shorter/all-day options remain tentative categories. Format, duration, and effort differ.
-
-Local/cultural discovery (D-022) remains included; source verification, categories, and coverage open. No host marketplace or fabricated endorsements.
-
-## Success standards — D-018
-
-| Rank | Standard |
+| Rank | Confirmed standard — D-018 |
 | --- | --- |
-| 1 | Suggestions the traveler would genuinely consider adding. |
-| 2 | Useful same-day nearby events/experiences, including festivals and pop-ups, and on-the-fly planning. |
-| 3 | Seamless, useful operation, not a chore. |
+| 1 | Suggestions the traveler genuinely wants to consider. |
+| 2 | Useful same-day nearby events and experiences, including festivals/pop-ups, and on-the-fly planning. |
+| 3 | Seamless, useful operation rather than a chore. |
 
-Same-day remains first-version work. Extra reveal effects cannot compensate for poor suggestions. Correctness, privacy, reliability, and accessibility remain necessary. Numerical quality/speed/coverage/effort/usability criteria are not approved. D-030 gives a concrete interaction direction, not a validated outcome or scoring formula.
+Same-day stays first-version work. Extra reveal effects cannot compensate for poor suggestions. Correctness, privacy, reliability, and accessibility remain necessary. No numerical quality, coverage, speed, energy, or usability threshold approved; no working product accepted.
 
-Organizer examples favor scenic, participatory, locally distinctive and complementary experiences over supplied standalone novelty/statue examples (D-019). Not a universal history ban, companion taste, ability/risk assumption, or verified offering.
+Organizer examples favor scenery, participation, local character, and complementary experiences over the supplied standalone novelty/statue examples. These do not ban history for everyone, establish companion taste, infer health/ability/risk, or verify actual offerings.
 
-Inputs include firsthand accounts, positive Reddit posts, reviews, date calendars, destination highlights (D-021), and local/cultural information. Popularity does not override fit; praise does not prove availability. No weights, API/scraper, history import, paid access, reproduction rights, or training use selected. Preliminary manual research is not an app integration or proof of consistent quality.
+Valued sources are firsthand accounts, positive Reddit posts, strong reviews, date calendars, destination highlights, and local/cultural insight. Popularity does not override fit; praise is not current availability. No supplier, weights, API/scraping access, account import, paid license, reproduction/training rights, or marketing channel selected. Manual source research is not an app integration.
 
-## Day balance and spontaneous use — D-023/D-024
+## Balance and spontaneous use
 
-Reported problems: getting started, choosing activities and order, coordinating hotel/travel context, balancing effort with shopping/food, and finding dated events.
+D-023 records difficulty getting started, choosing worthwhile activities/order, coordinating hotel/travel context, balancing effort with shopping/food, and finding dated events. D-024 illustrates:
 
 ```text
 One or two main experiences
-    → Free time
-    → Rest at the hotel when wanted
+    → Free time / hotel rest when wanted
     → Traveler chooses to reopen the app
-    → Discover worthwhile options within a radius
-    → Choose a spontaneous outing, or keep resting
+    → Find worthwhile options within a radius
+    → Choose an outing, or keep resting
 ```
 
-Example, not a universal event maximum, mandatory return, fixed rest, or compulsory extra outing. D-030's proactive design must not automatically fill downtime or turn this into notifications or inferred fatigue.
+This is not a universal activity cap, mandatory hotel return, fixed break, or compulsory outing. Do not automatically refill free time, infer fatigue, or start monitoring. Radius membership does not prove feasible travel or entry. Location consent, defaults, units, expansion, previews, and permissions remain open.
 
-Proposed details: reuse preferences, establish area/time, check travel/entry/cost/reservations, preview changes. Radius is not reachability/bookability; hotel address is not proof of current location. Units/defaults, consent, expansion, controls, and editing rights remain open.
+San Jose product results do not establish Japan data coverage. Controlled scenarios and checked current information are different evidence. No test or beta completion is implied by planning.
 
-San Jose tests spontaneous discovery. Local success does not prove Japan coverage; distinguish controlled scenarios from checked real-world evidence. No working beta or successful test claimed.
+## Milestones, resources, and boundaries
 
-## Milestones, effort, spending
+November 10, 2026 remains the first complete software-test target, not public launch or a booking deadline. Private flight inputs and approved city-date allocation are in the conversation. Flights, hotel arrival, transfers, and usable activity windows must remain distinct.
 
-November 10, 2026 remains the software-test target, not public launch or a booking deadline. Private timing establishes late-November to early-December travel with late arrival/midday departure. Exact values stay in chat; flights, transfers, hotels, and usable time differ.
+Owner effort is flexible/as necessary, not quantified or unlimited. Estimate actual tasks and assess progress. The separate per-person trip range excludes airfare; whole-trip currency, inclusions, total/remaining meaning, and splitting still need clarification. Hotel USD approval does not automatically answer those questions.
 
-Effort is as necessary (D-024), not quantified or unlimited. Estimate actual tasks and evaluate progress later.
+**D-017 free-first:** Aim for no additional app-service charges while suitable free options work. USD 100/month and 150 are flexible paid-operation references, not mandatory spending, hard ceiling, or purchasing authority. Review the blocker, free alternatives, useful paid choice, costs/limits, and consequence of waiting before a specific paid decision. More discretionary investment follows owner acceptance. Tools, setup, domains, enrollment, hardware, labor, taxes, marketing/legal work, transactions, and unpriced licenses stay separate.
 
-**D-017:** Aim for no additional app-service charges while suitable free options work. USD 100/month and 150 are flexible paid-operation references, not mandatory spending, hard ceiling, or purchase authority. Review blocker, alternatives, useful paid option, costs/limits, and consequences before spending. Greater discretionary investment follows working-product acceptance.
+Do not drop requirements, compromise protections, or label simulated data as verified to stay free. Recheck prices/terms before selecting services. Commercial subscription/ad-supported app-store/SaaS goals remain, with tiers, channels, timing, and public date open.
 
-Tools, setup purchases, domains, enrollment, hardware, labor, taxes, marketing/legal work, transactions, and unpriced licenses remain separate. Recheck costs before selecting services. Do not silently omit requirements or pass simulations off as real evidence to stay free. Hotel budget approval concerns travel planning, not a change to this app policy.
+App design remains sequential and Section 1 remains DRAFT. Actual trip work can use research/manual planning; no scaffolding, dependencies, infrastructure, schema, deployment, or Codex implementation transition authorized. Design completion means sufficient direction, scope, journeys, risks, and the first buildable slice—not every future feature.
 
-Ultimate subscription/ad-supported app-store/SaaS ambitions remain; pricing, tiers, channels, timing, and public date open. No authority to implement billing/ads follows from the trip-planning pivot.
+Research, schedules, and recommendations are not authority to book, change, cancel, or pay. No notifications, continuous tracking, monitoring, provider, identity system, AI architecture, sharing/permission model, or full release scope selected.
 
-## Planning and implementation boundaries
+## Public record and maintenance
 
-App design stays sequential; Section 1 remains DRAFT. Individual preferences, principles, and search-budget approval do not approve later sections. Actual-trip preparation may use research/manual planning before software exists; no scaffolding, dependencies, infrastructure, schema, or deployment authorized.
+Keep private finances, dated personal itineraries, exact flight times, references, credentials, identities, home addresses, and identifying research out of commits. Generic structures, city-level contexts, anonymous preference/status summaries, public candidate research, and software milestones may be recorded. Publicly omitted inputs are not unanswered questions.
 
-Codex follows explicit design-transition approval. Design completion means sufficient direction, scope, journeys, risks, and first buildable slice, not every future feature.
+Read standalone D-026–D-032 with the historical register and older brief. Latest decisions supersede conflicting current-status prompts, not historical reasoning. Maintain the question tracker and preserve unrelated files. Use `planning/blueprint.md` for section approval/order.
 
-Research/recommendations are not permission to book, change, cancel, or pay. Phone/radius/guided-discovery focus does not grant tracking, notifications, monitoring, or unsolicited automatic changes. Stack, identity, providers, AI, permissions, and full release scope remain open.
-
-**Labels:** CONFIRMED = explicit choice; RECORDED = self-report/example; PROPOSED = awaiting choice; ASSUMPTION = needs evidence; OPEN = unresolved; DEFERRED = explicitly postponed; REJECTED = deliberately excluded. A commit, manual itinerary, or comparison is not acceptance of the product.
-
-## Public repository and maintenance
-
-Keep private finances, exact dates/times, personal itineraries, booking references, credentials, identities, home addresses, and identifying research outside commits. Generic structures, city-level context, non-identifying preference/status summaries, unselected public research, illustrative budget scenarios, and software milestones are planning material. Consult the conversation for supplied private inputs.
-
-Read standalone D-026 through D-031 alongside the historical register. Amend this overview and question tracker when choices change; distinguish current decisions from historical prompts. Preserve prior reasoning and unrelated files. Use `planning/blueprint.md` for section order and approval status.
+**Labels:** CONFIRMED = explicit choice; RECORDED = self-report/example; PROPOSED = awaiting choice; ASSUMPTION = needs evidence; OPEN = unresolved; DEFERRED = explicitly postponed; REJECTED = deliberately excluded. A documentation commit or approved itinerary baseline is not product acceptance.
