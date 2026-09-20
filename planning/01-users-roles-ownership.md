@@ -100,4 +100,20 @@ A companion can join from an invite link, choose/display a name, and react/sugge
 ### D. Anyone-with-link access
 Lowest friction, but weaker privacy/control and not recommended as the default for private travel plans.
 
-**Recommended starting direction:** C — invite link with lightweight guest identity, with the option to require/upgrade to a full account later.
+**Confirmed starting direction — D-040:** C — invite link with lightweight guest identity, with the option to upgrade to a full account later.
+
+## Next decision
+
+**Q-103:** What should happen to companion access over time?
+
+Proposed starting model:
+
+- Each companion gets a unique invite link.
+- Organizer can revoke that companion's access at any time.
+- Once redeemed, the companion keeps access until removed or the trip is deleted.
+- Unused invite links can expire after a set period.
+- Forwarding a unique invite should not silently create a second companion identity.
+
+Exact expiration duration and technical token design remain later details.
+
+**Recommended direction:** unique invite per companion + organizer-controlled revocation + expiry for unused invites.
