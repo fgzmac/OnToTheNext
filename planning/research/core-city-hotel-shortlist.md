@@ -169,3 +169,31 @@ Before a property is selected, confirm:
 6. Practical transit/location pros and cons against the itinerary.
 
 A current general rate, undated OTA example, or "from" price is context only and must not be shown as the owner's live booking price.
+
+
+## Value-tier expansion — USD 100–200 target
+
+This tier is for clean, safe, price-efficient lodging with one large bed where possible. Exact private stay-date prices remain to be verified.
+
+### Tokyo candidates
+- Hotel JAL City Tokyo Toyosu — clean/quiet, queen room categories, strong for teamLab/Toyosu; tradeoff is weaker casual access to west/central Tokyo.
+- Toshi Center Hotel — calm central area, strong subway access, coin laundry; tradeoff is business-district atmosphere rather than shopping/nightlife at the door.
+- remm Hibiya — exceptional Hibiya/Ginza/Yurakucho location and strong sleep/recovery focus; tradeoff is very compact double-room layout and smaller bed in economy categories.
+- Shiba Park Hotel — quiet/refined, good transit and laundry, useful airport access; tradeoff is less convenient for casual Shibuya/Akihabara exploration.
+- APA Hotel Shinjuku Gyoemmae — strong price/location option for Shinjuku; tradeoff is smaller rooms and farther travel to the Ginza/Toyosu-heavy parts of the current itinerary.
+
+### Kyoto candidates
+- Sotetsu Fresa Inn Kyoto Shijo Karasuma — central, clean, practical, strong transit; late-November rates require validation.
+- Comfort Inn Kyoto Shijo Karasuma — central, practical, communal bath, strong transit.
+- hotel MONday Kyoto Marutamachi — clean/value reputation, close to subway and cultural areas; farther from Kawaramachi nightlife.
+- Hotel Forza Kyoto Shijo Kawaramachi — excellent downtown location, queen-room options; late-November peak demand may push rates above target.
+- Richmond Hotel Premier Kyoto Ekimae — strong cleanliness/service and Kyoto Station logistics; tradeoff is weaker walk-out-the-door access to Nishiki/Gion evenings.
+
+### Osaka candidates
+- Fairfield by Marriott Osaka Namba — clean, reliable, good Namba access; typical current listings often fall inside the target tier.
+- Hotel Nikko Osaka — direct Shinsaibashi Station access; excellent location and service, often strong value when rates fit.
+- Citadines Namba Osaka — larger rooms and useful extended-stay amenities; short walk rather than direct station access.
+- Toyoko Inn Osaka Namba — clean, practical, breakfast/value orientation and strong location.
+- Hotel Vista Osaka Namba — clean, good Namba/Dotonbori access and often within the target range.
+
+Do not present these as exact-date confirmed $100–200 properties until the owner's private stay dates and one-large-bed inventory are validated.
