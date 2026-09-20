@@ -116,4 +116,31 @@ Proposed starting model:
 
 Exact expiration duration and technical token design remain later details.
 
-**Recommended direction:** unique invite per companion + organizer-controlled revocation + expiry for unused invites.
+**Confirmed direction — D-041:** unique invite per companion + organizer-controlled revocation + expiry for unused invites.
+
+## Next decision
+
+**Q-105:** Which trip details should companions see by default?
+
+Recommended starting model:
+
+**Companions can see**
+- itinerary dates/times,
+- activities,
+- hotel names/locations,
+- transportation plan,
+- maps/directions,
+- reservation status such as booked/not booked,
+- shared notes needed for the trip.
+
+**Organizer-only by default**
+- full budget breakdown,
+- payment details,
+- booking confirmation/reference numbers,
+- private planning notes,
+- sensitive personal information,
+- precise live/current location history.
+
+The organizer can explicitly share more later.
+
+**Recommended direction:** practical trip details shared; financial, sensitive, and private planning details remain organizer-only by default.
