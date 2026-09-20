@@ -3,18 +3,18 @@
 **Purpose:** Keep unresolved choices visible without asking every future question at once.  
 **Current blueprint section:** 1 — Product Vision and Problem Brief; still DRAFT.  
 **Last updated:** 2026-09-20.  
-**Current amendments:** [D-026 — Phone-first and immediate Japan planning](decisions/D-026-phone-first-and-japan-priority.md); [D-027 — Starting cities and worthwhile detours](decisions/D-027-core-cities-and-worthwhile-detours.md); [D-028 — Main cities first and booking baseline](decisions/D-028-main-cities-first-and-booking-baseline.md); [D-029 — Per-city hotels and traveler preference question](decisions/D-029-per-city-hotels-and-stay-preference.md); [D-030 — Recommendation-led planning and hotel value](decisions/D-030-recommendation-led-planning-and-hotel-value.md).  
-**Next immediate discussion:** Q-016 — respond to the proposed hotel budget reference, not the already-answered lodging-style question. Then propose core city order/nights under Q-014.
+**Current amendments:** [D-026 — Phone-first and immediate Japan planning](decisions/D-026-phone-first-and-japan-priority.md); [D-027 — Starting cities and worthwhile detours](decisions/D-027-core-cities-and-worthwhile-detours.md); [D-028 — Main cities first and booking baseline](decisions/D-028-main-cities-first-and-booking-baseline.md); [D-029 — Per-city hotels and traveler preference question](decisions/D-029-per-city-hotels-and-stay-preference.md); [D-030 — Recommendation-led planning and hotel value](decisions/D-030-recommendation-led-planning-and-hotel-value.md); [D-031 — Hotel search reference approved](decisions/D-031-hotel-search-reference-approved.md).  
+**Next immediate discussion:** Q-014 — present and review a concrete core-city order and nights proposal. Q-016's lodging style and initial hotel search reference are answered.
 
 **D-030 principle:** Supply useful ideas and refine them through user reactions rather than requiring the traveler to invent the plan. Use concrete recommendations with reasons and tradeoffs; preserve custom input and user control. This is not background notifications, automatic bookings, repeated upselling, or permission to fill downtime.
 
-**Hotel style is answered:** Upscale, comfortable, conveniently located, not overly expensive, and no hostels for this traveler. Hostels are not excluded for all app users. Numerical budget, particular properties, room details, and exact comfort/location criteria remain open. The proposed USD 200–260 per room nightly search reference and other budget points are not approved or live quoted prices.
+**Hotel style and starting reference are answered:** Upscale, comfortable, conveniently located, not overly expensive, and no hostels for this traveler. Hostels are not excluded for all app users. D-031 approves the proposed initial USD per-room nightly search reference, including cheaper matching options. Preserve the preceding two-adult room comparison basis without selecting bed configuration or an expense-splitting rule. Exact personal amounts stay in chat. Particular properties, room details, full payable totals, and actual availability remain open. The approval is not a minimum spend, unrestricted upgrade budget, or permission to book.
 
 Phones are the initial focus. Actual Japan itinerary/reservation preparation proceeds now, independently of the beta or November 10 software target. Test spontaneous discovery in San Jose. Tokyo, Kyoto, and Osaka are the main cities; establish their itinerary before optional destinations. Use separate hotel stays in each main city for this trip and ask app users for their own hotel-base preference. City order, nights, and properties remain open.
 
-Only flights are booked, as reported by the owner (Q-015/D-028). Do not re-ask the broad inventory or treat it as live verification. Hotel preferences do not create bookings. Exact private flight details and travel-budget amounts are already in the conversation.
+Only flights are booked, as reported by the owner (Q-015/D-028). Do not re-ask the broad inventory or treat it as live verification. Hotel preferences and search-reference approval do not create bookings. Exact private flight details and travel-budget amounts are already in the conversation.
 
-Later blueprint questions are parked for sequencing, not approved exclusions. Real-trip preparation is not implementation or section approval. Keep private dates/times, spending, bookings, and personal itineraries outside this public tracker. Read D-026 through D-030 as amendments to older prompts.
+Later blueprint questions are parked for sequencing, not approved exclusions. Real-trip preparation is not implementation or section approval. Keep private dates/times, spending, bookings, and personal itineraries outside this public tracker. Read D-026 through D-031 as amendments to older prompts.
 
 ## Immediate Japan itinerary questions
 
@@ -22,19 +22,19 @@ Proceed one useful decision at a time. Offer a recommended starting point instea
 
 | ID | Question | Why it matters | Status |
 | --- | --- | --- | --- |
-| Q-016 | Does the proposed USD 200–260 per room per night for two adults work as an initial search reference, including cheaper options meeting the same preferences? What actual offers justify a different point? | Gives a concrete budget comparison without inventing an approved cap or a property quote. | STYLE ANSWERED D-030: upscale, comfortable, convenient, value-conscious, no hostels. Budget points supplied as proposals; no numerical range selected. One shared room and equal sharing are comparison assumptions, not finalized accommodation/accounting rules. |
-| Q-014 | What core city order and nights should be proposed with a separate hotel stay in each main city? | Establishes the main-city foundation for accommodation, travel, experiences, and reservation actions. | HOTEL-BASE CHOICE RESOLVED D-029. Main cities and booking baseline answered. Propose an order/nights for review, not an open-ended requirement that the user invent it. Optional additions follow core planning. |
-| Q-011 | What is the trip currency, total-versus-remaining meaning, and included non-airfare categories? | Prevents incorrect real-trip cost allocations. | Private bounds, airfare exclusion, and per-person basis supplied. USD hotel comparisons do not settle the trip currency or other remaining meanings. |
+| Q-014 | Does the proposed core-city order and night allocation work with the selected separate-city hotel strategy and supplied flights? | Gives accommodation and reservation research a concrete date framework without making the owner invent the route. | NEXT: present a recommended schedule for review. Main cities D-027, hotel strategy D-029, flights-only baseline D-028, and hotel reference D-031 answered. Any proposed return stay, route, and nights remain unapproved until reviewed; keep personal allocations in chat. Optional destinations follow the core plan. |
+| Q-016 | Which actual hotel offers meet the accepted search reference, style, location, and room needs? Would a specific tradeoff justify revising the reference? | Moves from a chosen starting allowance to evidence-based room comparisons. | STYLE AND INITIAL REFERENCE RESOLVED D-030/D-031. Do not ask the same broad budget/style question again. Properties, bed configuration, actual prices/taxes/inclusions/cancellation terms, and any budget revision remain open; equal expense splitting is not a product rule. |
+| Q-011 | What is the trip currency, total-versus-remaining meaning, and included non-airfare categories? | Prevents incorrect real-trip cost allocations. | Private bounds, airfare exclusion, and per-person basis supplied. Approval of USD for hotel searching does not by itself settle the separate trip budget's currency or other remaining meanings. |
 
 Chichibu, Uji, and Kinosaki Onsen appeal as ideas, but are not selected additions or bookings. D-028 sequences consideration after the main-city itinerary. Do not let an optional example dictate core dates before that stage. Annual event dates are not current-year program/inventory confirmation; orientation travel estimates are not dated routes. Recheck evidence when relevant.
 
-Recommend the main-city route/nights and worthwhile reservation-sensitive options, then verify actual release rules and show actions. Do not invent urgency, properties, sold-out status, prices, or booking confirmations. Preserve downtime; later extensions must show actual travel/time/cost/stay consequences.
+Recommend the main-city route/nights and worthwhile reservation-sensitive options, then verify actual release rules and show actions. Do not invent urgency, properties, sold-out status, prices, or booking confirmations. Preserve downtime; later extensions must show actual travel/time/cost/stay consequences. Budget approval alone does not approve a route, date allocation, train, or room.
 
 **Core-plan completion:** A reviewed workable draft with visible unbooked items is proposed, not an approved gate. The owner has not required all reservations to be paid before branching out. Schedule completion, reservation confirmation, and payment remain separate.
 
 ## Section 1 — Remaining blueprint questions
 
-**Recorded:** Japan pilot before commercialization; subscriptions/ads; two-person couple; both hotel/transport support paths; private timing and per-person trip range excluding airfare; November 10 software target; reservation awareness; free-first flexible references; quality/same-day/ease ranking; tastes and sources; both experience formats; local/cultural inclusion; balanced-day needs and example flow; flexible effort; San Jose discovery tests; phone focus; actual Japan preparation now; main cities before extensions; flights-only baseline; per-city stays and traveler-specific hotel-base question; recommendation-led refinement; upscale/value-conscious hotel preferences. Historical register through D-025 plus D-026 through D-030 applies.
+**Recorded:** Japan pilot before commercialization; subscriptions/ads; two-person couple; both hotel/transport support paths; private timing and per-person trip range excluding airfare; November 10 software target; reservation awareness; free-first flexible references; quality/same-day/ease ranking; tastes and sources; both experience formats; local/cultural inclusion; balanced-day needs and example flow; flexible effort; San Jose discovery tests; phone focus; actual Japan preparation now; main cities before extensions; flights-only baseline; per-city stays and traveler-specific hotel-base question; recommendation-led refinement; upscale/value-conscious hotel preferences; accepted initial hotel search reference. Historical register through D-025 plus D-026 through D-031 applies.
 
 | ID | Remaining question | Why it matters | Status |
 | --- | --- | --- | --- |
@@ -46,13 +46,15 @@ Recommend the main-city route/nights and worthwhile reservation-sensitive option
 | Q-010 | Broader commercial audience? | Pilot people/cities and personal hostel exclusion do not define everyone served. | OPEN; initial group answered. |
 | Q-001 | Is OnToTheNext the brand or repository name only? | Avoids invented branding. | OPEN, not a blocker. |
 
-Section 1 remains unapproved. Record the guided-recommendation principle now; detailed journey and learning behavior belong in later sections. No Codex implementation approval follows.
+Section 1 remains unapproved. Record accepted principles and inputs now; detailed journey and learning behavior belong in later sections. No Codex implementation approval follows.
 
 ## Current direction and boundaries
 
+**D-031 approved hotel reference:** The owner accepted the proposed USD per-room nightly starting search range and inclusion of cheaper matching rooms. Exact personal amounts remain in chat. Approval concerns the search, not an expense, room reservation, route, nights, tax treatment, or automatic upgrade. Clearly show full stay costs and separately collected/unknown charges. One two-adult room was the comparison basis; bed configuration and actual cost sharing remain open. Do not equate hotel currency approval with all remaining whole-trip budget meanings. Q-016's broad style/reference choice is answered; propose Q-014 next.
+
 **D-030 recommendation-led planning:** Use known context to suggest useful choices; let reactions refine subsequent suggestions while preserving accepted decisions. Custom entries, corrections, and stopping remain important proposed controls. Exact numbers, weights, algorithms, AI/providers, and data persistence open. Do not equate continually helpful with unsolicited notifications, tracking, auto-filled free time, endless choices, or booking transactions. Main-city-first still applies.
 
-**D-030 hotel preferences and comparison:** Upscale, comfortable, convenient, value-conscious, no hostels for the initial traveler. Not a global hostel ban or an approved star rating, private-bathroom/room-size/amenity list, neighborhood, cap, or property. Evaluate offered-room quality and location relative to the trip. Show budget points and total-stay tradeoffs rather than only asking a number. Proposed USD 150/200/250/300/400 nightly room scenarios and USD 200–260 search reference are not quotes or chosen limits. Label currency, charge basis, occupancy, taxes/mandatory fees, inclusions, and cancellation conditions. A cheaper room that fits should not be excluded to meet an artificial minimum. Equal sharing is illustrative only; the app budget is unrelated.
+**D-030 hotel preferences and comparison:** Upscale, comfortable, convenient, value-conscious, no hostels for the initial traveler. Not a global hostel ban or an approved star rating, bathroom/room-size/amenity list, neighborhood, or property. Evaluate offered-room quality and location relative to the trip. Show budget points and total-stay tradeoffs rather than only asking a number. D-031 subsequently approves the initial search reference; other D-030 illustrative budget points remain examples, not live quotes or chosen alternate limits. Label currency, charge basis, occupancy, taxes/mandatory fees, inclusions, and cancellation conditions. A cheaper room that fits should not be excluded to meet an artificial minimum. Equal sharing is illustrative only; the app budget is unrelated.
 
 **D-029 hotel bases:** Separate stay in each main city for this trip. Ask travelers rather than hardcoding that answer. Exact wording, placement, defaults, compare-both option, persistence, and previews open. A return to a city need not mean a different property; a day trip need not mean a hotel change. Consider luggage/transfers/check-in/out/activity time/rest; no booking modification authorized.
 
@@ -78,7 +80,7 @@ Section 1 remains unapproved. Record the guided-recommendation principle now; de
 
 **D-022 local/cultural:** Both included; source origin differs from proximity. Categories and verification open; no marketplace/hosts/partnerships/invented authenticity/local consensus/restricted access/guaranteed entry.
 
-**Timing/budgets:** November 10, 2026 is software testing, not a booking deadline or start of trip planning. Private travel values are supplied. Trip budget is per person excluding airfare; currency/categories/total/remaining open. No forced minimum, hard cap, split rule, or conversion. Free-first app references are flexible; review purchases specifically. Tools/setup/licenses are separate.
+**Timing/budgets:** November 10, 2026 is software testing, not a booking deadline or start of trip planning. Private travel values are supplied. Trip budget is per person excluding airfare; whole-trip currency/categories/total/remaining open. Hotel USD search reference is approved separately under D-031. No forced minimum, unrestricted upgrade, split rule, or conversion. Free-first app references are flexible; review purchases specifically. Tools/setup/licenses are separate.
 
 **Reservations/evidence:** Requirement, booked, and paid differ. Praise/calendar listings do not secure entry. An action list is not a reminder or payment authorization. No universal lead time, inventory, or working beta claimed. Do not drop features or fabricate evidence to remain free.
 
@@ -97,7 +99,7 @@ Section 1 remains unapproved. Record the guided-recommendation principle now; de
 
 | ID | Question | Status |
 | --- | --- | --- |
-| Q-201 | Smallest useful guided phone start/resume; concrete suggestions before exhaustive input; known/unknown stays, dates, time, budget, and hotel-base question? | D-030 recommendation-led principle confirmed; exact flow/defaults/required inputs open. Do not require users to invent the plan. |
+| Q-201 | Smallest useful guided phone start/resume; concrete suggestions before exhaustive input; known/unknown stays, dates, time, budget, and hotel-base question? | D-030 principle confirmed; exact flow/defaults/required inputs open. D-031 illustrates accepting a proposed reference and moving forward without repeating it. |
 | Q-202 | Main-city selection/review/completion before optional destinations; route/day-trip/overnight previews? | D-027/D-028 confirmed; gate/navigation open. Core review is not all bookings paid. |
 | Q-203 | Keep/Replace/Must-do/Lock/Undo/completed/skipped and correction behavior? | OPEN; no automatic completion detection or broad dislike inference. |
 | Q-204 | Suggested options with reasons, evidence, culture, value, time/effort, costs/reservations/uncertainty without phone clutter? | OPEN controls; no invented badges, endorsements, discounts, or live-price claims. |
@@ -105,25 +107,25 @@ Section 1 remains unapproved. Record the guided-recommendation principle now; de
 | Q-206 | Minimum reveal and quick practical view? | OPEN; sharing retained, extra polish below core function. |
 | Q-207 | Post-rest area/radius discovery, reaction/refinement, preview, decline/no results? | D-018/D-024/D-026/D-030 apply; controls/consent/changes open. Do not fill downtime merely because suggestions are proactive. |
 | Q-208 | Failed save, refresh, interruptions, connection/access loss? | OPEN; phone focus is not offline guarantee. |
-| Q-209 | Hotel strategy question, budget points, allowed property types/exclusions, room-level comparison, undecided stays, and change previews? | D-029 question and D-030 guided comparisons confirmed at principle level. Options/defaults/price bands/amenities/imports/proximity/transactions open. |
+| Q-209 | Hotel strategy question, budget points, allowed property types/exclusions, room-level comparison, undecided stays, and change previews? | D-029/D-030 principles confirmed; D-031 personal reference accepted, not universal bands. Options/defaults/amenities/imports/proximity/transactions open. |
 | Q-210 | Reservation releases/requirements and tentative/unavailable/not-released/unknown/booked/paid states? | OPEN; reviewed itinerary differs from secured bookings; manual actions are not implementation. |
-| Q-211 | Budget/currency/basis, room versus person/bed, categories/shared/paid/remaining, deposits/taxes/fees/inclusions, unknowns and overages? | OPEN; do not hardcode private values or derive a chosen nightly cap from a per-person total. |
+| Q-211 | Budget/currency/basis, room versus person/bed, categories/shared/paid/remaining, deposits/taxes/fees/inclusions, unknowns and overages? | OPEN accounting behavior. Preserve D-031's accepted personal search reference without turning it into a universal minimum, hard cap, or expense-splitting rule. |
 | Q-212 | Short/all-day/exact time, format labels, total duration, intermediate categories? | OPEN; tentative duration idea not fixed defaults. |
 | Q-213 | Effort/free time, main activities, rest, spontaneous continuation? | OPEN; no fixed count/rest/energy score/health inference; expose effects of changes. |
-| Q-214 | How do reactions refine suggestions, preserve accepted choices, allow custom entries/undo, and help finish rather than endlessly upsell or ask questions? | NEW OPEN detail under D-030; no selected ranking/learning model, fixed option count, cross-trip memory, or autonomous action. |
+| Q-214 | How do reactions refine suggestions, preserve accepted choices, allow custom entries/undo, and help finish rather than endlessly upsell or ask questions? | OPEN detail under D-030; no selected ranking/learning model, fixed option count, cross-trip memory, or autonomous action. D-031 supplies an example of an accepted starting reference. |
 
 ## Section 4 — Scope and Success
 
 | ID | Question | Status |
 | --- | --- | --- |
-| Q-301 | Bounded San Jose discovery, main Japan cities then additions, languages/phone matrix/group limits? | PARTIAL; main cities and personal hotel preferences known; full coverage open. |
+| Q-301 | Bounded San Jose discovery, main Japan cities then additions, languages/phone matrix/group limits? | PARTIAL; main cities and personal hotel preferences/reference known; full coverage open. |
 | Q-302 | Minimum hotel/transport/reservation/same-day/formats/local/cultural/destination/balanced-plan/guided-choice support across releases? | PARTIAL; preserve capabilities; manual trip does not complete software. |
 | Q-303 | Multi-city depth/voting/whole-trip automation/transactions initially excluded? | OPEN; no silent removal of required capabilities. |
-| Q-304 | Measured appeal, guided progress, hotel strategy/value fit, extension fit, events, phone ease, day balance, acceptance? | OPEN; compare evidence types; test honoring exclusions, useful refinement, correction, and unchanged plans when options declined. |
+| Q-304 | Measured appeal, guided progress, hotel strategy/value fit, extension fit, events, phone ease, day balance, acceptance? | OPEN; compare evidence types; test honoring exclusions and accepted inputs, useful refinement, correction, and unchanged plans when options declined. |
 | Q-305 | Stays/transfers/check-in/out/luggage, destination travel/cost, effort/free time, bookings/partial days/fixed tours/events? | OPEN; show effects before changes; no automatic cancellation or distance-only goal. |
 | Q-306 | Subscription/ad timing, tiers/trials/placements/ad-free behavior? | OPEN; revenue intent not implementation; guided choices must not imply hidden paid endorsement. |
 | Q-307 | Minimum booking links/status/deadlines/reminders/checks/transactions? | OPEN; research does not authorize automation. |
-| Q-308 | Budget categories/currencies/room-person-bed bases/estimates/shared costs/paid totals/taxes/warnings? | OPEN; proposed examples not universal price bands or chosen personal limits. |
+| Q-308 | Budget categories/currencies/room-person-bed bases/estimates/shared costs/paid totals/taxes/warnings? | OPEN behavior; D-031 personal search reference is not a universal price band, accounting rule, or approved live offer. |
 | Q-309 | Event/local/cultural/excursion coverage, freshness/speed/radius/no-results/plan creation? | OPEN; San Jose findings do not guarantee Japan inventory. |
 
 ## Section 5 — Risks and Experiments
@@ -155,10 +157,10 @@ Section 1 remains unapproved. Record the guided-recommendation principle now; de
 | --- | --- | --- |
 | Q-501 | First buildable slice and risk? | OPEN; actual trip immediate, coding awaits transition. |
 | Q-502 | Acceptance/permissions/contracts/data/failures? | OPEN; no invented metrics or automatic bookings. |
-| Q-503 | Real versus simulated, evidence, replacement? | OPEN; annual dates/manual itineraries/user reports/proposed prices/prepared data are not live integrations. |
+| Q-503 | Real versus simulated, evidence, replacement? | OPEN; annual dates/manual itineraries/user reports/budget references/prepared data are not live integrations. |
 | Q-504 | Tests/migrations/restoration/monitoring/recovery? | OPEN; free-first does not waive protection. |
 | Q-505 | Feedback/decisions/changes/spending reviews? | OPEN; no automatic purchasing. |
-| Q-506 | Explicit design-to-code approval? | OPEN; principle/preference/price comparison is not permission. |
+| Q-506 | Explicit design-to-code approval? | OPEN; principle/preference/search-reference approval is not permission. |
 
 ## Resolved questions and recorded inputs
 
@@ -196,10 +198,11 @@ Section 1 remains unapproved. Record the guided-recommendation principle now; de
 | Q-014 (hotel bases) | Separate stays or fewer bases? | Separate hotel in each main city; properties/order/nights/return-property reuse open. | D-029 |
 | R-013 | Ask app users about hotel bases? | Yes; not a universal default. Wording/options/placement/effects open. | D-029 |
 | R-014 | Who should generate planning ideas? | The app supplies useful recommendations and refines them through user reactions rather than requiring users to invent the plan. Mechanisms remain open. | D-030 — confirmed principle 2026-09-20 |
-| Q-016 (style) | What hotel experience? | Upscale, comfortable, convenient, reasonably priced; no hostels for this traveler, not everyone. Show budget points. No numerical limit or property chosen. | D-030 — recorded 2026-09-20 |
+| Q-016 (style) | What hotel experience? | Upscale, comfortable, convenient, reasonably priced; no hostels for this traveler, not everyone. Show budget points. Numerical reference subsequently approved in D-031; no property chosen. | D-030 — recorded 2026-09-20; D-031 clarifies reference approval |
+| Q-016 (initial search reference) | Does the proposed USD per-room nightly starting range work, including cheaper matching options? | Yes. Initial reference approved; exact personal amounts in chat. Not per-person price, mandatory minimum, unlimited upgrade authority, live quote, room selection, or booking. | D-031 — confirmed 2026-09-20 |
 
 ## Resolution procedure
 
-Preserve earlier reasoning and distinguish amendments. D-026 through D-030 extend the historical register. Section approval, actual purchasing, and product acceptance are separate from preferences and proposed budgets.
+Preserve earlier reasoning and distinguish amendments. D-026 through D-031 extend the historical register. Section approval, actual purchasing, and product acceptance are separate from preferences and accepted search references.
 
-**Next:** Offer the hotel budget comparison and recommend a starting reference under Q-016; ask for a reaction to that concrete proposal. Then propose the main-city order/nights and booking-sensitive experiences. Optional destinations follow the core plan. Do not repeat hotel style, base strategy, booking inventory, cities, device focus, tests, effort, problems, sources, formats, local/cultural inclusion, private timing, per-person basis, or free-first policy. Keep private details outside commits.
+**Next:** Present a recommended core-city order and nights under Q-014 and ask for review of that concrete proposal. Do not ask the owner to invent it or repeat Q-016's answered style/reference choices. Then compare actual hotels and shortlist booking-sensitive main-city experiences. Optional destinations follow the core plan. Preserve the hotel strategy, flights-only inventory, cities, device focus, testing direction, effort, problems, sources, formats, local/cultural inclusion, private timing, per-person basis, and free-first policy. Keep private personal allocations and financial amounts outside commits.
