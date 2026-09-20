@@ -3,8 +3,8 @@
 **Purpose:** The main planning framework for this project.  
 **Source:** The app-building blueprint adopted in the planning conversation.  
 **Framework status:** CONFIRMED as the planning process; not approval of every product proposal.  
-**Current section:** 1 — Product Vision and Problem Brief.  
-**Current section status:** IN REVIEW — closeout prepared; awaiting explicit owner approval.  
+**Current section:** 2 — Users, Roles, and Ownership.  
+**Current section status:** DRAFT — Section 1 approved; Section 2 active.  
 **Last updated:** 2026-09-19.  
 **Next review trigger:** The next planning answer from the project owner.
 
@@ -69,8 +69,8 @@ The original long-form blueprint had introductory sections before the product te
 
 | Step | Original blueprint heading | Planning section | Status |
 | --- | --- | --- | --- |
-| 1 | 3 | Product Vision and Problem Brief | IN REVIEW — awaiting owner approval |
-| 2 | 4 | Users, Roles, and Ownership | NOT STARTED |
+| 1 | 3 | Product Vision and Problem Brief | APPROVED — 2026-09-20 |
+| 2 | 4 | Users, Roles, and Ownership | DRAFT — current |
 | 3 | 5 | User Journeys and Interface Behavior | NOT STARTED |
 | 4 | 6 | First-Release Scope and Success Measures | NOT STARTED |
 | 5 | 7 | Assumptions, Risks, and Early Experiments | NOT STARTED |
