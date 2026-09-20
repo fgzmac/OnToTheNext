@@ -6,6 +6,7 @@
 **Current blueprint section:** 1 — Product Vision and Problem Brief; DRAFT, not yet approved  
 **Immediate priority:** Prepare the actual Japan itinerary and reservation plan without waiting for the app  
 **Starting Japan cities:** Tokyo, Kyoto, Osaka; complete their core itinerary before optional destination expansion  
+**Hotel-base preference:** Separate hotel stay in each main city; the app should ask travelers for their own preference  
 **Booking baseline:** Only plane tickets booked, as reported by the owner; exact private details remain in chat  
 **Initial device focus:** Phones; operating system and native/web delivery not selected  
 **Discovery testing:** Spontaneous nearby discovery in San Jose, California  
@@ -25,19 +26,22 @@
 
 **[D-028 — Main cities first and flights-only booking baseline](planning/decisions/D-028-main-cities-first-and-booking-baseline.md)** refines the order: build the main-city itinerary and address its booking needs first, then offer optional additional destinations. Only flights have been booked. The precise core-plan completion rule remains open; it does not automatically mean all reservations must be purchased first.
 
-Read these amendments before older next-step prompts. Phone focus, main cities, and the existing-booking inventory have been answered.
+**[D-029 — Per-city hotels and the traveler preference question](planning/decisions/D-029-per-city-hotels-and-stay-preference.md)** records a separate hotel stay in each main city for this trip and confirms that the app should ask users about separate city stays versus fewer bases. The trip preference is not a universal default. Exact question wording and placement remain proposed; properties, city order, and nights remain open.
+
+Read these amendments before older next-step prompts. Phone focus, main cities, existing-booking inventory, and the owner's hotel-base preference have been answered.
 
 | Document | Purpose | Status |
 | --- | --- | --- |
-| [Current sequencing decision](planning/decisions/D-028-main-cities-first-and-booking-baseline.md) | Main-city-first flow, optional expansion afterward, flights-only booking baseline. | D-028 sequence confirmed; exact completion rules, order, nights, and lodging open. |
+| [Hotel-base preference decision](planning/decisions/D-029-per-city-hotels-and-stay-preference.md) | Separate city hotel stays for the pilot and a reusable traveler question. | D-029 confirmed at preference/question-inclusion level; exact UI and lodging choices open. |
+| [Sequencing decision](planning/decisions/D-028-main-cities-first-and-booking-baseline.md) | Main-city-first flow, optional expansion afterward, flights-only booking baseline. | Read with D-029: hotel-base preference answered; completion rules, order, nights, and properties open. |
 | [Destination decision](planning/decisions/D-027-core-cities-and-worthwhile-detours.md) | Starting cities, worthwhile-detour requirement, preliminary public research. | Read with D-028: extra destinations considered after the core itinerary. |
 | [Priority decision](planning/decisions/D-026-phone-first-and-japan-priority.md) | Phone focus, immediate Japan reservation planning, San Jose discovery tests, generic booking-action template. | D-026 confirmed; implementation and bookings open. |
 | [Planning blueprint](planning/blueprint.md) | Framework and sequential progress tracker. | Adopted framework, not blanket approval. |
-| [Product vision and problem brief](planning/00-product-brief.md) | Detailed Section 1 draft through D-025. | Read with D-026 through D-028; full section not approved. |
+| [Product vision and problem brief](planning/00-product-brief.md) | Detailed Section 1 draft through D-025. | Read with D-026 through D-029; full section not approved. |
 | [Product success standards](planning/00-product-success-standards.md) | Standards, preferences, sources, formats, balanced days, proposed evaluations. | Detailed thresholds open; amendments and question register govern current direction. |
 | [App budget policy and options](planning/00-app-budget-options.md) | Free-first policy, retained cost scenarios, access risks. | D-017 confirmed; no vendor or purchase selected. |
-| [Decision register](planning/decisions.md) | Historical decisions/inputs through D-025. | Extended by standalone D-026 through D-028; preserve earlier reasoning. |
-| [Open questions](planning/open-questions.md) | Remaining questions and next actionable choice. | Next: Q-014 main-city hotel-base preference, then order/nights. Q-015 answered. |
+| [Decision register](planning/decisions.md) | Historical decisions/inputs through D-025. | Extended by standalone D-026 through D-029; preserve earlier reasoning. |
+| [Open questions](planning/open-questions.md) | Remaining questions and next actionable choice. | Next: Q-016 lodging style/priorities; core order/nights remain Q-014. Hotel-base choice and Q-015 answered. |
 
 ## Current priorities — independent workstreams
 
@@ -52,11 +56,11 @@ Phones are the initial focus; desktop parity is not the priority. No OS, native/
 
 ## Main-city foundation, then optional destinations — D-027/D-028
 
-**Starting set:** Tokyo, Kyoto, and Osaka. Their order in the owner's answer does not establish itinerary order. Under D-028, focus planning and booking decisions on these main cities first; branch out once their itinerary is established.
+**Starting set:** Tokyo, Kyoto, and Osaka. Their order in the owner's answer does not establish itinerary order. Under D-028, focus planning and booking decisions on these main cities first; branch out once their itinerary is established. D-029 selects a separate hotel stay in each city, not a particular hotel or allocation of nights.
 
-**Proposed flow:** Establish city order/nights → build main-city stays, transport, experiences, and reservation actions → review the core itinerary → consider worthwhile additional destinations → preview changes → accept or keep the core plan. The main-city-first sequence is confirmed; detailed substeps and the review/completion rule remain open.
+**Proposed flow:** Establish city order/nights with the traveler's hotel-base preference → build main-city stays, transport, experiences, and reservation actions → review the core itinerary → consider worthwhile additional destinations → preview changes → accept or keep the core plan. The main-city-first sequence and inclusion of the preference question are confirmed; detailed substeps, question placement, and review/completion rules remain open.
 
-**Booking baseline:** The owner reports only plane tickets booked. Hotels, intercity journeys, and timed experiences are not yet booked. Q-015 is resolved; do not request the same inventory again. Flight constraints remain in the private conversation. No live booking verification, route, stay allocation, or purchase authority is implied.
+**Booking baseline:** The owner reports only plane tickets booked. Hotels, intercity journeys, and timed experiences are not yet booked. Q-015 is resolved; do not request the same inventory again. Choosing separate city hotels does not create a booking. Flight constraints remain in the private conversation. No live booking verification, route, stay allocation, or purchase authority is implied.
 
 **Completed plan versus paid reservations:** Do not assume that every hotel and activity must be purchased before optional suggestions can appear. A reviewed core draft with clearly identified unbooked items is a proposed interpretation for later design. Selected, tentative, confirmed, and paid arrangements must not be conflated. Main-city reservation research should proceed as needed without waiting for the app.
 
@@ -66,7 +70,15 @@ Phones are the initial focus; desktop parity is not the priority. No OS, native/
 
 D-027 records preliminary official-source examples: Chichibu, Uji, and Kinosaki Onsen. The owner likes these ideas, but **none is selected or booked; keep them optional until the main-city itinerary is ready**. Annual dates are not current-year program or inventory confirmation; transport estimates are not dated train schedules. Recheck the evidence when an option is actually considered.
 
-**Next — Q-014:** Is a separate hotel stay in each main city preferred, or fewer hotel changes with more travel from a base? Then propose the core order/nights within the supplied flights. This is a preference question, not a claim of route feasibility. Known private dates/times, traveler count, budget bounds, and cities must not be requested again.
+## Hotel-base preference — D-029
+
+**For this trip:** Separate hotel stays in Tokyo, Kyoto, and Osaka. Do not replace these with one shared base for multiple main cities without a new decision. Returning to a previously visited city does not automatically require a different property; that detail remains open.
+
+**For the app:** Ask travelers whether they prefer a hotel stay in each city or fewer bases with additional travel where practical. This question is a confirmed product inclusion, not a requirement that every traveler choose the owner's answer. A proposed third answer is to compare both when undecided.
+
+**Proposed use:** Ask when relevant after main-city selection and before finalizing lodging and routing. Account for the selected strategy when considering hotel locations, transfer days, luggage/check-in time, activity windows, and rest. Keep the preference editable; preview affected plans and reservations rather than silently changing bookings. No exact wording, default, scoring rule, route guarantee, or interface has been approved. Do not require a booked hotel before all discovery or repeat an already supplied answer.
+
+**Next — Q-016:** Preferred lodging style and priorities for the main-city shortlist: simple/comfortable, upscale, or a mix with a special stay. These are examples, not a selected category. Core order/nights remain Q-014; no new destination is needed to answer this question. Known timing, budget bounds, group, cities, and hotel-base choice must not be requested again.
 
 ## Core use case and product coverage
 
@@ -78,7 +90,7 @@ An organizer takes the trip and shares the plan with companions: **“Look what 
 
 The pilot is a couple, two travelers (D-008), not a permanent limit, couples-only market, or assumption of identical tastes.
 
-Hotels and transportation require organizing existing bookings and recommending options before booking (D-009/D-010). Reservation-dependent dining/events are included (D-015). Requirement, actual booking, and payment differ. No transaction, import, provider, or guaranteed inventory selected.
+Hotels and transportation require organizing existing bookings and recommending options before booking (D-009/D-010). D-029 adds the hotel-base preference question. Reservation-dependent dining/events are included (D-015). Requirement, actual booking, and payment differ. No transaction, import, provider, or guaranteed inventory selected.
 
 The trip range is per person and excludes airfare (D-014/D-016); numerical bounds remain in chat. Currency, categories, and total-versus-remaining meaning are open. Not app funding or payment authority.
 
@@ -133,7 +145,7 @@ Ultimate app-store/SaaS commercialization with subscriptions/ads remains. Pricin
 
 ## Planning and implementation boundaries
 
-App design continues sequentially. Section 1 is DRAFT; priority, destination, and booking-baseline answers do not approve later sections. Immediate actual-trip preparation can use research/manual planning before software exists; it does not authorize scaffolding, dependencies, infrastructure, schema, or deployment.
+App design continues sequentially. Section 1 is DRAFT; priority, destination, booking-baseline, and hotel-preference answers do not approve later sections. Immediate actual-trip preparation can use research/manual planning before software exists; it does not authorize scaffolding, dependencies, infrastructure, schema, or deployment.
 
 Codex follows explicit design-transition approval. Design completion means sufficient direction, scope, journeys, risks, and first buildable slice, not every future feature.
 
@@ -145,4 +157,4 @@ Research is not permission to book/change/cancel/pay. Phone/radius focus is not 
 
 Keep private finances, exact dates/times, detailed personal itineraries, booking references, credentials, identities, home addresses, and identifying research out of commits. Generic structures, city-level contexts, non-identifying booking-status summaries, unselected public research examples, and software milestones are appropriate. Consult the conversation for already supplied private inputs.
 
-Read standalone D-026 through D-028 alongside the historical register. Amend this overview and question tracker when priorities change; distinguish current decisions from historical prompts. Preserve earlier reasoning and unrelated files. Use `planning/blueprint.md` for section order and approval status.
+Read standalone D-026 through D-029 alongside the historical register. Amend this overview and question tracker when priorities change; distinguish current decisions from historical prompts. Preserve earlier reasoning and unrelated files. Use `planning/blueprint.md` for section order and approval status.
