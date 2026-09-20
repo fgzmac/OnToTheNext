@@ -9,7 +9,7 @@
 **Core-city schedule:** Proposed Tokyo → Kyoto → Osaka → Tokyo baseline and night allocation approved under D-032; dated personal details remain in chat  
 **Hotel strategy:** Separate main-city stays; upscale, comfortable, convenient, value-conscious; no hostels for this traveler; accepted USD per-room nightly search reference under D-031  
 **Booking baseline:** Flights only, as last reported; itinerary approval is not a booking  
-**Initial device focus:** Phones; operating system and native/web delivery not selected  
+**Experience targets:** Web and mobile are both first-class; exact native/responsive-web technology remains open  
 **Discovery testing:** Spontaneous nearby discovery in San Jose, California  
 **First complete software-test target:** November 10, 2026; not a booking deadline  
 **Spending:** Free first; flexible paid-operation references; no purchase authorized  
@@ -62,7 +62,7 @@ Continually helpful does not mean unwanted notifications, tracking, automatic bo
 
 D-026 supersedes the interpretation that D-025's local testing → beta → Japan simulations sequence delays actual trip preparation. Software rehearsals can follow beta; real reservation research proceeds independently.
 
-Determine actual release windows for selected items, not a universal booking horizon or November 10 default. Phones are the initial focus; desktop parity is not the priority. No OS, native/web architecture, browser matrix, offline guarantee, framework, host, provider, or store submission chosen.
+Determine actual release windows for selected items, not a universal booking horizon or November 10 default. Web and mobile are both first-class experiences. Larger screens should support richer visual planning/comparison, while mobile should emphasize on-trip access and spontaneous discovery. No OS, native/web architecture, browser matrix, offline guarantee, framework, host, provider, or store submission chosen.
 
 ## Main-city foundation before optional additions
 
