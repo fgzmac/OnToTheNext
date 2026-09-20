@@ -144,3 +144,26 @@ Recommended starting model:
 The organizer can explicitly share more later.
 
 **Recommended direction:** practical trip details shared; financial, sensitive, and private planning details remain organizer-only by default.
+
+
+## Shared finances and expenses — D-042
+
+**Confirmed:** Companions can see the shared trip budget/cost picture because participants will be splitting costs. The trip includes a shared expense ledger with payer, participants, amount, currency, split, running balances, and end-of-trip settle-up summary.
+
+Sensitive payment credentials and unrelated private personal information remain excluded from shared visibility.
+
+The exact expense edit/delete permission model remains open.
+
+## Next decision
+
+**Q-104:** Who controls destructive/administrative trip actions?
+
+Recommended starting model:
+- Organizer can invite/remove companions.
+- Organizer can delete the trip.
+- Organizer can publish/share the itinerary.
+- Companions cannot delete the trip or remove other companions.
+- Ownership can be transferred deliberately, but not accidentally.
+- Shared expenses remain visible even if a companion is removed until outstanding balances are resolved or explicitly handled.
+
+**Recommended direction:** Organizer controls membership, deletion, publishing, and ownership transfer; companions participate in planning/expenses without administrative control.
