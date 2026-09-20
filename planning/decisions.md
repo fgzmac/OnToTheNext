@@ -36,6 +36,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 | D-022 | Include local recommendations and cultural experiences. | CONFIRMED inclusion | 2026-09-19 |
 | D-023 | Planning is difficult to begin and organize; desired help includes worthwhile choices/order, hotel/travel context, date-specific events, and balancing effort with shopping, food, and free time. | REPORTED PROBLEMS / DESIRED OUTCOMES RECORDED; mechanisms open | 2026-09-19 |
 | D-024 | Owner will devote time as necessary; example day has one or two main experiences, free time/hotel rest, then user-initiated nearby discovery within a radius. | FLEXIBLE EFFORT AND FLOW EXAMPLE RECORDED; not quantified capacity or a mandatory daily rule | 2026-09-19 |
+| D-025 | Test early versions locally in San Jose, California, then run Japan-focused simulations once a working beta exists. | CONFIRMED testing direction; joint local testing contemplated; sessions, devices, and pass criteria open | 2026-09-19 |
 
 ## D-001 — Sequential blueprint planning
 
@@ -63,7 +64,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Working interpretation:** Define direction, first-release scope, journeys, constraints/risks, and first buildable slice sufficiently, then obtain explicit transition approval. Do not specify every future feature upfront. Review this interpretation with the owner at transition.
 
-**Boundary:** Documentation-only now. No scaffolding, dependency installation, database, deployment, stack, identity, API provider, or AI choice follows from a milestone, preference, standard, source, format, budget approval, flexible time commitment, or example flow. No implementation transition recorded.
+**Boundary:** Documentation-only now. No scaffolding, dependency installation, database, deployment, stack, identity, API provider, or AI choice follows from a milestone, preference, standard, source, format, budget approval, flexible time commitment, example flow, or testing direction. No implementation transition recorded.
 
 **Related/revisit:** Q-506; owner explicitly authorizes implementation or changes the workflow.
 
@@ -93,7 +94,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Decision/source:** Owner explicitly prioritizes developing/testing for the Japan trip over commercialization.
 
-**Reason:** A concrete real-use scenario. Owner is initial organizer/tester. Later decisions specify group (D-008), hotel/transport support (D-009/D-010), Tokyo and December end (D-011), test target/calendar (D-012), private local times (D-013), standards (D-018), formats (D-020), and discovery inputs/inclusions (D-021/D-022).
+**Reason:** A concrete real-use scenario. Owner is initial organizer/tester. Later decisions specify group (D-008), hotel/transport support (D-009/D-010), Tokyo and December end (D-011), test target/calendar (D-012), private local times (D-013), standards (D-018), formats (D-020), and discovery inputs/inclusions (D-021/D-022). D-025 adds earlier local San Jose tests before Japan-focused beta simulations; it does not replace the Japan goal.
 
 **Boundary:** No nationwide/Japan-only promise, Tokyo-only restriction, public-launch date, paid services, or mandatory pilot monetization. Additional cities, actual coverage, devices, implementation depth, airports/transfers, and distribution remain open.
 
@@ -117,9 +118,9 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Decision/source:** Owner travels with a significant other; two total. Record anonymous organizer/companion profile.
 
-**Boundary:** Not a permanent size limit, couples-only market, romantic theme, identical interests, or permissions. Companion testing remains open. D-016 later resolves budget basis; D-019/D-021/D-023/D-024 do not automatically describe the companion.
+**Boundary:** Not a permanent size limit, couples-only market, romantic theme, identical interests, or permissions. Companion testing was open at this decision; D-025 subsequently records the owner's proposed joint local testing direction. Session roles remain open. D-016 later resolves budget basis; D-019/D-021/D-023/D-024 do not automatically describe the companion.
 
-**Related/revisit:** Q-003 pilot resolved; Q-008/Q-010/Q-101/Q-106 and remaining Q-011 open. Revisit when participation or audience changes.
+**Related/revisit:** Q-003 pilot resolved; Q-008 participation direction informed by D-025; Q-010/Q-101/Q-106 and remaining Q-011 open. Revisit when participation or audience changes.
 
 ## D-009 — Hotel and transportation inclusion
 
@@ -168,7 +169,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Boundary:** Target, not guarantee, tested feasibility, public launch, blanket feature approval, or design-to-code permission. Scope, capacity, costs, tests, and dependencies need evaluation. No automation/calendar/reminder requested or created.
 
-**Related/revisit:** Timing portion Q-004 resolved; D-024 later records flexible effort, not guaranteed capacity. Q-304/Q-501/Q-502 define completion. Explicit owner or evidence-driven target changes.
+**Related/revisit:** Timing portion Q-004 resolved; D-024 later records flexible effort, not guaranteed capacity. D-025 adds a testing sequence without changing this date. Q-304/Q-501/Q-502 define completion. Explicit owner or evidence-driven target changes.
 
 ## D-013 — Tokyo-local travel times
 
@@ -224,7 +225,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Expense review:** Explain blocker, free alternatives, smallest useful paid option, recurring/usage/overage costs, and consequence of waiting; obtain specific approval. Necessary limited spending may precede full acceptance. Discretionary expansion follows owner judgment of a working product.
 
-**Acceptance:** D-018 defines priorities; D-019/D-021/D-023/D-024 supply preference/problem/flow context. Detailed tests remain Q-304/Q-502. Demo, visual polish, mock tests, calendar target, or merely defined standards do not establish success.
+**Acceptance:** D-018 defines priorities; D-019/D-021/D-023/D-024 supply preference/problem/flow context. D-025 adds staged testing, not acceptance. Detailed tests remain Q-304/Q-502. Demo, visual polish, mock tests, calendar target, or merely defined standards do not establish success.
 
 **Scope/evidence:** Preserve all confirmed capabilities. Free-first changes spending sequence, not features. Label simulations; they do not prove coverage, persistence, routes, quality, or readiness. Investigate paid dependencies early; surface quality/cost/scope conflicts, not unsafe handling or false claims.
 
@@ -382,13 +383,39 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 **Evidence:** An intended flow and effort commitment, not observed use, real event coverage, companion agreement, workload measurement, or acceptance of the app. No actual trip details beyond existing generalized context are needed in public files.
 
-**Question resolution:** Q-004's availability answer is recorded at the level supplied. Later work can estimate and measure effort against actual tasks; maintenance and specific costs remain open. Q-008 companion testing participation is next. Carry the example into Q-207/Q-213, scheduling Q-305, radius/coverage Q-309, and evaluation Q-304/Q-352 without starting those later sections now.
+**Question resolution/history:** Q-004's availability answer is recorded at the level supplied. Later work can estimate and measure effort; maintenance and specific costs remain open. This record originally queued Q-008; D-025 subsequently provides the local-testing/Japan-simulation direction. Carry the day example into Q-207/Q-213, scheduling Q-305, radius/coverage Q-309, and evaluation Q-304/Q-352 without starting those later sections now.
 
 **Affected:** Product brief, success standards, README, decisions, and open questions.
 
 **Supersedes:** Current prompts asking the owner to supply weekly hours. Does not supersede the balanced-day preference, free-first policy, or earlier confirmed features.
 
 **Revisit:** Actual delivery effort, a new time constraint, owner clarification of the example/default behavior, or usability and data-feasibility evidence.
+
+## D-025 — San Jose early testing, then Japan beta simulations
+
+**Decision/source:** In response to the companion-testing question, the owner said early versions can be tested locally in San Jose, California, followed by Japan simulations once a working beta product exists. Record this staged testing direction. The collective wording supports planning for organizer and companion participation; exact sessions, tasks, and individual availability are not fixed.
+
+**Confirmed sequence:** Early local use in San Jose → working beta → Japan-focused simulations. The existing Japan trip remains the eventual real-use pilot. November 10, 2026 remains the first complete test target; no new dates or automatic extension are created.
+
+**Public context:** San Jose is recorded as a test area, not a home address, residence profile, live location, or authorization to collect location histories. No private Japan booking details or exact itinerary inputs are published.
+
+**Proposed local evaluation:** Try the core planning/sharing tasks and the D-024 planned-outing/break/optional-nearby-discovery flow. Judge worthwhile suggestions, real current-event relevance where real data is used, sensible travel/order, day balance, ease of resuming, and leaving free time unchanged when no outing is chosen. A chosen public start point can stand in for a hotel; no test hotel booking or paid outing is required by this plan. Include unfamiliar choices so prior local knowledge does not hide weak explanations. These are candidate tasks, not approved thresholds.
+
+**Proposed Japan evaluation:** Rehearse trip scenarios with Japan destinations, hotel/start-point context, travel and reservation constraints, partial arrival/departure days, dated events, local/cultural experiences, both experience formats, budgets, and optional discovery after a break. A rehearsal from the local test area using an explicitly selected Japan place and scenario time is a proposed method; the owner has not specified the physical execution site, test tooling, or a requirement to spoof device location. Do not assume the simulations must wait until physical arrival in Japan.
+
+**Evidence boundaries:** Separate synthetic/controlled scenario tests from tests using current externally checked Japan information. Changing a scenario date or location does not prove that a future festival exists, tickets are available, or a venue will be open. San Jose success does not establish Japan coverage or recommendation quality. Record sources, relevant occurrence dates, and uncertainty; no fabricated live data or implied bookings. No tests have actually run and no working beta or acceptance is claimed.
+
+**Sequence versus early risk work:** The integrated Japan rehearsals follow a working beta as requested. Earlier feasibility research into Japan event, hotel, transport, and reservation data should not be postponed merely because the full simulations are later. The exact research plan remains for the risk/dependency sections, without paid access or coding approval.
+
+**Scope boundaries:** Adds a bounded local test area, not nationwide U.S. coverage or a changed commercial audience. Does not require every Japan-specific integration to be duplicated for the earliest San Jose prototype; complete beta requirements must still preserve confirmed capabilities. No stack, device platform, provider, account/permission model, simulator, continuous tracking, transaction, purchase, or implementation transition selected. Free-first D-017 and priority order D-018 are unchanged.
+
+**Question resolution:** Q-008's initial testing direction is answered. Detailed sessions, feedback collection, wider recruitment, and acceptance remain open. Q-013 now asks which devices the early tests should support; it is a user/device constraint, not native-versus-web architecture selection. Full Section 1 remains DRAFT.
+
+**Related:** Q-304/Q-352 test criteria and examples; Q-301 local/Japan coverage; Q-353/Q-355/Q-356 early data risks; Q-503 real versus simulated evidence. Product brief 1.15 records the current testing approach.
+
+**Affected:** README, product brief, decision register, open questions. The success-standards note retains the existing proposed tasks; current testing sequence and next-discussion pointers are governed by this decision and the question register.
+
+**Revisit:** Local feedback, beta readiness, Japan data findings, device requirements, or explicit changes to the test sequence or target.
 
 ## Approval register
 
@@ -413,8 +440,10 @@ A commit is not approval of the whole product. Copied recommendations are not au
 | Main planning problems and desired day balance | RECORDED self-report; mechanisms open | D-023 |
 | Flexible development/review/testing effort | RECORDED as needed; not quantified or unlimited | D-024 |
 | Main experiences, hotel break, then optional radius-based discovery | OWNER FLOW EXAMPLE RECORDED; defaults and detailed behavior open | D-024 |
+| Early San Jose tests, then Japan simulations after working beta | CONFIRMED sequence; detailed plan and actual results open | D-025 |
+| Companion participation in initial testing | Joint local testing contemplated by owner; exact sessions/roles open | D-025/Q-008 |
+| Early-test devices | NOT SELECTED; next discussion | Q-013 |
 | Full current tool workflow/measured effort | NOT OBSERVED; research gap | Q-006 |
-| Companion testing participation | NOT YET SELECTED; next discussion | Q-008 |
 | Working product meets standards | NOT DEMONSTRATED OR ACCEPTED | Tests and owner judgment required |
 | Numerical criteria and exact planning rules | NOT SELECTED | Q-304/Q-305/Q-309 |
 | Sections 2–15 | NOT STARTED | None |
@@ -424,7 +453,7 @@ A commit is not approval of the whole product. Copied recommendations are not au
 
 ## Proposals not to mistake for decisions
 
-Organizer-led suggestion approval, publication/drafts, account-free access, exact Keep/Must-do/Lock behavior, detailed source/destination coverage, date-free exploration, providers/AI, automatic whole-trip edits, multi-city depth, transactions, billing/ad exclusions, pricing/placements, native/web choice, imports, modes, source weighting, ratings thresholds, evidence hierarchies/access, local verification, cultural taxonomy, duration buckets, energy ratings, free-time allocations, onboarding rules, hotel-required rules, routing/combination algorithms, airport buffers, budget formulas, booking/payment state models, monitoring/reminders, quantitative acceptance, and exact cost controls remain open unless separately approved. D-024 does not fix the daily count, break duration, radius size, units, search center, or location-access mechanism.
+Organizer-led suggestion approval, publication/drafts, account-free access, exact Keep/Must-do/Lock behavior, detailed source/destination coverage, date-free exploration, providers/AI, automatic whole-trip edits, multi-city depth, transactions, billing/ad exclusions, pricing/placements, native/web choice, imports, modes, source weighting, ratings thresholds, evidence hierarchies/access, local verification, cultural taxonomy, duration buckets, energy ratings, free-time allocations, onboarding rules, hotel-required rules, routing/combination algorithms, airport buffers, budget formulas, booking/payment state models, monitoring/reminders, quantitative acceptance, and exact cost controls remain open unless separately approved. D-024 does not fix the daily count, break duration, radius size, units, search center, or location-access mechanism. D-025 selects a testing sequence, not detailed cases, devices, numerical gates, or evidence of completed tests.
 
 Confirmed same-day, formats, local/cultural inclusion, and stated balanced-day needs must not disappear. Owner taste is not a universal category ban or companion preference. Source names are not licensed access; opinions are not current logistics. Flexible app references do not authorize payments, and flexible effort does not guarantee delivery. The old fixed-ceiling proposal is superseded.
 
@@ -448,4 +477,4 @@ Owner and date:
 
 ## Maintenance
 
-Update affected documents/questions together. Preserve historical reasoning and distinguish later clarifications from the state at the time. Change section completion only with explicit owner approval. A milestone, requirement, preference, problem report, example flow, or commit does not establish product acceptance.
+Update affected documents/questions together. Preserve historical reasoning and distinguish later clarifications from the state at the time. Change section completion only with explicit owner approval. A milestone, requirement, preference, problem report, example flow, test plan, or commit does not establish product acceptance.
