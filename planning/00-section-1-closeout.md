@@ -1,6 +1,6 @@
 # Section 1 Closeout — Product Vision and Problem Brief
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-20.  
 **Purpose:** Consolidate the approved direction and recorded preferences from D-001 through D-038 into a short reviewable product definition before moving to Section 2.
 
@@ -176,3 +176,10 @@ Approve Section 1 if this accurately represents:
 6. and the current non-goals.
 
 Approval of Section 1 does **not** authorize implementation. It only advances the blueprint to Section 2 — Users, Roles, and Ownership.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-20.  
+**Owner instruction:** “Approve section 1.”  
+**Effect:** Advance to Section 2 — Users, Roles, and Ownership. This approval does not authorize implementation.
