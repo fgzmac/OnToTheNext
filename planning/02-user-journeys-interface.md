@@ -361,3 +361,31 @@ Design recommendation cards and reactions:
 - reservation status,
 - Keep / Reject / Must-do / Compare / Show Different,
 - refinement from reaction reasons.
+
+
+## Discover / Activity Recommendation — D-048
+
+**Confirmed:** recommendation cards stay factual. The app may rank using preferences internally, but it should not explain or persuade with "why this fits you" messaging.
+
+Cards should show the experience details, practical constraints, evidence, reservation status, map/travel context, and allow the user to accept or deny it.
+
+Primary interaction:
+- Accept / Add
+- Deny / Not interested
+
+Secondary actions may include Must-do, Save for later, Compare, Show another, View map, and View sources.
+
+## Next decision — Hotel Discovery & Comparison
+
+Formalize the hotel screen using the already-approved requirements:
+- 4–5 meaningful options per city,
+- value and comfort/upscale tiers,
+- configurable price range,
+- photos,
+- one-large-bed/room details,
+- amenities,
+- itinerary-aware pros/cons,
+- map/transit context,
+- full-stay price and booking terms,
+- Keep / Reject / Compare behavior,
+- richer web comparison and focused mobile cards.
