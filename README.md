@@ -17,8 +17,8 @@
 | Document | Purpose | Status |
 | --- | --- | --- |
 | [Planning blueprint](planning/blueprint.md) | Reusable framework and sequential progress tracker. | Adopted framework; examples are not blanket approval. |
-| [Product vision and problem brief](planning/00-product-brief.md) | Current section populated from the concept and explicit decisions. | Draft for discussion. |
-| [Product success standards](planning/00-product-success-standards.md) | Ranked standards, same-day discovery, personal taste, formats, discovery evidence, and proposed evaluations/durations. | D-018/D-020 confirmed; D-019/D-021 inputs recorded; detailed behavior open. |
+| [Product vision and problem brief](planning/00-product-brief.md) | Current section populated from the concept and explicit decisions. | Draft for discussion; latest local/cultural addition is detailed in the standards note and D-022. |
+| [Product success standards](planning/00-product-success-standards.md) | Ranked standards, same-day discovery, personal taste, formats, discovery evidence, local/cultural inclusion, and proposed evaluations/durations. | D-018/D-020/D-022 confirmed; D-019/D-021 inputs recorded; detailed behavior open. |
 | [App budget policy and options](planning/00-app-budget-options.md) | Free-first policy, prior tier comparisons, example costs, and data-access risks. | D-017 confirmed; providers, purchases, controls unselected. |
 | [Decision register](planning/decisions.md) | Confirmed decisions and recorded inputs, reasoning, and boundaries. | Maintained as choices are made. |
 | [Open questions](planning/open-questions.md) | Unresolved questions by blueprint section. | Only current-section questions active. |
@@ -29,7 +29,7 @@ An organizer plans a trip they are taking and shares it with travel companions. 
 
 The product connects three jobs:
 
-- **Discover:** Genuinely appealing experiences, including nearby events for same-day plans.
+- **Discover:** Genuinely appealing experiences, including nearby events for same-day plans, local recommendations, and cultural experiences.
 - **Organize:** Realistic days accounting for hotels, transportation, spending, and reservation-dependent dining/events.
 - **Delight:** Personal, exciting sharing without obstructing practical trip details.
 
@@ -63,13 +63,23 @@ The interpretation favors scenery, participation, local character, and complemen
 
 ### Discovery sources and evidence — D-021
 
-The owner reports discovering activities through **real experiences, positive Reddit posts, highly rated reviews, calendars for relevant time frames, and popular destination-related must-see or must-experience events**.
+The owner reports discovering activities through **real experiences, positive Reddit posts, highly rated reviews, calendars for relevant time frames, and popular destination-related must-see or must-experience events**. D-022 adds local recommendations and cultural experiences alongside these inputs.
 
 These are recorded source preferences, not selected integrations. The proposed approach is to use firsthand/community/review evidence to assess appeal, calendars to identify dated occurrences, and suitable current organizer/venue/operator information to verify material logistics. Positive feedback is not proof of present availability or a reservation. Popularity should inform, not override, personal fit.
 
 No review threshold, source weight, minimum count, subreddit, particular calendar, API, scraper, account import, paid access, or content-use permission chosen. Do not invent source-backed labels or testimonials. The full source-checking proposal and open questions are in the standards note. No actual posts, reviews, calendars, or events were fetched for this update.
 
 **Q-006 progress:** Discovery sources are answered. The most frustrating step and the process for organizing discoveries remain open; do not state assumed pain points as user-confirmed facts.
+
+### Local recommendations and cultural experiences — D-022
+
+**Confirmed:** Include both in discovery and trip planning. The [standards note](planning/00-product-success-standards.md#local-recommendations-and-cultural-experiences--d-022) contains the detailed addition.
+
+**Proposed distinction:** Local recommendations are advice from residents, local guides, community hosts, or locally based sources—not simply nearby places. Cultural experiences concern what a traveler can learn, do, or observe, such as food traditions, crafts, performances, or public festivals. Examples are possibilities to evaluate, not selected or verified offerings.
+
+For this organizer, emphasize participation and meaningful context without making culture adventure-only or excluding history. Popular attractions can also be locally recommended. Support local-endorsement claims with actual source context; do not invent “locals love it,” authenticity, or exclusivity labels. Explain relevant language, participation, visitor access, etiquette, timing, and reservation requirements where supported.
+
+Specific sources, category boundaries, local-source verification, ranking, and pilot coverage remain open. This does not approve a guide marketplace, host accounts, paid partnerships, transactions, or source access. The existing Q-006 frustration question remains unanswered; inclusion itself does not need reconfirmation.
 
 ### Experience formats — D-020
 
@@ -86,7 +96,7 @@ No review threshold, source weight, minimum count, subreddit, particular calenda
 | Immediate | First full test November 10, 2026, for the Japan pilot including Tokyo and two travelers. | Free-first; target, not guarantee. Detailed specifications, capacity, source access/coverage, other cities, and devices open. |
 | Ultimate | Commercial app-store/SaaS offering earning subscriptions and ad revenue. | Greater investment after owner acceptance. Distribution, pricing, ad behavior, public-launch date open. |
 
-See **D-006 through D-021** in the [decision register](planning/decisions.md).
+See **D-006 through D-022** in the [decision register](planning/decisions.md).
 
 The pilot is not public launch or a nationwide-coverage promise. Tokyo included does not mean Tokyo-only. A successful personal trip is evidence, not proof of broad demand or revenue.
 
@@ -100,9 +110,9 @@ Aim for $0 additional app-service costs while practical. Do not activate tiers b
 
 Before spending, identify the blocked requirement, free alternatives, charges/limits, and consequence of waiting; obtain a specific decision. Greater discretionary investment follows a working product judged against D-018, informed by D-019's preferences. Detailed acceptance remains open; necessary earlier expenses need separate decisions.
 
-Free-first does not remove capabilities, imply free access to Reddit/reviews/calendars, or turn simulations into current evidence. Investigate source rights, coverage, and costs before relying on them. Disclose paid dependencies without activating them.
+Free-first does not remove capabilities, imply free access to Reddit/reviews/calendars/local sources, or turn simulations into current evidence. Investigate source rights, coverage, and costs before relying on them. Disclose paid dependencies without activating them.
 
-**Next discussion:** Q-006 — which part takes most effort: finding worthwhile options, checking dates/booking requirements, or combining them into a practical plan? These are examples, not assumed frustrations. Source preferences are recorded under D-021; do not re-ask them. Duration detail remains for journeys; full promise, capacity, and measurable acceptance stay open.
+**Next discussion:** Q-006 — which part takes most effort: finding worthwhile options, checking dates/booking requirements, or combining them into a practical plan? These are examples, not assumed frustrations. Source preferences are recorded under D-021 and local/cultural inclusion under D-022; do not re-ask them. Duration detail remains for journeys; full promise, capacity, and measurable acceptance stay open.
 
 ## Planning workflow
 
@@ -140,9 +150,9 @@ Base code on approved decisions. Surface missing product behavior or conflicts i
 
 ## Current boundaries
 
-No stack, database, identity system, AI model, data provider, permission model, sharing access, complete pilot scope, or commercial scope selected. Confirmed capabilities, including same-day planning and both formats, remain in place.
+No stack, database, identity system, AI model, data provider, permission model, sharing access, complete pilot scope, or commercial scope selected. Confirmed capabilities, including same-day planning, both formats, and local/cultural discovery, remain in place.
 
-Additional cities, airports, transfers, hotels, and practical activity windows open. Flight times do not establish hotel-ready times. Organizer-led collaboration proposed. Provider examples/prices need verification before selection; no hotel, event, reservation, timetable, excursion, review, or price-comparison integration chosen. Naming Reddit is not choosing an access method or marketing channel.
+Additional cities, airports, transfers, hotels, and practical activity windows open. Flight times do not establish hotel-ready times. Organizer-led collaboration proposed. Provider examples/prices need verification before selection; no hotel, event, reservation, timetable, excursion, review, local-guide, or price-comparison integration chosen. Naming Reddit is not choosing an access method or marketing channel.
 
 Subscription/ad intent does not authorize billing/ads now. Free-first is not automatic removal of monetization features. Delivery format open.
 
