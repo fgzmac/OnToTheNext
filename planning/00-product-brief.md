@@ -4,11 +4,11 @@
 **Owner:** Project owner (`fgzmac`); assistant facilitates drafting.  
 **Phase:** Product design.  
 **Last updated:** 2026-09-19.  
-**Source:** The owner's app concept and explicit decisions/inputs through D-019.  
+**Source:** The owner's app concept and explicit decisions/inputs through D-020.  
 **Related framework:** [Blueprint, Section 1](blueprint.md#1-product-vision-and-problem-brief).  
 **Supporting notes:** [App Budget Policy and Options](00-app-budget-options.md); [Product Success Standards](00-product-success-standards.md).  
-**Next review trigger:** Clarify ready-made excursions versus app-assembled combinations of separate activities, or both, under Q-012. Q-006's initial preference examples have been supplied.  
-**Approval record:** Section not yet approved. Timing target D-012, spending policy D-017, and ranked standards D-018 confirmed individually; D-019 records organizer preferences. No working-product acceptance or paid service approved.
+**Next review trigger:** Current discovery sources and the hardest part of finding or organizing worthwhile experiences, under the remaining Q-006 workaround question. Q-012 is resolved.  
+**Approval record:** Section not yet approved. Timing D-012, spending D-017, ranked standards D-018, and both experience formats D-020 confirmed individually; D-019 records organizer preferences. Duration options are proposed. No working-product acceptance or paid service approved.
 
 > Saving a draft does not approve every proposal it contains. CONFIRMED choices, PROPOSED directions, ASSUMPTIONS, and OPEN questions are different states.
 
@@ -27,7 +27,7 @@ Repository name is confirmed, not necessarily the final brand. Naming should not
 
 This combines Discover, Organize, and Delight without positioning the product primarily as an AI tool. Coverage includes activities, hotels and transportation, both organizing existing bookings and recommending options, per-person range-based trip budgeting with the stated exclusions, and reservation-aware restaurant/event planning (D-009, D-010, D-014 through D-016).
 
-D-018 makes useful suggestions the highest priority, same-day nearby discovery and on-the-fly planning second, and seamless functionality third. The product must help before the trip and when deciding what to do that day. D-019 supplies personal examples of quality for the initial organizer, not a universal travel taste or a new restriction on the target audience.
+D-018 makes useful suggestions the highest priority, same-day nearby discovery and on-the-fly planning second, and seamless functionality third. The product must help before the trip and when deciding what to do that day. D-019 supplies personal examples of quality for the initial organizer, not a universal travel taste or a new restriction on the target audience. D-020 confirms offering ready-made provider excursions and app-assembled combinations; shorter/all-day options are a user-proposed duration direction.
 
 **Status:** Description wording PROPOSED; referenced choices confirmed at their recorded level.
 
@@ -73,7 +73,7 @@ The base situation is an organizer preparing an upcoming trip with companions an
 
 The organizer may gather ideas from searches, maps, social media, travel sites, and recommendations, then organize them in notes, spreadsheets, saved lists, or messages. A same-day decision may require another round of searching and checking what actually fits.
 
-These are assumptions about current behavior, not recorded observations. D-019 provides taste examples, not evidence of which resources the initial users currently rely on or how much effort their process takes. That portion of Q-006 remains open.
+These are assumptions about current behavior, not recorded observations. D-019 provides taste examples and D-020 chooses formats; neither establishes which resources the initial users currently rely on or how much effort their process takes. That portion of Q-006 is the next discussion.
 
 **Status:** ASSUMPTION.
 
@@ -89,9 +89,9 @@ Candidate pain points are filtering generic or unappealing suggestions, finding 
 | 2 | Real-time, on-the-fly planning. | Find worthwhile options for the day nearby, including festivals, pop-ups, and experiences, and help make a plan. |
 | 3 | Seamless functionality and ease. | The experience must be useful and easy, not feel like a chore. |
 
-The high-level order is settled. D-019 now supplies positive and negative examples: connected scenic/participatory experiences versus standalone novelty-object or statue stops for the initial organizer. Detailed weighting, quantitative success, and validation for the wider audience remain open.
+The high-level order is settled. D-019 supplies positive and negative examples: connected scenic/participatory experiences versus standalone novelty-object or statue stops for the initial organizer. D-020 confirms both provider excursions and app-assembled recommendations. Detailed weighting, quantitative success, and validation for the wider audience remain open.
 
-**Status:** Priorities CONFIRMED; initial preference examples RECORDED. Broader evidence and metrics OPEN (Q-006, Q-010, Q-304).
+**Status:** Priorities and formats CONFIRMED; initial preference examples RECORDED. Broader evidence and metrics OPEN (Q-006, Q-010, Q-304).
 
 ## 1.8 Primary and secondary users
 
@@ -122,7 +122,7 @@ This does not impose a permanent two-person limit, make the service couples-only
 
 ### Ranked success standards
 
-D-018 confirms quality of suggestions first, same-day discovery/on-the-fly planning second, and seamless functionality third. The [standards note](00-product-success-standards.md) preserves the source, implications, preference examples, and proposed evaluations.
+D-018 confirms quality of suggestions first, same-day discovery/on-the-fly planning second, and seamless functionality third. The [standards note](00-product-success-standards.md) preserves the source, implications, preference examples, formats, and proposed evaluations.
 
 A polished reveal is not a substitute for the first two priorities. Sharing remains part of the concept; the owner did not remove it. Correctness, privacy, reliability, and accessibility are not dispensable because they were not separately ranked.
 
@@ -138,7 +138,15 @@ A polished reveal is not a substitute for the first two priorities. Sharing rema
 
 These are stated preferences, not global prohibitions on history, museums, statues, sightseeing, or popular places. They do not establish the companion's taste, physical ability, skill, exertion preference, willingness to spend, or a preference for a full-day package every day. A strong single activity can still be a worthwhile option. No actual snorkeling, ATV, beach, or restaurant option has been verified for the pilot.
 
-**Open capability distinction (Q-012):** Recommend existing provider excursions, assemble combinations of separate activities, or both? This answer does not settle that format. A proposed sequence must not masquerade as one provider's package, one price, or a confirmed booking. Later design must distinguish advertised package inclusions from separately sourced components and check timing, travel, costs, and reservation dependencies. The earlier hotel/transport 'both' decision answers a different question.
+### Both experience formats — D-020
+
+**Confirmed choice:** Offer ready-made provider excursions and app-assembled combinations of separate activities. Q-012 is answered by the owner's explicit “Offer both.” This is separate from the hotel/transport capability decision in D-010.
+
+A provider excursion is an actual advertised offering. An app-created combination is a proposed sequence, not automatically one provider's package, one price, or a confirmed booking. Verify advertised package inclusions for the former; evaluate separately sourced components, timing, travel, costs, and reservation dependencies for the latter. Specific sources, depth of coverage, presentation, algorithms, and transactional booking remain open.
+
+**User-proposed duration direction:** The owner suggested, “Maybe shorter activities and all day activities.” Explore both short outings and full-day options without fixing hour cutoffs, an intermediate category, or a screen/filter yet. Recommendation format and duration are separate: either format could suit either amount of available time. This is not a promise of actual inventory in every combination.
+
+**Proposed time-fit behavior:** Ask or reuse how much usable time the traveler has; distinguish advertised activity duration from total time including relevant travel and commitments. Avoid double-counting transfers included in a provider offering, show uncertainty, and do not compress a fixed operator itinerary without evidence of a shorter variant. Short options should still be worthwhile; a full-day plan should not fill every minute or override reservations. Details belong in Q-212/Q-305, not a new round of format approval.
 
 ### Same-day nearby discovery and planning
 
@@ -181,11 +189,11 @@ Currency, total-versus-remaining meaning, included categories, and treatment of 
 
 **Proposed design:** Separate whether a reservation is required from whether one has been secured and paid. Show a trusted booking route and known release/deadline information with relevant local-time/source context. Keep unconfirmed slots tentative, consider alternatives when a booking cannot be obtained, and protect confirmed timed commitments when previewing changes. Consider deposits/fees without double-counting.
 
-These are proposals, not an approved state schema or integration. User-entered and provider-verified confirmation are different evidence. No specific event/restaurant has been chosen or researched through this standards update. No reservations, monitoring, or reminders have been created.
+These are proposals, not an approved state schema or integration. User-entered and provider-verified confirmation are different evidence. No specific event/restaurant has been chosen or researched through this update. No reservations, monitoring, or reminders have been created.
 
 The earlier proposal that Keep means interest, not guaranteed scheduling, remains to be specified in the user journey; D-018 does not silently approve its exact controls.
 
-**Status:** Purpose, ranked standards, same-day capability, both hotel/transport paths, per-person budget basis/exclusion, and reservation consideration CONFIRMED at their stated level; D-019 records organizer preferences. Detailed behaviors, models, excursion formats, and thresholds remain PROPOSED/OPEN.
+**Status:** Purpose, ranked standards, same-day capability, hotel/transport paths, budget basis/exclusion, reservation consideration, and both experience formats CONFIRMED at their stated level; D-019 records personal preferences. Shorter/all-day choices and detailed duration, behavior, models, and thresholds remain PROPOSED/OPEN.
 
 ## 1.10 Intended distinguishing idea
 
@@ -205,7 +213,7 @@ This is proposed positioning, not a researched claim that competitors lack these
 
 **Investment sequence (D-017):** Free first until an expense is necessary; greater investment follows a working product that meets the owner's standards. D-018 defines the high-level order and D-019 supplies initial personal examples; measurable checks and actual acceptance remain open.
 
-Possible extensions include broader destination/event coverage, multi-city complexity, richer companion input, and more automated replanning. Their allocation remains open. Existing hotel/transport recommendations, reservation-aware planning, and basic same-day event discovery/on-the-fly planning are already confirmed needs, not hypothetical future-only extensions. Older generic later-feature examples must not override them.
+Possible extensions include broader destination/event coverage, multi-city complexity, richer companion input, and more automated replanning. Their allocation remains open. Existing hotel/transport recommendations, reservation-aware planning, basic same-day discovery, and both experience formats are confirmed needs, not hypothetical future-only extensions. Older generic later-feature examples must not override them.
 
 **Status:** Commercial direction, investment sequence, and individual capabilities CONFIRMED; detailed expansion OPEN.
 
@@ -217,15 +225,15 @@ Possible extensions include broader destination/event coverage, multi-city compl
 
 **Proposed complete promise incorporating confirmed capabilities:**
 
-> Help the organizer find suggestions they genuinely want to use; organize activities, hotel stays, transportation, spending, and reservation needs into a practical trip; discover worthwhile nearby events and experiences for a same-day plan; and share a personalized itinerary that is easy for both travelers to use.
+> Help the organizer find suggestions they genuinely want to use, including ready-made excursions and app-assembled combinations; organize activities, hotel stays, transportation, spending, and reservation needs into a practical trip; discover worthwhile nearby events and experiences for a same-day plan; and share a personalized itinerary that is easy for both travelers to use.
 
-This promise includes both recommendations and organizing existing hotel/transport bookings. It preserves Discover, Organize, and Delight, with D-018's explicit order guiding tradeoffs.
+This promise includes both recommendations and organizing existing hotel/transport bookings. It preserves Discover, Organize, and Delight, with D-018's explicit order guiding tradeoffs. D-020 confirms two experience formats; short/full-day duration options remain a proposal for later journey design.
 
 **Evaluation direction:** First ask whether suggestions are genuinely worth considering; second whether same-day options are timely and usable; third whether the relevant tasks are easy to complete. D-019's examples inform personal appeal, not an automatic rule that every suggestion must be adventurous or bundled. The [standards note](00-product-success-standards.md) proposes evaluation methods. Numeric thresholds, exact sample sets, and final acceptance remain open in Q-304.
 
 The sharing test need not depend on elaborate animation or many themes. An appealing introduction and practical trip view are proposed minimums, not a finalized screen design. Visual polish alone cannot pass the recommendation or current-data tests.
 
-Japan does not imply nationwide coverage or a permanent Japan-only product. Additional cities, exact categories/sources, useful event coverage, excursion formats, freshness and response targets, travel modes, supported devices, budget calculations, reservation behavior, and practical activity windows still require design. User-supplied flight times do not establish transfer durations or hotel timing.
+Japan does not imply nationwide coverage or a permanent Japan-only product. Additional cities, categories/sources, event and excursion coverage, duration presentation, freshness and response targets, travel modes, supported devices, budget calculations, reservation behavior, and practical activity windows still require design. Both formats are selected; user-supplied flight times do not establish transfers or hotel timing.
 
 No budget or free-prototype shortcut can silently drop confirmed capabilities. When feasibility conflicts with the target, surface the tradeoff for an explicit decision.
 
@@ -233,7 +241,7 @@ No budget or free-prototype shortcut can silently drop confirmed capabilities. W
 
 A separate milestone with date, audience, distribution, wider coverage, production requirements, and monetization details still open.
 
-**Status:** Individual decisions/inputs through D-019 apply. Complete promise, detailed specifications, and release acceptance remain PROPOSED/OPEN. Section 1 is not approved by recording the ranking or preference examples.
+**Status:** Individual decisions/inputs through D-020 apply. Complete promise, detailed specifications, and release acceptance remain PROPOSED/OPEN. Section 1 is not approved by recording these individual choices.
 
 ## 1.13 Explicit non-goals and presentation boundaries
 
@@ -243,21 +251,21 @@ A separate milestone with date, audience, distribution, wider coverage, producti
 
 **Reservation boundary:** Organizing bookings, recommending choices, and accounting for reservation requirements do not authorize booking transactions, changes, or cancellations.
 
-**Preference boundary:** D-019's rejection examples are not a product-wide exclusion of statues, history, or sightseeing. Its positive combinations do not yet approve provider-tour sourcing or automatic bundling; clarify Q-012 first.
+**Preference and format boundary:** D-019's rejection examples are not a product-wide exclusion of history or sightseeing. D-020 now confirms both provider excursions and app-assembled combinations; it does not approve a provider, automatic whole-trip edits, transactions, or a specific combining algorithm. The proposed duration range does not mandate full-day adventures or exclude short single experiences.
 
 **Proposed feature sequencing:** Test core planning and sharing before billing, ads, and store-publication work. Those exclusions remain Q-306; the confirmed free-first spending policy does not automatically settle monetization feature scope.
 
 **Presentation safeguards:** Suggestions must not look booked or paid without appropriate evidence. Requirement, booking state, and payment state need distinct meanings. An app-created combination must not appear to be a verified all-inclusive package. A reveal must not prevent quick access to useful trip information. Precise criteria remain to be specified.
 
-**Status:** Feature exclusions/details PROPOSED. D-018's same-day inclusion and ranking supersede conflicting older proposals; D-019 is personal taste, not a global restriction.
+**Status:** Feature exclusions/details PROPOSED. D-018's same-day inclusion and D-020's two formats supersede conflicting older open/proposed language; D-019 is personal taste, not a global restriction.
 
 ## 1.14 Evidence and important assumptions
 
-**Established:** User concept; primary use case; sequential planning and later Codex workflow; repository; pilot, test target, spending policy, individual capabilities; ranked success standards; and the organizer's positive/negative experience examples. These are choices or stated preferences, not demonstrated product results.
+**Established:** User concept; primary use case; sequential planning and later Codex workflow; repository; pilot, test target, spending policy, individual capabilities; ranked standards; organizer preference examples; and both experience formats. The shorter/all-day idea is recorded as proposed. These are choices or stated preferences, not demonstrated product results.
 
-**Prior external research:** The budget note retains earlier official price/access references and arithmetic assumptions. This update does not refresh them or validate provider coverage. No live same-day event search or excursion lookup was performed for this preference discussion.
+**Prior external research:** The budget note retains earlier official price/access references and arithmetic assumptions. This update does not refresh them or validate provider coverage. No live same-day event search or excursion lookup was performed for this format/duration discussion.
 
-**Not yet documented:** Observed planning sessions, prototype tests, recommendation acceptance measurements, live coverage/integration tests, scheduling evaluations, willingness to pay, or owner acceptance of a working product. Initial personal taste examples are now documented under D-019; companion preferences and actual current workarounds are not.
+**Not yet documented:** Observed planning sessions, prototype tests, recommendation acceptance measurements, live coverage/integration tests, scheduling evaluations, willingness to pay, or owner acceptance of a working product. Initial personal taste examples are documented under D-019; companion preferences and actual current workarounds are not.
 
 Important assumptions to test:
 
@@ -269,10 +277,11 @@ Important assumptions to test:
 6. The practical and personalized sharing experience matters to companions.
 7. The selected implementation can meet cost/reliability needs. Free-first does not prove every production dependency is free.
 8. Wider users will return, subscribe, or accept advertising; one successful personal trip does not establish that.
+9. Suitable provider excursions and separate components can be sourced and presented distinctly, with combinations that fit the user's available time. Offering both is not proof of reliable inventory or scheduling feasibility.
 
 These become experiments in Section 5. Same-day data feasibility is an early risk to examine before polishing a complete interface around untested coverage. Prepared examples test interface behavior, not current-world recommendation quality. Any necessary paid dependency requires a specific decision under D-017.
 
-**Status:** Assumptions and evidence gaps. Q-006's example portion answered; Q-356 retains current-data tests. Q-354/Q-355 retain commercial and reservation-data questions.
+**Status:** Assumptions and evidence gaps. Q-006's taste-example portion and Q-012 format choice are answered; current workarounds remain Q-006. Q-356 retains current-data tests, and Q-354/Q-355 retain commercial and reservation-data questions.
 
 ## 1.15 Project goal, business model, and distribution
 
@@ -289,7 +298,7 @@ The owner is the first tester; companion testing arrangements, outside testers, 
 
 Mobile app-store versus web delivery is unresolved. SaaS and app-store distribution need not be mutually exclusive. No operating system, framework, provider, hosting plan, store listing, or pilot delivery method is selected. Free-first does not settle the platform.
 
-**Status:** High-level objectives, timing, spending approach, and ranked standards answered; detailed cost/capacity, distribution, and revenue design open.
+**Status:** High-level objectives, timing, spending approach, ranked standards, and experience formats answered; detailed cost/capacity, distribution, and revenue design open.
 
 ## 1.16 Constraints
 
@@ -299,9 +308,9 @@ Mobile app-store versus web delivery is unresolved. SaaS and app-store distribut
 
 **Target:** November 10, 2026 first complete test, then an intended period for fixes/retesting. This does not guarantee unestimated scope fits.
 
-**Scheduling proposals:** Partial arrival/departure days; separate flight events, hotel timing, travel buffers, and rest preferences; preserve destination-local time meaning. No exact buffers or transport mode selected.
+**Scheduling proposals:** Partial arrival/departure days; separate flight events, hotel timing, travel buffers, and rest preferences; preserve destination-local time meaning. Explore shorter and all-day options using total required time, not just activity duration. No exact buffers, duration cutoffs, or transport mode selected.
 
-**Capabilities to preserve:** Both hotel/transport support paths (D-010), per-person range/exclusion (D-014/D-016), reservation-aware dining/events (D-015), and useful same-day nearby discovery/on-the-fly planning (D-018). Detailed specifications remain open, not silent permission to omit capabilities.
+**Capabilities to preserve:** Both hotel/transport support paths (D-010), per-person range/exclusion (D-014/D-016), reservation-aware dining/events (D-015), useful same-day discovery/on-the-fly planning (D-018), and both provider excursions and app-assembled recommendations (D-020). Detailed specifications remain open, not permission to omit capabilities.
 
 **Ranked quality constraint:** Recommendation quality first, same-day usefulness second, seamless functionality third. D-018 does not waive basic data correctness, privacy, reliability, or accessibility. D-019 supplies organizer-specific appeal examples, not global exclusions, a completed ranking formula, or acceptance thresholds.
 
@@ -315,7 +324,7 @@ Retain $100/month as an initial paid-operation planning target and $150 as a fle
 
 Before a paid commitment, identify the blocked requirement/test, free alternatives, smallest useful paid option, recurring and usage costs/overages, and consequence of waiting. A necessary expense before full acceptance is a separate decision; discretionary expansion should follow a working product meeting owner standards.
 
-**Acceptance gate:** D-018 defines the priorities. The [standards note](00-product-success-standards.md) records D-019's examples and proposes observable tests, but no numeric threshold or acceptance has been approved. A demo, prepared data, passing mock tests, visual polish, or the target date alone does not establish success. Do not classify static event examples as verified current recommendations or hypothetical combinations as secured excursions.
+**Acceptance gate:** D-018 defines the priorities. The [standards note](00-product-success-standards.md) records D-019's examples, D-020's format choice, and proposed tests; no numeric threshold or acceptance has been approved. A demo, prepared data, passing mock tests, visual polish, or the target date alone does not establish success. Do not classify static events as verified current recommendations or hypothetical combinations as secured excursions.
 
 The [budget note](00-app-budget-options.md) retains earlier scenario ranges for reference, not an upgrade schedule. D-017 supersedes the old fixed-ceiling proposal. Development tools/overages, domains, enrollment, transaction charges, labor, hardware, taxes, marketing/legal work, and unpriced data contracts remain separate.
 
@@ -327,13 +336,13 @@ Free-first does not justify unsafe/incorrect behavior or promise free access to 
 
 ## 1.17 Completion and next discussion
 
-Section 1 remains DRAFT. The owner has answered the top-three standards and their order (D-018), including same-day discovery as a first-version requirement, and provided initial positive/negative experience examples (D-019). This does not approve the full brief or demonstrate that the product meets those standards.
+Section 1 remains DRAFT. Ranked standards/same-day inclusion (D-018), organizer preference examples (D-019), and both experience formats (D-020) are recorded. The shorter/all-day suggestion remains proposed. None of these individually approves the full brief or demonstrates product success.
 
-**Next — Q-012:** Should the app recommend ready-made excursions, put together its own combinations of separate activities, or offer both? Clarify this capability distinction using the supplied examples, without assuming one combined booking or applying the earlier hotel/transport 'both' answer to a different question.
+**Next — Q-006:** Where does the owner currently find experiences they like, and what is the most frustrating part of finding or organizing them? This fills the current-workaround and problem-evidence gap in Sections 1.6/1.7. Do not repeat the supplied positive/negative examples or the resolved Q-012 format choice.
 
-Q-006's initial examples are answered. Current planning workarounds and observed frustrations remain open. The complete pilot promise, measurable acceptance, broader target audience, real-world evidence, remaining capacity, and travel-budget currency/category meanings still need decisions or explicit deferral. Spending-policy flexibility is intentional; do not ask for a fixed ceiling again.
+Duration controls, cutoffs, format presentation, and total-time rules are recorded in Q-212 for journey design, rather than forcing premature UI decisions in this section. The complete pilot promise, measurable acceptance, broader audience, remaining capacity, and travel-budget currency/category meanings still need decisions or explicit deferral. Spending-policy flexibility is intentional; do not ask for a fixed ceiling again.
 
-Continue one Section 1 question at a time. Do not re-ask the examples, priority order, supplied timing, group, budget basis, hotel/transport capabilities, reservation inclusion, or spending policy. Do not start implementation or mark later sections complete.
+Continue one Section 1 question at a time. Do not re-ask the examples, format choice, priority order, supplied timing, group, budget basis, hotel/transport capabilities, reservation inclusion, or spending policy. Do not start implementation or mark later sections complete.
 
 ## Revision record
 
@@ -349,4 +358,5 @@ Continue one Section 1 question at a time. Do not re-ask the examples, priority 
 | 2026-09-19 | Per-person basis; researched app-budget scenarios. | D-016; then-proposed fixed ceiling not approved. |
 | 2026-09-19 | Free-first flexible spending and owner-standards investment gate. | D-017; no purchase/implementation/acceptance approval. |
 | 2026-09-19 | Ranked recommendation quality, same-day nearby planning, and seamless use; reconciled earlier same-day deferral language and added standards note. | D-018 confirmed at priority/capability level. Detailed tests and Section 1 approval remain open. |
-| 2026-09-19 | Recorded scenic, participatory, locally distinctive and multi-part preference examples, plus rejected standalone attraction examples; separated personal taste from global rules and queued excursion-format clarification. | D-019 preference input recorded; no package-format, booking, implementation, or whole-section approval. |
+| 2026-09-19 | Recorded scenic, participatory, locally distinctive and multi-part preference examples, plus rejected standalone attraction examples; separated personal taste from global rules and queued excursion-format clarification. | D-019 preference input recorded; formats were still open at this revision. |
+| 2026-09-19 | Confirmed both ready-made excursions and app-assembled combinations; recorded shorter/all-day options as tentative, with duration detail for later journeys. | D-020 format choice confirmed; Q-012 resolved. No duration cutoffs, providers, transactions, implementation, or section approval. |
