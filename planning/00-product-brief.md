@@ -4,10 +4,10 @@
 **Owner:** Project owner (`fgzmac`); assistant facilitates drafting.  
 **Phase:** Product design.  
 **Last updated:** 2026-09-19.  
-**Source:** Owner's concept and explicit decisions/inputs through D-024.  
+**Source:** Owner's concept and explicit decisions/inputs through D-025.  
 **Related framework:** [Blueprint, Section 1](blueprint.md#1-product-vision-and-problem-brief).  
 **Supporting notes:** [App Budget Policy and Options](00-app-budget-options.md); [Product Success Standards](00-product-success-standards.md).  
-**Next review trigger:** Companion testing participation under Q-008. Q-004's time commitment is recorded as flexible/as necessary; no numerical hours required to proceed.  
+**Next review trigger:** Q-013 — devices needed for early testing. Initial local-testing/Japan-simulation direction is answered under D-025.  
 **Approval record:** Individual decisions and examples recorded; full Section 1, implementation transition, and working-product acceptance remain unapproved.
 
 > Saving a draft does not approve every proposal it contains. CONFIRMED choices, RECORDED self-reports/examples, PROPOSED mechanisms, ASSUMPTIONS, and OPEN questions have different meanings.
@@ -59,9 +59,11 @@ The main situation is an organizer preparing a trip with companions and moving f
 
 **Also confirmed for the first version:** Decide what to do today using worthwhile nearby events and experiences, including festivals and pop-ups (D-018). D-024 supplies a concrete example: complete main activities, take free time and a hotel break, then open the app when interested in a spontaneous nearby outing. This does not require a hotel return, another outing, continuous tracking, or whole-trip rewriting.
 
+**Early testing area (D-025):** San Jose, California. Test early versions locally, then conduct Japan-focused simulations once a working beta exists. This is staged validation, not a replacement for the Japan trip or a broad U.S. launch. Detailed testing approach is in 1.15.
+
 **Pilot context:** Japan, including Tokyo, two travelers. The public record retains a late-November to early-December 2026 planning window, roughly two weeks, with late-day arrival and midday departure. Exact private travel dates and Tokyo-local times are already in the conversation (D-006/D-008/D-011/D-013); do not ask for them again.
 
-**Approved first-test target:** November 10, 2026 (D-012). This is not a public-launch date or guarantee that unestimated scope fits. Additional cities, airports, hotels, transfers, and practical activity windows remain open. Tokyo included does not mean Tokyo-only.
+**Approved first-test target:** November 10, 2026 (D-012), unchanged by D-025. This is not a public-launch date or guarantee that unestimated scope fits. Additional cities, airports, hotels, transfers, and practical activity windows remain open. Tokyo included does not mean Tokyo-only.
 
 **Just exploring without dates** remains proposed. Same-day support does not approve every date-free workflow.
 
@@ -116,7 +118,7 @@ The owner enjoys substantial experiences (D-019) but also wants free time (D-023
 
 These are trip roles, not permanent account classes. The pilot is a couple, two travelers, owner as initial organizer/tester (D-008). No permanent size limit, couples-only market, identical tastes, or romantic theme is established.
 
-D-019/D-021/D-023/D-024 describe organizer inputs, not automatically the companion. The per-person budget does not fix how shared expenses are split. Companion testing participation is the next Q-008 discussion; broader audience and permissions remain Q-010/Q-101/Q-106. Testing participation must not be equated with editing permissions.
+D-019/D-021/D-023/D-024 describe organizer inputs, not automatically the companion. The per-person budget does not fix how shared expenses are split. D-025 records a direction for joint local testing followed by Japan beta simulations; exact participant tasks and sessions remain open. Broader audience and permissions remain Q-010/Q-101/Q-106. Testing participation must not be equated with editing permissions or proof of shared preferences.
 
 ## 1.9 Core value: Discover, Organize, Delight
 
@@ -232,7 +234,7 @@ Broader coverage, multi-city complexity, companion input, and extensive automate
 
 ### Japan pilot
 
-**Confirmed goal:** Test the app for the two-person Japan trip including Tokyo before commercial launch. First complete test target: November 10, 2026.
+**Confirmed goal:** Test the app for the two-person Japan trip including Tokyo before commercial launch. First complete test target: November 10, 2026. D-025 establishes early San Jose tests followed by Japan-focused simulations after a working beta; it does not change the target or the Japan real-use objective.
 
 **Proposed complete promise:**
 
@@ -240,15 +242,15 @@ Broader coverage, multi-city complexity, companion input, and extensive automate
 
 This incorporates confirmed choices without approving every implementation detail or exact screen. D-018 governs priority; D-024 supplies a day-flow example, not a rigid event quota or requirement to return to the hotel. A simpler appealing reveal can test sharing without elaborate effects.
 
-Evaluate recommendation appeal, current-event usefulness, ease of beginning/resuming the plan, and desired day balance. Proposed tests are in the standards note; numeric thresholds, scope, sample sets, and acceptance remain open. No inference of a guaranteed fully automated perfect itinerary.
+Evaluate recommendation appeal, current-event usefulness, ease of beginning/resuming the plan, and desired day balance. Proposed tasks are in the standards note and staged direction in 1.15; numeric thresholds, scope, sample sets, and acceptance remain open. No inference of a guaranteed fully automated perfect itinerary.
 
-Additional cities, date/event coverage, source access, duration/effort/radius rules, devices, modes, budgets, hotel timing, and reservation detail require later decisions. No free-prototype shortcut can remove a confirmed capability; conflicts require explicit tradeoffs.
+Additional Japan cities, bounded San Jose test coverage, date/event coverage, source access, duration/effort/radius rules, devices, modes, budgets, hotel timing, and reservation detail require later decisions. No free-prototype shortcut can remove a confirmed capability; conflicts require explicit tradeoffs.
 
 ### Commercial release
 
 Separate milestone: audience, date, distribution, wider coverage, production needs, and monetization detail OPEN.
 
-**Status:** Individual decisions through D-024 apply. Full promise, whole Section 1 approval, and actual product acceptance remain OPEN.
+**Status:** Individual decisions through D-025 apply. Full promise, whole Section 1 approval, and actual product acceptance remain OPEN.
 
 ## 1.13 Non-goals and presentation boundaries
 
@@ -258,38 +260,52 @@ Required same-day discovery is not excluded by earlier advanced-replanning defer
 
 **D-023/D-024 clarification:** Maximizing scheduled stops and filling free time are not the stated goals. The example of one or two main experiences is not a universal maximum; hotel rest and a subsequent outing are not mandatory. Exact intensity, free-time amount, search radius, scheduling objective, or learning mechanism is not selected.
 
+**Testing boundary (D-025):** San Jose is a bounded early test area, not a commitment to nationwide U.S. coverage. A local prototype need not duplicate every Japan-specific integration, but the eventual beta scope must preserve confirmed capabilities. Simulations are not proof of live Japan inventory or a reason to present sample events as real.
+
 Suggested activities must not look booked/paid without evidence. A reveal must not obstruct practical access. Exact criteria and the proposed sequence of core tests before billing/ads/store publication remain for later approval.
 
 ## 1.14 Evidence and assumptions
 
-**Recorded:** Concept, choices, pilot context/target, spending policy, standards, taste examples, formats, sources, local/cultural inclusion, planning problems, desired balance, flexible effort, and example day flow. D-023/D-024 are self-reports and intended behavior, not observed sessions or results.
+**Recorded:** Concept, choices, pilot context/target, spending policy, standards, taste examples, formats, sources, local/cultural inclusion, planning problems, desired balance, flexible effort, example day flow, and staged testing direction. D-023/D-024 are self-reports/intended behavior; D-025 selects a testing sequence, not completed tests.
 
 **Prior external research:** Budget note retains earlier official pricing/access references. This update does not refresh prices, verify data coverage, or research actual attractions.
 
-**Not demonstrated:** Actual workflow tools or measured time spent, companion tastes, prototype usability, recommendation acceptance, current-event coverage, scheduling correctness, actual weekly delivery capacity, willingness to pay, or acceptance of a working product.
+**Not demonstrated:** Actual workflow tools or measured time spent, companion tastes, prototype usability, recommendation acceptance, San Jose or Japan current-event coverage, scheduling correctness, actual weekly delivery capacity, willingness to pay, a working beta, or acceptance of a working product.
 
 Assumptions for later tests: the workflow reduces effort; fitting recommendations can be found consistently; sufficient timely event/local/cultural/excursion data is accessible; logistics can be represented honestly; balanced days can fit constraints and preferences; starting/resuming is easy despite incomplete information; sharing helps companions; free/paid choices meet reliability and cost needs; broader users will return or pay. Source praise does not prove logistics, free-first does not prove free data access, and a successful personal trip does not validate a market.
 
-Prepared examples test interactions, not live-world quality. Investigate data dependencies early and obtain specific approval for necessary spending. Q-006's examples, sources, and main problems are answered; tools and measurement remain research gaps. Flexible effort is a commitment, not an estimate proving the full scope fits the target.
+Prepared examples test interactions, not live-world quality. San Jose success does not establish Japan coverage. Investigate high-risk Japan dependencies early even though integrated Japan simulations follow the beta; obtain specific approval for necessary spending. Q-006's examples, sources, and main problems are answered; tools and measurement remain research gaps. Flexible effort is a commitment, not an estimate proving the scope fits the target.
 
-## 1.15 Project goal, business model, distribution
+## 1.15 Project goal, business model, distribution, and early testing
 
 | Priority | Objective | Status |
 | --- | --- | --- |
-| Immediate | First complete test November 10, 2026, Japan pilot, free-first, using ranked standards. | Confirmed target/direction, not guarantee. |
+| Immediate | Early local tests, then Japan-focused beta simulations toward the November 10, 2026 first complete test and Japan pilot; free-first and ranked standards. | Confirmed target/direction, not guarantee. |
 | Ultimate | Commercial app-store/SaaS service earning subscriptions/ads, investing more after owner acceptance. | Confirmed direction; detail open. |
 
-Pricing, intervals, tiers, trials, ad placements, vendors, ad-free behavior, and monetization timing remain open; no additional revenue model chosen. Owner is the first tester; companion participation is next under Q-008. External testing and acquisition remain Q-008/Q-010. Reddit discovery does not select a marketing channel.
+### Testing direction — D-025
 
-SaaS and app-store delivery are not inherently exclusive. No OS, framework, deployment, host, identity, or store choice made. Free-first does not decide local-only, web, or native delivery.
+**Confirmed sequence:** Early versions tested locally in San Jose, California → working beta → Japan-focused simulations. The owner's collective answer indicates joint local testing can involve the organizer and companion; exact sessions, tasks, and individual availability remain open. It does not grant editing permissions or mean feedback has already been collected.
+
+**Proposed local tasks:** Judge recommendation appeal, plan a worthwhile outing, share and read the plan, leave free time for food/shopping/rest, then reopen for optional radius-based discovery. Check actual current events when real sources are used and keep controlled examples labeled. A chosen public start point can represent a hotel; there is no requirement to buy a hotel stay or attend paid activities just to test. Include unfamiliar local choices so existing knowledge does not hide unclear recommendations.
+
+**Proposed Japan tasks after beta:** Rehearse hotel/transport context, existing versus recommended arrangements, partial travel days, destination-local times, trip-date events, reservation constraints, both experience formats, local/cultural choices, budgets, and the post-rest discovery flow. Rehearsing from the local area with a selected Japan location and scenario time is a possible method, not a requirement to be physically in Japan, spoof GPS, or use a specific simulator. Actual execution location and scenario design are not fixed.
+
+**Evidence separation:** Controlled scenarios test rules and interactions; independently checked current Japan data tests source coverage and factual reliability. A simulated future date does not prove future events, admission, prices, or bookings. Keep scenario clock/location, source retrieval date, and event occurrence separate. Local success alone cannot pass Japan data tests. Do not wait until a polished beta to investigate whether essential Japan sources are accessible; the full integrated simulation sequence still follows the beta as requested.
+
+**Completion and scope:** No beta exists or testing result is established by this decision. Later Sections 4/5/14 will set criteria for a working beta and readiness for trip use; no arbitrary pass rate is approved now. Early local testing is bounded, not a new nationwide commercial scope. November 10 and free-first policy are unchanged.
+
+Pricing, intervals, tiers, trials, ad placements, vendors, ad-free behavior, and monetization timing remain open; no additional revenue model chosen. External testing and acquisition remain Q-008/Q-010. Reddit discovery does not select a marketing channel.
+
+SaaS and app-store delivery are not inherently exclusive. No OS, framework, deployment, host, identity, store, or test-device choice made. Free-first and geographic local testing do not decide local-only hosting, web, or native delivery.
 
 ## 1.16 Constraints
 
 **Process:** One blueprint section at a time; GitHub is the maintained planning record; Codex after approved design transition. Current work is documentation-only.
 
-**Pilot:** Tokyo/Japan, couple, two people, late-November to early-December 2026 context. Exact private dates, local times, and spending amounts already supplied in chat. Airports, transfers, hotel details, additional cities remain open.
+**Pilot:** Early testing in San Jose, followed by Japan beta simulations under D-025. Tokyo/Japan remains the two-person travel pilot in the established 2026 context. Exact private dates, local times, and spending amounts are already supplied in chat. Airports, transfers, hotel details, additional Japan cities, and detailed local test coverage remain open.
 
-**Target:** November 10, 2026 first full test with intended fixes/retesting afterward, not an effort estimate or guarantee.
+**Target:** November 10, 2026 first full test with intended fixes/retesting afterward, not an effort estimate or guarantee. No new dates or automatic extension follow from the testing sequence.
 
 **Time commitment — D-024:** The owner's answer is “As much as necessary.” Record flexible/as-needed planning, later implementation review, and testing effort. No numerical weekly allocation or fixed cap is selected. Do not ask for the same estimate again to block progress, invent full-time/unlimited capacity, or infer permission to begin coding. Assess real task effort and observed progress when delivery is planned; maintenance capacity remains open.
 
@@ -307,17 +323,17 @@ Budget examples are references, not upgrade schedules or provider choices. Codin
 
 Simulated data, polished screens, mock tests, and the calendar target do not establish live coverage, correctness, or owner acceptance. Do not fabricate facts, compromise essential protection, or silently omit requirements to remain free. Verify terms, coverage, cost, and rights when evaluating providers.
 
-**Remaining constraints:** Actual task estimates/progress, maintenance capacity, specific expenses, devices, and final scope need evaluation. The flexible time answer and budget policy are recorded; neither implies unlimited resources.
+**Remaining constraints:** Actual task estimates/progress, maintenance capacity, specific expenses, devices, and final scope need evaluation. The flexible time answer, spending policy, and testing direction are recorded; none implies unlimited resources or validated results.
 
-**Public record:** No private dates/times, financial amounts, bookings, account histories, companion identities, credentials, or identifying research records in commits. Generalized needs and project milestones are appropriate planning material. Public repository does not imply public itineraries.
+**Public record:** No private dates/times, financial amounts, bookings, account histories, companion identities, home addresses, credentials, or identifying research records in commits. San Jose is a city-level test area here, not a residence profile or current-location claim. Generalized needs and project milestones are appropriate planning material. Public repository does not imply public itineraries.
 
 ## 1.17 Completion and next discussion
 
-Section 1 remains DRAFT. Q-006's main problem question is answered by D-023. D-024 records flexible/as-needed effort and the example day flow; neither should be asked again as missing input. No numerical weekly estimate has been invented.
+Section 1 remains DRAFT. Q-006's main problems are answered by D-023; D-024 records flexible effort and the day example; D-025 records local San Jose testing followed by Japan simulations after a working beta. Do not re-ask these as missing inputs or claim tests already passed.
 
-**Next — Q-008:** Will the companion try early versions and provide feedback before travel, or will the organizer handle the initial testing alone? This concerns testing participation, not permission to edit or publish the itinerary.
+**Next — Q-013:** Should early tests focus on phones, or support both phone and computer use? This identifies the intended testing devices/use context, not native-versus-web architecture. Detailed OS/browser coverage can follow the initial answer.
 
-Exact tools and measured effort, travel currency/categories, broader audience, full-promise approval, and final acceptance remain open. Energy/time/radius controls and routing detail belong in Q-201/Q-207/Q-212/Q-213/Q-305/Q-309. Finish Section 1 through explicit decisions or recorded deferrals before marking it approved.
+Q-008 retains exact session roles, feedback collection, and external recruitment questions, not the broad initial testing-direction question. Exact tools and measured effort, travel currency/categories, broader audience, full-promise approval, and final acceptance remain open. Energy/time/radius controls and routing detail belong in Q-201/Q-207/Q-212/Q-213/Q-305/Q-309. Finish Section 1 through explicit decisions or recorded deferrals before marking it approved.
 
 ## Revision record
 
@@ -336,3 +352,4 @@ Exact tools and measured effort, travel currency/categories, broader audience, f
 | 2026-09-19 | Local/cultural inclusion recorded in standards/register; reconciled into this brief. | D-022 retained. |
 | 2026-09-19 | Recorded planning friction, energy/free-time balance, hotel context, and date discovery; advanced to capacity. | D-023; Q-006 main problems answered. |
 | 2026-09-19 | Recorded flexible effort and the example main-experiences/free-time/hotel-rest/radius-discovery flow; advanced to companion testing participation. | D-024; no fixed hours, daily quota, radius, implementation, or section approval. |
+| 2026-09-19 | Recorded early San Jose testing and Japan simulations after a working beta; distinguished controlled scenarios from current-data checks and queued test devices. | D-025; no completed test, fixed session, platform, provider, purchase, or section approval. |
