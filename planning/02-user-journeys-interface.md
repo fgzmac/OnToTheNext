@@ -274,4 +274,50 @@ Then immediately show a visually rich set of destination/city ideas and let the 
 
 Avoid a long onboarding questionnaire before the app gives any value.
 
-**Recommended direction:** short setup → immediate recommendations → progressive refinement.
+**Confirmed direction — D-045:** short setup → immediate visual recommendations → progressive refinement.
+
+The app should not front-load a long questionnaire before showing value.
+
+## Next decision — Main planning workspace
+
+**Q-202/Q-201 follow-on:** What should the organizer see after the trip has an initial structure?
+
+Proposed information architecture:
+
+### Primary trip navigation
+- **Overview**
+- **Itinerary**
+- **Discover**
+- **Hotels**
+- **Reservations**
+- **Expenses**
+- **Map**
+
+These are proposed top-level destinations; exact labels and whether some combine remain open.
+
+### Web workspace
+Proposed default:
+- left navigation,
+- main planning canvas,
+- contextual right-side panel or map,
+- persistent trip header with dates/travelers/budget state.
+
+### Mobile workspace
+Proposed default:
+- bottom navigation with 4–5 high-frequency sections,
+- secondary items under More/Trip,
+- Today's plan emphasized while traveling,
+- full-screen map when selected.
+
+### Overview page
+Proposed contents:
+- trip progress / what remains undecided,
+- next booking action,
+- current city plan,
+- hotel status,
+- must-do count,
+- companion suggestions,
+- current budget/expense snapshot,
+- recommendation cards for the next useful decision.
+
+**Recommended direction:** a trip-centered dashboard where the app surfaces the next useful decision, rather than forcing users to navigate every module manually.
