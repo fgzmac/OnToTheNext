@@ -407,3 +407,23 @@ Formalize:
 - linked itinerary items,
 - check-back/reminder behavior,
 - and mobile/web layouts.
+
+
+## Reservations Center — D-050
+
+**Confirmed:** centralized reservation management with explicit action states, itinerary/expense integration, official booking routes, confirmation storage, cancellation deadlines, and conflict checking.
+
+For `Check Back` items, show the **next known inventory-release date/time/window** when reliable information is available. If it is not announced, display that honestly instead of inventing a date.
+
+## Next decision — Expenses & Split Costs
+
+Formalize:
+- quick-add expense,
+- payer,
+- participants,
+- split method,
+- currency,
+- running balances,
+- settlement,
+- reservation-to-expense handoff,
+- and web/mobile layouts.
