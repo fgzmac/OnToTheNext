@@ -78,6 +78,26 @@ Proposed starting models:
 - Organizer chooses each companion's level.
 - Most flexible, but significantly more UI and permission complexity for an early version.
 
-**Recommended starting direction:** B — organizer remains the final decision-maker while companions can react and suggest.
+**Confirmed starting direction — D-039:** B — organizer remains the final decision-maker while companions can view, react, and suggest.
 
-This recommendation is not yet approved.
+This is now the default initial permission model. Exact reaction types, voting, private-field visibility, and future co-editor permissions remain open.
+
+## Next decision
+
+**Q-102:** How should companions gain access?
+
+Proposed options:
+
+### A. Account required
+Every companion signs in before viewing or interacting.
+
+### B. Shared link for viewing; account required for reacting/suggesting
+Fast to open, but identity is required for participation.
+
+### C. Shared invite link with lightweight guest identity
+A companion can join from an invite link, choose/display a name, and react/suggest without creating a full account immediately.
+
+### D. Anyone-with-link access
+Lowest friction, but weaker privacy/control and not recommended as the default for private travel plans.
+
+**Recommended starting direction:** C — invite link with lightweight guest identity, with the option to require/upgrade to a full account later.
