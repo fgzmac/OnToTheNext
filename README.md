@@ -16,113 +16,124 @@
 
 | Document | Purpose | Status |
 | --- | --- | --- |
-| [Planning blueprint](planning/blueprint.md) | The detailed, reusable framework for progressing from product vision to a buildable first release. | Adopted planning framework; not approval of every proposed feature. |
-| [Product vision and problem brief](planning/00-product-brief.md) | The current section, populated from the supplied app concept and confirmed objectives. | Draft for discussion. |
-| [App budget policy and options](planning/00-app-budget-options.md) | Adopted free-first policy plus retained operating-tier comparisons, example costs, and data-access risks. | D-017 policy confirmed; providers, purchases, and detailed controls remain unselected. |
-| [Decision register](planning/decisions.md) | Explicitly confirmed decisions, with their reasoning and boundaries. | Maintained as decisions are made. |
+| [Planning blueprint](planning/blueprint.md) | The reusable framework and sequential progress tracker. | Adopted framework; examples are not blanket feature approval. |
+| [Product vision and problem brief](planning/00-product-brief.md) | The current section populated from the concept and explicit decisions. | Draft for discussion. |
+| [Product success standards](planning/00-product-success-standards.md) | Ranked quality standards, required same-day discovery, and proposed evaluation methods. | D-018 priorities/capability confirmed; measurements and detailed behavior open. |
+| [App budget policy and options](planning/00-app-budget-options.md) | Free-first policy plus retained tier comparisons, example costs, and data-access risks. | D-017 policy confirmed; providers, purchases, and detailed controls unselected. |
+| [Decision register](planning/decisions.md) | Confirmed decisions, reasoning, and boundaries. | Maintained as decisions are made. |
 | [Open questions](planning/open-questions.md) | Unresolved questions organized by blueprint section. | Only the current section's questions are active. |
 
 ## Confirmed core use case
 
 An organizer plans a trip they are taking and shares the plan with their travel companions. The primary experience is **“Look what I planned for us,”** rather than planning a fully secret trip for somebody else.
 
-The product direction connects three jobs:
+The product connects three jobs:
 
-- **Discover:** Help the organizer find experiences that fit the group.
-- **Organize:** Turn choices into realistic days, accounting for hotels, transportation, trip spending, and reservation-dependent events/restaurants as well as activities.
-- **Delight:** Make receiving the itinerary personal and exciting without making practical trip details difficult to access.
+- **Discover:** Find genuinely appealing experiences, including relevant nearby events for same-day plans.
+- **Organize:** Turn choices into realistic days, accounting for hotels, transportation, spending, and reservation-dependent events/restaurants.
+- **Delight:** Make receiving the itinerary personal and exciting without obstructing practical trip details.
 
-**Initial pilot audience:** A couple, **two travelers total**: one organizer and one companion (D-008). This does not make the commercial service couples-only, impose a two-person product limit, or decide companion permissions.
+**Initial pilot audience:** A couple, **two travelers total**, one organizer and one companion (D-008). This does not make the commercial service couples-only, impose a permanent two-person limit, or settle permissions.
 
-**Hotels and transportation:** Both areas are included (D-009), and each must support **organizing existing bookings and recommending options before booking in the first version** (D-010). Purchasing reservations is a separate, undecided capability. No provider, live-price/availability guarantee, automatic booking import, or direct transaction capability is selected.
+**Hotels and transportation:** Both areas must support organizing existing bookings and recommending options before booking in the first version (D-009/D-010). Purchasing reservations is separate and undecided. No provider, live-price/availability guarantee, automatic import, or transaction capability is selected.
 
-**Trip budget:** The owner supplied a low/high dollar-denominated trip-spending range excluding plane tickets (D-014), subsequently confirmed as **per person** (D-016). The private numerical bounds stay in chat. Currency, remaining-versus-total meaning, and other category inclusions remain open. This is not an app-running allowance. Do not hardcode personal amounts or infer permission to spend.
+**Trip budget:** The owner's supplied low/high range excludes plane tickets (D-014) and is per person (D-016). Private numerical bounds stay in chat. Currency, total-versus-remaining meaning, and other category inclusions remain open. It is not an app-running allowance or permission to spend.
 
-**Events and restaurants:** Planning must account for those requiring reservations (D-015). Reservation requirement, actual booking state, and payment state need distinct treatment; detailed labels/rules remain proposed. No automatic booking, reminder, notification, provider choice, or guaranteed availability is approved by that requirement.
+**Events and restaurants:** Account for those requiring reservations (D-015). Requirement, booking state, and payment state need distinct treatment; detailed rules are proposed. No automatic booking, monitoring, reminder, notification, or guaranteed availability is approved.
 
-## Confirmed priorities
+## Ranked product standards — D-018
+
+| Rank | Standard | Meaning for the first version |
+| --- | --- | --- |
+| 1 | High-quality suggestions. | Options must be things the intended traveler would genuinely consider adding to their itinerary. A polished list of unappealing options is not success. |
+| 2 | Real-time, on-the-fly planning. | Help the traveler decide what to do today using worthwhile nearby events and experiences, including festivals and pop-ups. |
+| 3 | Seamless functionality and ease of use. | Completing useful tasks should be straightforward, not a chore. |
+
+Same-day nearby discovery is a **core first-version capability**, not merely a later enhancement. Older proposals to defer advanced replanning must not remove it. Continuous tracking, automatic whole-trip reorganization, exact refresh intervals, providers, guaranteed live inventory, and paid services remain undecided.
+
+Personalized sharing remains part of the concept. Extra reveal effects do not take precedence over these standards. Basic correctness, privacy, reliability, and accessibility are not optional just because they are outside the ranked three.
+
+The [standards note](planning/00-product-success-standards.md) separates confirmed priorities from proposed tests. No quality score, latency target, minimum coverage, or owner acceptance of the product has yet been established. A recently retrieved event listing is not automatically accurate or currently bookable; an event today is not necessarily reachable in the time available.
+
+## Confirmed project priorities
 
 | Priority | Goal | Boundaries |
 | --- | --- | --- |
-| Immediate | First complete test targeted for November 10, 2026, ahead of the Japan-trip pilot including Tokyo and two travelers. | Free-first development. Target approved, not a delivery guarantee. Detailed specifications, capacity, paid-service needs, additional cities, and devices remain open. |
-| Ultimate | Launch commercially through a mobile app store or as a SaaS product, earning subscription and ad revenue. | Greater investment follows a working product meeting the owner's standards. Distribution, pricing, ad behavior, implementation timing, and launch date remain open. |
+| Immediate | First complete test targeted for November 10, 2026, ahead of the Japan-trip pilot including Tokyo and two travelers. | Free-first. Target approved, not a delivery guarantee. Detailed specifications, capacity, data coverage, additional cities, and devices remain open. |
+| Ultimate | Commercial mobile app-store/SaaS offering earning subscription and ad revenue. | Greater investment follows a working product meeting owner standards. Distribution, pricing, ad behavior, and launch date remain open. |
 
-See decisions **D-006 through D-017** in the [decision register](planning/decisions.md).
+See decisions **D-006 through D-018** in the [decision register](planning/decisions.md).
 
-The pilot is not a public-launch deadline. Japan is the first testing context, not a promise of nationwide coverage or a permanent Japan-only product. Tokyo is confirmed, but a Tokyo-only trip is not. A successful trip would provide pilot evidence, not automatically validate customer demand or subscription revenue.
+The pilot is not a public-launch deadline or a promise of nationwide coverage. Tokyo is confirmed, but Tokyo-only is not. A successful trip can supply useful evidence without proving broader demand or subscription revenue.
 
-**Timing:** The owner approved **November 10, 2026** for the first complete test (D-012), establishing the 2026 planning calendar. The late-November to early-December trip spans approximately two weeks and crosses a month boundary. Supplied Tokyo-local times (D-013) establish late-day arrival and midday departure context. Exact private dates and clock times stay in chat. Proposed scheduling should distinguish airport events, hotel arrival/departure, transfers, and usable activity time; precise rules and buffers remain open.
+**Timing:** November 10, 2026 is the approved first complete test target (D-012). The late-November to early-December trip spans a month boundary; supplied Tokyo-local times establish late-day arrival and midday departure context (D-013). Exact private dates/times remain in chat. Airport events, transfers, hotel timing, and usable activity windows must not be conflated; precise rules and buffers remain open.
 
 ## Adopted app budget rule — free first
 
-**D-017:** Build and test using suitable free options until an expense is necessary. Keep **$100/month as an initial paid-operation planning target and $150 as a flexible upper reference**, not a fixed ceiling, required spend, or permission to buy services. The owner can revise the allowance once actual needs are clear.
+**D-017:** Use suitable free options until an expense is necessary. Keep **$100/month as an initial paid-operation planning target and $150 as a flexible upper reference**, not a fixed ceiling, required spend, or purchase authority.
 
-Aim for **$0 in additional app-service costs for as long as practical**. Do not activate a paid tier just because it appeared in the cost comparison. Keep development tools, one-time purchases, store enrollment, and unpriced data agreements separate from the runtime reference.
+Aim for **$0 in additional app-service costs for as long as practical**. Do not activate paid tiers merely because they appeared in a comparison. Development tools, one-time purchases, store enrollment, and unpriced data agreements stay separate.
 
-Before any paid commitment, identify the blocked requirement, free alternatives, expected cost and limits, and why it is necessary; obtain a specific spending decision. Greater discretionary spending should follow a working product that the owner judges to meet their standards. Those standards still need definition under Q-005; a limited necessary expense before that point is a separate decision, not blanket authorization.
+Before a paid commitment, identify the blocked requirement, free alternatives, expected charges/limits, and consequence of waiting; obtain a specific spending decision. Greater discretionary spending follows a working product the owner judges to meet the standards now ranked in D-018. Detailed acceptance checks remain open; necessary earlier expenses are separate decisions, not blanket authorization.
 
-Free-first does not remove confirmed features, excuse unsafe or incorrect behavior, or make simulated data equivalent to verified live behavior. Investigate data access early and disclose any paid dependency; do not promise that all production capabilities will be free. No providers, paid accounts, deployments, or purchases have been selected or activated through this planning update.
+Free-first does not remove confirmed features or turn simulated data into evidence of current recommendations. Investigate timely event coverage and other data-access risks before polishing a complete interface around untested assumptions. Disclose any paid dependency; do not promise every production capability will be free.
 
-**Next discussion:** Q-005 — what must the first version do well for the owner to consider it successful and worth further investment? Q-004's spending approach is answered; development time, separate costs, and future expense approvals remain open. Do not re-ask the budget policy or the trip-budget per-person basis.
+**Next discussion:** Q-006 — give an example of an experience worth adding and one worth rejecting, and explain the difference. Q-005's ranked standards are answered under D-018; the complete promise and measurable acceptance remain open. Do not re-ask the priority order, budget policy, or per-person travel-budget basis.
 
 ## Planning workflow
 
 ```text
 Draft one section
     → Discuss its open questions
-    → Record explicit decisions
-    → Obtain approval of the section
-    → Update the planning status
+    → Record decisions and evidence
+    → Obtain section approval
+    → Update planning status
     → Move to the next section
 ```
 
-The chat is the discussion space. This repository is the maintained planning record. Sections are completed sequentially; unresolved later topics are recorded rather than prematurely settled.
-
-Publishing a draft to GitHub does **not** approve its proposals.
+This chat is the discussion space; this repository is the maintained planning record. Sections are completed sequentially. Saving a draft is not approving its proposals.
 
 ### Decision labels
 
 | Label | Meaning |
 | --- | --- |
-| CONFIRMED | Explicitly chosen or approved by the project owner. |
-| PROPOSED | A suggested direction awaiting a decision. |
-| ASSUMPTION | A belief that needs evidence or testing. |
+| CONFIRMED | Explicitly chosen or approved by the owner. |
+| PROPOSED | Suggested, awaiting a decision. |
+| ASSUMPTION | A belief that needs evidence. |
 | OPEN | An unresolved question. |
-| DEFERRED | Explicitly postponed, not silently forgotten. |
-| REJECTED | Considered and deliberately excluded. |
+| DEFERRED | Explicitly postponed. |
+| REJECTED | Deliberately excluded. |
 
-A confirmed product choice is not automatically a validated market assumption. A whole document can remain a draft while containing individual confirmed decisions.
+A confirmed choice is not automatically a validated market or technical assumption. A document can remain a draft while containing confirmed decisions.
 
 ## Design before implementation
 
-Codex will be used to implement the app after the design phase. Until that phase is explicitly approved as complete, this workflow is documentation-only: do not scaffold the app, choose a stack, install dependencies, provision services, implement endpoints, or create a database merely to fill a planning gap.
+Codex implementation begins after the approved design transition. Until then this workflow is documentation-only: do not scaffold, install dependencies, provision services, create endpoints, or design a database merely to fill a planning gap.
 
-Design completion means the product direction, first-release scope, main journeys, important constraints and risks, and first buildable delivery slice are sufficiently defined. It does **not** mean specifying every future feature. Approval of a testing target or a free-first spending policy is not approval of the design-to-implementation transition.
+Design completion means sufficiently defined direction, first-release scope, main journeys, important constraints/risks, and the first buildable slice—not every future feature. Approving a date, standard, or spending policy does not approve implementation.
 
-Future implementation should use approved planning documents. Proposed features, unresolved permissions, example providers, and hypothetical technical choices are not implementation instructions. Conflicts or missing product decisions must be surfaced rather than silently invented.
+Use approved decisions as the basis for future code. Do not silently decide proposed features, permissions, providers, freshness guarantees, or missing product behavior. Surface conflicts.
 
 ## Current boundaries
 
-No technology stack, database, authentication system, AI model, data provider, companion-permission model, sharing-access policy, complete pilot scope, or final commercial-release scope has been selected. Individual confirmed requirements must be preserved while remaining decisions are made.
+No stack, database, identity system, AI model, data provider, permission model, sharing-access policy, complete pilot scope, or commercial-release scope is selected. Confirmed capabilities, including D-018's same-day discovery, must be preserved while remaining decisions are made.
 
-The pilot's Japan/Tokyo context, travel timing, two-person group, and dated test target are supplied or confirmed. Additional destinations, airports, transfers, hotel check-in/out, and practical activity windows are not. Flight times alone do not establish hotel-ready times or when to leave the hotel. Organizer-led collaboration remains a proposal. Providers in the base concept and cost comparison are examples to evaluate, not selected integrations. No hotel, restaurant/event booking, timetable, reservation, or price-comparison provider is selected. Cost references need rechecking before selection or spending.
+Additional destinations, airports, transfers, hotels, and practical activity windows remain open. Flight times alone do not establish hotel-ready times. Organizer-led collaboration remains proposed. Provider examples and cost references require verification before selection; no hotel, event, reservation, timetable, or price-comparison integration has been chosen.
 
-Subscription and ad revenue are intentions, not a finalized tier model or authority to implement billing/ads now. A pilot without monetization is a proposed feature boundary, distinct from the confirmed preference not to spend unnecessarily on building it. App-store or SaaS delivery has not settled the pilot platform or architecture.
+Subscription and ad intent does not settle product tiers or authorize billing/ads now. Free-first development is not automatic exclusion of monetization features. Delivery format remains open.
 
-A proposed exclusion of in-app booking/payment does not exclude organizing existing bookings, recommending options, or accounting for restaurant/event reservation needs. These planning capabilities do not authorize making, changing, or canceling reservations. Exact data sources, workflows, verification, scheduling protection, and reminders remain open.
+Organizing or recommending bookings and accounting for reservation requirements do not authorize making, changing, or canceling them. Same-day discovery likewise does not authorize background location collection, automated booking, notifications, or ongoing monitoring.
 
-Travel-budget ranges, price estimates, paid amounts, category totals, and excluded costs must not be conflated. The lower bound is not an approved minimum-spend rule; the travel upper bound's firmness is undecided. The travel range is per person, must not be used for hosting/API/AI/development spending, and does not specify an equal split for each shared expense. Airfare's budget exclusion does not remove flight timing from the plan. D-017's flexibility applies to the app budget, not automatically to the travel budget.
-
-Do not silently defer a confirmed capability. Any scope reduction requires an explicit decision.
+Travel-budget bounds, estimates, paid amounts, and excluded costs must not be conflated. Lower bound is not a minimum-spend requirement; upper-bound firmness is open. Per-person input does not imply an equal split of every shared charge. D-017's flexibility applies to app spending, not automatically to trip spending.
 
 ## Public repository
 
-This repository is public. Record only minimum non-sensitive milestone context and anonymous pilot profiles. Keep personal spending amounts, exact travel dates/times, detailed schedules, credentials, companion names, private booking information, and identifying research responses out of commits. Use fictional or redacted examples. Omitted private inputs are not missing user input; consult the conversation rather than asking the owner to repeat them. The software-testing target and app operating references are project-planning material, not a published private travel budget or flight schedule.
+Keep private financial amounts, exact travel dates/times, detailed schedules, credentials, companion names, bookings, and identifying research responses out of commits. Use fictional/redacted examples. Omitted private inputs are not missing user input; consult the conversation instead of re-asking. Software milestones, generalized standards, and app cost references are project-planning material.
 
 ## Update rules
 
-1. Update the relevant section when a decision is made; do not leave contradictory versions in place.
-2. Record confirmed decisions in `planning/decisions.md` and close or revise the matching open question.
-3. Use `planning/blueprint.md` as the section-order and completion tracker.
-4. Keep later features broad until their turn. Specify the next implementable slice precisely only after its product direction is approved.
-5. Preserve existing application code and unrelated files when making planning updates.
+1. Update affected sections and resolve contradictions when a decision changes.
+2. Record explicit decisions and update matching questions.
+3. Use `planning/blueprint.md` as the section-order/completion tracker.
+4. Keep later features broad; specify only the next selected slice in implementation detail.
+5. Preserve application code and unrelated files during planning updates.
