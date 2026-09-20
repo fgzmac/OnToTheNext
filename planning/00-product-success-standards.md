@@ -1,207 +1,231 @@
 # Section 1 Supporting Note — Product Success Standards
 
-**Status:** Priority order, first-version same-day capability, both experience formats, and local/cultural discovery inclusion CONFIRMED; owner preference examples and discovery sources RECORDED; shorter/all-day duration options PROPOSED; detailed behavior, metrics, and acceptance thresholds OPEN.  
+**Status:** Priority order, first-version same-day capability, both experience formats, and local/cultural inclusion CONFIRMED; owner preferences, sources, and planning problems RECORDED; detailed behaviors, metrics, and acceptance thresholds OPEN.  
 **Owner:** Project owner (`fgzmac`).  
 **Recorded:** 2026-09-19.  
-**Decisions:** D-018; D-019 clarifies the initial organizer's taste; D-020 confirms both recommendation formats; D-021 records valued discovery sources; D-022 adds local recommendations and cultural experiences.  
-**Related section:** [Product Vision and Problem Brief](00-product-brief.md), especially 1.6, 1.7, 1.9, 1.12, and 1.16.  
-**Related questions:** Q-005, Q-006, resolved Q-012, Q-207, Q-212, Q-304, Q-309, Q-356, Q-402, Q-403.  
-**Source:** The owner's ranked standards, appealing/rejectable examples, format choice, duration idea, account of discovery sources, and explicit addition of local recommendations and cultural experiences.  
-**Next discussion:** The most frustrating part of finding, checking, or organizing worthwhile experiences; the discovery-source portion of Q-006 is answered.  
-**Evidence status:** These are stated preferences, reported practices, and product choices, not observed behavior. No product test, recommendation evaluation, live event search, or owner acceptance has been completed by writing this note.
+**Decisions:** D-018 standards; D-019 personal taste; D-020 formats; D-021 sources; D-022 local/cultural inclusion; D-023 planning friction and desired day balance.  
+**Related section:** [Product Vision and Problem Brief](00-product-brief.md), especially 1.4, 1.6, 1.7, 1.9, 1.12, and 1.16.  
+**Related questions:** Q-004, Q-005, Q-006, resolved Q-012, Q-201, Q-207, Q-212, Q-213, Q-304, Q-305, Q-309, Q-356, Q-402, Q-403.  
+**Source:** The owner's ranked standards, preferences, format and coverage choices, discovery sources, and description of planning difficulties.  
+**Next discussion:** Available weekly development/review/testing time under Q-004. The main Q-006 pain points are now supplied; do not ask them again.  
+**Evidence status:** Self-reports and product choices, not observed task performance. No product test, live event search, measured outcome, or acceptance of a working product has been completed by writing this note.
 
 ## Confirmed order of importance
 
 | Rank | Owner's standard | Meaning at product level |
 | --- | --- | --- |
-| 1 | High-quality suggestions. | Suggestions must be things the intended traveler would genuinely consider adding to the itinerary. A functioning generator or attractive list is not enough. |
-| 2 | Real-time ability to make a plan on the fly. | A traveler should be able to decide what to do that day using high-quality nearby events and experiences, including festivals and pop-ups. |
-| 3 | Functionality and ease of use. | The app should feel easy, seamless, and useful, not like a chore. Completing a real task matters more than the presence of many controls. |
+| 1 | High-quality suggestions. | Things the traveler would genuinely consider adding. A functioning generator or attractive list is not enough. |
+| 2 | Real-time, on-the-fly planning. | Decide what to do today using worthwhile nearby events and experiences, including festivals and pop-ups. |
+| 3 | Functionality and ease. | Easy, seamless, and useful, not a chore. Completing a task matters more than having many controls. |
 
-This order guides product tradeoffs and the owner's evaluation before greater discretionary investment under D-017. It is not permission to neglect basic correctness, privacy, reliability, or accessibility. Defining standards is not a finding that the app meets them.
+This order guides tradeoffs and evaluation before greater discretionary investment under D-017. It does not waive correctness, privacy, reliability, or accessibility. Defining standards is not evidence that a product meets them.
 
-Personalized sharing remains in the base concept (D-005). Elaborate reveal effects cannot compensate for poor suggestions or broken everyday use. The owner has not requested removal of the sharing experience.
+Personalized sharing remains in D-005. Elaborate reveal effects cannot compensate for poor suggestions or difficult everyday use.
+
+## Current planning problems and desired balance — D-023
+
+The owner has now described the actual planning difficulties, not only hypothetical quality criteria.
+
+| Reported problem | Desired outcome from the owner's account | Proposed design response, not yet an approved mechanism |
+| --- | --- | --- |
+| Deciding where to go first and what to experience. | Help narrow worthwhile choices and choose a sensible sequence. | Explain why suggested stops belong together and why a proposed order works; do not assume nearest-first is always best. |
+| Organizing activities in a way that makes sense. | A coherent trip rather than disconnected recommendations. | Consider relevant travel, opening/entry times, fixed bookings, duration, and daily start/end locations. |
+| Balancing energy-demanding activities with free time for shopping and good food. | Enjoyable days with room for both substantial experiences and unhurried personal time. | Assess overall day effort and preserve flexible windows; do not fill every gap or treat meals/shopping as expendable filler. |
+| Finding events occurring during the trip. | Discover date-specific opportunities when they can actually be used. | Consider event dates before assigning all flexible activities; retain actual occurrence and reservation uncertainty. |
+| Difficulty starting because of travel, hotel proximity, and recommendation-quality variables. | A manageable starting point without solving all dependencies manually first. | Ask only for the next useful inputs, reuse known trip details, and support a provisional plan when some arrangements remain undecided. |
+
+**Proposed problem statement:** Help a traveler move from many interdependent choices to a worthwhile, logically ordered trip that fits their dates and travel arrangements while balancing demanding experiences with free time for shopping, food, and spontaneous choices.
+
+This is not a request for an itinerary maximizing stop count, minimizing distance at any cost, or packing every day with high-effort adventures. The existing priority ranking in D-018 is unchanged.
+
+### Proposed planning principles for later specification
+
+**Hotel location informs, but does not dictate, the plan.** Use known stay locations when relevant to daily travel. Do not invent a hotel, require a booking before any exploration, assume every day must start/end at the same hotel, or discard a worthwhile farther experience automatically. Travel-time limits, start/end preferences, and hotel-not-yet-chosen behavior remain open.
+
+**Balance applies to the whole day and potentially consecutive days.** Include the effort of activities and transport, not duration alone. Walking, standing, transfers, early starts, and several demanding days are candidate considerations, not selected scoring inputs. Do not infer physical ability, health status, fatigue, or an exact personal energy score. The traveler should be able to express pace rather than accept an unverified estimate as fact.
+
+**Free time is a desired part of the experience.** Optional shopping areas, food choices, or a flexible neighborhood window may be more useful than booking every minute. Shopping is not necessarily low-effort and dining is not necessarily quick or reservation-free. Preserve the distinction between optional ideas, tentative plan items, and fixed bookings.
+
+**Make tradeoffs visible.** When a timed event, a longer excursion, travel, and free time conflict, propose alternatives for review instead of quietly dropping a priority, moving a booking, or erasing the flexible time. No automatic editing authority or mathematical optimization objective is approved.
+
+**Starting should not be an exhaustive survey.** Present a useful first decision with the information available. Exact onboarding order, required fields, default assumptions, full-draft generation, and manual controls remain open. This does not replace the established activity-choice approach with fully automatic planning.
+
+### Candidate evaluation additions
+
+Observe whether the organizer can begin without assistance, judge the proposed order, preserve desired free time, understand total travel/effort, and identify relevant events during a defined date window. Compare a tightly packed proposal with a balanced alternative using the same preferences and constraints. Test a known hotel and an undecided hotel, while keeping assumptions visible.
+
+These are proposed tests, not approved thresholds or claims of reduced effort. The self-report does not establish which tools the owner uses to save ideas, actual hours spent, or how the companion prefers to travel. Those remain research gaps; the main frustration question itself is answered.
 
 ## Scope reconciliation
 
-Same-day nearby discovery and on-the-fly planning are **core first-version capabilities**, not an optional later enhancement. This follows from the context of the question the owner answered: what the first version must do well.
+Same-day nearby discovery and on-the-fly planning are **core first-version capabilities** under D-018, not optional later enhancements. Older advanced-replanning deferral proposals must not remove them.
 
-Older proposals to postpone advanced same-day replanning must not be used to postpone this confirmed capability. Distinguish:
+**Required at capability level:** Find worthwhile nearby options for today, including time-specific events, and help form a usable plan.
 
-- **Required at capability level:** Find worthwhile options for today near a relevant location, including time-specific events and experiences, and help the traveler form a usable plan.
-- **Still to decide:** Minimum supported locations and categories, how to add or replace items, how much of a day can be rearranged, refresh behavior, exact response-time and freshness targets, and how constraints are checked.
-- **Not selected by this answer:** Continuous location tracking, automatic notifications, background monitoring, automatic whole-trip rewriting, live seat/room guarantees, reservation transactions, paid providers, or an AI architecture.
+**Still open:** Minimum areas/categories, adding versus replacing items, how much of a day changes, freshness/response targets, and precise constraint checks.
 
-Basic permanent-place suggestions may complement events, but a generic list of nearby landmarks is not sufficient evidence that event discovery works. Likewise, an event occurring today is not necessarily occurring now, reachable in time, open for entry, or bookable.
+**Not selected:** Continuous location tracking, notifications, background monitoring, automatic whole-trip rewriting, live inventory guarantees, reservation transactions, paid providers, or AI architecture.
 
-D-020 also confirms offering both ready-made provider excursions and app-assembled combinations. Their detailed coverage and release implementation remain to be scoped; neither should be silently removed. Duration options were suggested tentatively and are not an approved set of time limits.
+Permanent places may complement events, but a generic nearby list does not demonstrate event discovery. An event today is not necessarily still running, reachable, open for entry, or bookable.
 
-D-022 adds local recommendations and cultural experiences to discovery and trip planning. Carry both into minimum-coverage design without silently making them later-only or interpreting them as authorization to build a local-host marketplace.
+D-020 confirms both provider excursions and app-assembled combinations. D-022 adds local recommendations and cultural experiences. Neither should silently become later-only. Shorter/all-day duration categories remain proposed. D-023 refines the required usefulness of planning, not permission to choose an algorithm or begin implementation.
 
 ## 1. Recommendation quality — proposed evaluation framework
 
-The owner has chosen quality as the highest priority. These dimensions are a proposal for making that preference testable; their weights and thresholds are not approved.
+Quality is the highest priority. Proposed dimensions, without approved weights or thresholds:
 
 | Dimension | Question to test |
 | --- | --- |
-| Personal appeal | Would this traveler seriously consider doing it, rather than merely recognize that it is popular? |
-| Practical fit | Does it fit the relevant dates, time available, travel effort, cost context, group, and known commitments? |
-| Trustworthy information | Is there evidence for the description, location, timing, and reservation requirement? What remains uncertain? |
-| Decision usefulness | Is there enough concise information to accept or reject the option without reconstructing the recommendation from scratch? |
-| Useful variety | Are the choices meaningfully different and relevant rather than duplicates or filler? |
+| Personal appeal | Would this traveler seriously consider doing it, rather than merely recognize its popularity? |
+| Practical fit | Does it fit dates, available time, travel effort, cost, group, hotel context, desired pace, and known commitments? |
+| Trustworthy information | What supports the description, location, timing, and reservation requirement? What is uncertain? |
+| Decision usefulness | Can the traveler judge it without reconstructing the research from scratch? |
+| Useful variety | Are alternatives meaningfully different, relevant, and not filler or duplicates? |
 
-Do not silently equate quality with popularity, high ratings, novelty, luxury, local authenticity, or hidden gems. A famous attraction can be a strong personal fit; an unusual event can be a poor fit. D-019 supplies initial organizer examples below; D-021 adds valued review and destination-highlight signals without establishing universal ranking weights.
+Do not equate quality solely with popularity, ratings, novelty, luxury, authenticity, or obscurity. A famous option can fit well; an unusual one can fit poorly. D-019/D-021 provide initial preference evidence, not universal ranking weights.
 
 ### Initial organizer preference examples — D-019
 
-| Stated response | Generalized example supplied by the owner | Interpretation to use carefully |
+| Response | Owner's example | Careful interpretation |
 | --- | --- | --- |
-| Would consider adding | An excursion combining a breathtaking beach view, snorkeling, and an oceanside dinner. | Positive signal for a connected sequence combining scenery, participation, and a meal. |
-| Would consider adding | An ATV excursion through scenic views with something distinctive to that area. | Positive signal for active exploration, scenery, and a locally distinctive element. |
-| Would reject | The world's largest rubber band. | Negative example of a novelty object as the main attraction for this organizer. |
-| Would reject | A historical statue. | Negative example of a standalone, primarily observational stop for this organizer. |
+| Would consider | Breathtaking beach view, snorkeling, and oceanside dinner in one excursion. | Scenery, participation, and a connected sequence appeal. |
+| Would consider | Scenic ATV exploration with something distinctive to the area. | Active exploration, setting, and local distinctiveness appeal. |
+| Would reject | The world's largest rubber band. | Standalone novelty-object attraction is a negative example for this organizer. |
+| Would reject | A historical statue. | Standalone, mainly observational stop is a negative example for this organizer. |
 
-**Working interpretation:** For this initial organizer, favor opportunities to experience and participate in a place, especially with memorable scenery and a meaningful combination of activities, over stand-alone novelty or monument stops. The user supplied examples of things they would consider, not bookings, guaranteed attendance, or a requirement that every suggestion contain all these elements.
+Favor meaningful participation, scenery, and complementary experiences for this organizer without requiring every result to have all those elements. These are choices the owner would consider, not bookings or guaranteed attendance.
 
-**Personalization boundaries:** These are one organizer's preferences, not a product-wide ban on monuments, history, museums, or sightseeing. They do not establish the companion's taste, willingness to pay, physical ability, skill, risk tolerance, preferred exertion level, or availability for an all-day tour. A preference for snorkeling or ATV examples is not a request to find those activities in Tokyo on the pilot dates. No provider, actual excursion, location, season, route, or reservation has been verified by this answer.
+**Personalization boundaries:** No global ban on history, museums, monuments, sightseeing, or popular places. Do not copy these tastes to the companion or infer willingness to pay, physical ability, skill, risk tolerance, or constant all-day availability. D-023 explicitly adds balance and free time, not a measured exertion limit. These examples do not request snorkeling or ATV trips in Tokyo or verify their availability there.
 
-**Single experiences and variety:** Do not automatically reject a strong single activity because it is not a bundle. Do not turn every free hour into a packed adventure sequence. Exact weighting and the desired mix remain open. A historical setting that hosts an engaging experience should not be discarded solely because it also contains a statue; the owner's willingness to choose it would still need evaluation.
+A strong single activity remains eligible. A historical setting can host an engaging experience. Do not pack every gap into an adventure sequence. Exact mix and weights remain open.
 
-**Recommendation explanation proposal:** Describe what the traveler will actually do and see, why it fits their stated preferences, and what makes the setting distinctive when supported by evidence. Do not use generic excitement language or claim something exists nowhere else without support. Local distinctiveness does not automatically mean an obscure or exclusive attraction.
+**Explanation proposal:** Describe what the traveler will do and see, why it fits, and what is locally distinctive when supported. Avoid generic excitement or unsupported claims that something exists nowhere else. Local distinctiveness does not require obscurity or exclusivity.
 
 ### Discovery sources and evidence preferences — D-021
 
-The owner reports finding activities through **real experiences, positive Reddit posts, highly rated reviews, calendars covering relevant dates, and popular must-see or must-experience events associated with the destination**. Record these five inputs without replacing them with a generic search-only strategy. They describe sources and signals the owner values, not a completed integration design. D-022 subsequently adds local recommendations alongside them.
+The owner reports real experiences, positive Reddit posts, highly rated reviews, date-relevant event calendars, and destination-related must-see/must-experience highlights. Preserve these categories; D-022 adds local recommendations.
 
-| Reported source or signal | Proposed contribution to recommendations | Proposed verification or interpretation boundary |
+| Input | Proposed contribution | Boundary |
 | --- | --- | --- |
-| Real experiences / firsthand accounts | Understand what someone actually did and what made it worthwhile. | Distinguish an account from a verified visit; the owner has not specified whether this means their own experiences, other travelers' accounts, or both. Do not invent a particular past trip. |
-| Positive posts on Reddit | Discover recommendations, practical details, and reasons travelers enjoyed an experience. | Check context, relevant dates, and whether the described activity/operator matches. Upvotes or positive sentiment alone do not establish current quality or availability. |
-| Highly rated reviews | Look for supporting evidence of a worthwhile experience. | Consider review content, recency, volume, and relevant caveats rather than only the average score. No star threshold, minimum count, or review platform is selected. |
-| Calendars for a particular time frame | Identify actual event occurrences during the trip or on the day being planned. | Distinguish publication date, event date/year, recurring editions, local admission windows, and cancellation information. A calendar listing does not establish ticket availability. |
-| Popular destination-related must-see experiences/events | Surface meaningful destination highlights, not only lesser-known options. | Explain why the experience fits this traveler. Popularity is evidence to consider, not mandatory itinerary inclusion or an instruction to reverse D-019's personal dislikes. |
+| Real experiences / firsthand accounts | What people did and why it was worthwhile. | An account is not verified attendance; own versus others' accounts is unspecified. No invented past trip. |
+| Positive Reddit posts | Community ideas, reasons, and practical details. | Check context, dates, and activity/operator identity. Praise/upvotes do not prove current availability. |
+| Highly rated reviews | Supporting experience evidence. | Consider content, recency, volume, and useful criticisms. No service, star threshold, count, or weight selected. |
+| Date-relevant calendars | Actual occurrences in the requested window. | Distinguish publication date, event year/edition, local admission, cancellation, and ticket availability. |
+| Destination highlights | Meaningful well-known experiences as well as lesser-known options. | Popularity informs candidates; it is not compulsory inclusion or a reversal of personal dislikes. |
 
-**Proposed sourcing approach:** Discover candidates from these sources; evaluate personal appeal; verify material logistics using current organizer, venue, operator, or booking information where appropriate; check practical fit; then present a concise recommendation with evidence and uncertainty. This is a proposal, not a selected supplier hierarchy or algorithm.
+**Proposed sourcing:** Discover candidates, assess appeal, verify material logistics using suitable current organizer/venue/operator/booking information, check practical fit, then explain evidence and uncertainty. This is not an exclusive source hierarchy or algorithm.
 
-Community praise can support perceived appeal while an organizer's current information supports dates and entry rules. Keep these evidence roles separate. Do not imply that Reddit posts or reviews confirm current reservations, nor that an official listing guarantees personal enjoyment. No single recommendation is required to have all five source types.
+Keep evidence roles separate: community praise may support appeal, while current organizer information may support dates. Neither guarantees the other or a reservation. An option need not have every source type.
 
-**Proposed quality safeguards:** Retain useful critical caveats even when discovery begins from positive posts; avoid counting copied mentions as independent support; distinguish different editions or operators; disclose material conflicts and unknowns. Do not manufacture testimonials, ratings, source counts, or labels such as "Reddit recommended" without supporting retrieved evidence. Exact credibility rules, weighting, source display, and freshness thresholds remain open.
+Retain critical caveats; do not count copied mentions as independent support; distinguish editions/operators; disclose conflicting evidence. Do not manufacture testimonials, ratings, counts, or “Reddit recommended” labels. Source access, weighting, display, freshness, and credibility rules remain open.
 
-**Access boundary:** Naming Reddit, reviews, or calendars does not approve scraping, paid APIs, account access, importing a user's history, copying posts/photos into the product, or training on community content. Evaluate suitable access, rights, attribution, retention, coverage, and cost in the dependency section. No posts, calendars, review records, or actual events were fetched or verified in this update.
+Naming a source does not approve scraping, paid access, account/history imports, reproduction of posts/photos, or training on community content. Evaluate rights, attribution, retention, coverage, and cost later. No actual post, calendar, review, or event was fetched in this planning update.
 
 ### Local recommendations and cultural experiences — D-022
 
-**Confirmed:** Include both in discovery and trip planning. Keep the distinction between a recommendation's source and the experience itself.
+**Confirmed inclusion:** Both belong in discovery and trip planning. A recommendation's origin and an experience's subject are different dimensions.
 
-| Addition | Proposed interpretation | Illustrative directions, not selected offerings |
+| Addition | Proposed meaning | Illustrative possibilities, not verified offerings |
 | --- | --- | --- |
-| Local recommendations | Advice from residents, local guides, community hosts, or locally based sources, with a reason for the recommendation. | A neighborhood food recommendation, a community event, or a guide's suggested experience. |
-| Cultural experiences | Opportunities to engage with or understand the destination's food, crafts, arts, customs, history, and everyday life. | A cooking workshop with a shared meal; a craft workshop; a locally guided neighborhood walk; a public performance or festival. |
+| Local recommendations | Advice from residents, local guides, hosts, or locally based sources, with a reason. | Neighborhood food recommendation, community event, guide's selection. |
+| Cultural experiences | Engagement with food, crafts, arts, customs, history, or everyday life. | Cooking and shared meal, craft workshop, guided neighborhood walk, public performance/festival. |
 
-These examples are not a fixed category list or proof that a particular activity exists for the pilot. Local recommendations need not be hidden or obscure; popular highlights can also have local support. Cultural experiences may be participatory or observational. For this organizer, propose emphasizing engaging participation and context rather than assuming a standalone object or monument will appeal. D-019 does not exclude history or culture, and neither the companion nor all users inherit the same preference.
+Not a fixed taxonomy or guaranteed inventory. Local does not mean obscure; popular highlights can have local support. Culture can be participatory or observational. Favor meaningful context for this organizer without making culture adventure-only or assuming companion agreement.
 
-**Proposed source standard:** Support a local-endorsement claim with appropriate source context. Nearby distance, the language used in a review, a high rating, or a generic listing does not by itself establish that local people recommended it. Distinguish an individual recommendation, a host's own promotion, a guide's selection, and wider agreement when evidence permits. Do not invent testimonials, residency verification, or “locals love it” labels. Exact source checks and labels remain for Q-402/Q-403.
+**Proposed evidence standard:** Proximity, review language, high ratings, and generic listings do not prove local endorsement. Distinguish individual opinion, host promotion, guide selection, and wider support where evidence permits. Do not invent verified residency, testimonials, authenticity, exclusivity, or community-wide agreement.
 
-**Proposed cultural-information standard:** Describe what the traveler will do or observe, who offers it when known, and the relevant cultural context. Include language, visitor access, etiquette, participation limits, duration, costs, and reservation needs where material and supported. Do not fabricate “authentic” or “exclusive” claims, suggest private or restricted participation without permission, or portray one person's view as representing an entire community. A provider's commercial role should not be presented as independent community endorsement.
+Explain what the visitor does/observes, relevant context, who offers it when known, and material language, access, etiquette, participation limits, duration, cost, and reservation information. Do not imply private/restricted participation without permission or disguise a provider's commercial interest as independent endorsement.
 
-**Fit with existing formats:** A cultural activity can be a strong standalone choice, part of a real provider excursion, or a component in an app-assembled plan. Do not manufacture a combined package. For same-day use, check actual date/time and entry feasibility rather than assuming a cultural festival is available now or a workshop accepts walk-ins.
+A cultural experience can stand alone, be in a genuine excursion, or be part of an assembled plan. Check same-day date and admission feasibility; do not assume walk-ins or current availability.
 
-**Scope boundary:** Inclusion is approved; a local-host marketplace, direct guide contact, host accounts, community reviews, specific partnerships, paid sources, booking transactions, category filters, and numerical ranking weights are not. D-017's free-first rule and D-018's priority order remain unchanged. No sources or local/cultural offerings were externally verified in this update.
+No guide marketplace, direct-contact system, host accounts, community-review feature, partnership, paid source, transaction, filter, or ranking weight is selected. Exact access and local-source checks remain open. D-017/D-018 are unchanged.
 
 ### Both ready-made excursions and app-assembled plans — D-020
 
-**Confirmed:** Offer both formats. Q-012 is resolved by the owner's “Offer both,” not inferred from the earlier hotel/transport answer.
+**Confirmed:** Offer both; Q-012 resolved.
 
 | Format | Meaning | Boundary |
 | --- | --- | --- |
-| Ready-made provider excursion | An existing operator's advertised experience, potentially with several included activities. | Show actual advertised inclusions, conditions, price basis, and booking route; selection does not reserve it. |
-| App-assembled combination | A suggested sequence of separately sourced experiences or stops that work together as a plan. | Do not imply one operator, combined availability, one price, or one booking unless independently established. |
+| Provider excursion | Actual operator offering, possibly with several activities. | Verify advertised inclusions, conditions, duration, price basis, and booking route. Selection is not reservation. |
+| App-assembled combination | Proposed sequence of separate experiences/stops. | Do not imply one operator, joint availability, single package price, or one booking. |
 
-For a real excursion, verify advertised inclusions, timing, booking route, and price basis. For an app-created combination, evaluate each component's availability, travel, total time, costs, and reservation requirements separately; label estimates, unknowns, and separate booking steps. No included dinner, provider endorsement, or reservation is established merely by putting cards together.
-
-For the same-day experience, avoid a combination whose attractive parts cannot fit the remaining time or whose required reservations cannot be secured. Both formats must meet D-018's recommendation-quality standard. Specific operators, integrations, ranking balance, editing behavior, transactions, and data access remain undecided.
+Check components, travel, total time, costs, reservations, and uncertainty separately for assembled plans. Adding dinner to cards does not establish inclusion or provider endorsement. Same-day combinations must fit the remaining time and actual booking constraints. Operators, source access, ranking mix, editing, and transactions remain unselected.
 
 ### Shorter and all-day options — proposed duration direction
 
-The owner added, “Maybe shorter activities and all day activities.” Record this as a **user-proposed range of durations**, not approval of exact buckets, hours, a mandatory all-day schedule, or an added half-day category.
+The owner's “Maybe shorter activities and all day activities” is tentative, not fixed hours, categories, mandatory all-day schedules, or approval of an added half-day bucket.
 
-Duration and recommendation format are separate dimensions. A provider-led experience may be short or long; an app-assembled plan may cover a short outing or most of a day. Do not equate short with self-guided, all-day with a provider package, or length with quality. These are design possibilities, not verified availability in every format/duration combination.
+Format and duration are independent. Either format may cover a short outing or a longer day; that is a design possibility, not verified inventory. Duration does not determine quality or exertion.
 
-**Proposed behavior:** Let a traveler express the time they have, using simple duration choices or an exact available window. Show activity duration separately from total time needed to reach it, participate, transfer between components, and reach the next commitment or chosen endpoint. Avoid double-counting transfers already included in a provider's advertised duration. Where necessary timing is unknown, label it rather than claiming a precise fit.
+**Proposed behavior:** Reuse or ask the available window; distinguish activity length from travel, between-stop transfers, and reaching the next commitment/endpoint. Avoid double-counting operator-included transfers. Label unknown timing rather than claiming a precise fit. D-023 adds desired energy balance and free time to this discussion.
 
-A full-day option should leave room for appropriate breaks rather than fill every minute. A shorter option should still be worth choosing, not filler. For today, use the remaining usable window and entry/booking constraints rather than the duration label alone. Do not shorten a provider's fixed itinerary or remove included stops to force it to fit without evidence that such a variant exists.
+Full-day options need not fill every minute. Short options must not be filler. Do not truncate a fixed operator itinerary or invent shorter variants. Exact cutoffs, intermediate durations, controls, start/end locations, and buffers remain Q-212/Q-213/Q-305.
 
-Exact cutoffs, whether an intermediate duration is useful, default filters, start/end locations, buffer rules, and whether to present both formats together remain Q-212 and the scope/scheduling questions. These details can wait for journey design; no need to re-ask Q-012.
+### Candidate quality measurements
 
-**Candidate measurements for Section 4:** Number of seriously considered options within a defined shortlist; voluntary saves/additions; reasons for rejection; discovered factual or feasibility errors; and whether the selected experience remained worthwhile after use. A save is evidence of interest, not proof of attendance or satisfaction. Do not optimize for clicks or completed bookings as the sole measure of quality.
+Assess serious consideration within a defined shortlist, voluntary saves/additions, rejection reasons, factual/feasibility errors, and post-use value. Saves show interest, not attendance or satisfaction; clicks/bookings alone are not success.
 
-Use the positive and negative examples as an initial preference-evaluation reference, not a complete benchmark or a shortcut that labels all adventurous items good and all landmarks bad. Evaluate both appeal and practical fit. A visually impressive but infeasible bundle is not a successful recommendation.
+Use D-019 as initial preference examples, not a benchmark labeling all adventurous items good and all landmarks bad. Test both individual appeal and the complete day's fit using D-023. A beautiful but infeasible or unwantedly crowded combination is not success.
 
-Evaluate against the same user context and declared constraints. Do not claim a recommendation success rate without defining the sample, denominator, and evaluation procedure. No arbitrary percentage threshold is approved here.
+Define context, sample, denominator, and evaluation method before reporting a success rate. No numerical pass target is approved.
 
-## 2. Same-day discovery — proposed user outcome and behavior
+## 2. Same-day discovery — proposed behavior
 
-**User outcome:** “Help me find something I would actually enjoy near me today, and help me fit it into the time I have.”
-
-A proposed flow to flesh out in Section 3:
+**Outcome:** Find something worthwhile nearby today and fit it into the time available.
 
 ```text
 Open same-day discovery
-    → Supply or reuse a relevant area, available time, and preferences
+    → Supply or reuse area, available time, and preferences
     → Review a short set of relevant current options
     → See practical constraints and uncertainty
     → Preview adding an option or forming a small plan
     → Confirm the change
 ```
 
-Location permission with a manual-area alternative remains a proposed design, not a grant of location access. Do not require a fully built multi-day itinerary merely to investigate a same-day option; the exact entry requirements remain to be decided.
+Location permission and manual-area alternative are proposed, not permission to access location. A complete multi-day itinerary should not be assumed necessary to explore today. Exact entry requirements remain open. Existing flexible time must not automatically be interpreted as an instruction to fill it.
 
-**Candidate information for each result:** What the experience is; why it fits; where it occurs; the event's relevant date and start/end or admission window; travel effort; estimated visit length and cost with their basis; reservation or ticket needs; a source; and freshness/verification context when available. D-020 adds the distinction between provider offerings and app-assembled plans; Q-212 covers duration presentation. D-021 identifies valued discovery evidence, and D-022 adds local/cultural inclusion, not guaranteed live event coverage.
+**Candidate result information:** What it is, why it fits, location, event occurrence/admission window, travel, visit length, cost basis, booking needs, source, and freshness. D-020 adds format distinction; Q-212 covers duration; D-021/D-022 evidence and culture are not guaranteed coverage.
 
-**Information distinctions to preserve in later specifications:**
-
-| Statement | What it does not establish |
+| Known statement | Does not establish |
 | --- | --- |
-| The listing was fetched recently. | That the organizer recently updated it or that it is accurate. |
-| The event takes place today. | That it is still running, reachable before entry closes, or fits the remaining day. |
-| Tickets or reservations are required. | That tickets or tables are available, or that the traveler has booked. |
-| A place is nearby geographically. | That the selected travel mode can reach it in an acceptable time. |
-| An event was published by multiple sites. | That these are multiple distinct events or independent confirmations. |
+| Fetched recently. | Underlying organizer information recently updated or accurate. |
+| Happens today. | Still running, reachable before entry closes, or fitting the remaining day. |
+| Booking required. | Available inventory or an existing traveler booking. |
+| Geographically near. | Acceptable travel time by the selected mode. |
+| Mentioned on multiple sites. | Distinct events or independent confirmation. |
 
-**Proposed safeguards:** Exclude clearly expired or known canceled options from actionable suggestions; identify dates in the relevant local time; distinguish actual event occurrences from permanent venues; avoid duplicate listings; disclose conflicting or unverified details; preserve confirmed commitments when previewing changes; and explain when an option needs further reservation verification. Exact rules and sources remain open.
+**Proposed safeguards:** Exclude known expired/canceled options from actionable results; preserve local occurrence time; distinguish events from venues; avoid duplicates; disclose conflicting/unverified information; preserve existing commitments on previews; explain reservation uncertainty. Exact checks/sources remain open.
 
-When suitable events cannot be found, say so rather than inventing results. Offering a wider area, another time, or clearly labeled non-event experiences is a proposed fallback. Lack of discovered data is not proof that nothing exists in the area.
+When suitable events cannot be found, say so. Wider area, another time, or labeled non-event alternatives are proposed fallbacks. Missing results do not prove no events exist. Never invent current events to fill a list.
 
-**Candidate evaluation:** Use real, independently checked examples from a bounded destination and date/time window. Measure relevant valid options, expired/incorrect/duplicate results, time/entry feasibility, and known suitable events the system missed. Report source coverage and uncertainty separately from how attractive the options seem. Prototype data can test the interface, but cannot pass the live-data portion of this evaluation.
+**Candidate evaluation:** Independently checked real examples from a bounded date/time and location, including valid options, duplicates/errors, timing/entry fit, and known suitable events missed. Separate source coverage from appeal. Prepared data cannot pass the live-data check.
 
-“Real time” describes the required usefulness for a current decision; no polling interval, continuous feed, freshness guarantee, or response-time threshold has been selected. Both data freshness and response speed need later definitions. The app must not label static demonstration data as current verified events.
+“Real time” means current-decision usefulness. No polling interval, continuous feed, freshness guarantee, latency threshold, inventory promise, or background monitoring selected.
 
-## 3. Functionality and ease — proposed evaluation framework
+## 3. Functionality and ease — proposed evaluation
 
-The confirmed standard is that the app feels seamless and useful rather than burdensome. Proposed design principles are to reuse already-supplied preferences, ask for more information only when it affects the task, make the next action obvious, preserve saved work, support undo/recovery where relevant, and provide practical access without replaying a reveal.
+Reuse provided preferences, ask only relevant next questions, make actions clear, preserve work, provide undo/recovery where appropriate, and allow practical access without replaying the reveal. These are proposals, not a screen inventory or a rule minimizing taps at the expense of essential checks.
 
-These are proposed behaviors, not a finalized screen inventory or an assertion that the smallest number of taps always produces the best result. Necessary permission or booking checks should not be hidden merely to appear seamless.
+D-023 now confirms difficulty starting and coordinating variables, not just a general preference for simplicity. Candidate tasks include beginning with incomplete hotel information, narrowing choices, understanding suggested order, balancing an excursion with food/shopping/free time, judging a provider versus assembled plan, discovering today's events, previewing changes, reopening saved work, and accessing the companion view.
 
-**Candidate evaluation tasks:** Start planning, judge a suggestion, distinguish a provider excursion from an app-created plan, assess its time requirements, keep or replace an option, find something for today, preview a plan change, reopen saved work, and open the companion-facing itinerary. Existing hotel/transport and reservation-related requirements must also remain understandable.
-
-Observe completion, hesitation, repeated input, requests for help, errors, recovery, and the user's judgment of effort. Response-time and task-duration targets should be based on chosen journeys and then explicitly agreed. No number of taps, seconds, or screens is approved here. D-021 supplies reported discovery sources, but the owner's specific frustrations and actual organization process are still to be described.
+Observe completion, hesitation, repeated input, help needed, errors, recovery, and reported effort. Include hotel/transport and reservation tasks. No number of taps, seconds, energy points, or mandatory breaks has been approved. Self-reported pain points are not measured time savings.
 
 ## Free-first spending and evidence
 
-D-017 remains unchanged: prefer suitable free approaches and review any necessary spending specifically. These standards, source preferences, format choices, and local/cultural additions do not select providers or authorize purchases.
+D-017 remains unchanged. Requirements and source preferences do not select suppliers or authorize purchases.
 
-However, do not defer finding out whether adequate event data exists until after polishing the entire interface. The early feasibility question is whether we can obtain enough genuinely useful, timely local options for the supported pilot area under acceptable access, use, and cost conditions. Festivals and pop-ups are requirements to investigate, not claims of coverage by a particular service. Real excursion listings and app-assembled components also require suitable evidence.
+Investigate whether suitable timely event, local/cultural, and excursion information is accessible under acceptable rights, coverage, freshness, and cost before polishing around untested data. Prepare prototypes for interaction questions, but use real checks for live-data quality.
 
-Prepared-data prototypes and live-data checks answer different questions. A free demo is not a completed test of current recommendations. If reliable coverage requires paid access or the free approach falls short, report the evidence and proposed tradeoff; do not silently weaken the standard, fabricate information, or treat the flexible budget as permission to spend.
+Report necessary spending or a free approach's limitations with evidence and a proposed tradeoff. Do not silently weaken a requirement, fabricate facts, or treat flexible references as permission to spend. A working demo does not prove readiness.
 
 ## Outstanding decisions and next step
 
-**Answered:** Ranked standards; first-version same-day discovery; initial organizer preference examples (D-019); offer both ready-made excursions and app-assembled combinations (D-020/Q-012); valued discovery sources and signals (D-021); include local recommendations and cultural experiences (D-022).
+**Answered:** Ranked standards, first-version same-day capability, initial organizer examples, both recommendation formats, reported discovery sources, local/cultural inclusion, and reported planning friction/day-balance priorities (D-023).
 
-**Proposed:** Shorter/all-day duration options, time controls, source-checking workflow, review interpretation, evidence presentation, specific cultural categories, and local-source verification rules. Their detailed rules are not approved.
+**Proposed:** Duration buckets, gradual onboarding, hotel-informed ordering, effort estimation, flexible windows, sequence explanations, exact source checks, and evaluation methods.
 
-**Open:** The owner's specific current planning frustration and organization process; detailed preference weights and companion preferences; minimum event/excursion/local/cultural coverage; source access and verification; location behavior; scheduling constraints; freshness/response targets; quantitative acceptance; and companion validation. Self-reported sources are not observed task evidence or broader demand validation.
+**Open:** Weekly development capacity, full pilot-promise approval, exact saving/organization tools and measured effort, companion input, scope/coverage, time/pace controls, sources, response/freshness targets, numerical acceptance, and product validation. Keep detailed journey questions in their assigned sections.
 
-The next Section 1 question remains the Q-006 pain point: **Which part takes the most effort now: finding worthwhile options, checking dates and booking requirements, or combining them into a practical plan?** These are examples, not assumed problems. The additional discovery requirements do not answer this question. Do not re-ask the sources, taste examples, format choice, or local/cultural inclusion.
+Next under Q-004: **How many hours per week can the owner realistically devote to planning, reviewing Codex's work, and testing before the November 10 target?** No implementation start is approved. Do not ask for the already supplied main frustrations, sources, preference examples, formats, or budget policy again.
 
-No app code, external event/excursion search, Reddit/review/calendar retrieval, paid service, booking, or live test was created by this documentation update. Section 1 remains DRAFT, and later blueprint sections remain NOT STARTED.
+Section 1 remains DRAFT; later sections remain NOT STARTED. No code, booking, paid service, data integration, live event test, or automation was created by this documentation update.
