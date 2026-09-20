@@ -135,3 +135,37 @@ For the private trip dates:
 5. Present pros/cons and ask the owner to keep/reject/refine.
 
 No hotel listed here is selected or booked.
+
+
+## 2026-09-20 finalist/rate-validation note
+
+Exact dated rates for the owner's late-November/early-December stays are not consistently exposed in static public pages. Several official sites route pricing through interactive booking engines. Do not substitute unrelated "from" prices or current 30-day sample prices as the owner's stay total.
+
+### Current finalists to validate first
+
+**Tokyo**
+- Mitsui Garden Hotel Ginza Tsukiji — strongest amenity match because all rooms have washer/dryer; strong Ginza/Tsukiji access.
+- Daiwa Roynet Hotel Ginza PREMIER — strong value/convenience comparison; king double exists, coin laundry, very strong transit.
+- Millennium Mitsui Garden Hotel Tokyo — strongest transit/shopping convenience comparison.
+
+**Kyoto**
+- Hilton Garden Inn Kyoto Shijo Karasuma — balanced central base.
+- Cross Hotel Kyoto — stronger downtown walkability and larger king-room layouts; no self-service coin laundry, so laundry tradeoff is explicit.
+- GOOD NATURE HOTEL KYOTO — upscale/wellness/dining upgrade comparison; strong Kawaramachi/Gion access.
+
+**Osaka**
+- HOTEL THE FLAG Shinsaibashi — best overall location/value/amenity fit.
+- Cross Hotel Osaka — best Dotonbori walkability; 180cm Deluxe Double option.
+- HOTEL ROYAL CLASSIC OSAKA — strongest direct-Namba convenience/upscale comparison; published standard double list rates are premium and are not the owner's dated rate.
+
+### Validation rule
+
+Before a property is selected, confirm:
+1. One-large-bed room actually available for the private stay dates.
+2. Refundable and non-refundable rate options.
+3. Taxes, service charges, and accommodation taxes.
+4. Total stay price.
+5. Material amenities for the chosen room.
+6. Practical transit/location pros and cons against the itinerary.
+
+A current general rate, undated OTA example, or "from" price is context only and must not be shown as the owner's live booking price.
