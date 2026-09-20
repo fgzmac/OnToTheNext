@@ -4,10 +4,11 @@
 **Owner:** Project owner (`fgzmac`); assistant facilitates drafting.  
 **Phase:** Product design.  
 **Last updated:** 2026-09-19.  
-**Source:** The owner's supplied app concept and subsequent decisions through D-015, including the trip-budget range excluding plane tickets and reservation requirements for events and restaurants.  
+**Source:** The owner's supplied app concept and decisions through D-016, including per-person trip-budget basis, plus the requested app operating-budget comparison.  
 **Related framework:** [Blueprint, Section 1](blueprint.md#1-product-vision-and-problem-brief).  
-**Next review trigger:** Clarify the trip-budget currency and whether its range covers the two travelers together or each person (Q-011). The app-running budget in Q-004 remains unanswered.  
-**Approval record:** Section not yet approved. Individual timing target approved under D-012.
+**Supporting research:** [App Budget Options](00-app-budget-options.md) — reference prices and proposed envelopes, not provider selections.  
+**Next review trigger:** Choose or revise the proposed monthly app operating target and ceiling under Q-004. Travel-budget per-person basis is answered; currency and other meanings remain under Q-011.  
+**Approval record:** Section not yet approved. Individual timing target approved under D-012; no app spending plan approved.
 
 > Saving this draft does not approve every proposal it contains. CONFIRMED decisions, PROPOSED directions, ASSUMPTIONS, and OPEN questions are different states.
 
@@ -24,7 +25,7 @@ The repository name is confirmed. It does not automatically establish the final 
 
 > An app that helps people discover experiences their travel group will enjoy, turn those choices into a realistic trip, and share a personalized itinerary that builds excitement and remains useful while traveling.
 
-This wording combines Discover, Organize, and Delight without positioning the product primarily as an AI tool. Product coverage includes hotels and transportation alongside activities (D-009). Both hotel/transport existing-booking organization and recommendations are first-version requirements (D-010). The owner also wants a trip-budget range excluding plane tickets (D-014) and planning that accounts for events and restaurants requiring reservations (D-015). Detailed behavior remains to be specified.
+This wording combines Discover, Organize, and Delight without positioning the product primarily as an AI tool. Product coverage includes hotels and transportation alongside activities (D-009). Both hotel/transport existing-booking organization and recommendations are first-version requirements (D-010). The owner also wants a trip-budget range excluding plane tickets (D-014), now confirmed as per person (D-016), and planning that accounts for events and restaurants requiring reservations (D-015). Detailed behavior remains to be specified.
 
 **Status:** PROPOSED wording based on the adopted base idea. Exact wording is not yet approved.
 
@@ -99,7 +100,7 @@ These are roles within a trip, not necessarily permanent account types.
 
 **Initial pilot:** A couple, **two travelers total**: one organizer and one companion. The project owner is the initial organizer/tester. This is the anonymous first-use profile recorded under D-008; no names, ages, bookings, or identifying details are needed in the planning repository.
 
-**Boundaries:** The pilot does not impose a permanent two-person limit, make the commercial service couples-only, imply identical preferences, or require a romantic presentation theme. The companion's actual participation in app testing remains to be arranged. Two travelers also does not establish whether a supplied budget is per person or shared (Q-011).
+**Boundaries:** The pilot does not impose a permanent two-person limit, make the commercial service couples-only, imply identical preferences, or require a romantic presentation theme. The companion's actual participation in app testing remains to be arranged. The travel-budget range is now explicitly per person under D-016; this does not settle how each shared expense is allocated.
 
 **Eventual commercial audience:** Still OPEN (Q-010). Testing with the pilot group does not automatically select the broader customer segment or validate demand from other travelers.
 
@@ -144,13 +145,13 @@ Accounting for a reservation or recommending an option is not the same as making
 
 ### Trip-budget range
 
-**Confirmed input (D-014):** Use a low/high spending range for the pilot, excluding plane tickets. The numerical dollar-denominated bounds were supplied in chat and are retained there rather than publishing personal financial amounts in this repository. Their absence here is not missing user input.
+**Confirmed input (D-014, clarified in D-016):** Use a low/high spending range **per person** for the pilot, excluding plane tickets. The numerical dollar-denominated bounds were supplied in chat and are retained there rather than publishing personal financial amounts in this repository. Their absence here is not missing user input.
 
-**Interpretation:** The airfare exclusion indicates a traveler trip budget, not an answer to the preceding monthly app-running-cost question. No hosting, API, AI, or development spending is authorized from that range. Q-004's operating-budget question remains OPEN.
+**Interpretation:** This is a traveler trip budget, not a monthly app-running allowance. The owner has separately asked for app-budget tiers and tradeoffs. No hosting, API, AI, or development spending is authorized from the travel range. Q-004's operating-budget selection remains OPEN.
 
-**Still open:** Currency; whether the range is for both travelers combined or per person; whether it covers the whole trip or remaining unspent costs; exact included categories; and how the lower/upper bounds should affect suggestions. See Q-011 and Q-211.
+**Still open:** Currency; whether the range covers the whole trip or remaining unspent costs; exact included categories; and how lower/upper bounds should affect suggestions. The per-person basis is answered and must not be re-asked. See Q-011 and Q-211.
 
-**Proposed behavior:** Use configurable budget inputs rather than hardcoding the pilot amounts. Do not treat the lower bound as a spending requirement. Clarify whether the upper bound is a firm ceiling or a preference; flag relevant tradeoffs rather than silently exceeding it. Separate excluded airfare from included costs while retaining flights in the schedule. Label unknown prices and estimates, distinguish shared and per-person charges, and avoid counting a deposit again as an additional full charge. No currency conversion, category allocation, daily allowance, or affordability claim has been established.
+**Proposed behavior:** Use configurable budget inputs rather than hardcoding pilot amounts. Do not treat the lower bound as a spending requirement. Clarify whether the upper bound is a firm ceiling or a preference; flag relevant tradeoffs rather than silently exceeding it. Separate excluded airfare from included costs while retaining flights in the schedule. Label unknown prices and estimates, distinguish shared and per-person charges, and avoid counting a deposit again as an additional full charge. A per-person budget does not establish an equal split for every shared expense. No currency conversion, category allocation, daily allowance, or affordability claim has been established.
 
 ### Events and restaurants requiring reservations
 
@@ -168,7 +169,7 @@ Accounting for a reservation or recommending an option is not the same as making
 
 These are proposed rules for Q-210/Q-305, not an approved status schema, reminder system, or transaction integration. User-entered confirmation and provider-verified confirmation must not be conflated. No restaurants or events have been researched or chosen, and no reservations have been made.
 
-**Status:** Product purpose, both hotel/transport support paths, range-based trip-budget input excluding airfare, and event/restaurant reservation consideration are CONFIRMED at the stated level. Detailed workflows, rules, modes, coverage, and technical methods remain PROPOSED or OPEN. See D-009, D-010, D-014, D-015 and Q-209 through Q-211.
+**Status:** Product purpose, both hotel/transport support paths, per-person range-based trip-budget input excluding airfare, and event/restaurant reservation consideration are CONFIRMED at the stated level. Detailed workflows, rules, modes, coverage, and technical methods remain PROPOSED or OPEN. See D-009, D-010, D-014 through D-016 and Q-209 through Q-211.
 
 ## 1.10 Intended distinguishing idea
 
@@ -206,13 +207,13 @@ The proposed complete test preserves all three product jobs: Discover, Organize,
 
 The first test does not necessarily require elaborate animation or many presentation styles. A minimum meaningful reveal and a usable trip view could test the principle.
 
-Japan is the confirmed pilot context, not a promise of nationwide coverage or a permanent Japan-only product. Tokyo is included; additional cities, single-city versus multi-city needs, practical activity windows, scheduling guarantees, and supported devices are still OPEN. Local arrival/departure times have been supplied privately (D-013), but transfer and airport-processing assumptions are not established. Exact modes, recommendation coverage, budget treatment, and reservation behavior remain for later scope decisions. Do not silently exclude a required capability or trip need based on an earlier generic scope suggestion.
+Japan is the confirmed pilot context, not a promise of nationwide coverage or a permanent Japan-only product. Tokyo is included; additional cities, single-city versus multi-city needs, practical activity windows, scheduling guarantees, and supported devices are still OPEN. Local arrival/departure times have been supplied privately (D-013), but transfer and airport-processing assumptions are not established. Exact modes, recommendation coverage, budget treatment, and reservation behavior remain for later scope decisions. Do not silently exclude a required capability or trip need based on an earlier generic scope suggestion or a lean-prototype cost example.
 
 ### First commercial release
 
 The public release is a separate milestone. Its date, audience, platform, wider destination coverage, production requirements, and monetization behavior are not yet approved.
 
-**Status:** Individual decisions D-006 and D-008 through D-015 apply. The complete pilot promise, detailed feature specifications, and first-commercial-release scope remain PROPOSED or OPEN. See Q-005, Q-301, Q-302, and Q-306.
+**Status:** Individual decisions D-006 and D-008 through D-016 apply. The complete pilot promise, detailed feature specifications, and first-commercial-release scope remain PROPOSED or OPEN. See Q-005, Q-301, Q-302, and Q-306.
 
 ## 1.13 Explicit non-goals and presentation boundaries
 
@@ -236,9 +237,11 @@ These boundaries will need observable criteria in later feature specifications.
 
 ## 1.14 Evidence and important assumptions
 
-**Established in this planning record:** The owner's concept, organizer-to-companion use case, sequential planning process, GitHub repository, later implementation workflow, Japan-first priority, commercial subscription/ad ambition, two-traveler pilot, both hotel/transport support paths, Tokyo/travel context, approved testing target, supplied trip-budget range excluding plane tickets, and event/restaurant reservation requirement. Private pilot values are in the conversation, not provider-verified or published here.
+**Established in this planning record:** The owner's concept, organizer-to-companion use case, sequential planning process, GitHub repository, later implementation workflow, Japan-first priority, commercial subscription/ad ambition, two-traveler pilot, both hotel/transport support paths, Tokyo/travel context, approved testing target, supplied per-person trip-budget range excluding plane tickets, and event/restaurant reservation requirement. Private pilot values are in the conversation, not provider-verified or published here.
 
-**Not documented:** Interviews, observed planning sessions, prototype findings, willingness to pay, comparative product research, real provider tests, or scheduling evaluation results. Choosing a real trip as the pilot does not mean testing has already happened.
+**Targeted external research:** Official hosting/database/runtime-AI/mapping price references, app-store enrollment fees, and one hotel API's access prerequisites were reviewed for the owner's requested app-budget comparison. Sources and arithmetic assumptions are in [App Budget Options](00-app-budget-options.md). These are pricing/access observations, not full provider selection or live coverage tests.
+
+**Not documented:** Interviews, observed planning sessions, prototype findings, willingness to pay, comparative product research, real provider integration tests, or scheduling evaluation results. Choosing a real trip as the pilot does not mean testing has already happened.
 
 Important assumptions:
 
@@ -246,12 +249,12 @@ Important assumptions:
 2. Personalized presentation provides meaningful value to organizers and companions.
 3. The practical plan reduces effort or confusion compared with current workarounds, including coordinating activities, accommodation, transportation, spending, and reservations.
 4. Reliable information is available under usable technical, commercial, and content conditions. Availability, schedules, pricing, reservation requirements, and booking windows must not be treated as verified without an appropriate source.
-5. Realistic schedules can be produced within an acceptable cost and reliability budget. The owner's trip budget does not establish the app's operating budget or the affordability of actual travel options.
+5. Realistic schedules can be produced within an acceptable cost and reliability budget. The owner's trip budget does not establish the app's operating budget or the affordability of actual travel options. Published infrastructure prices do not establish live hotel/reservation access or a fixed cost per itinerary.
 6. Other travelers will see enough ongoing value to subscribe, and advertising can support the business without undermining the experience. This needs separate commercial validation; one successful trip does not establish it.
 
-These will become specific experiments in Section 5. No demand, cost, coverage, correctness, or revenue claims are being treated as validated.
+These will become specific experiments in Section 5. No demand, coverage, correctness, or revenue claims are being treated as validated. Cost scenarios remain estimates until measured against a selected implementation and usage pattern.
 
-**Status:** ASSUMPTIONS and evidence gaps. See Q-006, Q-354, and Q-355.
+**Status:** ASSUMPTIONS and evidence gaps, with limited official-source cost research recorded. See Q-006, Q-354, and Q-355.
 
 ## 1.15 Project goal, business model, and distribution
 
@@ -268,9 +271,9 @@ These will become specific experiments in Section 5. No demand, cost, coverage, 
 
 **Initial testing path:** The owner will develop and test against the Japan trip, whose travel party is one organizer and one companion. Companion testing participation and feedback arrangements remain open. Recruiting broader testers and eventual customer acquisition are not yet defined. See resolved Q-003 and open Q-008/Q-010.
 
-**Distribution:** Mobile app-store release versus SaaS delivery remains OPEN. No operating system, platform order, app-store listing, hosting plan, billing provider, or initial pilot delivery mechanism is selected. No public-launch date is promised.
+**Distribution:** Mobile app-store versus web delivery remains OPEN. SaaS is a service/business model and app-store release is a distribution channel; they need not be mutually exclusive. No operating system, platform order, app-store listing, hosting plan, billing provider, or initial pilot delivery mechanism is selected. The cost note's mobile-friendly web pilot is an assistant recommendation, not an approved choice. No public-launch date is promised.
 
-**Status:** Q-002 is resolved at the objective/priority level. Q-007 is resolved at the revenue-direction level. Q-004's first-test target is approved; its app budget and capacity remain open. The trip-spending range in D-014 does not resolve those app costs.
+**Status:** Q-002 is resolved at the objective/priority level. Q-007 is resolved at the revenue-direction level. Q-004's first-test target is approved; its app budget and capacity remain open. The per-person travel range in D-014/D-016 does not resolve those app costs.
 
 ## 1.16 Constraints
 
@@ -282,27 +285,42 @@ These will become specific experiments in Section 5. No demand, cost, coverage, 
 
 **Proposed scheduling implications from supplied travel times (D-013):** Treat arrival and departure as partial days. Do not equate airport arrival with hotel arrival or immediate activity availability, or equate flight departure with when travelers should leave their hotel. Account for airport procedures, transfers, check-in/out, and a rest preference when calculating usable time. Exact buffers, routing, verification, and change handling remain open. Keep destination-local times distinct from the organizer's home/browser time zone.
 
-**Confirmed capability constraints:** Preserve both existing-booking organization and recommendations for hotels/transportation (D-010), the supplied trip-budget range and plane-ticket exclusion (D-014), and consideration of events/restaurants requiring reservations (D-015). Detailed implementation remains open, but these requirements must not be silently dropped.
+**Confirmed capability constraints:** Preserve both existing-booking organization and recommendations for hotels/transportation (D-010), the supplied per-person trip-budget range and plane-ticket exclusion (D-014/D-016), and consideration of events/restaurants requiring reservations (D-015). Detailed implementation remains open, but these requirements must not be silently dropped.
 
-**Two separate budgets:** The owner supplied a trip-spending range with plane tickets excluded. Its currency, per-person/group basis, remaining-versus-total meaning, and other category inclusions still need clarification (Q-011). Monthly app-running/testing costs, one-time development costs, and available development/maintenance time remain OPEN under Q-004. Do not assign the trip range to infrastructure or infer permission to purchase services.
+**Two separate budgets:** The travel range is per person, excluding plane tickets. Currency, remaining-versus-total meaning, and other category inclusions remain open (Q-011). It is not an infrastructure allowance. Monthly app costs, developer-tool costs, one-time development costs, and available development/maintenance time remain separate constraints under Q-004.
 
-**Other open delivery constraints:** Supported devices, remaining pilot coverage, and commercial launch timing. See Q-004, Q-209 through Q-211, and Q-301/Q-302.
+### App operating-budget options — not selected
+
+The owner requested tiers, possibilities, and pros/cons. The [supporting comparison](00-app-budget-options.md) contains official price references reviewed on 2026-09-19 and these **proposed monthly USD operating envelopes**:
+
+| Option | Monthly envelope | Intended use |
+| --- | --- | --- |
+| Lean prototype | $0–$50 | Interim workflow tests and tightly bounded live-data experiments; not automatically the complete pilot. |
+| Practical pilot | $75–$150 | Two-traveler real-use testing, controlled API use, and entry-level paid persistence. |
+| Expanded private beta | $150–$400 | Wider testing and heavier measured usage after the pilot works. |
+| Early commercial operations | $400–$1,500+ | Usage-driven public operations; not a fixed user-capacity or profitability promise. |
+
+**Assistant recommendation:** Evaluate the practical-pilot tier with a **$100/month normal target and $150/month operating ceiling**. This includes hypothetical allowances, not only quoted base fees. Development tools, domains, store enrollment, transaction charges, labor, taxes, marketing/legal work, and unpriced data contracts are separate. No tier, target, ceiling, service, or purchase is approved by the request for a comparison.
+
+**Important limits:** A small hosting allowance does not prove access to date-specific hotel inventory or reservation APIs. A higher tier does not automatically improve data quality or finish the app. No provider has been tested for Japan coverage. Any approved ceiling will require deliberate usage controls and handling for optional calls that must pause; it is not automatically an enforceable provider hard cap. See the note's sources and assumptions before using a cost figure.
+
+**Other open delivery constraints:** Available personal development time, maintenance capacity, supported devices, remaining pilot coverage, and commercial launch timing. See Q-004, Q-209 through Q-211, and Q-301/Q-302.
 
 **Unselected technical decisions:** Stack, database, identity/access system, AI components, and external data providers. See Q-401.
 
-Google Places, Google Routes, and Ticketmaster in the supplied concept are candidates, not approved dependencies. Any selection requires current provider documentation, coverage, cost, and content-use evaluation. No accommodation, transport-timetable, reservation, or price-comparison provider has been selected either.
+Providers in the base concept and cost comparison are candidates, not approved dependencies. Before selection, verify current documentation, coverage, cost, content-use terms, and access requirements. No accommodation, transport-timetable, reservation, or price-comparison provider has been selected.
 
-**Repository visibility:** Verified public on 2026-09-19. Use fictional/redacted examples; do not commit credentials, private booking details, exact private travel dates/times, personal spending amounts, or identifying research responses. The software-testing target is a project milestone, not a published flight schedule. Public visibility does not mean app itineraries should be public.
+**Repository visibility:** Verified public on 2026-09-19. Use fictional/redacted examples; do not commit credentials, private booking details, exact private travel dates/times, personal spending amounts, or identifying research responses. The software-testing target and hypothetical app operating allowances are project-planning material, not a published private travel budget or flight schedule. Public visibility does not mean app itineraries should be public.
 
 ## 1.17 Completion and next discussion
 
-This section remains a draft. The core direction, pilot, timing, hotel/transport capabilities, trip-budget-range input with airfare exclusion, and reservation consideration are recorded. Broader commercial targeting, remaining constraints, evidence, and the complete pilot/public-release promises still need decisions or explicit deferral.
+This section remains a draft. The core direction, pilot, timing, hotel/transport capabilities, per-person trip-budget input with airfare exclusion, and reservation consideration are recorded. Broader commercial targeting, remaining constraints, evidence, and complete pilot/public-release promises still need decisions or explicit deferral.
 
-**Next question — Q-011:** Is the supplied dollar-denominated trip range in U.S. dollars, and does it cover both travelers combined or each person? Use the numerical bounds already supplied in chat; do not ask the owner to repeat them. Clarify the most consequential missing budget basis before deriving allocations or affordability. Other budget inclusions can follow later.
+**Next question — Q-004:** After reviewing the requested tiers, should the pilot use the proposed **$100 monthly operating target and $150 ceiling**, excluding development tools and the other stated separate costs, or a different envelope? This is a budget-planning choice, not a purchase or implementation authorization.
 
-The monthly app-running budget in Q-004 remains unanswered, not replaced by the trip range and not assumed to be zero. Return to the remaining app-budget/capacity questions after resolving the immediate trip-budget ambiguity. Do not ask all constraints at once.
+Q-011's per-person subquestion is resolved by D-016. Travel currency, included categories, and total-versus-remaining meaning are still open, but do not re-ask the basis or block the requested app-budget analysis. App capacity, one-time costs, and maintenance questions remain visible for subsequent discussion.
 
-Do not re-ask the approved test date/year, supplied travel timing, Q-002, pilot group/count, Q-007, Q-009, or whether reservation-dependent events/restaurants belong in planning. Do not jump to implementation. Section approval still requires the owner's explicit approval.
+Do not re-ask the approved test date/year, supplied travel timing, Q-002, pilot group/count, Q-007, Q-009, the travel-budget per-person basis, or whether reservation-dependent events/restaurants belong in planning. Do not jump to implementation. Section approval still requires the owner's explicit approval.
 
 ## Revision record
 
@@ -314,4 +332,5 @@ Do not re-ask the approved test date/year, supplied travel timing, Q-002, pilot 
 | 2026-09-19 | Confirmed both existing-booking organization and recommendations for hotels and transportation in the first version; resolved Q-009 and moved the next discussion to the pilot-ready date. | D-010 confirmed at capability level; detailed specifications and Section 1 approval remain open. |
 | 2026-09-19 | Recorded Tokyo and the month-spanning travel window without publishing exact private dates; separated travel timing from the proposed pre-trip test target. | D-011 records confirmed context; year remained an assumption and test target proposed at this revision. |
 | 2026-09-19 | Recorded explicit approval of November 10, 2026 for the first complete test and receipt of Tokyo-local arrival/departure times; kept private flight details out of the repository and advanced to app budget. | D-012 confirms the target; D-013 records supplied timing context; Section 1 remains DRAFT. |
-| 2026-09-19 | Recorded the supplied trip-budget range excluding plane tickets separately from app costs, and added restaurant/event reservation consideration. | D-014 and D-015 recorded; budget basis/currency and detailed rules remain open; Section 1 remains DRAFT. |
+| 2026-09-19 | Recorded the private trip-budget range with plane tickets excluded and the requirement to account for events/restaurants requiring reservations. | D-014 and D-015 recorded; no app spending budget or detailed reservation integration approved. |
+| 2026-09-19 | Confirmed per-person travel-budget basis and added the requested researched app-cost tiers with separate proposed target/ceiling and exclusions. | D-016 confirmed; no operating tier, budget, vendor, purchase, stack, or section approval. |
