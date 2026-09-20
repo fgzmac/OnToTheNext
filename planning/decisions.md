@@ -4,7 +4,7 @@
 **Owner:** Project owner (`fgzmac`).  
 **Last updated:** 2026-09-19.  
 **Current phase:** Product design.  
-**Source:** Explicit statements in the planning conversation. Targeted pricing research is separately recorded in [App Budget Options](00-app-budget-options.md); no user testing or live provider integration test has yet been recorded.
+**Source:** Explicit statements in the planning conversation. Prior targeted pricing research is separately recorded in [App Budget Policy and Options](00-app-budget-options.md); no user testing or live provider integration test has yet been recorded.
 
 A GitHub commit is not a product approval. Recommendations copied into the base idea do not automatically become approved requirements. Each decision below records only the part supported by the owner's actual direction.
 
@@ -28,6 +28,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 | D-014 | Use the supplied low/high trip-spending range excluding plane tickets; do not apply it to app-running costs. | Range/exclusion CONFIRMED; per-person basis subsequently settled in D-016; currency OPEN | 2026-09-19 |
 | D-015 | Account for events and restaurants that require reservations. | CONFIRMED planning requirement; detailed behavior OPEN | 2026-09-19 |
 | D-016 | The supplied trip-budget range is per person, not a combined two-traveler total. | CONFIRMED basis; other budget meanings remain OPEN | 2026-09-19 |
+| D-017 | Build free first; retain $100/month and $150 as flexible paid-operation references, spend only when necessary, and consider greater investment after a working product meets the owner's standards. | CONFIRMED policy; no fixed ceiling, provider, or purchase approved | 2026-09-19 |
 
 ## D-001 — Sequential blueprint planning
 
@@ -69,7 +70,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Source:** The owner's instruction that Codex will be used once the design phase is done.
 
-**Boundaries:** No application stack, database, authentication model, API provider, or AI component is selected by this decision. The present planning setup is documentation-only, not permission to scaffold or deploy the app. Approval of the test target in D-012 does not itself approve the transition to implementation.
+**Boundaries:** No application stack, database, authentication model, API provider, or AI component is selected by this decision. The present planning setup is documentation-only, not permission to scaffold or deploy the app. Approval of the test target in D-012 or spending policy in D-017 does not itself approve the transition to implementation.
 
 **Working interpretation:** Design completion means sufficiently defined direction, first-release scope, main experiences, important constraints/risks, and first buildable feature, followed by explicit approval of the transition. It does not require fully specifying all future features. This interpretation should be reviewed with the owner before transition.
 
@@ -87,7 +88,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Boundaries:** The repository name does not automatically become the final app name. Public repository visibility does not authorize public user itineraries or publication of sensitive information. No credentials, personal booking details, exact private travel dates/times, personal spending amounts, or identifying research responses should be committed. An approved software-testing milestone may be recorded without publishing a flight schedule.
 
-**Current organization:** README, the reusable blueprint, the active product brief, this decision register, and the open-question register. Additional section documents and supporting notes are added when needed. The app-cost comparison is a Section 1 research note, not a completed architecture section.
+**Current organization:** README, the reusable blueprint, the active product brief, this decision register, and the open-question register. Additional section documents and supporting notes are added when needed. The app-cost comparison and policy are a Section 1 note, not a completed architecture section.
 
 **Revisit when:** The owner changes the repository, visibility, or documentation workflow.
 
@@ -125,7 +126,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Affected documents:** Product brief, README, decision register, open-question register. Later sections should use this priority when resolving scope and risks.
 
-**Related questions:** Q-002 resolved; Q-003 resolved for the pilot under D-008; Q-004 timing target approved under D-012; Q-004 app budget/capacity and Q-008 partially open; Q-005 and detailed Q-301/Q-302 scope still open. The supplied trip-spending range is separately recorded in D-014 and clarified in D-016.
+**Related questions:** Q-002 resolved; Q-003 resolved for the pilot under D-008; Q-004 timing target approved under D-012 and spending approach subsequently settled in D-017. Capacity, specific future costs, Q-008, Q-005, and detailed Q-301/Q-302 scope remain open. The trip-spending range is separately recorded in D-014 and clarified in D-016.
 
 **Revisit when:** Trip needs, timing, evidence, or the owner's explicit priorities change.
 
@@ -139,7 +140,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Reason:** Commercialization and revenue are the stated long-term goals, not merely portfolio or personal-use objectives.
 
-**Priority:** D-006 comes first. Commercial ambitions inform later design without authorizing immediate commercial implementation.
+**Priority:** D-006 comes first. Commercial ambitions inform later design without authorizing immediate commercial implementation. D-017 subsequently makes greater spending conditional on a working product meeting the owner's standards.
 
 **Confirmed versus unconfirmed:** Subscription and ad revenue are confirmed intentions. Pricing, billing intervals, free/paid entitlements, ad formats/placements, ad-free plans, vendors, implementation order, and when monetization enters the product remain OPEN. No extra revenue stream has been selected.
 
@@ -212,13 +213,13 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Boundaries:** This does not approve in-app booking, payments, reservation changes/cancellation, email or booking-account access, automatic imports, live prices/availability, a particular transport mode, a provider, an affiliate/commission model, or all-destination coverage. Entry methods, recommendation criteria, data verification, and booking handoffs remain to be specified. A recommendation is not confirmation that a booking has been made.
 
-**Scope effect:** Do not silently treat recommendations as a future-only capability or reduce the first version to a booking organizer. If later feasibility or timing requires a change, surface that tradeoff and obtain an explicit decision. This confirms capability inclusion, not the full feature specification or approval of Section 1.
+**Scope effect:** Do not silently treat recommendations as a future-only capability or reduce the first version to a booking organizer. If later feasibility or timing requires a change, surface that tradeoff and obtain an explicit decision. This confirms capability inclusion, not the full feature specification or approval of Section 1. D-017's free-first policy does not remove either support path.
 
 **Evidence limits:** This is a product choice, not a verified statement about data availability, recommendation quality, or development effort.
 
 **Affected documents:** Product brief, README, decision register, open-question register.
 
-**Related questions:** Q-009 resolved. Remaining detailed behavior in Q-209; coverage and acceptance conditions in Q-301/Q-302/Q-305; sourcing and concepts in Q-402/Q-404. Q-004's target was approved in D-012; its app budget and capacity remain open.
+**Related questions:** Q-009 resolved. Remaining detailed behavior in Q-209; coverage and acceptance conditions in Q-301/Q-302/Q-305; sourcing and concepts in Q-402/Q-404. Q-004's target was approved in D-012 and spending approach in D-017; specific costs and capacity remain open.
 
 **Revisit when:** The owner changes the requirement or evidence requires an explicit scope decision.
 
@@ -234,7 +235,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Boundaries:** Travel dates alone did not approve a software target; the approval is separately recorded in D-012. Neither establishes a public-launch commitment. Tokyo being named does not establish a Tokyo-only itinerary, a particular airport, accommodation nights, transfer durations, or full sightseeing days. Additional destinations remain open.
 
-**Related questions:** Q-004 timing target is now settled under D-012; budget and capacity remain open. Q-301 has Tokyo and a month-spanning pilot context; remaining coverage and detailed scheduling are open. Do not re-ask supplied travel endpoints simply because they are omitted from the public repository.
+**Related questions:** Q-004 timing target is settled under D-012; spending approach subsequently settled by D-017 while capacity and specific future costs remain open. Q-301 has Tokyo and a month-spanning pilot context; remaining coverage and detailed scheduling are open. Do not re-ask supplied travel endpoints simply because they are omitted from the public repository.
 
 **Revisit when:** The owner changes the test target, adds destinations, or changes travel plans.
 
@@ -254,7 +255,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Affected documents:** Product brief, README, decision register, open-question register. The blueprint's current-section status stays DRAFT.
 
-**Related questions:** Q-004 timing subquestion resolved. Monthly app-running costs, one-time costs, and development/maintenance capacity remain open. D-014's later trip-spending answer does not resolve those app costs. Q-304 and Q-501/Q-502 will define how the full test is evaluated.
+**Related questions:** Q-004 timing subquestion resolved. D-017 subsequently settles the free-first spending approach; actual service costs, one-time costs, and development/maintenance capacity remain open. D-014's trip-spending answer is not an app allowance. Q-304 and Q-501/Q-502 will define how the full test is evaluated.
 
 **Revisit when:** Scope or feasibility evidence requires an explicit target tradeoff, or the owner changes the milestone.
 
@@ -282,11 +283,11 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Confirmed input:** The owner requested a range, supplied lower and upper dollar-denominated amounts in chat, and explicitly excluded plane tickets. The numerical amounts stay in the conversation/private pilot configuration, not this public record. Currency and basis were initially open; D-016 subsequently confirms **per person**. Currency remains open.
 
-**Context and interpretation:** This answer followed a question about monthly app-running costs. The explicit airfare exclusion indicated trip spending instead. Record it as a traveler budget input, not an infrastructure allowance. The owner subsequently distinguished the app-cost question by requesting a tier comparison. Q-004 is still awaiting an operating-budget choice; no paid spending is authorized.
+**Context and interpretation:** This answer followed a question about monthly app-running costs. The explicit airfare exclusion indicated trip spending instead. Record it as a traveler budget input, not an infrastructure allowance. The owner subsequently distinguished the app-cost question by requesting a tier comparison and settled the app's free-first approach in D-017. No paid purchase is authorized from the travel range.
 
 **Product direction:** Support the chosen range and exclusion in the pilot's planning input. Do not silently replace the range with a single amount, assign it to app costs, or assume included categories beyond what the owner has specified.
 
-**Still OPEN:** Currency, whether it is total-trip or remaining spending, all category inclusions, upper-bound firmness, lower-bound meaning, and cost-display/calculation behavior. Per-person basis is resolved by D-016, not an open question. Q-011 retains the remaining meanings; Q-211 covers detailed behavior.
+**Still OPEN:** Currency, whether it is total-trip or remaining spending, all category inclusions, upper-bound firmness, lower-bound meaning, and cost-display/calculation behavior. Per-person basis is resolved by D-016, not an open question. Q-011 retains remaining meanings; Q-211 covers detailed behavior. Flexibility in the app budget under D-017 does not determine flexibility in the travel budget.
 
 **Proposed safeguards:** Configurable inputs rather than hardcoded personal amounts; do not treat the lower bound as a required minimum spend; clarify before using the upper bound as a hard cap; show estimates and unknown prices honestly; separate shared/per-person and paid/remaining amounts; avoid counting deposits twice. Excluding airfare from a budget does not remove flight times from itinerary planning. These safeguards are proposals, not a complete accounting specification.
 
@@ -294,7 +295,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Affected documents:** Product brief, README, decision register, open questions. Public records preserve the requirement and remaining questions, not personal financial figures.
 
-**Related questions:** Q-004 operating-budget selection is next following the requested comparison; Q-011 retains currency/category questions; detailed budget behavior in Q-211, scope in Q-308, and data/test considerations in Q-402/Q-404/Q-352.
+**Related questions:** Q-004 spending approach subsequently resolved by D-017; Q-011 retains currency/category questions; detailed budget behavior in Q-211, scope in Q-308, and data/test considerations in Q-402/Q-404/Q-352.
 
 **Revisit when:** The owner clarifies included costs, currency, or spending preferences.
 
@@ -312,7 +313,7 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Boundaries:** No automatic or in-app reservations, payments, cancellations, modifications, account/email access, availability guarantee, provider choice, release-date monitoring, notifications, or reminders are authorized by this requirement. No specific event/restaurant has been selected or externally verified, and no reservation has been made. An organizer's entered status and provider-verified status are not the same evidence.
 
-**Evidence limits:** This is a planning requirement, not proof that all required booking-window or availability data can be obtained, or that the requested scope fits the test target. Later feasibility findings may require an explicit tradeoff.
+**Evidence limits:** This is a planning requirement, not proof that all required booking-window or availability data can be obtained, or that the requested scope fits the test target. Later feasibility findings may require an explicit tradeoff. D-017 does not turn unavailable data into free or verified data.
 
 **Affected documents:** Product brief, README, decision register, open questions; later journeys, scope, data, and verification planning.
 
@@ -332,13 +333,41 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 **Boundaries:** The answer does not explicitly confirm currency, category inclusions, total versus remaining spending, a required equal division of shared expenses, minimum spend, or upper-limit enforcement. Private numerical bounds and derived personal totals remain in the chat. Do not count a shared hotel price twice simply because budgets are per person.
 
-**Separate app-budget request:** Researching and comparing app-cost tiers is not selecting a tier, authorizing purchases, choosing providers, approving a stack, or beginning implementation. The researched options and the assistant's proposed $100/month target / $150 ceiling are in [App Budget Options](00-app-budget-options.md), with exclusions and evidence limits. Q-004 remains OPEN for the owner's choice.
+**Separate app-budget request and later resolution:** Requesting the comparison did not select a tier, authorize a purchase, choose a provider/stack, or begin implementation. The original $100/month target and $150 fixed-ceiling recommendation was subsequently accepted with modifications under D-017: free first, flexible references, and greater spending after a working product meets the owner's standards. The retained comparison is in [App Budget Policy and Options](00-app-budget-options.md).
 
-**Affected documents:** Product brief, README, decision register, open-question register; new Section 1 budget-options supporting note.
+**Affected documents:** Product brief, README, decision register, open-question register; Section 1 budget-options supporting note.
 
-**Related questions:** Q-011's basis subquestion resolved. Remaining Q-011 questions stay open; Q-004 operating-envelope selection is the next discussion. Detailed budget behavior remains Q-211/Q-308.
+**Related questions:** Q-011's basis subquestion resolved. Remaining Q-011 questions stay open; Q-004's spending approach subsequently answered by D-017. Detailed travel-budget behavior remains Q-211/Q-308.
 
 **Revisit when:** The owner changes the travel budget's basis or supplies additional budget meanings.
+
+## D-017 — Free-first development with a flexible budget
+
+**Question:** Should the proposed $100 monthly operating target and $150 ceiling guide the pilot?
+
+**Decision:** Adopt the recommended rule as a **flexible reference**, not a fixed budget. Focus on building with suitable free options until an expense becomes necessary. Consider greater spending after the product works and meets the owner's standards.
+
+**Source of explicit approval:** The owner's instruction to start with the recommended rule but not fix it, build free until spending is necessary, and spend more once a working product meets their standards.
+
+**Current effect:** Aim for no additional app-service costs while free options adequately meet the current need. Retain $100/month as an initial paid-operation planning target and $150 as an upper reference for review, not a hard ceiling, required spending amount, automatic cutoff, or purchase authorization. No paid Tier 2 plan is activated. Lower spending is preferred where it works; higher future spending is possible by a subsequent decision.
+
+**Necessary spending versus expanded investment:** A genuinely necessary small expense may be considered before overall acceptance if it blocks an essential requirement or test. Present the blocker, free alternatives, smallest useful paid option, recurring/usage costs and overages, and consequence of waiting before obtaining a specific spending decision. Do not interpret the policy as approval to start paid subscriptions or metered billing. Larger discretionary investment should follow a demonstrated working product and the owner's assessment that it meets their standards.
+
+**Acceptance gate:** The owner determines whether the product meets their standards. Those standards need to be defined under Q-005 and later translated into measurable acceptance criteria under Q-304/Q-502. A functioning demo, attractive screens, passing mock tests, or reaching the calendar target does not by itself establish that acceptance. No acceptance is recorded by this budget decision.
+
+**Scope and evidence boundaries:** Preserve D-010 and D-015 and all other confirmed requirements. Free-first changes spending sequence, not approved capability inclusion. Label prepared data and simulated services; do not claim they prove live coverage, reliable persistence, correct routing, or production readiness. Investigate paid dependency risks early and surface any cost/scope/quality conflict rather than silently dropping features or claiming every dependency can be free. The policy does not excuse unsafe data handling or false availability claims.
+
+**Separate costs:** Coding-tool subscriptions/overages, one-time purchases, domains, app-store enrollment, hardware, and unpriced data contracts stay outside the monthly runtime reference and require separate decisions. The travel-budget amounts and their upper-bound behavior are unaffected. Existing personal subscriptions are not being reclassified as free.
+
+**Implementation and source boundaries:** Remain in Section 1 design under D-001/D-003. No stack, vendor, native/web choice, deployment, billing enrollment, purchase, or recurring task is approved. This policy-only update does not refresh the comparison's price references; verify relevant rates and terms before selection or spending.
+
+**Supersedes:** The earlier proposed fixed $150 ceiling and any implication that paid infrastructure should be activated at the start. Preserves the $100/$150 figures only as adjustable planning references.
+
+**Affected documents:** README, product brief, app-budget policy/options note, decision register, and open questions.
+
+**Related questions:** Q-004's spending-policy subquestion is answered. Available time, one-time/tool costs, and future specific expense approvals remain open. Q-005's product standards become the next Section 1 discussion. Detailed tests, free-tier suitability, data feasibility, and operational controls remain Q-304, Q-353/Q-355, Q-403/Q-405, and Q-502/Q-503.
+
+**Revisit when:** A necessary paid dependency is identified, measured usage outgrows a free allowance, the product meets the owner's standards, or the owner changes the budget policy. Flexibility must not be treated as unlimited authorization.
 
 ## Approval register
 
@@ -355,7 +384,8 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 | Tokyo-local arrival/departure timing | CONFIRMED user-supplied context; exact times omitted | D-013 |
 | Trip-budget range excluding plane tickets | INPUT RECORDED; per-person basis confirmed; currency/details OPEN | D-014, D-016 |
 | Event/restaurant reservation consideration | CONFIRMED planning requirement; details OPEN | D-015 |
-| Monthly app-running/testing budget | OPTIONS RESEARCHED; no tier, target, or ceiling approved | Q-004 and budget-options note |
+| App spending policy | CONFIRMED free-first, flexible $100/$150 references; no fixed ceiling or purchase approved | D-017 |
+| Working product meets owner's standards | NOT YET DEFINED OR DEMONSTRATED | Q-005, later Q-304 |
 | Sections 2–15 | NOT STARTED | None |
 | Complete pilot and first-public-release feature scope | NOT APPROVED; individual decisions above apply | None for complete scope |
 | Technical architecture and stack | NOT SELECTED | None |
@@ -364,9 +394,9 @@ A GitHub commit is not a product approval. Recommendations copied into the base 
 
 ## Proposals that must not be mistaken for decisions
 
-Organizer-led editing with companion suggestions; shared links showing only published updates; private unfinished edits; companion access without installation/accounts; Keep as interest rather than mandatory scheduling; must-dos/locked commitments; exact destination scope; Just exploring; provider/AI choices; advanced replanning; multi-city support; booking/payment integrations; an ads/billing-free pilot; pricing/ad placements; native or web-first delivery; imports; transport modes; recommendation criteria; scheduling and airport/transfer buffers; budget calculation/allocation rules; exact reservation/payment states; reminder/notification features; the operating tiers and $100 target / $150 ceiling in the budget comparison.
+Organizer-led editing with companion suggestions; shared links showing only published updates; private unfinished edits; companion access without installation/accounts; Keep as interest rather than mandatory scheduling; must-dos/locked commitments; exact destination scope; Just exploring; provider/AI choices; advanced replanning; multi-city support; booking/payment integrations; an ads/billing-free pilot; pricing/ad placements; native or web-first delivery; imports; transport modes; recommendation criteria; scheduling and airport/transfer buffers; travel-budget calculation/allocation rules; exact reservation/payment states; reminder/notification features; specific providers, allocations, and usage controls in the cost comparison.
 
-The confirmed concepts and inputs under D-006 through D-016 do not approve all detailed behavior. Trip-budget values are not an infrastructure allowance, reservation awareness is not permission to make bookings, and a researched price example is not a provider selection. Coherent suggestions remain proposals until decided.
+The confirmed concepts and inputs through D-017 do not approve all detailed behavior. Trip-budget values are not an infrastructure allowance, reservation awareness is not permission to make bookings, and flexible free-first guidance is not authorization to spend. The original fixed-ceiling recommendation is superseded; do not continue treating that as the current rule. Coherent suggestions remain proposals until decided.
 
 ## New decision template
 
