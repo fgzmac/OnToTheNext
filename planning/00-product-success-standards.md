@@ -1,14 +1,14 @@
 # Section 1 Supporting Note — Product Success Standards
 
-**Status:** Priority order, first-version same-day capability, and both experience formats CONFIRMED; owner preference examples and discovery sources RECORDED; shorter/all-day duration options PROPOSED; detailed behavior, metrics, and acceptance thresholds OPEN.  
+**Status:** Priority order, first-version same-day capability, both experience formats, and local/cultural discovery inclusion CONFIRMED; owner preference examples and discovery sources RECORDED; shorter/all-day duration options PROPOSED; detailed behavior, metrics, and acceptance thresholds OPEN.  
 **Owner:** Project owner (`fgzmac`).  
 **Recorded:** 2026-09-19.  
-**Decisions:** D-018; D-019 clarifies the initial organizer's taste; D-020 confirms both recommendation formats; D-021 records valued discovery sources.  
+**Decisions:** D-018; D-019 clarifies the initial organizer's taste; D-020 confirms both recommendation formats; D-021 records valued discovery sources; D-022 adds local recommendations and cultural experiences.  
 **Related section:** [Product Vision and Problem Brief](00-product-brief.md), especially 1.6, 1.7, 1.9, 1.12, and 1.16.  
 **Related questions:** Q-005, Q-006, resolved Q-012, Q-207, Q-212, Q-304, Q-309, Q-356, Q-402, Q-403.  
-**Source:** The owner's ranked standards, appealing/rejectable examples, format choice, duration idea, and account of discovery sources.  
+**Source:** The owner's ranked standards, appealing/rejectable examples, format choice, duration idea, account of discovery sources, and explicit addition of local recommendations and cultural experiences.  
 **Next discussion:** The most frustrating part of finding, checking, or organizing worthwhile experiences; the discovery-source portion of Q-006 is answered.  
-**Evidence status:** These are stated preferences and reported practices, not observed behavior. No product test, recommendation evaluation, live event search, or owner acceptance has been completed by writing this note.
+**Evidence status:** These are stated preferences, reported practices, and product choices, not observed behavior. No product test, recommendation evaluation, live event search, or owner acceptance has been completed by writing this note.
 
 ## Confirmed order of importance
 
@@ -35,6 +35,8 @@ Older proposals to postpone advanced same-day replanning must not be used to pos
 Basic permanent-place suggestions may complement events, but a generic list of nearby landmarks is not sufficient evidence that event discovery works. Likewise, an event occurring today is not necessarily occurring now, reachable in time, open for entry, or bookable.
 
 D-020 also confirms offering both ready-made provider excursions and app-assembled combinations. Their detailed coverage and release implementation remain to be scoped; neither should be silently removed. Duration options were suggested tentatively and are not an approved set of time limits.
+
+D-022 adds local recommendations and cultural experiences to discovery and trip planning. Carry both into minimum-coverage design without silently making them later-only or interpreting them as authorization to build a local-host marketplace.
 
 ## 1. Recommendation quality — proposed evaluation framework
 
@@ -69,7 +71,7 @@ Do not silently equate quality with popularity, high ratings, novelty, luxury, l
 
 ### Discovery sources and evidence preferences — D-021
 
-The owner reports finding activities through **real experiences, positive Reddit posts, highly rated reviews, calendars covering relevant dates, and popular must-see or must-experience events associated with the destination**. Record these five inputs without replacing them with a generic search-only strategy. They describe sources and signals the owner values, not a completed integration design.
+The owner reports finding activities through **real experiences, positive Reddit posts, highly rated reviews, calendars covering relevant dates, and popular must-see or must-experience events associated with the destination**. Record these five inputs without replacing them with a generic search-only strategy. They describe sources and signals the owner values, not a completed integration design. D-022 subsequently adds local recommendations alongside them.
 
 | Reported source or signal | Proposed contribution to recommendations | Proposed verification or interpretation boundary |
 | --- | --- | --- |
@@ -86,6 +88,25 @@ Community praise can support perceived appeal while an organizer's current infor
 **Proposed quality safeguards:** Retain useful critical caveats even when discovery begins from positive posts; avoid counting copied mentions as independent support; distinguish different editions or operators; disclose material conflicts and unknowns. Do not manufacture testimonials, ratings, source counts, or labels such as "Reddit recommended" without supporting retrieved evidence. Exact credibility rules, weighting, source display, and freshness thresholds remain open.
 
 **Access boundary:** Naming Reddit, reviews, or calendars does not approve scraping, paid APIs, account access, importing a user's history, copying posts/photos into the product, or training on community content. Evaluate suitable access, rights, attribution, retention, coverage, and cost in the dependency section. No posts, calendars, review records, or actual events were fetched or verified in this update.
+
+### Local recommendations and cultural experiences — D-022
+
+**Confirmed:** Include both in discovery and trip planning. Keep the distinction between a recommendation's source and the experience itself.
+
+| Addition | Proposed interpretation | Illustrative directions, not selected offerings |
+| --- | --- | --- |
+| Local recommendations | Advice from residents, local guides, community hosts, or locally based sources, with a reason for the recommendation. | A neighborhood food recommendation, a community event, or a guide's suggested experience. |
+| Cultural experiences | Opportunities to engage with or understand the destination's food, crafts, arts, customs, history, and everyday life. | A cooking workshop with a shared meal; a craft workshop; a locally guided neighborhood walk; a public performance or festival. |
+
+These examples are not a fixed category list or proof that a particular activity exists for the pilot. Local recommendations need not be hidden or obscure; popular highlights can also have local support. Cultural experiences may be participatory or observational. For this organizer, propose emphasizing engaging participation and context rather than assuming a standalone object or monument will appeal. D-019 does not exclude history or culture, and neither the companion nor all users inherit the same preference.
+
+**Proposed source standard:** Support a local-endorsement claim with appropriate source context. Nearby distance, the language used in a review, a high rating, or a generic listing does not by itself establish that local people recommended it. Distinguish an individual recommendation, a host's own promotion, a guide's selection, and wider agreement when evidence permits. Do not invent testimonials, residency verification, or “locals love it” labels. Exact source checks and labels remain for Q-402/Q-403.
+
+**Proposed cultural-information standard:** Describe what the traveler will do or observe, who offers it when known, and the relevant cultural context. Include language, visitor access, etiquette, participation limits, duration, costs, and reservation needs where material and supported. Do not fabricate “authentic” or “exclusive” claims, suggest private or restricted participation without permission, or portray one person's view as representing an entire community. A provider's commercial role should not be presented as independent community endorsement.
+
+**Fit with existing formats:** A cultural activity can be a strong standalone choice, part of a real provider excursion, or a component in an app-assembled plan. Do not manufacture a combined package. For same-day use, check actual date/time and entry feasibility rather than assuming a cultural festival is available now or a workshop accepts walk-ins.
+
+**Scope boundary:** Inclusion is approved; a local-host marketplace, direct guide contact, host accounts, community reviews, specific partnerships, paid sources, booking transactions, category filters, and numerical ranking weights are not. D-017's free-first rule and D-018's priority order remain unchanged. No sources or local/cultural offerings were externally verified in this update.
 
 ### Both ready-made excursions and app-assembled plans — D-020
 
@@ -135,7 +156,7 @@ Open same-day discovery
 
 Location permission with a manual-area alternative remains a proposed design, not a grant of location access. Do not require a fully built multi-day itinerary merely to investigate a same-day option; the exact entry requirements remain to be decided.
 
-**Candidate information for each result:** What the experience is; why it fits; where it occurs; the event's relevant date and start/end or admission window; travel effort; estimated visit length and cost with their basis; reservation or ticket needs; a source; and freshness/verification context when available. D-020 adds the distinction between provider offerings and app-assembled plans; Q-212 covers duration presentation. D-021 identifies valued discovery evidence, not guaranteed live event coverage.
+**Candidate information for each result:** What the experience is; why it fits; where it occurs; the event's relevant date and start/end or admission window; travel effort; estimated visit length and cost with their basis; reservation or ticket needs; a source; and freshness/verification context when available. D-020 adds the distinction between provider offerings and app-assembled plans; Q-212 covers duration presentation. D-021 identifies valued discovery evidence, and D-022 adds local/cultural inclusion, not guaranteed live event coverage.
 
 **Information distinctions to preserve in later specifications:**
 
@@ -167,7 +188,7 @@ Observe completion, hesitation, repeated input, requests for help, errors, recov
 
 ## Free-first spending and evidence
 
-D-017 remains unchanged: prefer suitable free approaches and review any necessary spending specifically. These standards, source preferences, and format choices do not select providers or authorize purchases.
+D-017 remains unchanged: prefer suitable free approaches and review any necessary spending specifically. These standards, source preferences, format choices, and local/cultural additions do not select providers or authorize purchases.
 
 However, do not defer finding out whether adequate event data exists until after polishing the entire interface. The early feasibility question is whether we can obtain enough genuinely useful, timely local options for the supported pilot area under acceptable access, use, and cost conditions. Festivals and pop-ups are requirements to investigate, not claims of coverage by a particular service. Real excursion listings and app-assembled components also require suitable evidence.
 
@@ -175,12 +196,12 @@ Prepared-data prototypes and live-data checks answer different questions. A free
 
 ## Outstanding decisions and next step
 
-**Answered:** Ranked standards; first-version same-day discovery; initial organizer preference examples (D-019); offer both ready-made excursions and app-assembled combinations (D-020/Q-012); valued discovery sources and signals (D-021).
+**Answered:** Ranked standards; first-version same-day discovery; initial organizer preference examples (D-019); offer both ready-made excursions and app-assembled combinations (D-020/Q-012); valued discovery sources and signals (D-021); include local recommendations and cultural experiences (D-022).
 
-**Proposed:** Shorter/all-day duration options, time controls, source-checking workflow, review interpretation, and evidence presentation. Their detailed rules are not approved.
+**Proposed:** Shorter/all-day duration options, time controls, source-checking workflow, review interpretation, evidence presentation, specific cultural categories, and local-source verification rules. Their detailed rules are not approved.
 
-**Open:** The owner's specific current planning frustration and organization process; detailed preference weights and companion preferences; minimum event/excursion coverage; source access and verification; location behavior; scheduling constraints; freshness/response targets; quantitative acceptance; and companion validation. Self-reported sources are not observed task evidence or broader demand validation.
+**Open:** The owner's specific current planning frustration and organization process; detailed preference weights and companion preferences; minimum event/excursion/local/cultural coverage; source access and verification; location behavior; scheduling constraints; freshness/response targets; quantitative acceptance; and companion validation. Self-reported sources are not observed task evidence or broader demand validation.
 
-The next Section 1 question is the remaining Q-006 pain point: **Which part takes the most effort now: finding worthwhile options, checking dates and booking requirements, or combining them into a practical plan?** These are examples, not assumed problems. Do not re-ask the sources, taste examples, or format choice.
+The next Section 1 question remains the Q-006 pain point: **Which part takes the most effort now: finding worthwhile options, checking dates and booking requirements, or combining them into a practical plan?** These are examples, not assumed problems. The additional discovery requirements do not answer this question. Do not re-ask the sources, taste examples, format choice, or local/cultural inclusion.
 
 No app code, external event/excursion search, Reddit/review/calendar retrieval, paid service, booking, or live test was created by this documentation update. Section 1 remains DRAFT, and later blueprint sections remain NOT STARTED.
