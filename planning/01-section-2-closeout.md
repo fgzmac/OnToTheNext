@@ -1,6 +1,6 @@
 # Section 2 Closeout — Users, Roles, and Ownership
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-20.  
 **Purpose:** Consolidate the initial user/role/ownership model before moving to Section 3 — User Journeys and Interface Behavior.
 
@@ -118,3 +118,10 @@ Approve Section 2 if the following model is correct:
 Approval advances the blueprint to **Section 3 — User Journeys and Interface Behavior**.
 
 Approval does not authorize implementation.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-20.  
+**Owner instruction:** “Approve section 2.”  
+**Effect:** Advance to Section 3 — User Journeys and Interface Behavior. This approval does not authorize implementation.
