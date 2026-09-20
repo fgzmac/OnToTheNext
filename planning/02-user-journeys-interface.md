@@ -320,4 +320,23 @@ Proposed contents:
 - current budget/expense snapshot,
 - recommendation cards for the next useful decision.
 
-**Recommended direction:** a trip-centered dashboard where the app surfaces the next useful decision, rather than forcing users to navigate every module manually.
+**Confirmed direction — D-046:** trip-centered workspace with Overview / Itinerary / Discover / Hotels / Reservations / Expenses / Map as the conceptual structure. Web exposes richer simultaneous context; mobile uses Home / Itinerary / Discover / Map / More with contextual access to secondary areas. The Overview surfaces the next useful action.
+
+## Next decision — Itinerary Builder
+
+**Q-203/Q-213/Q-305 follow-on:** How should the itinerary visually represent scheduled items, travel, free time, rest, reservations, and conflicts?
+
+Proposed model:
+- vertical timeline by day,
+- cards for activities/reservations,
+- explicit travel blocks,
+- explicit free-time blocks,
+- optional hotel/rest blocks,
+- fixed/locked versus flexible states,
+- visible booking status,
+- conflict warnings,
+- map synchronization,
+- drag/reorder on web plus accessible Move Earlier / Move Later controls,
+- simplified vertical timeline on mobile.
+
+Detailed proposal follows in the discussion.
