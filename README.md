@@ -6,6 +6,7 @@
 **Current blueprint section:** 1 — Product Vision and Problem Brief  
 **Current section status:** Draft; not yet approved  
 **First complete test target:** November 10, 2026 — approved planning target  
+**App spending policy:** Free first; flexible paid-operation reference; no paid service authorized  
 **Implementation:** Not started through this planning workflow  
 **Last updated:** 2026-09-19
 
@@ -17,7 +18,7 @@
 | --- | --- | --- |
 | [Planning blueprint](planning/blueprint.md) | The detailed, reusable framework for progressing from product vision to a buildable first release. | Adopted planning framework; not approval of every proposed feature. |
 | [Product vision and problem brief](planning/00-product-brief.md) | The current section, populated from the supplied app concept and confirmed objectives. | Draft for discussion. |
-| [App budget options](planning/00-app-budget-options.md) | Researched operating tiers, tradeoffs, example costs, and unresolved data-access risks for Section 1. | Options and recommendation only; no budget or vendor selected. |
+| [App budget policy and options](planning/00-app-budget-options.md) | Adopted free-first policy plus retained operating-tier comparisons, example costs, and data-access risks. | D-017 policy confirmed; providers, purchases, and detailed controls remain unselected. |
 | [Decision register](planning/decisions.md) | Explicitly confirmed decisions, with their reasoning and boundaries. | Maintained as decisions are made. |
 | [Open questions](planning/open-questions.md) | Unresolved questions organized by blueprint section. | Only the current section's questions are active. |
 
@@ -43,18 +44,26 @@ The product direction connects three jobs:
 
 | Priority | Goal | Boundaries |
 | --- | --- | --- |
-| Immediate | First complete test targeted for November 10, 2026, ahead of the Japan-trip pilot including Tokyo and two travelers. | Target approved, not a delivery guarantee. Detailed specifications, capacity, app costs, additional cities, and devices remain open. |
-| Ultimate | Launch commercially through a mobile app store or as a SaaS product, earning subscription and ad revenue. | Distribution approach, pricing, ad behavior, implementation timing, and launch date remain open. |
+| Immediate | First complete test targeted for November 10, 2026, ahead of the Japan-trip pilot including Tokyo and two travelers. | Free-first development. Target approved, not a delivery guarantee. Detailed specifications, capacity, paid-service needs, additional cities, and devices remain open. |
+| Ultimate | Launch commercially through a mobile app store or as a SaaS product, earning subscription and ad revenue. | Greater investment follows a working product meeting the owner's standards. Distribution, pricing, ad behavior, implementation timing, and launch date remain open. |
 
-See decisions **D-006 through D-016** in the [decision register](planning/decisions.md).
+See decisions **D-006 through D-017** in the [decision register](planning/decisions.md).
 
 The pilot is not a public-launch deadline. Japan is the first testing context, not a promise of nationwide coverage or a permanent Japan-only product. Tokyo is confirmed, but a Tokyo-only trip is not. A successful trip would provide pilot evidence, not automatically validate customer demand or subscription revenue.
 
 **Timing:** The owner approved **November 10, 2026** for the first complete test (D-012), establishing the 2026 planning calendar. The late-November to early-December trip spans approximately two weeks and crosses a month boundary. Supplied Tokyo-local times (D-013) establish late-day arrival and midday departure context. Exact private dates and clock times stay in chat. Proposed scheduling should distinguish airport events, hotel arrival/departure, transfers, and usable activity time; precise rules and buffers remain open.
 
-**App operating budget — proposal, not approval:** The owner requested tiers and pros/cons. The [supporting note](planning/00-app-budget-options.md) compares $0–$50, $75–$150, $150–$400, and $400–$1,500+ monthly USD operating envelopes. The assistant recommends evaluating the $75–$150 pilot tier, with a $100 normal target and $150 ceiling, excluding development tools and stated one-time/unpriced costs. No tier, spending cap, provider, or paid service has been approved or activated. The note separates published prices from our hypothetical allowances and does not guarantee live hotel/reservation access.
+## Adopted app budget rule — free first
 
-**Next discussion:** Q-004 — choose or revise the proposed monthly operating target and ceiling after reviewing the tiers. The trip-budget per-person basis is answered; do not ask it again. Remaining travel-currency/category questions stay under Q-011 without blocking the requested app-budget comparison.
+**D-017:** Build and test using suitable free options until an expense is necessary. Keep **$100/month as an initial paid-operation planning target and $150 as a flexible upper reference**, not a fixed ceiling, required spend, or permission to buy services. The owner can revise the allowance once actual needs are clear.
+
+Aim for **$0 in additional app-service costs for as long as practical**. Do not activate a paid tier just because it appeared in the cost comparison. Keep development tools, one-time purchases, store enrollment, and unpriced data agreements separate from the runtime reference.
+
+Before any paid commitment, identify the blocked requirement, free alternatives, expected cost and limits, and why it is necessary; obtain a specific spending decision. Greater discretionary spending should follow a working product that the owner judges to meet their standards. Those standards still need definition under Q-005; a limited necessary expense before that point is a separate decision, not blanket authorization.
+
+Free-first does not remove confirmed features, excuse unsafe or incorrect behavior, or make simulated data equivalent to verified live behavior. Investigate data access early and disclose any paid dependency; do not promise that all production capabilities will be free. No providers, paid accounts, deployments, or purchases have been selected or activated through this planning update.
+
+**Next discussion:** Q-005 — what must the first version do well for the owner to consider it successful and worth further investment? Q-004's spending approach is answered; development time, separate costs, and future expense approvals remain open. Do not re-ask the budget policy or the trip-budget per-person basis.
 
 ## Planning workflow
 
@@ -88,7 +97,7 @@ A confirmed product choice is not automatically a validated market assumption. A
 
 Codex will be used to implement the app after the design phase. Until that phase is explicitly approved as complete, this workflow is documentation-only: do not scaffold the app, choose a stack, install dependencies, provision services, implement endpoints, or create a database merely to fill a planning gap.
 
-Design completion means the product direction, first-release scope, main journeys, important constraints and risks, and first buildable delivery slice are sufficiently defined. It does **not** mean specifying every future feature. Approval of a testing target is not approval of the design-to-implementation transition.
+Design completion means the product direction, first-release scope, main journeys, important constraints and risks, and first buildable delivery slice are sufficiently defined. It does **not** mean specifying every future feature. Approval of a testing target or a free-first spending policy is not approval of the design-to-implementation transition.
 
 Future implementation should use approved planning documents. Proposed features, unresolved permissions, example providers, and hypothetical technical choices are not implementation instructions. Conflicts or missing product decisions must be surfaced rather than silently invented.
 
@@ -96,19 +105,19 @@ Future implementation should use approved planning documents. Proposed features,
 
 No technology stack, database, authentication system, AI model, data provider, companion-permission model, sharing-access policy, complete pilot scope, or final commercial-release scope has been selected. Individual confirmed requirements must be preserved while remaining decisions are made.
 
-The pilot's Japan/Tokyo context, travel timing, two-person group, and dated test target are supplied or confirmed. Additional destinations, airports, transfers, hotel check-in/out, and practical activity windows are not. Flight times alone do not establish hotel-ready times or when to leave the hotel. Organizer-led collaboration remains a proposal. The providers discussed in the base concept and cost comparison are examples to evaluate, not selected integrations. No hotel, restaurant/event booking, timetable, reservation, or price-comparison provider is selected.
+The pilot's Japan/Tokyo context, travel timing, two-person group, and dated test target are supplied or confirmed. Additional destinations, airports, transfers, hotel check-in/out, and practical activity windows are not. Flight times alone do not establish hotel-ready times or when to leave the hotel. Organizer-led collaboration remains a proposal. Providers in the base concept and cost comparison are examples to evaluate, not selected integrations. No hotel, restaurant/event booking, timetable, reservation, or price-comparison provider is selected. Cost references need rechecking before selection or spending.
 
-Subscription and ad revenue are intentions, not a finalized tier model or authority to implement billing/ads now. A pilot without monetization is a proposed boundary, not an approved exclusion. App-store or SaaS delivery has not settled the pilot platform or architecture.
+Subscription and ad revenue are intentions, not a finalized tier model or authority to implement billing/ads now. A pilot without monetization is a proposed feature boundary, distinct from the confirmed preference not to spend unnecessarily on building it. App-store or SaaS delivery has not settled the pilot platform or architecture.
 
 A proposed exclusion of in-app booking/payment does not exclude organizing existing bookings, recommending options, or accounting for restaurant/event reservation needs. These planning capabilities do not authorize making, changing, or canceling reservations. Exact data sources, workflows, verification, scheduling protection, and reminders remain open.
 
-Budget ranges, price estimates, paid amounts, category totals, and excluded costs must not be conflated. The lower bound is not an approved minimum-spend rule; the upper bound's firmness is undecided. The travel range is per person, must not be used for hosting/API/AI/development spending, and does not specify an equal split for each shared expense. Airfare's budget exclusion does not remove flight timing from the plan.
+Travel-budget ranges, price estimates, paid amounts, category totals, and excluded costs must not be conflated. The lower bound is not an approved minimum-spend rule; the travel upper bound's firmness is undecided. The travel range is per person, must not be used for hosting/API/AI/development spending, and does not specify an equal split for each shared expense. Airfare's budget exclusion does not remove flight timing from the plan. D-017's flexibility applies to the app budget, not automatically to the travel budget.
 
 Do not silently defer a confirmed capability. Any scope reduction requires an explicit decision.
 
 ## Public repository
 
-This repository is public. Record only minimum non-sensitive milestone context and anonymous pilot profiles. Keep personal spending amounts, exact travel dates/times, detailed schedules, credentials, companion names, private booking information, and identifying research responses out of commits. Use fictional or redacted examples. Omitted private inputs are not missing user input; consult the conversation rather than asking the owner to repeat them. The software-testing target and hypothetical app operating allowances are project-planning material, not a published private travel budget or flight schedule.
+This repository is public. Record only minimum non-sensitive milestone context and anonymous pilot profiles. Keep personal spending amounts, exact travel dates/times, detailed schedules, credentials, companion names, private booking information, and identifying research responses out of commits. Use fictional or redacted examples. Omitted private inputs are not missing user input; consult the conversation rather than asking the owner to repeat them. The software-testing target and app operating references are project-planning material, not a published private travel budget or flight schedule.
 
 ## Update rules
 
