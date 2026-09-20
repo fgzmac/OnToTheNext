@@ -340,3 +340,24 @@ Proposed model:
 - simplified vertical timeline on mobile.
 
 Detailed proposal follows in the discussion.
+
+
+## Itinerary Builder — D-047
+
+**Confirmed:** vertical day timeline with explicit travel, free time, rest, fixed/flexible states, conflicts, preview-before-change, synchronized map, and responsive web/mobile behavior.
+
+Accessible alternatives to drag/reorder are required.
+
+## Next decision — Discover / Activity Recommendation
+
+Design recommendation cards and reactions:
+- image/visual,
+- what the experience is,
+- why it fits,
+- source/evidence summary,
+- current logistics status,
+- group fit,
+- cost/duration/location,
+- reservation status,
+- Keep / Reject / Must-do / Compare / Show Different,
+- refinement from reaction reasons.
