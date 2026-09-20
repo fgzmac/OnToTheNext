@@ -60,7 +60,7 @@ Whole Section 1 remains unapproved. The detailed brief and main register retain 
 | --- | --- | --- |
 | Q-101 | Ownership and companion view/suggest/edit rights, including same-day changes? | RESOLVED D-039: organizer owns/finalizes; companions can view, react, and suggest but do not directly overwrite confirmed plans by default. |
 | Q-102 | Accounts and timing? | OPEN. |
-| Q-103 | Link/invitation access and revocation? | OPEN. |
+| Q-103 | Link/invitation access and revocation? | NEXT: decide unique invites, organizer revocation, and unused-link expiration. |
 | Q-104 | Publish/delete/invite/remove access/transfer ownership? | OPEN. |
 | Q-105 | Private booking/spending/location/other information? | OPEN; public repo does not mean public trips. |
 | Q-106 | Collect/combine group and individual tastes, hotel strategies, exclusions, budgets, and pace? | OPEN; do not apply organizer preferences/reactions universally. |
