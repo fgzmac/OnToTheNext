@@ -461,3 +461,30 @@ Formalize:
 - expense participation,
 - group activity visibility,
 - and notification/attention behavior.
+
+
+## Companion Collaboration simplification — D-053
+
+**Confirmed:** no in-app thumbs-up/down, planning suggestions, hotel/activity voting, or proposal approval workflow is needed.
+
+Companion experience is primarily:
+- view shared trip,
+- access itinerary/reservation/map details,
+- view shared costs,
+- add their own expenses,
+- see balances,
+- record settlements.
+
+The organizer handles planning changes.
+
+## Next decision — On-Trip Mobile Home / Today
+
+Formalize what the traveler sees once the trip begins:
+- next activity,
+- today's timeline,
+- ticket/reservation access,
+- directions,
+- return-to-hotel action,
+- nearby discovery,
+- quick expense entry,
+- and live day adjustments.
