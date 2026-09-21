@@ -217,3 +217,14 @@ The core role/ownership model is now defined:
 Remaining details such as exact invite expiry duration, expense-edit permissions, raw-preference visibility, deletion recovery, and ownership-transfer mechanics can be specified in later interface/data/security work.
 
 **Section 2 is ready for closeout review.**
+
+
+## Companion model amendment — D-053
+
+The owner simplified the companion role after Section 2 approval.
+
+**Current rule:** companions view the trip and participate in shared expenses. They do not need in-app thumbs-up/down reactions, planning suggestions, hotel/activity voting, or itinerary-change proposals.
+
+Planning feedback can happen directly between travelers outside the app, with the organizer making changes.
+
+This amendment supersedes the reaction/suggestion portions of D-039 and D-044 while preserving invite/access, shared visibility, organizer control, and expense participation.
