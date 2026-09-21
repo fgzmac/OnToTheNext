@@ -427,3 +427,21 @@ Formalize:
 - settlement,
 - reservation-to-expense handoff,
 - and web/mobile layouts.
+
+
+## Expenses & Split Costs — D-051
+
+**Confirmed:** shared expense entry, equal/exact/percentage/shares splits, multi-currency preservation, running balances, external-payment settlement records, reservation-to-expense handoff, and planned-vs-actual trip spending.
+
+Direct in-app payment processing and detailed restaurant itemization are not required at this stage.
+
+## Next decision — Map experience
+
+Formalize:
+- itinerary/map synchronization,
+- hotel and activity markers,
+- planned versus suggested places,
+- food/shopping/transit layers,
+- route and travel-time context,
+- nearby discovery,
+- and responsive web/mobile behavior.
