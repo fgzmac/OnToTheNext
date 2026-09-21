@@ -445,3 +445,19 @@ Formalize:
 - route and travel-time context,
 - nearby discovery,
 - and responsive web/mobile behavior.
+
+
+## Map Experience — D-052
+
+**Confirmed:** trip-aware map synchronized with itinerary and hotel screens, distinct planned/suggested/logistics states, whole-trip/city/day views, layers, route-quality context, hotel comparisons, nearby discovery, and privacy-preserving location choices.
+
+## Next decision — Companion Collaboration
+
+Formalize:
+- reactions,
+- suggestions,
+- proposed itinerary changes,
+- organizer approval/rejection,
+- expense participation,
+- group activity visibility,
+- and notification/attention behavior.
