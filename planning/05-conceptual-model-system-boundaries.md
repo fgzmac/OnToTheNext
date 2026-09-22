@@ -777,4 +777,50 @@ The Planned Cost should not be overwritten by the Expense. Keeping both allows t
 
 If no estimate existed before purchase, a Reservation may link directly to an Expense.
 
-**Recommended direction:** Reservation may reference both Planned Cost and Expense, preserving both when they exist.
+**Confirmed direction — D-078:** Reservation may reference both Planned Cost and Expense, preserving both when they exist.
+
+
+## Next decision — Reservation workflow versus external inventory facts
+
+**Q-514:** Should Reservation state remain separate from external inventory/availability evidence?
+
+Recommended model:
+
+### Reservation
+Represents the user's workflow/booking state:
+- Book now
+- Opens later
+- Check back
+- Booked
+- Needs attention
+- Cancelled
+
+### Evidence / Availability facts
+Represents what an external source currently says:
+- inventory currently available/unavailable,
+- next release date/time,
+- booking-window rule,
+- official sale date,
+- last verified time,
+- source.
+
+Example:
+
+```text
+Reservation state: CHECK BACK
+
+Evidence:
+- Current inventory unavailable
+- Next release: Oct 3 at 10:00 JST
+- Source: official venue
+- Verified: Sep 21
+```
+
+Why separate them:
+- external inventory can change without changing the user's intent,
+- stale inventory data can be clearly identified,
+- the app avoids pretending to be the authoritative inventory system,
+- multiple sources can disagree,
+- workflow state remains stable even while evidence refreshes.
+
+**Recommended direction:** keep Reservation workflow state separate from inventory/availability Evidence Records.
