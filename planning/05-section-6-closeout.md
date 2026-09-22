@@ -1,6 +1,6 @@
 # Section 6 Closeout — Conceptual Model and System Boundaries
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-21.  
 **Purpose:** Consolidate the core domain model and system boundaries before architecture and quality decisions.
 
@@ -203,3 +203,10 @@ Approve Section 6 if this conceptual model is correct.
 Approval advances the blueprint to **Section 7 — Architecture, Quality, and External Dependencies**.
 
 Approval does not authorize implementation.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-21.  
+**Owner instruction:** “Approve section 6.”  
+**Effect:** Advance to Section 7 — Architecture, Quality, and External Dependencies. This approval does not authorize implementation.
