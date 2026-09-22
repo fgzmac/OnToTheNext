@@ -237,4 +237,24 @@ Why:
 - keeps Sprint 1 smaller,
 - still honors D-088 once providers are actually introduced.
 
-**Recommended direction:** no unused provider stubs in Sprint 1; add adapters just-in-time with the feature that needs them.
+**Confirmed direction — D-107:** Sprint 1 does not create unused provider stubs; adapters are introduced just-in-time with the first real provider-backed feature.
+
+
+## Section 12 status
+
+The Sprint 1 implementation boundary is now sufficiently defined.
+
+Confirmed:
+- real Trip / Segment / Day persistence and validation,
+- real Home / Itinerary / Discover shell,
+- deterministic prototype-owner identity,
+- deterministic Japan development seed data,
+- no production auth,
+- no external providers,
+- no unused provider stubs,
+- no background jobs,
+- no object storage,
+- no fake Discover functionality,
+- strict scope control against later-feature creep.
+
+**Section 12 is ready for closeout review.**
