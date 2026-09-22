@@ -1,6 +1,6 @@
 # Section 3 Closeout — User Journeys and Interface Behavior
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-21.  
 **Purpose:** Consolidate the approved UI/journey decisions into one simple product structure before moving to Section 4 — First-Release Scope and Success Measures.
 
@@ -339,3 +339,10 @@ Approve Section 3 if this simplified structure is correct:
 Approval advances the blueprint to **Section 4 — First-Release Scope and Success Measures**.
 
 Approval does not authorize implementation.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-21.  
+**Owner instruction:** “Approve section 3.”  
+**Effect:** Advance to Section 4 — First-Release Scope and Success Measures. This approval does not authorize implementation.
