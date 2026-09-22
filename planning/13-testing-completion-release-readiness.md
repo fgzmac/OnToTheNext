@@ -301,4 +301,18 @@ Optional but useful:
 
 The goal is not bureaucracy. It is to make Sprint 1 completion reproducible and easy to review.
 
-**Recommended direction:** require a concise completion report with test/migration results, manual checks, and known issues before accepting Sprint 1.
+**Confirmed direction — D-115:** Sprint 1 requires a concise completion report with test/migration results, manual checks, known issues, implementation summary, and scope confirmation before acceptance.
+
+
+## Section 14 status
+
+Sprint 1 testing, completion, and acceptance requirements are now sufficiently defined.
+
+Confirmed:
+- automated coverage for domain rules, database behavior, and the core end-to-end flow,
+- manual visual/responsive checks for lower-risk UI concerns,
+- zero known blockers/data-integrity defects,
+- documented low-risk polish issues may carry forward,
+- concise completion evidence required before milestone acceptance.
+
+**Section 14 is ready for closeout review.**
