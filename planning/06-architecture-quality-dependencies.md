@@ -381,4 +381,31 @@ Exact provider should be selected after comparing:
 - security,
 - operational simplicity.
 
-**Recommended direction:** managed authentication with full accounts + lightweight guest identity + guest-to-account upgrade.
+**Amended direction — D-083:** keep managed authentication with full accounts + lightweight guest identity as the later commercial architecture, but defer full auth/privacy/security implementation during the current personal-use prototype.
+
+For now:
+- favor single-owner/private-use operation,
+- mock or simplify companion authentication until multi-user testing requires it,
+- keep only a minimum security baseline: server-side secrets, no committed credentials, no plaintext passwords, no public guessable access to private trip data, and no storage of payment credentials.
+
+
+## Prototype security scope — D-083
+
+Production-grade authentication, privacy, consent, and security hardening are intentionally deferred until the app is validated and moving toward public/commercial release.
+
+This does **not** defer basic secret-handling and private-access hygiene.
+
+## Next decision — Database and data access
+
+**Q-604:** Should the prototype use PostgreSQL from the beginning, or start with a lighter local database and migrate later?
+
+**Recommended direction:** use PostgreSQL from the beginning.
+
+Why:
+- the conceptual model is highly relational,
+- expenses/allocations/memberships benefit from relational constraints,
+- avoids a migration from a throwaway data model later,
+- managed PostgreSQL is inexpensive and simple enough for a personal prototype,
+- still works cleanly with the modular monolith.
+
+Exact hosting provider and ORM remain open.
