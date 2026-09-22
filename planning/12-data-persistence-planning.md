@@ -299,4 +299,37 @@ Because Sprint 1 has no real Itinerary Items yet, deleting obsolete Day rows dur
 
 Later, once Days have itinerary content, Day deletion/remapping must become migration-aware.
 
-**Recommended direction:** reconcile Days by unique `(tripId, date)` during Sprint 1 regeneration.
+**Confirmed direction — D-110:** Sprint 1 reconciles Days by unique `(tripId, date)` during regeneration.
+
+
+## Next decision — Segment deletion / Day foreign-key behavior
+
+**Q-1204:** If a TripSegment is removed, should existing Day rows survive and simply become Unassigned where that Segment previously owned them?
+
+**Recommended direction:** yes.
+
+Persistence behavior:
+- `Day.primarySegmentId` remains nullable.
+- Removing a Segment must not cascade-delete Days.
+- The Segment mutation + Day regeneration occurs in one transaction.
+- Regeneration reassigns each affected Day to another valid Segment when the boundary rules say so.
+- Otherwise, set `primarySegmentId = null` and surface the date as Unassigned.
+
+Conceptually:
+
+```text
+Before:
+Nov 30 → Kyoto Segment
+
+Remove Kyoto Segment
+
+After regeneration:
+Nov 30 → Unassigned
+```
+
+Why:
+- Days belong to the Trip calendar, not to the Segment lifecycle.
+- Segment removal should create visible planning gaps rather than erase calendar dates.
+- Matches D-098 temporary Unassigned-day behavior.
+
+**Recommended direction:** no Segment→Day cascade delete; preserve Days and regenerate assignment.
