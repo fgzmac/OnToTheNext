@@ -823,4 +823,53 @@ Why separate them:
 - multiple sources can disagree,
 - workflow state remains stable even while evidence refreshes.
 
-**Recommended direction:** keep Reservation workflow state separate from inventory/availability Evidence Records.
+**Confirmed direction — D-079:** keep Reservation workflow state separate from inventory/availability Evidence Records.
+
+
+## Next decision — App-owned actions versus provider handoffs
+
+**Q-515:** For V1, should the app own trip state and orchestration while handing specialized external actions to authoritative providers?
+
+Recommended boundary:
+
+### App owns
+- trip structure,
+- recommendations and user decisions,
+- itinerary,
+- reservation workflow state,
+- planned costs,
+- expense ledger,
+- companion membership,
+- share presentation,
+- Today experience.
+
+### External providers own
+- actual ticket purchase,
+- hotel purchase/booking transaction,
+- airline/train purchase where applicable,
+- money transfer/payment,
+- turn-by-turn navigation,
+- live inventory,
+- authoritative venue hours/rules,
+- live transit/weather feeds.
+
+The app can launch/handoff to those services and then store the result the user confirms.
+
+Example:
+
+```text
+Reservation
+→ Open official booking provider
+→ User purchases externally
+→ Return to app
+→ Mark/confirm Booked
+→ Save confirmation + Expense
+```
+
+Why this is preferred for V1:
+- keeps scope realistic,
+- avoids rebuilding specialized systems,
+- preserves authoritative providers,
+- still lets the app remain the source of truth for the Trip.
+
+**Recommended direction:** app owns the trip; specialized providers own the transaction/navigation/live-authority layer.
