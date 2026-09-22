@@ -3,8 +3,8 @@
 **Purpose:** The main planning framework for this project.  
 **Source:** The app-building blueprint adopted in the planning conversation.  
 **Framework status:** CONFIRMED as the planning process; not approval of every product proposal.  
-**Current section:** 7 — Architecture, Quality, and External Dependencies.  
-**Current section status:** IN REVIEW — Section 7 closeout prepared; awaiting explicit owner approval.  
+**Current section:** 8 — Lightweight API Capability Inventory.  
+**Current section status:** DRAFT — Section 7 approved; Section 8 active.  
 **Last updated:** 2026-09-19.  
 **Next review trigger:** The next planning answer from the project owner.
 
