@@ -341,4 +341,44 @@ Why:
 Important:
 This is a delivery/implementation choice, not a downgrade of mobile. Mobile UX remains first-class.
 
-**Recommended direction:** responsive web + PWA-style V1, native apps later if validated.
+**Confirmed direction — D-082:** responsive web + PWA-style V1, with native apps deferred until validated needs justify them.
+
+
+## Next decision — Authentication and guest identity
+
+**Q-603:** How should V1 handle accounts and lightweight companion access?
+
+Recommended direction:
+
+### Full users
+Support standard authenticated accounts for organizers and returning users.
+
+### Guests
+A companion can join through a unique invite and receive a lightweight guest identity without completing a full signup flow.
+
+### Upgrade path
+A guest may later create/claim a full account while preserving:
+- Trip Membership,
+- expense history,
+- settlements,
+- access to the shared Trip.
+
+### Session/security requirements
+- server-managed secure sessions,
+- invite tokens stored/validated securely,
+- revocation support,
+- unused-invite expiry,
+- no provider secrets exposed to the client.
+
+### Provider strategy
+Use a mature managed authentication provider or well-supported auth framework rather than building password/session security from scratch.
+
+Exact provider should be selected after comparing:
+- guest/anonymous identity support,
+- account linking,
+- Next.js support,
+- pricing,
+- security,
+- operational simplicity.
+
+**Recommended direction:** managed authentication with full accounts + lightweight guest identity + guest-to-account upgrade.
