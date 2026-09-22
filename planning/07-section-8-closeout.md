@@ -1,6 +1,6 @@
 # Section 8 Closeout — Lightweight API Capability Inventory
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-21.  
 **Purpose:** Consolidate the capabilities the application must support before moving into roadmap and sprint planning.
 
@@ -173,3 +173,10 @@ Approve Section 8 if this capability inventory and internal-only V1 API boundary
 Approval advances the blueprint to **Section 9 — Roadmap and Sprint Brief**.
 
 Approval does not authorize implementation.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-21.  
+**Owner instruction:** “Approve section 8.”  
+**Effect:** Advance to Section 9 — Roadmap and Sprint Brief. This approval does not authorize implementation.
