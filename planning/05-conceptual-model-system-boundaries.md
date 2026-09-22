@@ -872,4 +872,36 @@ Why this is preferred for V1:
 - preserves authoritative providers,
 - still lets the app remain the source of truth for the Trip.
 
-**Recommended direction:** app owns the trip; specialized providers own the transaction/navigation/live-authority layer.
+**Confirmed direction — D-080:** the app owns trip state/orchestration; specialized providers own transactions, turn-by-turn navigation, and authoritative live-data layers.
+
+
+## Section 6 status
+
+The major conceptual model and system boundaries are now defined.
+
+Key confirmed concepts include:
+- Trip
+- Trip Segment
+- Day
+- typed Itinerary Item
+- Place
+- Recommendation
+- Recommendation Decision
+- typed Reservation
+- Source
+- Evidence Record
+- User/Guest Identity
+- Trip Membership
+- User Preference Profile
+- Trip Preference Profile
+- Trip Budget
+- Planned Cost
+- Expense
+- Expense Allocation
+- Settlement
+- Hotel Stay
+- Share Presentation
+- Share Link
+- Companion Invite
+
+**Section 6 is ready for closeout review.**
