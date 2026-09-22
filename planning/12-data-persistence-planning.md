@@ -332,4 +332,39 @@ Why:
 - Segment removal should create visible planning gaps rather than erase calendar dates.
 - Matches D-098 temporary Unassigned-day behavior.
 
-**Recommended direction:** no Segment→Day cascade delete; preserve Days and regenerate assignment.
+**Confirmed direction — D-111:** removing a Segment does not cascade-delete Days; Days are regenerated/reassigned or become Unassigned.
+
+
+## Next decision — Trip deletion cascade behavior
+
+**Q-1205:** If a Trip is deleted in development/Sprint 1, should its owned child records be deleted with it?
+
+**Recommended direction:** yes.
+
+A Trip owns:
+- TripSegments,
+- Days,
+- TripPreferenceProfile.
+
+For Sprint 1, deleting the Trip should remove those child records transactionally/cascade at the database relationship level where appropriate.
+
+Conceptually:
+
+```text
+Delete Trip
+→ delete Segments
+→ delete Days
+→ delete TripPreferenceProfile
+```
+
+The PrototypeUser should **not** be deleted when one Trip is deleted.
+
+Why:
+- these child records have no meaning without their Trip,
+- simplifies development reset/testing,
+- avoids orphan records,
+- matches aggregate ownership.
+
+This is different from Segment deletion, where Days must survive because they belong to the Trip calendar.
+
+**Recommended direction:** Trip deletion cascades to Trip-owned child records; PrototypeUser survives.
