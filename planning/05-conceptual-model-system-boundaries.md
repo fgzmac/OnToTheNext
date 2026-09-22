@@ -305,7 +305,7 @@ The app may summarize or cache supported data, but should not pretend to be the 
 
 **Q-501:** Should `Reservation` be one general concept shared by activities, hotels, and transportation, or should those use separate booking concepts?
 
-**Recommended direction:** use one general **Reservation** concept with typed details.
+**Confirmed direction — D-066:** use one general **Reservation** concept with typed details.
 
 Example:
 - Activity reservation
@@ -318,3 +318,30 @@ Why:
 - still allows type-specific fields.
 
 A Hotel Stay remains its own trip concept, but its booking details can reference a Reservation.
+
+
+## Next decision — Itinerary item model
+
+**Q-502:** Should the day timeline use one general `Itinerary Item` concept with typed variants?
+
+Proposed types:
+- Activity
+- Meal
+- Shopping
+- Transportation / Transit
+- Free Time
+- Hotel / Rest
+- Custom
+
+Shared fields could include:
+- date/day,
+- start time,
+- end time or duration,
+- position/order,
+- fixed/flexible state,
+- notes,
+- place/location where relevant.
+
+Type-specific details would be added only when needed.
+
+**Recommended direction:** yes — one typed Itinerary Item model, because every day block needs ordering/timing behavior even though the content differs.
