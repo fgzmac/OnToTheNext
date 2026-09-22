@@ -274,4 +274,46 @@ Do **not** represent Sprint 1 date-only values as midnight UTC timestamps.
 
 Later, when reservations and transportation add exact times, introduce timezone-aware date-time values separately.
 
-**Recommended direction:** ISO date-only strings / database DATE semantics for Sprint 1 calendar dates.
+**Confirmed direction — D-102:** use ISO date-only values / database DATE semantics for all Sprint 1 Trip, Segment, and Day calendar dates.
+
+
+## Next decision — Atomic Segment reordering
+
+**Q-1003:** Should `reorderSegments` accept the complete ordered list of Segment IDs for the Trip and apply the reorder atomically?
+
+Recommended contract:
+
+```text
+reorderSegments({
+  tripId,
+  orderedSegmentIds: [
+    segmentA,
+    segmentB,
+    segmentC,
+    segmentD
+  ]
+})
+```
+
+Server validation:
+- every supplied Segment belongs to the Trip,
+- no duplicate IDs,
+- no existing Segment is omitted,
+- no foreign Segment is included.
+
+If validation succeeds:
+- update all positions in one transaction,
+- keep Segment dates unchanged,
+- re-run structural validation,
+- regenerate Days if needed,
+- return warnings if the order is logically incomplete but still valid.
+
+If validation fails:
+- apply none of the reorder.
+
+Why this is safer than sending individual position changes:
+- avoids duplicate positions,
+- avoids transient half-reordered states,
+- makes drag/reorder behavior deterministic.
+
+**Recommended direction:** full ordered ID list + atomic reorder.
