@@ -1,14 +1,12 @@
-import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
 import { TripNav } from "@/app/components/trip-nav";
-import { getTripSkeleton } from "@/src/modules/trips/service";
+import { loadTripSkeleton } from "./load-trip";
 
 export const dynamic = "force-dynamic";
 
-export default async function TripLayout({ children, params }: Readonly<{ children: React.ReactNode; params: Promise<{ tripId: string }> }>) {
+export default async function TripLayout({ children, params }: Readonly<{ children: ReactNode; params: Promise<{ tripId: string }> }>) {
   const { tripId } = await params;
-  const result = await getTripSkeleton(tripId);
-  if (!result.ok || !result.data) notFound();
-  const { trip } = result.data;
+  const { trip } = await loadTripSkeleton(tripId);
 
   return (
     <main className="page">

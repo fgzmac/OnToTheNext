@@ -1,14 +1,11 @@
-import { notFound } from "next/navigation";
 import { AddSegmentForm } from "@/app/components/add-segment-form";
 import { SegmentCard } from "@/app/components/segment-card";
 import { TripDetailsForm } from "@/app/components/trip-details-form";
-import { getTripSkeleton } from "@/src/modules/trips/service";
+import { loadTripSkeleton } from "./load-trip";
 
 export default async function TripHomePage({ params }: { params: Promise<{ tripId: string }> }) {
   const { tripId } = await params;
-  const result = await getTripSkeleton(tripId);
-  if (!result.ok || !result.data) notFound();
-  const { trip, segments, unassignedDates } = result.data;
+  const { trip, segments, unassignedDates } = await loadTripSkeleton(tripId);
   const ids = segments.map((segment) => segment.id);
 
   const makeMoveOrder = (index: number, direction: -1 | 1) => {

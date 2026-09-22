@@ -1,5 +1,4 @@
-import { notFound } from "next/navigation";
-import { getTripSkeleton } from "@/src/modules/trips/service";
+import { loadTripSkeleton } from "../load-trip";
 
 function prettyDate(dateOnly: string) {
   const date = new Date(`${dateOnly}T12:00:00.000Z`);
@@ -8,9 +7,7 @@ function prettyDate(dateOnly: string) {
 
 export default async function ItineraryPage({ params }: { params: Promise<{ tripId: string }> }) {
   const { tripId } = await params;
-  const result = await getTripSkeleton(tripId);
-  if (!result.ok || !result.data) notFound();
-  const { days, segments } = result.data;
+  const { days, segments } = await loadTripSkeleton(tripId);
   const segmentNames = new Map(segments.map((segment) => [segment.id, segment.baseName]));
 
   return (
