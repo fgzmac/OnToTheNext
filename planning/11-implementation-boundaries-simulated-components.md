@@ -204,4 +204,37 @@ Why:
 - easy regression checks for repeated-city Segments and transfer boundaries,
 - useful for responsive testing without recreating the same trip manually every time.
 
-**Recommended direction:** include deterministic Japan seed data for development, but do not make the product depend on it.
+**Confirmed direction — D-106:** include deterministic Japan seed data for development/testing convenience, while keeping the real Create Trip flow fully functional and independent.
+
+
+## Next decision — Empty provider abstractions in Sprint 1
+
+**Q-1103:** Should Sprint 1 create placeholder adapters/interfaces for Maps, Hotels, Weather, Transit, Currency, and other providers even though none are used yet?
+
+**Recommended direction:** no.
+
+Do not create empty abstraction layers merely because future integrations are planned.
+
+Instead:
+- preserve clean module boundaries,
+- keep provider-specific code out of domain/UI code,
+- introduce each adapter when the first real provider-backed feature is implemented.
+
+Example:
+
+```text
+Sprint 1
+Trip / Segment / Day only
+→ no MapsAdapter yet
+
+Later Discover Map milestone
+→ define Places/Maps adapter based on real needs
+```
+
+Why:
+- avoids speculative interfaces,
+- prevents abstractions from being designed around guesses,
+- keeps Sprint 1 smaller,
+- still honors D-088 once providers are actually introduced.
+
+**Recommended direction:** no unused provider stubs in Sprint 1; add adapters just-in-time with the feature that needs them.
