@@ -591,4 +591,11 @@ Do not build enterprise dashboards/alerting yet.
 
 Use the managed host's basic logs plus one lightweight error-reporting solution only if it materially helps testing.
 
-**Recommended direction:** lightweight automated testing + basic error/provider logging, with enterprise monitoring deferred.
+**Confirmed direction — D-090:** lightweight automated testing + basic application/provider logging, with enterprise monitoring deferred.
+
+
+## Section 7 status
+
+The core V1 architecture, quality baseline, and external-dependency strategy are now defined.
+
+**Section 7 is ready for closeout review.**
