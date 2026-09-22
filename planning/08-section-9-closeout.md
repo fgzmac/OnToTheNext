@@ -1,6 +1,6 @@
 # Section 9 Closeout — Roadmap and Sprint Brief
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-21.  
 **Purpose:** Lock the implementation order and first sprint boundary before moving into detailed feature specification.
 
@@ -111,3 +111,10 @@ Approve Section 9 if this implementation sequence and Sprint 1 boundary are corr
 Approval advances the blueprint to **Section 10 — Detailed Feature Specification**.
 
 Approval still does **not** authorize implementation. The project remains in design/specification mode until the owner explicitly transitions to implementation.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-21.  
+**Owner instruction:** “Approve section 9.”  
+**Effect:** Advance to Section 10 — Detailed Feature Specification. This approval does not authorize implementation.
