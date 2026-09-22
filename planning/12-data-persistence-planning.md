@@ -367,4 +367,24 @@ Why:
 
 This is different from Segment deletion, where Days must survive because they belong to the Trip calendar.
 
-**Recommended direction:** Trip deletion cascades to Trip-owned child records; PrototypeUser survives.
+**Confirmed direction — D-112:** Trip deletion cascades to TripSegments, Days, and TripPreferenceProfile; PrototypeUser survives.
+
+
+## Section 13 status
+
+The Sprint 1 persistence model is now sufficiently defined.
+
+Confirmed:
+- PostgreSQL + Prisma,
+- CUID/CUID2-style opaque IDs,
+- minimal typed TripPreferenceProfile,
+- DATE semantics,
+- unique Day by `(tripId, date)`,
+- explicit Segment/Day ordering,
+- transactional Day regeneration,
+- Segment deletion preserves Days,
+- Trip deletion cascades to Trip-owned child records,
+- deterministic development seed/reset behavior,
+- migration-first schema changes.
+
+**Section 13 is ready for closeout review.**
