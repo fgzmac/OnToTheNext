@@ -477,4 +477,32 @@ This keeps the creation flow flexible without inventing destinations or auto-fil
 
 Later, once Days can contain activities, reservations, free time, and other real content, date changes must use a safer preview/migration flow to avoid silently losing or moving itinerary items.
 
-**Recommended direction:** automatic Day regeneration after confirmed date edits in Sprint 1 only; richer migration behavior comes later.
+**Confirmed direction — D-099:** automatically regenerate Days after confirmed Trip/Segment date edits during Sprint 1 only; richer migration behavior comes later.
+
+
+## Next decision — Initial Segment creation
+
+**Q-906:** When the user creates a Trip with a primary destination, should Sprint 1 automatically create the first Trip Segment from that destination instead of starting with an empty Segment list?
+
+Recommended behavior:
+
+Example:
+
+```text
+Create Trip
+Destination: Japan
+Dates: Nov 24–Dec 8
+```
+
+If the entered destination is a **specific city/base** such as Tokyo:
+- create the first Segment as Tokyo using the Trip start date,
+- leave its departure/end boundary editable,
+- user can then add Kyoto, Osaka, etc.
+
+If the entered destination is a **country/region** such as Japan:
+- do not create a fake "Japan" Segment,
+- prompt for the first city/base instead.
+
+This keeps Segment semantics correct: Segments represent actual travel bases/stays, not broad countries.
+
+**Recommended direction:** auto-create the first Segment only when the entered destination is already a specific city/base; otherwise ask for the first base.
