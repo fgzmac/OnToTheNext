@@ -397,3 +397,45 @@ The preferred version should feel noticeably more useful/exciting than the plain
 The result should tell us how much visual/theming effort belongs in V1.
 
 **Recommended direction:** use this as Experiment 5.
+
+
+## Experiment priority — D-064
+
+**Confirmed:** Share Trip usefulness is Experiment 5.
+
+The experiment compares plain, polished, and richer themed versions of the same itinerary to determine how much visual treatment belongs in V1.
+
+## Next decision — Shared-expense usefulness experiment
+
+Test whether expense tracking belongs naturally inside the trip experience or feels like unnecessary duplication of dedicated expense apps.
+
+### Proposed scenario
+
+Use a two-person simulated trip day with:
+- shared hotel cost,
+- one meal,
+- one activity,
+- one transit expense,
+- one expense paid by each traveler,
+- one uneven split,
+- one settlement at the end.
+
+### Tasks
+
+Ask both travelers to:
+1. Add expenses they paid.
+2. Check who currently owes whom.
+3. Correct one expense.
+4. Review planned versus actual spend.
+5. Record a final settlement.
+
+### Success target
+
+Both travelers should be able to explain the final balance without:
+- a spreadsheet,
+- manual calculation,
+- or opening a separate expense app.
+
+At the same time, expense entry should not make Home or Today feel finance-heavy.
+
+**Recommended direction:** use this as Experiment 6.
