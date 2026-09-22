@@ -532,4 +532,54 @@ Why keep them separate:
 - sharing should never accidentally elevate access,
 - public/read-only sharing can evolve independently from private membership.
 
-**Recommended direction:** keep all three concepts separate.
+**Confirmed direction — D-072:** keep Share Presentation, Share Link, and Companion Invite as separate concepts.
+
+
+## Next decision — Source evidence and freshness
+
+**Q-508:** Should external recommendation evidence be represented separately from the Recommendation itself?
+
+Recommended model:
+
+### Source
+Represents where information came from:
+- official venue/operator,
+- local publication,
+- tourism board,
+- community/forum,
+- review platform,
+- map/place provider,
+- transit provider,
+- other supported source.
+
+### Evidence Record
+Represents one sourced claim or observation used by the app.
+
+Conceptual fields:
+- Source,
+- source URL/provider reference,
+- retrieved/observed date,
+- claim/topic,
+- source type,
+- freshness/verification state,
+- applicable Place/Recommendation,
+- optional expiration/recheck date.
+
+Examples:
+- official opening hours,
+- ticket release schedule,
+- recurring traveler praise,
+- common crowd complaint,
+- current hotel cancellation terms.
+
+### Recommendation
+Uses one or more Evidence Records to present factual details and cautions.
+
+Why separate them:
+- evidence can be refreshed without recreating the Recommendation,
+- conflicting sources can coexist,
+- official logistics can be distinguished from traveler opinion,
+- freshness can be tracked explicitly,
+- the app can explain when information is unknown or stale.
+
+**Recommended direction:** add reusable Source + Evidence Record concepts and keep them separate from user Accept/Deny state.
