@@ -245,6 +245,35 @@ It means:
 
 **Q-1301:** Should Sprint 1 require the full automated test stack above before it is considered complete, or allow some lower-risk UI checks to remain manual?
 
-**Recommended direction:** require automated tests for domain rules, database transactions, and the core end-to-end happy path; allow lower-risk responsive/visual checks to remain manual during the personal prototype.
+**Confirmed direction — D-113:** automated coverage is required for domain rules, persistence/transactions, and the core end-to-end happy path; lower-risk visual/responsive checks may remain manual during the personal prototype.
 
 This balances reliability with speed.
+
+
+## Next decision — Defect threshold for Sprint 1 completion
+
+**Q-1302:** What defects are allowed when Sprint 1 is marked complete?
+
+**Recommended direction:**
+
+Sprint 1 must have **zero known blocking or data-integrity defects** in its approved scope.
+
+Not allowed at completion:
+- Trip/Segment/Day data loss,
+- incorrect Day ownership,
+- invalid overlaps saving,
+- valid transfer boundaries being rejected,
+- non-atomic reorder,
+- broken migration,
+- structural transaction leaving partial state,
+- primary navigation unusable on desktop or phone.
+
+May remain documented if they do not block the approved flow:
+- minor visual spacing issues,
+- low-impact copy wording,
+- small non-blocking responsive polish issues,
+- development-only inconvenience.
+
+Every known remaining issue should be recorded before moving to the next milestone.
+
+**Recommended direction:** zero blockers/data-integrity bugs; documented low-risk polish defects may carry forward.
