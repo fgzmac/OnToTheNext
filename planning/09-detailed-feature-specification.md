@@ -431,4 +431,33 @@ Kyoto arrival: Nov 28
 
 because the two stays claim more than the single permitted handoff date.
 
-**Recommended direction:** allow exactly one shared boundary date between consecutive Segments when previous departure = next arrival.
+**Confirmed direction — D-097:** consecutive Segments may share exactly one transfer-date boundary when the previous departure date equals the next arrival date.
+
+## Next decision — Gaps while building Segments
+
+**Q-904:** Should Sprint 1 allow temporary uncovered dates while the user is still building the Segment sequence?
+
+Recommended behavior:
+
+- Yes, while editing the trip structure.
+- Show uncovered dates clearly as **Unassigned** rather than silently assigning them.
+- Do not treat an incomplete Segment plan as a fatal error while the user is still working.
+- Before the trip structure is considered complete, every Trip date should resolve to exactly one primary Segment under the approved boundary rules.
+
+Example:
+
+```text
+Trip: Nov 24–Dec 8
+
+Tokyo: Nov 24–Nov 28
+Kyoto: Nov 28–Dec 2
+
+Dec 2–Dec 8
+UNASSIGNED
+```
+
+The user can continue adding Osaka and the return Tokyo Segment.
+
+This keeps the creation flow flexible without inventing destinations or auto-filling gaps.
+
+**Recommended direction:** allow temporary Unassigned days during editing; require complete Segment coverage before the trip structure is considered complete.
