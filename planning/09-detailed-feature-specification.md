@@ -187,7 +187,7 @@ The transportation item later records the transition to Kyoto.
 
 This avoids duplicating one calendar date under two Segments.
 
-This rule is proposed, not yet approved.
+**Confirmed — D-095:** transfer days belong to the Segment where the traveler starts the day.
 
 ## Day fields for Sprint 1
 
@@ -364,7 +364,7 @@ Do not include:
 
 **Q-901:** What should own a transfer day when one Segment ends and another begins?
 
-**Recommended direction:** assign each calendar Day to the Segment where the traveler **starts the day**.
+**Confirmed direction — D-095:** assign each calendar Day to the Segment where the traveler **starts the day**.
 
 Example:
 - Wake up in Tokyo on Nov 28
@@ -379,3 +379,23 @@ Why:
 - transition is represented explicitly by transportation.
 
 This rule can be changed later only if real itinerary behavior proves it awkward.
+
+
+## Next decision — Sprint 1 date requirement
+
+**Q-902:** Should the first working Sprint 1 build require Trip start/end dates, while the broader "just exploring / dates not set" mode remains part of the product but is implemented later?
+
+**Recommended direction:** yes.
+
+Why:
+- Day generation depends on dates.
+- Segment validation is much simpler.
+- Sprint 1 is about proving persistence/navigation, not every onboarding variation.
+- The product model still preserves undated exploration for a later milestone.
+
+Sprint 1 would therefore require:
+- Trip start date,
+- Trip end date,
+- Segment date ranges.
+
+Later, undated exploration can use a planning state that does not generate calendar Days until dates are chosen.
