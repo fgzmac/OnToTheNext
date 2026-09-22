@@ -9,7 +9,7 @@ async function createTrip(page: import("@playwright/test").Page, options: {
 }) {
   await page.goto("/");
   await page.getByLabel("Destination", { exact: true }).fill(options.destination);
-  await page.getByLabel("Destination type", { exact: true }).selectOption({ label: options.destinationType });
+  await page.locator('select[name="destinationScope"]').selectOption({ label: options.destinationType });
   await page.getByLabel("Travelers").fill(options.travelers ?? "2");
   await page.getByLabel("Start date").fill(options.startDate);
   await page.getByLabel("End date").fill(options.endDate);
