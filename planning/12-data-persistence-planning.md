@@ -243,4 +243,28 @@ Why:
 
 UUID would also work, but there is no strong V1 requirement that favors UUID interoperability yet.
 
-**Recommended direction:** CUID2/CUID-style opaque IDs for Sprint 1 entities.
+**Confirmed direction — D-108:** use CUID2/CUID-style opaque IDs for Sprint 1 app-owned entities.
+
+
+## Next decision — Sprint 1 TripPreferenceProfile persistence
+
+**Q-1202:** How much preference data should Sprint 1 persist before Discover exists?
+
+**Recommended direction:** keep `TripPreferenceProfile` deliberately minimal and structured.
+
+For Sprint 1, persist only fields that already have clear product meaning, for example:
+- optional rough budget/comfort label or range,
+- optional planning note,
+- timestamps.
+
+Do **not** add a generic JSON blob for dozens of future preference fields.
+
+Why:
+- Sprint 1 does not use recommendation logic yet,
+- generic JSON would hide an undefined schema rather than solve it,
+- later Discover work can add real typed preference fields through migrations,
+- keeps the first database honest and small.
+
+If a field is not used by Sprint 1 behavior, prefer to omit it rather than create a speculative placeholder.
+
+**Recommended direction:** minimal typed TripPreferenceProfile, no catch-all future-preferences JSON blob.
