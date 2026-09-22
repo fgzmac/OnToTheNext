@@ -268,3 +268,19 @@ V1 navigation success includes:
 - preserved screen context,
 - no redundant permanent tabs,
 - state-aware appearance/disappearance of planning tools.
+
+
+## V1 information-architecture rule — D-059
+
+V1 should enforce **one feature, one canonical home**.
+
+Canonical structure:
+- Home → Share Trip, Expenses, Travelers/Companion Access, trip-level utilities
+- Itinerary → day schedule and scheduled-item details
+- Discover → recommendations, nearby discovery, Map, planning-phase hotel discovery
+
+Contextual facts may appear elsewhere, but duplicate shortcut/redirect buttons should be avoided.
+
+### Navigation success criterion
+
+After learning the app once, a user should be able to predict where a feature lives without hunting between duplicate entry points.
