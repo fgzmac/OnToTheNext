@@ -225,3 +225,23 @@ A completed itinerary should be able to generate a polished, destination-themed 
 
 The important V1 proof is:
 > Finish itinerary → Share Trip → recipient opens an exciting, readable trip summary → recipient can follow the app link.
+
+
+## V1 navigation simplification — D-057
+
+V1 should validate a small primary navigation:
+- Home
+- Itinerary
+- Discover
+- More
+
+Map is integrated into Discover rather than shipped as a separate permanent tab.
+
+Other capabilities should be contextual where possible:
+- Hotels inside planning/discovery by city
+- Reservations from itinerary/Home/More
+- Expenses via quick-add and More
+- Share Trip from trip/itinerary
+- Companion access under trip settings/More
+
+A successful V1 should prove that these capabilities remain easy to find without exposing each one as a separate global menu.
