@@ -1,6 +1,6 @@
 # Section 14 Closeout — Testing, Completion, and Release Readiness
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-21.  
 **Purpose:** Lock what Sprint 1 must prove before it can be accepted and before the project advances to the next implementation milestone.
 
@@ -151,3 +151,10 @@ Approve Section 14 if these testing and completion requirements are correct.
 Approval advances to **Section 15 — Feedback, Decisions, and Documentation**.
 
 Approval still does not authorize coding.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-21.  
+**Owner instruction:** “Approve section 14.”  
+**Effect:** Advance to Section 15 — Feedback, Decisions, and Documentation. This approval does not authorize implementation.
