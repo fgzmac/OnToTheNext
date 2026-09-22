@@ -555,4 +555,40 @@ Local development remains supported, but a managed hosted environment is useful 
 
 Exact vendor can be selected later after checking the current free/low-cost options.
 
-**Recommended direction:** managed app hosting + managed PostgreSQL for the prototype.
+**Confirmed direction — D-089:** managed app hosting + managed PostgreSQL for the prototype; exact vendors remain open until deployment.
+
+
+## Next decision — Quality and observability baseline
+
+**Q-610:** What minimum quality/observability should the personal prototype have?
+
+**Recommended direction:** keep it lightweight but enough to catch real failures.
+
+### Quality baseline
+- TypeScript strictness where practical
+- linting/formatting
+- unit tests for important business rules
+- integration tests for database-backed flows
+- a small end-to-end test set for Tier A journeys
+
+Priority test areas:
+- itinerary ordering/state transitions,
+- reservation-state rules,
+- expense allocation math,
+- planned-vs-actual behavior,
+- Trip Membership/access relationships,
+- Share Trip generation basics.
+
+### Observability baseline
+- application error logging,
+- provider/API failure logging,
+- failed background-job state when jobs exist,
+- basic request/performance visibility,
+- no sensitive credentials in logs.
+
+### Prototype rule
+Do not build enterprise dashboards/alerting yet.
+
+Use the managed host's basic logs plus one lightweight error-reporting solution only if it materially helps testing.
+
+**Recommended direction:** lightweight automated testing + basic error/provider logging, with enterprise monitoring deferred.
