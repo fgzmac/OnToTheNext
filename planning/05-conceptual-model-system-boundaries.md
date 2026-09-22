@@ -460,4 +460,42 @@ Why this is preferred:
 - reuses the Reservation booking-state model,
 - still makes segment transitions explicit.
 
-**Recommended direction:** model intercity transfer as a typed Itinerary Item, with optional Transportation Reservation and Segment-to-Segment references.
+**Confirmed direction — D-070:** model intercity transfer as a typed Itinerary Item, with optional Transportation Reservation and Segment-to-Segment references.
+
+
+## Next decision — Expense allocations
+
+**Q-506:** Should a shared `Expense` contain separate per-traveler **Expense Allocations** rather than storing only one split formula?
+
+Recommended model:
+
+```text
+Expense
+├── Payer: Gio
+├── Original amount: ¥14,800
+└── Allocations
+    ├── Gio      → ¥7,400
+    └── Companion → ¥7,400
+```
+
+For an uneven split:
+
+```text
+Expense
+└── Allocations
+    ├── Gio      → ¥10,000
+    └── Companion → ¥4,800
+```
+
+The selected split method (equal / exact / percentage / shares) is the **input method** used to calculate the allocations.
+
+The allocations become the resulting amounts each traveler is responsible for.
+
+Why this helps:
+- running balances become straightforward,
+- historical math stays reproducible,
+- changing split methods does not change the meaning of the stored result,
+- travelers can be excluded cleanly,
+- later settlement calculations become simpler.
+
+**Recommended direction:** Expense + per-traveler Expense Allocations.
