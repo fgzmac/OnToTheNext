@@ -699,4 +699,52 @@ Why separate them:
 - trip preferences can be deleted with the Trip,
 - global preferences can remain optional and user-controlled.
 
-**Recommended direction:** use separate User Preference Profile and Trip Preference Profile concepts, with trip preferences taking priority for the current trip.
+**Confirmed direction — D-076:** use separate User Preference Profile and Trip Preference Profile concepts, with Trip Preferences taking priority for the current Trip.
+
+
+## Next decision — Budget versus planned and actual spending
+
+**Q-512:** Should `Trip Budget`, `Planned Cost`, and `Expense` remain three separate concepts?
+
+Recommended model:
+
+### Trip Budget
+Represents the user's target/constraint for the Trip:
+- reference currency,
+- target amount or range,
+- per-person versus total,
+- optional category targets,
+- optional hard/soft limits.
+
+### Planned Cost
+Represents an estimate/forecast for something not yet paid:
+- expected hotel total,
+- expected ticket cost,
+- expected transit cost,
+- optional linked itinerary/reservation/hotel item.
+
+### Expense
+Represents money actually spent:
+- original amount/currency,
+- payer,
+- allocations,
+- linked trip item where relevant.
+
+Example:
+
+```text
+Trip Budget: $5,000 per person
+        ↓
+Planned Costs: $4,300 forecast
+        ↓
+Actual Expenses: $2,100 paid so far
+```
+
+Why separate them:
+- the budget is a target, not a transaction,
+- estimates can change before purchase,
+- actual spending needs audit/history,
+- planned-versus-actual becomes easy to calculate,
+- the user can remain under/over budget without mutating the underlying expenses.
+
+**Recommended direction:** keep Trip Budget, Planned Cost, and Expense as separate concepts.
