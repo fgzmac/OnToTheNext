@@ -505,3 +505,35 @@ Formalize a single readiness view that answers:
 - Is the trip within the planned budget?
 - Do companions have access?
 - Is anything departure-critical still unresolved?
+
+
+## Trip prep simplification — D-055
+
+A dedicated Trip Readiness dashboard is **not** part of the product.
+
+Do not add a readiness score or checklist-heavy navigation.
+
+Instead, use a short essentials checklist embedded in an existing surface such as Overview/Home. Keep it trip-specific and limited to the few items that could materially disrupt travel if forgotten.
+
+Examples:
+- hotels,
+- major transportation,
+- critical reservations,
+- ticket/confirmation access,
+- companion access,
+- arrival/airport plan.
+
+Resolved items may collapse or disappear, and checklist items should link into the existing relevant screen rather than create duplicate management UI.
+
+**Design priority:** useful, easy to use, and simple.
+
+## Section 3 closeout direction
+
+Before approval, review the current journeys for unnecessary UI complexity and retain only the core interactions needed for:
+- planning,
+- booking awareness,
+- itinerary use,
+- maps,
+- expenses,
+- companion viewing,
+- and on-trip use.
