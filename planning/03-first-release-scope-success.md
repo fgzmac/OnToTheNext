@@ -245,3 +245,26 @@ Other capabilities should be contextual where possible:
 - Companion access under trip settings/More
 
 A successful V1 should prove that these capabilities remain easy to find without exposing each one as a separate global menu.
+
+
+## V1 navigation/lifecycle amendment — D-058
+
+Primary navigation target:
+- Home
+- Itinerary
+- Discover
+
+Home launches focused secondary screens for:
+- Share Trip
+- Expenses
+- Travelers / Companion Access
+- Trip Settings when needed
+
+Hotel comparison is a planning-phase flow and should recede after lodging is confirmed.
+
+V1 navigation success includes:
+- shallow navigation,
+- obvious back actions,
+- preserved screen context,
+- no redundant permanent tabs,
+- state-aware appearance/disappearance of planning tools.
