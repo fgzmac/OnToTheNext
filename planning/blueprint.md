@@ -4,7 +4,7 @@
 **Source:** The app-building blueprint adopted in the planning conversation.  
 **Framework status:** CONFIRMED as the planning process; not approval of every product proposal.  
 **Current section:** 4 — First-Release Scope and Success Measures.  
-**Current section status:** DRAFT — Section 3 approved; Section 4 active.  
+**Current section status:** IN REVIEW — Section 4 closeout prepared; awaiting explicit owner approval.  
 **Last updated:** 2026-09-19.  
 **Next review trigger:** The next planning answer from the project owner.
 
