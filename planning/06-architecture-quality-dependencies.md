@@ -466,4 +466,37 @@ For the personal prototype, we can keep this lightweight and only add object sto
 
 Do not store large images/PDFs directly as database blobs.
 
-**Recommended direction:** object storage + PostgreSQL metadata, introduced only when a real V1 feature needs file bytes.
+**Confirmed direction — D-086:** object storage for file/media bytes + PostgreSQL metadata, introduced only when an implemented feature actually needs persistent files.
+
+
+## Next decision — Background jobs
+
+**Q-607:** How much background-job infrastructure should V1 introduce?
+
+Potential background work:
+- reservation/inventory rechecks,
+- source/evidence refresh,
+- Share Trip asset generation,
+- later weather/transit refresh,
+- later notification preparation.
+
+**Recommended direction:** keep V1 job infrastructure minimal.
+
+Use:
+- synchronous request/response for normal user actions,
+- a simple managed scheduler/queue only when a feature genuinely needs deferred or scheduled execution,
+- idempotent jobs,
+- retry limits,
+- clear last-run/failure state.
+
+Avoid:
+- multiple worker services,
+- complex distributed queues,
+- event-bus architecture,
+- always-on worker fleets
+
+during the personal prototype.
+
+For early testing, some refreshes may remain manual.
+
+**Recommended direction:** minimal managed jobs only as-needed; manual refresh is acceptable during the prototype.
