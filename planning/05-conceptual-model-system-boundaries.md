@@ -344,4 +344,47 @@ Shared fields could include:
 
 Type-specific details would be added only when needed.
 
-**Recommended direction:** yes — one typed Itinerary Item model, because every day block needs ordering/timing behavior even though the content differs.
+**Confirmed direction — D-067:** use one typed Itinerary Item model for the day timeline, with shared timing/order behavior and type-specific details.
+
+
+## Next decision — Place versus Recommendation
+
+**Q-503:** Should `Place` be the reusable factual entity and `Recommendation` be the trip-specific proposal about that place/experience?
+
+Proposed model:
+
+### Place
+Represents the factual location/entity:
+- name,
+- coordinates,
+- address,
+- category,
+- provider IDs,
+- official/source metadata.
+
+Examples:
+- Shibuya Sky
+- Fushimi Inari
+- a restaurant
+- a hotel
+- a station
+- a neighborhood
+
+### Recommendation
+Represents the app proposing something **for a specific trip/planning context**:
+- linked Place when applicable,
+- factual summary shown to the user,
+- duration,
+- cost basis,
+- reservation/freshness context,
+- evidence/source summary,
+- ranking/context,
+- user outcome: accepted / denied / saved / must-do.
+
+Why separate them:
+- the same Place can appear in many trips,
+- user decisions belong to the trip, not the global place,
+- map/location data stays reusable,
+- recommendation evidence can change over time without changing the core Place identity.
+
+**Recommended direction:** separate Place from Recommendation.
