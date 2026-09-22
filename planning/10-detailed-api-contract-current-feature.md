@@ -356,4 +356,18 @@ Why:
 
 Simple read-only or field-only edits can still return narrower data when appropriate later.
 
-**Recommended direction:** structural mutations return the canonical refreshed Trip/Segment/Day skeleton plus errors/warnings.
+**Confirmed direction — D-104:** structural mutations return the refreshed canonical Trip/Segment/Day skeleton plus errors/warnings.
+
+
+## Section 11 status
+
+The Sprint 1 internal application contract is now sufficiently defined.
+
+Confirmed decisions include:
+- blocking errors + non-blocking warnings,
+- ISO date-only semantics,
+- atomic full-list Segment reordering,
+- server-owned Day regeneration,
+- structural mutations returning refreshed canonical Trip/Segment/Day state.
+
+**Section 11 is ready for closeout review.**
