@@ -430,4 +430,34 @@ Why this helps:
 - planning-only hotel discovery can happen per segment,
 - itinerary days remain simpler.
 
-**Recommended direction:** add a Trip Segment / Stay Segment concept between Trip and Day.
+**Confirmed direction — D-069:** add a Trip Segment / Stay Segment concept between Trip and Day.
+
+
+## Next decision — Inter-segment transportation
+
+**Q-505:** How should travel between Trip Segments be represented?
+
+Recommended model:
+- Use the existing **Transportation / Transit Itinerary Item** for the actual journey.
+- Optionally link it to a **Transportation Reservation** when booking/seat details exist.
+- The item references an origin Segment and destination Segment when it is an intercity transfer.
+
+Example:
+
+```text
+Tokyo Segment
+    ↓
+Transportation Itinerary Item
+Tokyo Station → Kyoto Station
+    ↔ Transportation Reservation (optional)
+    ↓
+Kyoto Segment
+```
+
+Why this is preferred:
+- avoids inventing a separate transfer object,
+- reuses the Itinerary Item timing/order model,
+- reuses the Reservation booking-state model,
+- still makes segment transitions explicit.
+
+**Recommended direction:** model intercity transfer as a typed Itinerary Item, with optional Transportation Reservation and Segment-to-Segment references.
