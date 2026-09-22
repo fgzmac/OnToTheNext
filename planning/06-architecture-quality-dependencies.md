@@ -431,4 +431,39 @@ Prisma should be treated as a persistence tool, not the domain model itself. Cor
 
 If later scale/performance needs justify another data-access approach, the modular architecture should make replacement possible.
 
-**Recommended direction:** Prisma for V1 data access and migrations.
+**Confirmed direction — D-085:** Prisma for V1 data access and migrations.
+
+
+## Next decision — File and media storage
+
+**Q-606:** How should V1 store files and generated media?
+
+Potential file types:
+- Share Trip cover/generated assets,
+- ticket PDFs/images,
+- reservation screenshots,
+- future receipt photos,
+- other uploaded travel documents.
+
+**Recommended direction:** use **object storage** for files and store only metadata/references in PostgreSQL.
+
+Conceptually:
+
+```text
+PostgreSQL
+└── File record / metadata
+    ├── owner/trip
+    ├── file type
+    ├── storage key
+    ├── content type
+    └── related itinerary/reservation/share object
+
+Object Storage
+└── actual file bytes
+```
+
+For the personal prototype, we can keep this lightweight and only add object storage when the first file-upload/share-asset feature actually needs it.
+
+Do not store large images/PDFs directly as database blobs.
+
+**Recommended direction:** object storage + PostgreSQL metadata, introduced only when a real V1 feature needs file bytes.
