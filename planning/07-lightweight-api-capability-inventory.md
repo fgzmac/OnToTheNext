@@ -350,4 +350,41 @@ Why:
 - makes Today/Home easier to change,
 - keeps business logic in the canonical modules.
 
-**Recommended direction:** Home/Today compose existing domain capabilities; no separate duplicate Home state.
+**Confirmed direction — D-092:** Home/Today compose canonical domain capabilities; optimized read models are allowed but duplicate business state is not.
+
+
+## Next decision — Internal application API versus public API
+
+**Q-703:** Does the personal-use V1 need a public/external API?
+
+**Recommended direction:** no public API for the prototype.
+
+Use an internal application capability layer:
+
+```text
+Next.js UI
+    ↓
+Server Action / Route Handler / Application Service
+    ↓
+Domain capability
+    ↓
+Prisma / Provider Adapter
+```
+
+Benefits:
+- smaller attack surface,
+- less versioning/documentation work,
+- faster iteration,
+- no need to design a developer-facing API before there are external consumers.
+
+Important:
+- keep application/domain capabilities clean enough that a public API or native client can be added later,
+- do not let UI components call Prisma or third-party providers directly.
+
+A public API becomes justified later if:
+- native clients require it,
+- third-party integrations are added,
+- external developers need access,
+- or the product architecture clearly benefits from it.
+
+**Recommended direction:** internal application API only for V1; public API deferred.
