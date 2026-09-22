@@ -262,3 +262,41 @@ The user should correctly predict the section for at least **5 of 6 tasks** with
 If multiple users repeatedly miss the same task, adjust the information architecture rather than adding duplicate shortcut buttons everywhere.
 
 **Recommended direction:** use this as the second Section 5 experiment.
+
+
+## Experiment priority — D-061
+
+**Confirmed:** Navigation comprehension is Experiment 2.
+
+Success target: at least 5 of 6 common tasks are found in the correct canonical section without menu hunting.
+
+## Next decision — Reservation-state comprehension experiment
+
+Test whether users can correctly distinguish:
+- **Book now**
+- **Opens later**
+- **Check back**
+- **Booked**
+- **Needs attention**
+
+### Proposed test
+
+Show 5–6 reservation cards with realistic scenarios and ask the tester:
+
+- What should you do now?
+- Is this already booked?
+- If not, why can't/can't you book it?
+- When should you check again?
+- Is there a known next inventory release?
+- Does the itinerary already depend on this time?
+
+### Success target
+
+For every card, the tester should correctly identify the next action and whether the reservation is actually confirmed.
+
+Particularly important:
+- **Opens later** = booking window is known but not open yet.
+- **Check back** = inventory/details are currently unavailable or incomplete; show next known batch if available.
+- **Booked** = confirmed, not merely accepted or scheduled.
+
+**Recommended direction:** use this as Experiment 3.
