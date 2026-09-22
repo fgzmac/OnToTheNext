@@ -267,4 +267,36 @@ Why:
 
 If a field is not used by Sprint 1 behavior, prefer to omit it rather than create a speculative placeholder.
 
-**Recommended direction:** minimal typed TripPreferenceProfile, no catch-all future-preferences JSON blob.
+**Confirmed direction — D-109:** Sprint 1 uses a minimal typed TripPreferenceProfile with no catch-all future-preferences JSON blob.
+
+
+## Next decision — Day regeneration persistence strategy
+
+**Q-1203:** During Sprint 1 Day regeneration, should the database treat `(tripId, date)` as the stable Day identity boundary and reconcile the set from that key?
+
+Recommended behavior:
+
+For the expected Trip date range:
+- one Day per `(tripId, date)`,
+- create missing dates,
+- update `primarySegmentId` / position for existing dates,
+- remove Day rows whose dates are no longer inside the Trip after a confirmed Trip-date change.
+
+This keeps `Day.id` opaque, but makes the logical uniqueness deterministic.
+
+Example:
+
+```text
+Trip A + 2026-11-28
+→ exactly one Day row
+```
+
+Constraints:
+- unique `(tripId, date)`,
+- unique `(tripId, position)`.
+
+Because Sprint 1 has no real Itinerary Items yet, deleting obsolete Day rows during regeneration is safe.
+
+Later, once Days have itinerary content, Day deletion/remapping must become migration-aware.
+
+**Recommended direction:** reconcile Days by unique `(tripId, date)` during Sprint 1 regeneration.
