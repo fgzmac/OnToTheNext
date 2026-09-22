@@ -184,9 +184,7 @@ At that point:
 
 **Q-1401:** Should implementation discoveries be allowed to change approved plans through explicit amendments, rather than treating the blueprint as immutable?
 
-**Recommended direction:** yes.
-
-The blueprint should be authoritative, but not rigid.
+**Confirmed direction — D-116:** the blueprint is authoritative but may evolve through explicit numbered amendments when implementation, testing, or real-trip use proves a change is needed.
 
 If implementation reveals that a rule is wrong or impractical:
 1. document the finding,
@@ -195,3 +193,19 @@ If implementation reveals that a rule is wrong or impractical:
 4. preserve the older decision as historical context.
 
 Do not silently diverge from the approved blueprint.
+
+
+## Section 15 status
+
+The project-governance and documentation model is now sufficiently defined.
+
+Confirmed:
+- decisions remain explicitly numbered,
+- approved sections remain historical baselines,
+- implementation findings can amend plans,
+- sprint implementation records stay concise,
+- meaningful experiment results are recorded,
+- Git history handles ordinary code changes,
+- conflicting documents resolve in favor of the latest confirmed amendment.
+
+**Section 15 is ready for closeout review.**
