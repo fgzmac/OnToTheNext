@@ -1,6 +1,6 @@
 # Section 10 Closeout — Detailed Feature Specification
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-21.  
 **Purpose:** Lock the first implementation-ready feature specification before moving to detailed API contracts.
 
@@ -220,3 +220,10 @@ Approve Section 10 if this first feature specification is implementation-ready.
 Approval advances the blueprint to **Section 11 — Detailed API Contract for Current Feature**.
 
 Approval still does not authorize coding; the project remains in specification mode until the owner explicitly transitions to implementation.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-21.  
+**Owner instruction:** “Approve section 10.”  
+**Effect:** Advance to Section 11 — Detailed API Contract for Current Feature. This approval does not authorize implementation.
