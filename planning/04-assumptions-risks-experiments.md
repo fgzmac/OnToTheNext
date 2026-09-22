@@ -439,3 +439,19 @@ Both travelers should be able to explain the final balance without:
 At the same time, expense entry should not make Home or Today feel finance-heavy.
 
 **Recommended direction:** use this as Experiment 6.
+
+
+## Experiment priority — D-065
+
+**Confirmed:** Shared Expense Usefulness is Experiment 6.
+
+This completes the proposed early product-validation set:
+
+1. Recommendation usefulness
+2. Navigation comprehension
+3. Reservation-state comprehension
+4. On-Trip Today usability
+5. Share Trip usefulness
+6. Shared Expense Usefulness
+
+The remaining risks—data freshness, source access, inventory complexity, map/routing dependence, currency ambiguity, offline behavior, and overbuilding—will be carried forward into later architecture and implementation planning.
