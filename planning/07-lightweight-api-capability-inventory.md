@@ -387,4 +387,26 @@ A public API becomes justified later if:
 - external developers need access,
 - or the product architecture clearly benefits from it.
 
-**Recommended direction:** internal application API only for V1; public API deferred.
+**Confirmed direction — D-093:** internal application API only for V1; public API deferred until an external consumer justifies it.
+
+
+## Section 8 status
+
+The lightweight capability inventory now covers:
+- Trip lifecycle,
+- Segments,
+- Days/Itinerary,
+- Discover/Recommendations,
+- Places/Map support,
+- Hotels,
+- Reservations,
+- Budget/Planned Costs/Expenses/Settlements,
+- Home/Today composition,
+- Sharing,
+- Travelers/Membership,
+- Preferences,
+- Source/Evidence freshness,
+- provider adapters,
+- and the internal-only V1 API exposure boundary.
+
+**Section 8 is ready for closeout review.**
