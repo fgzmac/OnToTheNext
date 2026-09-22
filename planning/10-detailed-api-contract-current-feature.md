@@ -244,4 +244,34 @@ Examples:
 
 This matches the approved planning behavior: incomplete is allowed; invalid is not.
 
-**Recommended direction:** structured errors + warnings, where warnings do not block Sprint 1 saves.
+**Confirmed direction — D-101:** structural mutations return blocking errors and non-blocking warnings; warnings do not prevent valid Sprint 1 saves.
+
+
+## Next decision — Canonical date representation
+
+**Q-1002:** How should Sprint 1 represent Trip, Segment, and Day dates internally and across the application contract?
+
+**Recommended direction:** use date-only ISO values in `YYYY-MM-DD` form for all Sprint 1 calendar dates.
+
+Examples:
+
+```text
+Trip.startDate       = "2026-11-24"
+Trip.endDate         = "2026-12-08"
+Segment.arrivalDate  = "2026-11-24"
+Segment.departureDate= "2026-11-28"
+Day.date             = "2026-11-24"
+```
+
+Why:
+- Sprint 1 has no exact arrival/reservation times yet,
+- avoids timezone shifting a date backward/forward,
+- comparisons and Day generation stay deterministic,
+- matches the product concept of a calendar day.
+
+Important:
+Do **not** represent Sprint 1 date-only values as midnight UTC timestamps.
+
+Later, when reservations and transportation add exact times, introduce timezone-aware date-time values separately.
+
+**Recommended direction:** ISO date-only strings / database DATE semantics for Sprint 1 calendar dates.
