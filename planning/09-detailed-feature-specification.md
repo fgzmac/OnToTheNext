@@ -505,4 +505,25 @@ If the entered destination is a **country/region** such as Japan:
 
 This keeps Segment semantics correct: Segments represent actual travel bases/stays, not broad countries.
 
-**Recommended direction:** auto-create the first Segment only when the entered destination is already a specific city/base; otherwise ask for the first base.
+**Confirmed direction — D-100:** auto-create the first Segment only when the entered destination is already a specific city/base; otherwise ask for the first city/base.
+
+
+## Section 10 status
+
+The first implementation-ready feature specification is now defined for:
+
+- Create Trip,
+- Trip Segments,
+- Day generation,
+- Trip Home shell,
+- Home / Itinerary / Discover navigation.
+
+Confirmed Sprint 1 behavior includes:
+- transfer days belong to the Segment where the traveler starts the day,
+- Sprint 1 requires dates,
+- adjacent Segments may share one transfer-date boundary,
+- temporary Unassigned dates are allowed while editing,
+- Days automatically regenerate after confirmed date edits during Sprint 1,
+- the first Segment is auto-created only from a specific city/base.
+
+**Section 10 is ready for closeout review.**
