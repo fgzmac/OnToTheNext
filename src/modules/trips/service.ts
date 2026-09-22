@@ -16,6 +16,22 @@ import { errorResult, okResult } from "./types";
 
 type Tx = Prisma.TransactionClient;
 
+class TransactionAbort extends Error {
+  constructor(readonly issues: DomainIssue[]) {
+    super(issues[0]?.message ?? "Transaction aborted.");
+    this.name = "TransactionAbort";
+  }
+}
+
+function persistenceIssue(message = "The trip could not be saved. Please try again."): DomainIssue {
+  return { code: "PERSISTENCE_FAILURE", message };
+}
+
+function resultFromCaughtError(error: unknown, fallbackMessage?: string): Result<TripSkeleton> {
+  if (error instanceof TransactionAbort) return errorResult(error.issues);
+  return errorResult([persistenceIssue(fallbackMessage)]);
+}
+
 export interface CreateTripInput {
   name?: string | null;
   destinationLabel: string;
@@ -44,10 +60,6 @@ export interface SegmentInput {
 
 export interface UpdateSegmentInput extends SegmentInput {
   segmentId: string;
-}
-
-function persistenceIssue(message = "The trip could not be saved. Please try again."): DomainIssue {
-  return { code: "PERSISTENCE_FAILURE", message };
 }
 
 function toTripShape(record: {
@@ -143,13 +155,13 @@ async function regenerateDaysTx(tx: Tx, tripId: string): Promise<Result<TripSkel
   const segmentRecords = await tx.tripSegment.findMany({ where: { tripId }, orderBy: { position: "asc" } });
 
   if (!tripRecord) {
-    return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
+    throw new TransactionAbort([{ code: "NOT_FOUND", message: "Trip not found." }]);
   }
 
   const trip = toTripShape(tripRecord);
   const segments = segmentRecords.map(toSegmentShape);
   const structuralErrors = validateTripStructure(trip, segments);
-  if (structuralErrors.length > 0) return errorResult(structuralErrors);
+  if (structuralErrors.length > 0) throw new TransactionAbort(structuralErrors);
 
   const plannedDays = buildDayPlan(trip, segments);
 
@@ -184,11 +196,11 @@ async function regenerateDaysTx(tx: Tx, tripId: string): Promise<Result<TripSkel
       });
     }
   } catch {
-    return errorResult([{ code: "DAY_GENERATION_FAILED", message: "Trip days could not be regenerated." }]);
+    throw new TransactionAbort([{ code: "DAY_GENERATION_FAILED", message: "Trip days could not be regenerated." }]);
   }
 
   const skeleton = await getTripSkeletonTx(tx, tripId);
-  if (!skeleton) return errorResult([{ code: "NOT_FOUND", message: "Trip not found after save." }]);
+  if (!skeleton) throw new TransactionAbort([{ code: "NOT_FOUND", message: "Trip not found after save." }]);
   return okResult(skeleton, structureWarnings(skeleton.days));
 }
 
@@ -221,7 +233,7 @@ export async function createTrip(input: CreateTripInput): Promise<Result<TripSke
     travelerCount: input.travelerCount,
   });
   if (!input.destinationLabel.trim()) {
-    validationErrors.push({ code: "PERSISTENCE_FAILURE", message: "Destination is required.", field: "destinationLabel" });
+    validationErrors.push({ code: "INVALID_DESTINATION", message: "Destination is required.", field: "destinationLabel" });
   }
   if (validationErrors.length > 0) return errorResult(validationErrors);
 
@@ -263,8 +275,8 @@ export async function createTrip(input: CreateTripInput): Promise<Result<TripSke
 
       return regenerateDaysTx(tx, trip.id);
     });
-  } catch {
-    return errorResult([persistenceIssue()]);
+  } catch (error) {
+    return resultFromCaughtError(error);
   }
 }
 
@@ -305,12 +317,16 @@ export async function updateTrip(input: UpdateTripInput): Promise<Result<TripSke
 
       return regenerateDaysTx(tx, input.tripId);
     });
-  } catch {
-    return errorResult([persistenceIssue()]);
+  } catch (error) {
+    return resultFromCaughtError(error);
   }
 }
 
 export async function addSegment(input: SegmentInput): Promise<Result<TripSkeleton>> {
+  if (!input.baseName.trim()) {
+    return errorResult([{ code: "INVALID_SEGMENT_NAME", message: "City / base is required.", field: "baseName" }]);
+  }
+
   try {
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
@@ -347,12 +363,16 @@ export async function addSegment(input: SegmentInput): Promise<Result<TripSkelet
       await normalizeSegmentPositionsTx(tx, input.tripId, orderedIds);
       return regenerateDaysTx(tx, input.tripId);
     });
-  } catch {
-    return errorResult([persistenceIssue()]);
+  } catch (error) {
+    return resultFromCaughtError(error);
   }
 }
 
 export async function updateSegment(input: UpdateSegmentInput): Promise<Result<TripSkeleton>> {
+  if (!input.baseName.trim()) {
+    return errorResult([{ code: "INVALID_SEGMENT_NAME", message: "City / base is required.", field: "baseName" }]);
+  }
+
   try {
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
@@ -387,8 +407,8 @@ export async function updateSegment(input: UpdateSegmentInput): Promise<Result<T
 
       return regenerateDaysTx(tx, input.tripId);
     });
-  } catch {
-    return errorResult([persistenceIssue()]);
+  } catch (error) {
+    return resultFromCaughtError(error);
   }
 }
 
@@ -419,8 +439,8 @@ export async function reorderSegments(tripId: string, orderedSegmentIds: string[
       await normalizeSegmentPositionsTx(tx, tripId, orderedSegmentIds);
       return regenerateDaysTx(tx, tripId);
     });
-  } catch {
-    return errorResult([persistenceIssue()]);
+  } catch (error) {
+    return resultFromCaughtError(error);
   }
 }
 
@@ -438,7 +458,7 @@ export async function removeSegment(tripId: string, segmentId: string): Promise<
       await normalizeSegmentPositionsTx(tx, tripId, remaining.map((item) => item.id));
       return regenerateDaysTx(tx, tripId);
     });
-  } catch {
-    return errorResult([persistenceIssue()]);
+  } catch (error) {
+    return resultFromCaughtError(error);
   }
 }
