@@ -537,3 +537,16 @@ Before approval, review the current journeys for unnecessary UI complexity and r
 - expenses,
 - companion viewing,
 - and on-trip use.
+
+
+## Section 3 simplification review
+
+A consolidated closeout has been created at `planning/02-section-3-closeout.md`.
+
+Key simplification proposed for approval:
+- Home / Itinerary / Discover / Map / More as the primary navigation model.
+- Hotels, Reservations, Expenses, Companions, and Trip Settings remain contextual capabilities rather than all becoming permanent top-level navigation.
+- No dedicated readiness dashboard.
+- Use progressive disclosure and one clear next action where possible.
+
+**Section 3 is IN REVIEW pending explicit owner approval.**
