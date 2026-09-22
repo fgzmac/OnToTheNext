@@ -276,4 +276,29 @@ May remain documented if they do not block the approved flow:
 
 Every known remaining issue should be recorded before moving to the next milestone.
 
-**Recommended direction:** zero blockers/data-integrity bugs; documented low-risk polish defects may carry forward.
+**Confirmed direction — D-114:** Sprint 1 requires zero known blockers and zero known data-integrity defects; documented low-risk polish defects may carry forward.
+
+
+## Next decision — Sprint 1 completion evidence
+
+**Q-1303:** What evidence should be required before Sprint 1 is formally accepted?
+
+**Recommended completion package:**
+- passing typecheck,
+- passing lint,
+- passing automated test suite,
+- passing core end-to-end happy path,
+- successful fresh-database migration,
+- successful deterministic reset/reseed,
+- short manual desktop check,
+- short manual phone-width check,
+- known-issues list,
+- brief implementation summary of what changed,
+- explicit confirmation that no out-of-scope later features were added.
+
+Optional but useful:
+- screenshots of Home / Itinerary / Discover at desktop and phone widths.
+
+The goal is not bureaucracy. It is to make Sprint 1 completion reproducible and easy to review.
+
+**Recommended direction:** require a concise completion report with test/migration results, manual checks, and known issues before accepting Sprint 1.
