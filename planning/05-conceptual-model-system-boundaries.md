@@ -387,4 +387,47 @@ Why separate them:
 - map/location data stays reusable,
 - recommendation evidence can change over time without changing the core Place identity.
 
-**Recommended direction:** separate Place from Recommendation.
+**Confirmed direction — D-068:** separate reusable factual Place data from trip-specific Recommendation state.
+
+
+## Next decision — Multi-city trip structure
+
+**Q-504:** Should a Trip contain explicit **Trip Segments** (or Stops/Stays) for each destination block?
+
+Proposed model:
+
+```text
+Trip
+├── Segment: Tokyo
+│   ├── Days
+│   └── Hotel Stay
+├── Segment: Kyoto
+│   ├── Days
+│   └── Hotel Stay
+├── Segment: Osaka
+│   ├── Days
+│   └── Hotel Stay
+└── Segment: Tokyo
+    ├── Days
+    └── Hotel Stay
+```
+
+A segment would represent one contiguous stay/base in a destination.
+
+Conceptual fields:
+- destination/city/base,
+- arrival date/time,
+- departure date/time,
+- ordered position in trip,
+- associated Days,
+- associated Hotel Stay,
+- incoming/outgoing transportation references where useful.
+
+Why this helps:
+- the same city can appear more than once in one trip,
+- hotel stays naturally attach to a specific stay block,
+- arrival/departure and transfer days are easier to reason about,
+- planning-only hotel discovery can happen per segment,
+- itinerary days remain simpler.
+
+**Recommended direction:** add a Trip Segment / Stay Segment concept between Trip and Day.
