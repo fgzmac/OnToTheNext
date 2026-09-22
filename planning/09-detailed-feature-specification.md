@@ -385,13 +385,7 @@ This rule can be changed later only if real itinerary behavior proves it awkward
 
 **Q-902:** Should the first working Sprint 1 build require Trip start/end dates, while the broader "just exploring / dates not set" mode remains part of the product but is implemented later?
 
-**Recommended direction:** yes.
-
-Why:
-- Day generation depends on dates.
-- Segment validation is much simpler.
-- Sprint 1 is about proving persistence/navigation, not every onboarding variation.
-- The product model still preserves undated exploration for a later milestone.
+**Confirmed direction — D-096:** Sprint 1 requires Trip start/end dates and Segment date ranges. Undated exploration remains in the broader product but is implemented later.
 
 Sprint 1 would therefore require:
 - Trip start date,
@@ -399,3 +393,42 @@ Sprint 1 would therefore require:
 - Segment date ranges.
 
 Later, undated exploration can use a planning state that does not generate calendar Days until dates are chosen.
+
+
+## Next decision — Adjacent Segment boundary dates
+
+**Q-903:** How should consecutive Segment date ranges meet on a transfer day?
+
+Recommended rule:
+
+A previous Segment's **departure date may equal the next Segment's arrival date**.
+
+Example:
+
+```text
+Tokyo Segment
+Arrival: Nov 24
+Departure: Nov 28
+
+Kyoto Segment
+Arrival: Nov 28
+Departure: Dec 2
+```
+
+This shared Nov 28 boundary is **valid** and is not treated as a conflicting overlap.
+
+Under D-095:
+- Nov 28's primary Day belongs to Tokyo because the traveler starts the day there.
+- The later Transportation Itinerary Item records Tokyo → Kyoto.
+- Kyoto becomes the primary Segment beginning with Nov 29.
+
+Invalid overlap example:
+
+```text
+Tokyo departure: Nov 29
+Kyoto arrival: Nov 28
+```
+
+because the two stays claim more than the single permitted handoff date.
+
+**Recommended direction:** allow exactly one shared boundary date between consecutive Segments when previous departure = next arrival.
