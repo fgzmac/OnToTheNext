@@ -747,4 +747,34 @@ Why separate them:
 - planned-versus-actual becomes easy to calculate,
 - the user can remain under/over budget without mutating the underlying expenses.
 
-**Recommended direction:** keep Trip Budget, Planned Cost, and Expense as separate concepts.
+**Confirmed direction — D-077:** keep Trip Budget, Planned Cost, and Expense as separate concepts.
+
+
+## Next decision — Reservation cost lifecycle
+
+**Q-513:** Should a Reservation be able to reference both a Planned Cost and, once paid, an actual Expense?
+
+Recommended model:
+
+```text
+Reservation
+├── Planned Cost (before purchase)
+└── Expense (after purchase)
+```
+
+Example:
+
+```text
+Shibuya Sky Reservation
+Estimated cost: ¥5,400   ← Planned Cost
+
+After purchase:
+Actual paid: ¥5,800     ← Expense
+Paid by: Organizer
+```
+
+The Planned Cost should not be overwritten by the Expense. Keeping both allows the app to show forecast accuracy and planned-vs-actual changes.
+
+If no estimate existed before purchase, a Reservation may link directly to an Expense.
+
+**Recommended direction:** Reservation may reference both Planned Cost and Expense, preserving both when they exist.
