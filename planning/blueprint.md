@@ -3,8 +3,8 @@
 **Purpose:** The main planning framework for this project.  
 **Source:** The app-building blueprint adopted in the planning conversation.  
 **Framework status:** CONFIRMED as the planning process; not approval of every product proposal.  
-**Current section:** 12 — Implementation Boundaries and Simulated Components.  
-**Current section status:** IN REVIEW — Section 12 closeout prepared; awaiting explicit owner approval.  
+**Current section:** 13 — Data and Persistence Planning.  
+**Current section status:** DRAFT — Section 12 approved; Section 13 active.  
 **Last updated:** 2026-09-19.  
 **Next review trigger:** The next planning answer from the project owner.
 
