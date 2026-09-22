@@ -1,6 +1,6 @@
 # Section 12 Closeout — Implementation Boundaries and Simulated Components
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-21.  
 **Purpose:** Lock what Sprint 1 builds for real versus what remains deferred, simulated, or intentionally absent.
 
@@ -137,3 +137,10 @@ Approve Section 12 if these implementation boundaries are correct.
 Approval advances to **Section 13 — Data and Persistence Planning**.
 
 Approval still does not authorize coding.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-21.  
+**Owner instruction:** “Approve section 12.”  
+**Effect:** Advance to Section 13 — Data and Persistence Planning. This approval does not authorize implementation.
