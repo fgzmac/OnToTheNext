@@ -460,4 +460,21 @@ The user can continue adding Osaka and the return Tokyo Segment.
 
 This keeps the creation flow flexible without inventing destinations or auto-filling gaps.
 
-**Recommended direction:** allow temporary Unassigned days during editing; require complete Segment coverage before the trip structure is considered complete.
+**Confirmed direction — D-098:** allow temporary Unassigned days while editing; require complete Segment coverage before the trip structure is considered complete.
+
+
+## Next decision — Day regeneration during Sprint 1
+
+**Q-905:** If Trip or Segment dates change before any real Itinerary Items exist, should Days regenerate automatically after the user confirms the date change?
+
+**Recommended behavior:**
+- Yes, during Sprint 1.
+- Recalculate Day records from the updated Trip/Segment date structure.
+- Preserve deterministic transfer-day ownership from D-095.
+- Preserve temporary Unassigned dates from D-098.
+- Show the updated day structure immediately after save.
+- Do not require a separate migration/preview screen yet because Sprint 1 Days contain no itinerary content.
+
+Later, once Days can contain activities, reservations, free time, and other real content, date changes must use a safer preview/migration flow to avoid silently losing or moving itinerary items.
+
+**Recommended direction:** automatic Day regeneration after confirmed date edits in Sprint 1 only; richer migration behavior comes later.
