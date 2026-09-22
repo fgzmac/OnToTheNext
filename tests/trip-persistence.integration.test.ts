@@ -1,4 +1,4 @@
-import { afterAll, beforeEach, describe, expect, it } from "vitest";
+import { afterAll, afterEach, beforeEach, describe, expect, it } from "vitest";
 import { getPrismaClient } from "@/src/lib/prisma";
 import {
   addSegment,
@@ -14,12 +14,19 @@ const prisma = databaseEnabled ? getPrismaClient() : null;
 
 async function resetDatabase() {
   if (!prisma) return;
+  await prisma.$executeRawUnsafe('ALTER TABLE "Day" DROP CONSTRAINT IF EXISTS "Day_test_position_limit"');
   await prisma.trip.deleteMany();
   await prisma.prototypeUser.deleteMany();
 }
 
 integration("Trip persistence", () => {
   beforeEach(resetDatabase);
+
+  afterEach(async () => {
+    if (prisma) {
+      await prisma.$executeRawUnsafe('ALTER TABLE "Day" DROP CONSTRAINT IF EXISTS "Day_test_position_limit"');
+    }
+  });
 
   afterAll(async () => {
     if (prisma) await prisma.$disconnect();
@@ -78,7 +85,7 @@ integration("Trip persistence", () => {
     });
     const tripId = created.data!.trip.id;
 
-    const tokyo = await addSegment({
+    await addSegment({
       tripId,
       baseName: "Tokyo",
       arrivalDate: "2030-04-01",
@@ -99,7 +106,6 @@ integration("Trip persistence", () => {
 
     const reopened = await getTripSkeleton(tripId);
     expect(reopened.data?.segments.map((segment) => segment.baseName)).toEqual(["Tokyo", "Kyoto"]);
-    expect(tokyo.ok).toBe(true);
   });
 
   it("preserves Trip days and marks gaps Unassigned after a Segment is removed", async () => {
@@ -144,13 +150,9 @@ integration("Trip persistence", () => {
     });
     const tripId = created.data!.trip.id;
 
-    await prisma!.day.create({
-      data: {
-        tripId,
-        date: new Date("2030-05-01T12:00:00.000Z"),
-        position: 10_000,
-      },
-    });
+    await prisma!.$executeRawUnsafe(
+      'ALTER TABLE "Day" ADD CONSTRAINT "Day_test_position_limit" CHECK ("position" < 10000)',
+    );
 
     const result = await addSegment({
       tripId,
