@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <div className="site-shell">
           <header className="brand-bar">
-            <a className="brand" href="/">On To The Next</a>
+            <Link className="brand" href="/">On To The Next</Link>
             <span className="prototype-badge">Sprint 1 prototype</span>
           </header>
           {children}
