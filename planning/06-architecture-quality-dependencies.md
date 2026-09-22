@@ -499,4 +499,30 @@ during the personal prototype.
 
 For early testing, some refreshes may remain manual.
 
-**Recommended direction:** minimal managed jobs only as-needed; manual refresh is acceptable during the prototype.
+**Confirmed direction — D-087:** minimal managed jobs only as-needed; manual refresh is acceptable during the personal prototype.
+
+
+## Next decision — External provider selection rule
+
+**Q-608:** How should V1 choose maps, places, hotel, source, transit/weather, and currency providers?
+
+**Recommended direction:** choose providers by **capability + cost + replaceability**, not by brand.
+
+For the personal prototype:
+- prefer free tiers / low-cost APIs,
+- use official/current sources where authoritative data matters,
+- allow manual data when an API is not worth paying for yet,
+- avoid contracts/minimum commitments,
+- keep every provider behind an adapter,
+- store provider IDs separately from the app's own domain IDs,
+- avoid making one provider the only representation of a Place, Reservation, or Trip object.
+
+Selection criteria:
+1. Does it provide the data we actually need?
+2. Is the data current enough?
+3. Are the terms/licensing compatible with the product?
+4. Is the prototype cost reasonable?
+5. Can we replace it later without rewriting product logic?
+6. Does it support the countries/regions we need, starting with Japan and local U.S. testing?
+
+**Recommended direction:** low-cost, capability-driven, adapter-based provider selection; do not lock final vendors until each integration is needed.
