@@ -363,3 +363,26 @@ Revised primary navigation target:
 Hotels, Reservations, Expenses, Share Trip, Companion Access, and Trip Settings remain contextual or lower-frequency destinations rather than permanent top-level tabs.
 
 The governing rule is to combine features that naturally belong to the same task whenever doing so reduces clutter without making functionality difficult to find.
+
+
+## Post-approval navigation amendment — D-058
+
+The navigation is simplified again:
+
+### Primary navigation
+- **Home**
+- **Itinerary**
+- **Discover**
+
+### Home-launched secondary screens
+- Share Trip
+- Expenses
+- Travelers / Companion Access
+- Trip Settings when needed
+
+A permanent `More` tab is not required for these functions.
+
+### Hotels
+Hotel discovery/comparison is a **planning-phase capability**. Once lodging for a city is selected and reserved, hotel-shopping UI should recede. The confirmed hotel remains available through the itinerary/trip details for address, confirmation, directions, dates, and cost.
+
+Secondary screens must make it easy to go back and forth while preserving the user's context.
