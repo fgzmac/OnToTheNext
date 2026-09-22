@@ -4,7 +4,7 @@
 **Source:** The app-building blueprint adopted in the planning conversation.  
 **Framework status:** CONFIRMED as the planning process; not approval of every product proposal.  
 **Current section:** 14 — Testing, Completion, and Release Readiness.  
-**Current section status:** DRAFT — Section 13 approved; Section 14 active.  
+**Current section status:** IN REVIEW — Section 14 closeout prepared; awaiting explicit owner approval.  
 **Last updated:** 2026-09-19.  
 **Next review trigger:** The next planning answer from the project owner.
 
@@ -82,7 +82,7 @@ The original long-form blueprint had introductory sections before the product te
 | 11 | 13 | Detailed API Contract for the Current Feature | NOT STARTED |
 | 12 | 14 | Implementation Boundaries and Simulated Components | NOT STARTED |
 | 13 | 15 | Data and Persistence Planning | NOT STARTED |
-| 14 | 16 | Testing, Completion, and Release Readiness | NOT STARTED |
+| 14 | 16 | Testing, Completion, and Release Readiness | IN REVIEW — awaiting owner approval |
 | 15 | 17 | Feedback, Decisions, and Documentation | NOT STARTED |
 
 Only Section 1 currently has a populated product document: [Product brief](00-product-brief.md). Later templates below are reference material, not completed planning sections. Open questions are in [the question register](open-questions.md), and approved decisions are in [the decision register](decisions.md).
