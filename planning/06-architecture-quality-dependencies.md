@@ -399,7 +399,7 @@ This does **not** defer basic secret-handling and private-access hygiene.
 
 **Q-604:** Should the prototype use PostgreSQL from the beginning, or start with a lighter local database and migrate later?
 
-**Recommended direction:** use PostgreSQL from the beginning.
+**Confirmed direction — D-084:** use PostgreSQL from the beginning.
 
 Why:
 - the conceptual model is highly relational,
@@ -409,3 +409,26 @@ Why:
 - still works cleanly with the modular monolith.
 
 Exact hosting provider and ORM remain open.
+
+
+## Next decision — ORM / data-access layer
+
+**Q-605:** What should V1 use to access PostgreSQL?
+
+**Recommended direction:** use **Prisma** for the first build.
+
+Why:
+- strong TypeScript integration,
+- readable schema,
+- generated types,
+- migration tooling,
+- straightforward relational modeling,
+- fast iteration for a solo/personal prototype,
+- works well with Next.js/PostgreSQL.
+
+Important boundary:
+Prisma should be treated as a persistence tool, not the domain model itself. Core business rules should live in application/domain modules rather than being scattered through raw ORM calls in UI code.
+
+If later scale/performance needs justify another data-access approach, the modular architecture should make replacement possible.
+
+**Recommended direction:** Prisma for V1 data access and migrations.
