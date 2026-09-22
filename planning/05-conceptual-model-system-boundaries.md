@@ -628,4 +628,37 @@ Why separate them:
 - revoked membership does not require deleting the person's identity,
 - expense history can remain linked even after active access ends.
 
-**Recommended direction:** separate User/Guest Identity from Trip Membership.
+**Confirmed direction — D-074:** separate User/Guest Identity from Trip Membership.
+
+
+## Next decision — Recommendation decision state
+
+**Q-510:** Should Accept / Deny / Save / Must-do be stored as a separate **Recommendation Decision** (or Recommendation Interaction) rather than directly mutating the Recommendation?
+
+Recommended model:
+
+### Recommendation
+Represents the proposed option and its factual/contextual information.
+
+### Recommendation Decision
+Represents how a specific traveler/trip responded.
+
+Conceptual fields:
+- Recommendation,
+- Trip,
+- identity/membership when relevant,
+- outcome: Accepted / Denied / Saved / Must-do,
+- timestamp,
+- optional reason,
+- optional later superseded/reversed state.
+
+Why this helps:
+- the same Recommendation can be shown to different travelers/trips,
+- decision history can be preserved,
+- a user can change their mind,
+- recommendation data can refresh without overwriting user intent,
+- future ranking logic can learn from interactions cleanly.
+
+For the current simplified companion model, organizer decisions are the primary planning decisions; companion-specific recommendation decisions are not required for V1.
+
+**Recommended direction:** separate Recommendation from Recommendation Decision.
