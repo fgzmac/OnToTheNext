@@ -300,3 +300,53 @@ Particularly important:
 - **Booked** = confirmed, not merely accepted or scheduled.
 
 **Recommended direction:** use this as Experiment 3.
+
+
+## Experiment priority — D-062
+
+**Confirmed:** Reservation-state comprehension is Experiment 3.
+
+The tester must be able to identify both:
+- whether an item is actually booked,
+- and the correct next action.
+
+## Next decision — On-Trip Today usability experiment
+
+Test the mobile travel-mode experience in a realistic local day.
+
+### Proposed scenario
+Use a San Jose test day with:
+- one fixed-time reservation,
+- one flexible activity,
+- one intentional free-time block,
+- one return-to-home/hotel-style break,
+- one nearby-discovery decision,
+- one shared expense.
+
+### Tasks
+Ask the tester to:
+1. Identify the next activity.
+2. Determine when to leave.
+3. Find the reservation/ticket details.
+4. Understand the remaining day.
+5. Use the free-time block to find something nearby.
+6. Return to the hotel/home equivalent.
+7. Add an expense.
+8. Recover after a simulated 30-minute delay.
+
+### Success target
+The tester should complete the day without hunting through multiple screens for basic trip-state information.
+
+Specialized external apps are allowed for:
+- turn-by-turn navigation,
+- payment,
+- official ticket purchase.
+
+The app should remain the source of truth for:
+- what happens next,
+- timing,
+- reservation context,
+- free-time choices,
+- and the day plan.
+
+**Recommended direction:** use this as Experiment 4.
