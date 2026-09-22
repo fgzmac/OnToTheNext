@@ -316,4 +316,44 @@ Why this is safer than sending individual position changes:
 - avoids transient half-reordered states,
 - makes drag/reorder behavior deterministic.
 
-**Recommended direction:** full ordered ID list + atomic reorder.
+**Confirmed direction — D-103:** `reorderSegments` accepts the complete ordered Segment ID list and applies the reorder atomically.
+
+
+## Next decision — Mutation response shape
+
+**Q-1004:** After a successful Trip/Segment structural mutation, should the server return the refreshed canonical Trip skeleton rather than only returning the changed record or a success flag?
+
+Recommended response data:
+
+```text
+data
+├── Trip basics
+├── ordered Segments
+├── regenerated Days
+└── structural summary / Unassigned dates
+```
+
+along with:
+
+```text
+errors[]
+warnings[]
+```
+
+Examples of operations that would return the refreshed skeleton:
+- `createTrip`
+- `updateTrip` when dates change
+- `addSegment`
+- `updateSegment`
+- `reorderSegments`
+- `removeSegment`
+
+Why:
+- the server owns validation and Day generation,
+- the UI should not recreate Segment/Day logic locally,
+- one response keeps Home and Itinerary synchronized,
+- fewer follow-up fetches are needed during the personal prototype.
+
+Simple read-only or field-only edits can still return narrower data when appropriate later.
+
+**Recommended direction:** structural mutations return the canonical refreshed Trip/Segment/Day skeleton plus errors/warnings.
