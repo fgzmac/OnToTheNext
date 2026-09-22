@@ -317,7 +317,13 @@ Out of scope for Sprint 1:
 
 **Q-801:** Should implementation follow this milestone order, with Sprint 1 limited to Foundation + Trip skeleton?
 
-**Recommended direction:** yes.
+**Confirmed direction — D-094:** use the approved milestone order and keep Sprint 1 limited to Foundation + Trip Skeleton. Future sprint details will be refined after validating each completed milestone rather than being over-specified upfront.
 
-Reason:
-It establishes the data model and navigation without prematurely integrating APIs or building visually rich features on an unstable foundation.
+
+## Section 9 status
+
+The roadmap sequence, first complete software-test target, and Sprint 1 brief are now defined.
+
+Future sprint briefs should be created incrementally after each milestone is validated.
+
+**Section 9 is ready for closeout review.**
