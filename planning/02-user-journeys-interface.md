@@ -550,3 +550,12 @@ Key simplification proposed for approval:
 - Use progressive disclosure and one clear next action where possible.
 
 **Section 3 is IN REVIEW pending explicit owner approval.**
+
+
+## Post-approval UI amendment — D-056
+
+Add a contextual **Share Trip** action after the itinerary reaches a useful/shareable state.
+
+It should generate a polished destination-themed summary suitable for email/text and include a link back into the app.
+
+This should remain contextual and should **not** add another permanent top-level navigation item.
