@@ -4,7 +4,7 @@
 **Source:** The app-building blueprint adopted in the planning conversation.  
 **Framework status:** CONFIRMED as the planning process; not approval of every product proposal.  
 **Current section:** 11 — Detailed API Contract for Current Feature.  
-**Current section status:** DRAFT — Section 10 approved; Section 11 active.  
+**Current section status:** IN REVIEW — Section 11 closeout prepared; awaiting explicit owner approval.  
 **Last updated:** 2026-09-19.  
 **Next review trigger:** The next planning answer from the project owner.
 
