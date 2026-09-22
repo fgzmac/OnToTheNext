@@ -1,0 +1,24 @@
+node_modules/
+.next/
+out/
+.env
+.env.local
+.env.*.local
+coverage/
+*.log
+.DS_Store
+src/generated/prisma/
+prisma/.local/
+playwright-report/
+test-results/
+
+# Project-local development storage
+.data/
+.cache/
+logs/
+*.tsbuildinfo
+.env.*
+!.env.example
+
+# Private local boundary references
+PROJECT-BOUNDARIES.md

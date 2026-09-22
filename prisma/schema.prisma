@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum DestinationScope {
+  CITY_BASE
+  COUNTRY_REGION
+}
+
+model PrototypeUser {
+  id          String   @id @default(cuid())
+  displayName String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  trips       Trip[]
+}
+
+model Trip {
+  id                String                 @id @default(cuid())
+  ownerId           String
+  name              String?
+  destinationLabel  String
+  destinationScope  DestinationScope
+  startDate         DateTime               @db.Date
+  endDate           DateTime               @db.Date
+  travelerCount     Int                    @default(1)
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+  owner             PrototypeUser          @relation(fields: [ownerId], references: [id], onDelete: Restrict)
+  segments          TripSegment[]
+  days              Day[]
+  preferenceProfile TripPreferenceProfile?
+
+  @@index([ownerId])
+}
+
+model TripSegment {
+  id            String   @id @default(cuid())
+  tripId        String
+  baseName      String
+  arrivalDate   DateTime @db.Date
+  departureDate DateTime @db.Date
+  position      Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  trip          Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  primaryDays   Day[]    @relation("PrimarySegmentDays")
+
+  @@unique([tripId, position])
+  @@index([tripId, arrivalDate, departureDate])
+}
+
+model Day {
+  id               String       @id @default(cuid())
+  tripId           String
+  date             DateTime     @db.Date
+  primarySegmentId String?
+  position         Int
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  trip             Trip         @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  primarySegment   TripSegment? @relation("PrimarySegmentDays", fields: [primarySegmentId], references: [id], onDelete: SetNull)
+
+  @@unique([tripId, date])
+  @@unique([tripId, position])
+  @@index([primarySegmentId])
+}
+
+model TripPreferenceProfile {
+  id            String   @id @default(cuid())
+  tripId        String   @unique
+  budgetComfort String?
+  planningNote  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  trip          Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+}
