@@ -661,4 +661,42 @@ Why this helps:
 
 For the current simplified companion model, organizer decisions are the primary planning decisions; companion-specific recommendation decisions are not required for V1.
 
-**Recommended direction:** separate Recommendation from Recommendation Decision.
+**Confirmed direction — D-075:** separate Recommendation from Recommendation Decision.
+
+
+## Next decision — Trip preferences versus long-term user preferences
+
+**Q-511:** Should the app separate a user's durable preferences from the preferences/constraints for one specific Trip?
+
+Recommended model:
+
+### User Preference Profile
+Optional longer-term tendencies that may help future trips:
+- general interests,
+- common accommodation preferences,
+- accessibility needs explicitly provided,
+- typical pace,
+- recurring dislikes/preferences.
+
+### Trip Preference Profile
+The current trip's planning context:
+- budget/comfort range,
+- pace for this trip,
+- trip-specific interests,
+- must-dos,
+- exclusions,
+- hotel requirements,
+- transportation preferences,
+- special constraints.
+
+Example:
+A traveler may generally like nightlife, but on a family trip they may choose a quiet/early pace. That should not overwrite their long-term profile.
+
+Why separate them:
+- trip context changes,
+- recommendation behavior stays explainable,
+- one unusual trip does not permanently distort future recommendations,
+- trip preferences can be deleted with the Trip,
+- global preferences can remain optional and user-controlled.
+
+**Recommended direction:** use separate User Preference Profile and Trip Preference Profile concepts, with trip preferences taking priority for the current trip.
