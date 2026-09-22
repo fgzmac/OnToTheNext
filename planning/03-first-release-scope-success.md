@@ -196,3 +196,32 @@ Candidate first-release success measures:
 - Automatic reservation/provider integrations
 
 This keeps the complete product shape intact while protecting the November test target.
+
+
+## Added V1 capability — Shareable themed itinerary — D-056
+
+A completed itinerary should be able to generate a polished, destination-themed trip summary that can be sent by text or email and includes a link back into the app.
+
+### V1 target
+- Generate a clean themed itinerary presentation.
+- Include trip title/destination, dates, city sequence, day highlights, selected hotels, and major reservations where appropriate.
+- Use destination-aware visual styling.
+- Support **Share Trip** through device-native sharing, allowing text/email selection.
+- Support Copy Link.
+- Include an app/deep link.
+- Do not expose sensitive credentials/private financial information.
+
+### Later enhancements
+- PDF export
+- Image/story-style export
+- Custom cover/theme editing
+- Multiple visual templates
+- Interactive external web presentation
+- Social sharing
+
+### Scope tier
+
+**Recommended:** Tier A/B boundary — the sharing flow must work in V1, while highly customized export formats/themes may be simplified.
+
+The important V1 proof is:
+> Finish itinerary → Share Trip → recipient opens an exciting, readable trip summary → recipient can follow the app link.
