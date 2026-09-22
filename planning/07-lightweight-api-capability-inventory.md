@@ -318,8 +318,36 @@ over only:
 - `updateItem`
 - `updateReservation`
 
-**Recommended direction:** use a hybrid approach:
-- ordinary CRUD for simple data maintenance,
-- explicit action capabilities for meaningful state transitions and business rules.
+**Confirmed direction — D-091:** use ordinary CRUD for simple data maintenance and explicit action capabilities for meaningful state transitions/business rules.
 
 This keeps the API simple without hiding important domain behavior inside generic update calls.
+
+
+## Next decision — Home/Today composition boundary
+
+**Q-702:** Should Home and Today be **composition/read-model surfaces** over canonical domain data rather than owning duplicate stored state?
+
+Recommended model:
+
+```text
+Home / Today
+    ↓ compose
+Trip + Itinerary + Reservations + Expenses + Membership
+```
+
+Examples:
+- "Next activity" comes from Itinerary.
+- "Booked" comes from Reservation.
+- "Current balance" comes from Expenses.
+- "Traveler access" comes from Trip Membership.
+- "Share Trip" launches the Sharing capability.
+
+Home may have a purpose-built query/read model for speed and convenience, but it should not duplicate the underlying source-of-truth fields.
+
+Why:
+- avoids inconsistent copies of the same status,
+- keeps one-feature-one-home at the UI level without duplicating backend ownership,
+- makes Today/Home easier to change,
+- keeps business logic in the canonical modules.
+
+**Recommended direction:** Home/Today compose existing domain capabilities; no separate duplicate Home state.
