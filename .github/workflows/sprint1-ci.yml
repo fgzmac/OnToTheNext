@@ -43,6 +43,8 @@ jobs:
         run: npm run db:deploy
       - name: Seed deterministic fixture
         run: npm run db:seed
+      - name: Verify reset and deterministic reseed
+        run: npm run db:reset
       - name: Typecheck
         run: npm run typecheck
       - name: Lint
