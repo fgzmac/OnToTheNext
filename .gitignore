@@ -9,3 +9,5 @@ coverage/
 .DS_Store
 src/generated/prisma/
 prisma/.local/
+playwright-report/
+test-results/

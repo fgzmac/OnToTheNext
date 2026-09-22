@@ -19,7 +19,8 @@
     "db:deploy": "prisma migrate deploy",
     "db:seed": "prisma db seed",
     "db:reset": "prisma migrate reset --force && prisma db seed",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.0",
@@ -40,6 +41,7 @@
     "prisma": "7.10.0",
     "tsx": "^4.20.6",
     "typescript": "6.0.3",
-    "vitest": "5.0.1"
+    "vitest": "5.0.1",
+    "@playwright/test": "1.63.0"
   }
 }

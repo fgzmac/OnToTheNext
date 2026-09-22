@@ -47,7 +47,11 @@ jobs:
         run: npm run typecheck
       - name: Lint
         run: npm run lint
-      - name: Test
+      - name: Unit and integration tests
         run: npm test
       - name: Build
         run: npm run build
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Browser end-to-end tests
+        run: npm run e2e
