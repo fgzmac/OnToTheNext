@@ -1,106 +1,130 @@
-# Sprint 1 Completion Report — Foundation + Trip Skeleton
+# Sprint 1 completion report
 
-**Status:** READY FOR OWNER REVIEW  
-**Branch:** `sprint-1-foundation`  
-**Verified commit before report:** `2b26ac56ccca328936f868b428f582594fd0b7ac`  
-**Verification run:** https://github.com/fgzmac/OnToTheNext/actions/runs/35691340637
+**Engineering verification:** 2026-09-22
+**Branch:** sprint-1-foundation
+**PR:** [#1 — Foundation + Trip Skeleton](https://github.com/fgzmac/OnToTheNext/pull/1)
+**Acceptance:** Pending CEO/TPM review; do not merge automatically.
 
-## Scope implemented
+## Implementation and audit
 
-Sprint 1 implemented the approved Foundation + Trip Skeleton vertical slice:
+Reviewed the existing foundation against planning/blueprint.md, Sections 08–13,
+the Sprint brief, and D-094 through D-117. The real Next.js application persists
+the five approved Prisma models in PostgreSQL. SQL DATE fields preserve calendar
+dates. The server validates and reconciles Trip/Segment/Day structure atomically.
 
-- Next.js / React / TypeScript application foundation
-- PostgreSQL + Prisma
-- initial Prisma migration
-- deterministic prototype owner
-- Trip
-- Trip Segment
-- Day
-- minimal TripPreferenceProfile
-- Trip/Segment structural validation
-- server-owned Day regeneration
-- valid shared transfer-date boundaries
-- transfer-day ownership by starting Segment
-- temporary Unassigned dates
-- repeated-city Segments
-- atomic Segment reordering
-- rollback-safe structural mutations
-- responsive Home / Itinerary / Discover shell
-- deterministic development seed
-- automated verification
+Confirmed shared transfer boundaries, true-overlap rejection, repeated cities,
+Unassigned gaps, stable surviving Day IDs, Segment removal preserving Days, Trip
+cascade deletion preserving the prototype owner, complete reorder validation,
+successful atomic reorder and rollback after injected regeneration failure.
+Home, Itinerary and the Discover placeholder have one canonical navigation each.
 
-## Completion evidence
+Fixed the seed's midnight/noon comparison error by sharing the application Day
+planner and wrapping fixture replacement in a transaction. Added malformed-date
+validation, corrected the guarded reset CLI resolution, and required isolated test
+targets before destructive fixtures. The seed preserves unrelated created trips.
+No production authentication or later-sprint product capabilities were introduced.
+
+## Actual local verification
 
 | Check | Result |
 | --- | --- |
-| Prisma client generation | PASS |
-| Fresh migration deploy | PASS |
-| Deterministic seed | PASS |
-| Reset + reseed | PASS |
-| Typecheck | PASS |
-| Lint | PASS |
-| Unit/domain tests | PASS |
-| PostgreSQL integration tests | PASS |
-| Production build | PASS |
-| Desktop browser happy path | PASS |
-| Phone-width overflow/navigation check | PASS |
+| npm run db:generate | PASS |
+| npm run db:deploy against a fresh empty database | PASS; one initial migration |
+| npm run db:seed | PASS |
+| npm run db:reset on verified isolated database | PASS; migration reset and explicit reseed |
+| npm run typecheck | PASS, including after build-generated configuration restoration |
+| npm run lint | PASS |
+| Unit/domain tests | 14 passed |
+| Reset identity/command-order tests | 22 passed |
+| Total unit/safety tests | 36 passed |
+| PostgreSQL integration tests | 8 passed |
+| Total Vitest tests / skipped | 44 passed / 0 skipped |
+| npm run build | PASS; normal Next.js production build |
+| npm run e2e | 2 passed |
+| Desktop visual review | PASS |
+| Phone visual review, 390x844 | PASS |
+| Known blockers / data-integrity failures | 0 / 0 |
 
-## Automated behavior proven
+The fresh local verification database was ontothenext_verify_20260922_acceptance,
+on localhost:5433 with itinerary user ontothenext. Before reset, the redacted URL,
+actual current_database()/current_user and owning itinerary container/volume were
+verified. Prisma's runtime consent gate was honored with explicit owner approval.
+The normal development database was never reset; its complete data/schema hash
+was identical before and after verification. No Options resources were modified.
 
-The test suite verifies:
+Both initial seed and reset/reseed produced exactly:
+PrototypeUser 1, Trip 1, TripSegment 4, Day 15, TripPreferenceProfile 1.
+Assertions checked all three transfer boundaries and the final date.
+An integration regression seeds twice, checks ownership/counts, and verifies that
+an unrelated trip survives. Synthetic dates are used throughout.
 
-- invalid Trip dates are rejected,
-- valid one-date Segment handoffs are accepted,
-- true overlaps are rejected,
-- the same city may appear more than once,
-- transfer days belong to the Segment where the traveler starts the day,
-- gaps remain Unassigned,
-- persisted multi-city Trips reopen correctly,
-- invalid reorders do not change persisted order,
-- Segment removal preserves Days and creates Unassigned gaps,
-- failed Day regeneration rolls back the Segment mutation,
-- deleting a Trip cascades to Trip-owned children while preserving PrototypeUser,
-- the UI can create Tokyo → Kyoto → Osaka → Tokyo through the real flow,
-- 15 Days render and persist,
-- Home / Itinerary / Discover preserve Trip context,
-- phone-width primary screens do not horizontally overflow.
+## Core flow and visual acceptance
 
-## Failure behavior verified
+Browser setup clears only its explicitly validated isolated test database.
+The desktop flow proves empty application → broad Japan Trip → no invented Segment
+→ Tokyo → Kyoto → Osaka → Tokyo → 15 Days with transfer ownership → refresh and
+navigation persistence. The same route is checked at desktop and phone widths.
 
-Structural Day regeneration was deliberately forced to fail in a PostgreSQL integration test.
+Coverage includes a rejected overlapping edit with visible error, a valid date edit
+persisting after refresh, Segment removal yielding visible Unassigned Days, and
+Home/Itinerary/Discover navigation. Screenshots cover creation, Home, editing/errors,
+Itinerary, Discover and Unassigned warnings. Full-page screenshots were visually
+reviewed; controls remain reachable, Day labels and messages readable, and tested
+pages have no horizontal overflow. No UI redesign was required.
 
-Result:
-- the operation returned a Day-generation failure,
-- the attempted Segment insert was rolled back,
-- no partial structural state remained.
+Local logs, database fingerprints and screenshots remain in ignored .cache and
+test-results. Screenshots and fixtures contain only synthetic development data.
 
-## Known issues
+## Change inventory and public repository review
 
-No known blocker or data-integrity defects remain within Sprint 1 scope.
+Changes present before the audit were classified before staging:
 
-Non-blocking / expected:
-- styling is foundation-level and not final product visual design,
-- production auth/privacy/security remains intentionally deferred,
-- no later-milestone product capability is implemented.
+| Classification | Files / disposition |
+| --- | --- |
+| PRE-EXISTING VERIFIED INFRASTRUCTURE | .env.example, docker-compose.yml, package.json, playwright.config.ts, .github/workflows/sprint1-ci.yml, .gitignore, .npmrc, package-lock.json, scripts/dev-session.ps1, scripts/db-reset.ts, src/lib/database-reset.ts and its tests, IMPLEMENTATION.md |
+| PRE-EXISTING INFRASTRUCTURE requiring portability review | AGENTS.md and DEVELOPMENT-STORAGE.md; rewritten as portable guidance |
+| SPRINT 1 IMPLEMENTATION during this audit | seed/date fixes, isolated test safeguards, expanded regression/browser acceptance, updated Sprint reports |
+| LOCAL-ONLY / DO NOT COMMIT | .env, .cache, .next, generated Prisma output, node_modules/browser binaries, test-results, external boundary map and mount/backup helpers |
+| UNEXPECTED | None |
 
-## Scope confirmation
+Significant additions across the Sprint branch relative to origin/main:
+- app routes/components/styles for creation, Home, Itinerary and Discover.
+- src/modules/trips domain/date/types/service/actions and prototype-owner seam.
+- src/lib Prisma access and reset guard.
+- Prisma schema, migration, synthetic seed and shared seed implementation.
+- Domain/reset/integration/Playwright tests and isolated browser fixture setup.
+- Package/lockfile, TypeScript/Next/ESLint/Vitest/Playwright configuration.
+- Compose/environment example, CI, session/reset scripts and portable setup docs.
+- D-117 implementation transition and the two Sprint reports.
 
-Sprint 1 did **not** add:
-- recommendations,
-- Map,
-- hotels,
-- reservations,
-- expenses,
-- Share Trip,
-- companion access,
-- external data providers,
-- background jobs,
-- object storage,
-- native apps,
-- public API.
+No secrets, personal machine paths, SSD serials, private bookings or private travel
+fixtures were added. Existing public local-development example credentials remain
+examples, not production secrets. AGENTS/storage docs are portable; the external
+PROJECT-BOUNDARIES.md is excluded. Generated/runtime/data files remain ignored.
 
-## Acceptance still needed
+## CI and scope gate
 
-Per D-115, owner review is still required before the sprint is formally marked accepted.
+CI uses a fresh ephemeral itinerary PostgreSQL service on host 5433, npm ci,
+Prisma generation/migration/seed/guarded reset, typecheck, lint, unit/safety and
+integration tests, build and Chromium E2E with hermetic browsers.
+The final engineering handoff and PR description record the actual pushed head
+and its green run. See [current PR checks](https://github.com/fgzmac/OnToTheNext/pull/1/checks);
+the old pre-audit run is not acceptance evidence for this revision.
 
-The code is ready for review and merge.
+Compared the Sprint branch to origin/main. No recommendations, activities,
+Map, hotels, reservations, expenses, sharing, companions, external APIs, weather,
+transit, ML or native applications were added. No out-of-scope additions required
+removal. The implementation remains Foundation + Trip Skeleton.
+
+## Known low-risk issues
+
+- Phone Segment headings wrap dates and reorder labels; all controls remain usable.
+  Low severity; optional later visual polish, no next-sprint dependency.
+- The PostgreSQL adapter emits a pg deprecation warning about overlapping client
+  queries. Current pinned-version tests pass with no failed persistence checks.
+  Low severity; review with a future dependency upgrade, before pg 9.
+- Prototype identity and foundation-level visual copy are intentional Sprint 1
+  limitations, not production readiness. Production hardening stays deferred.
+
+Zero known Sprint 1 blockers or data-integrity defects remain. CEO/TPM acceptance
+and review of actual current-head green CI are required before advancing.

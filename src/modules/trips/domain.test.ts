@@ -23,6 +23,17 @@ function segment(
 }
 
 describe("trip domain rules", () => {
+  it.each(["2030-99-01", "2030-04-99", "2030-02-29", "not-a-date"])("rejects malformed calendar date %s without throwing", value => {
+    expect(validateTripBasics({ startDate: value, endDate: "2030-04-15", travelerCount: 1 })[0]?.code).toBe("INVALID_TRIP_DATE_RANGE");
+  });
+  it.each([0, -1, 1.5])("rejects invalid traveler count %s", travelerCount => {
+    expect(validateTripBasics({ ...trip, travelerCount }).some(issue => issue.code === "INVALID_TRAVELER_COUNT")).toBe(true);
+  });
+  it("rejects reversed and out-of-trip segment ranges", () => {
+    expect(validateTripStructure(trip, [segment("a", "Tokyo", "2030-04-05", "2030-04-01", 0)]).some(issue => issue.code === "INVALID_SEGMENT_DATE_RANGE")).toBe(true);
+    expect(validateTripStructure(trip, [segment("a", "Tokyo", "2030-03-31", "2030-04-16", 0)]).some(issue => issue.code === "SEGMENT_OUTSIDE_TRIP")).toBe(true);
+  });
+
   it("rejects invalid trip dates", () => {
     expect(validateTripBasics({ startDate: "2030-04-15", endDate: "2030-04-01", travelerCount: 1 })[0]?.code)
       .toBe("INVALID_TRIP_DATE_RANGE");

@@ -1,112 +1,66 @@
 # Sprint 1 — Foundation + Trip Skeleton
 
-**Status:** READY FOR REVIEW  
-**Started:** 2026-09-21  
-**Branch:** `sprint-1-foundation`
+**Status:** Implementation verified locally; awaiting CEO/TPM acceptance and current-head CI gate.
+**Started:** 2026-09-21
+**Engineering audit:** 2026-09-22
+**Branch:** sprint-1-foundation
+**Pull request:** [#1](https://github.com/fgzmac/OnToTheNext/pull/1)
 
-## Objective
+## Approved scope and implementation
 
-Create the smallest real application foundation that persists a multi-city Trip and exposes the approved Home / Itinerary / Discover navigation.
+The existing implementation was reviewed against the blueprint, approved Sections
+9–14 and decisions D-094 through D-117. Later confirmed decisions take precedence.
+This is the existing Sprint 1 foundation, not a replacement implementation.
 
-## Approved implementation scope
+- Next.js / React / TypeScript responsive Home, Itinerary and Discover placeholder.
+- PostgreSQL 17 and Prisma schema/migration: PrototypeUser, Trip, TripSegment, Day
+  and a minimal typed TripPreferenceProfile.
+- ISO calendar dates backed by SQL DATE columns; metadata alone uses timestamps.
+- Trip and Segment validation, repeated cities, shared transfer boundaries,
+  start-of-day ownership, explicit Unassigned dates, and server-owned Day regeneration.
+- Day reconciliation preserves surviving date identities and normalizes positions.
+- Segment removal preserves Days; Trip deletion cascades its children, preserving owner.
+- Complete-list reorder validation and structural writes/regeneration in one transaction.
+  A reorder that contradicts unchanged dates is rejected visibly.
+- One prototype-owner seam and a synthetic Japan seed, with no seed dependency for creation.
 
-- Next.js / TypeScript application shell
-- PostgreSQL
-- Prisma 7 data layer/migrations
-- deterministic prototype owner seam
-- Trip persistence
-- Trip Segment persistence
-- Day persistence/regeneration
-- minimal TripPreferenceProfile
-- date-only domain rules
-- valid shared transfer boundaries
-- true-overlap rejection
-- temporary Unassigned dates
-- atomic Segment reorder
-- responsive Home / Itinerary / Discover shell
-- deterministic development seed
-- automated domain tests
+## Audit fixes
 
-## Current implementation
+1. Seed comparisons mixed SQL DATE midnight values with noon Date objects, assigning
+   transfer dates incorrectly and leaving the final date Unassigned. Seeding now uses
+   the same date-only Day planner as the application, within one transaction.
+2. Malformed calendar dates could throw during validation. They now return a
+   structural validation error.
+3. The new reset wrapper resolved Prisma's package entry rather than its CLI binary.
+   It now launches the declared binary from the installed package metadata.
+4. Destructive integration fixtures could fall back to a normal DATABASE_URL.
+   Tests now require an explicit, validated isolated TEST_DATABASE_URL; browser setup
+   verifies actual database/user identity before clearing its isolated fixture.
 
-Initial foundation work is active on the Sprint 1 branch.
+No product redesign or later-sprint features were added.
 
-## Completion evidence required
+## Runtime and infrastructure reconciliation
 
-Before this sprint can move to COMPLETE:
-- typecheck passes
-- lint passes
-- automated tests pass
-- database-backed integration checks pass
-- core end-to-end path passes
-- fresh migration succeeds
-- reset/reseed succeeds
-- desktop manual check passes
-- phone-width manual check passes
-- known issues are documented
-- zero known blocker/data-integrity defects remain
-- D-115 completion report is produced
+Web uses 3100. PostgreSQL uses host 5433 and container 5432.
+Compose project remains ontothenext; volume remains ontothenext_ontothenext-postgres.
+Options App resources are read-only and unchanged.
 
+Portable AGENTS.md and DEVELOPMENT-STORAGE.md are committed. Machine-specific
+boundary maps, mount helpers and backup records remain outside Git.
+The lockfile is included and CI uses npm ci. Windows session setup keeps temporary
+files/caches inside ignored .cache; Playwright uses PLAYWRIGHT_BROWSERS_PATH=0.
 
-## Implementation result
+## Verification and acceptance
 
-Implemented on branch `sprint-1-foundation`:
+See [completion report](sprint-1-completion-report.md) for actual results and coverage.
+Local verification passed: Prisma generation, clean migration, seed, guarded isolated
+reset/reseed, typecheck, lint, 36 unit/safety tests, 8 PostgreSQL integration tests,
+production build and 2 expanded Playwright tests. No tests skipped.
 
-- Next.js / React / TypeScript foundation
-- PostgreSQL + Prisma schema and migration
-- deterministic prototype-owner seam
-- Trip persistence
-- Trip Segment persistence
-- Day persistence/regeneration
-- minimal typed TripPreferenceProfile
-- date-only domain rules
-- valid shared transfer boundary behavior
-- true-overlap rejection
-- temporary Unassigned dates
-- atomic Segment reordering
-- rollback-safe structural transactions
-- Home / Itinerary / Discover responsive shell
-- deterministic Japan development seed
-- unit, PostgreSQL integration, and Playwright browser tests
-- GitHub Actions verification pipeline
+Desktop and 390x844 phone screenshots were reviewed for creation, Home/segment
+editing, Itinerary, Discover, errors and Unassigned warnings. No blocker found.
 
-## Verification
-
-Latest full CI verification: **PASS**
-
-https://github.com/fgzmac/OnToTheNext/actions/runs/35691340637
-
-The successful run verified:
-- dependency install
-- Prisma generation
-- fresh migration deploy
-- deterministic seed
-- database reset + deterministic reseed
-- TypeScript typecheck
-- ESLint
-- unit/domain tests
-- PostgreSQL integration tests
-- production Next.js build
-- desktop browser happy path
-- phone-width navigation/overflow check
-
-## Known issues / follow-up
-
-No known blocker or data-integrity defects remain in approved Sprint 1 scope.
-
-Low-risk notes:
-- visual design is intentionally foundation-level, not final polish,
-- production authentication/security/privacy remains deferred by D-083,
-- manual owner visual acceptance is still required before Sprint 1 is formally accepted.
-
-## Scope check
-
-No later-milestone product feature was added:
-- no recommendations,
-- no Map,
-- no hotel search,
-- no reservations,
-- no expenses,
-- no Share Trip,
-- no companion workflow,
-- no external provider integrations.
+The final handoff must verify CI on the pushed branch's actual head, using
+[PR #1 checks](https://github.com/fgzmac/OnToTheNext/pull/1/checks).
+An older green run is not current-head evidence. The PR remains unmerged.
+Acceptance belongs to the CEO/TPM; Sprint 2 has not started.

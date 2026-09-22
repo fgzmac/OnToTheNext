@@ -19,7 +19,7 @@ jobs:
           POSTGRES_USER: ontothenext
           POSTGRES_PASSWORD: ontothenext
         ports:
-          - 5432:5432
+          - 5433:5432
         options: >-
           --health-cmd "pg_isready -U ontothenext -d ontothenext_test"
           --health-interval 5s
@@ -27,8 +27,9 @@ jobs:
           --health-retries 10
 
     env:
-      DATABASE_URL: postgresql://ontothenext:ontothenext@localhost:5432/ontothenext_test?schema=public
-      TEST_DATABASE_URL: postgresql://ontothenext:ontothenext@localhost:5432/ontothenext_test?schema=public
+      DATABASE_URL: postgresql://ontothenext:ontothenext@localhost:5433/ontothenext_test?schema=public
+      PLAYWRIGHT_BROWSERS_PATH: "0"
+      TEST_DATABASE_URL: postgresql://ontothenext:ontothenext@localhost:5433/ontothenext_test?schema=public
 
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +37,7 @@ jobs:
         with:
           node-version: 22
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Generate Prisma client
         run: npm run db:generate
       - name: Apply migrations

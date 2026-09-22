@@ -5,7 +5,7 @@ const DATE_ONLY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 export function isValidDateOnly(value: string): value is DateOnly {
   if (!DATE_ONLY_PATTERN.test(value)) return false;
   const parsed = toUtcDate(value);
-  return formatDateOnly(parsed) === value;
+  return Number.isFinite(parsed.getTime()) && formatDateOnly(parsed) === value;
 }
 
 export function toUtcDate(value: DateOnly): Date {
