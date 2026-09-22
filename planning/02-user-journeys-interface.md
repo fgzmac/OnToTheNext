@@ -488,3 +488,20 @@ Formalize what the traveler sees once the trip begins:
 - nearby discovery,
 - quick expense entry,
 - and live day adjustments.
+
+
+## On-Trip Mobile Home / Today — D-054
+
+**Confirmed:** mobile Home becomes a travel-mode Today screen focused on the next activity, leave-by time, directions, tickets, remaining itinerary, intentional free time, nearby discovery, hotel return, quick expenses, and meaningful alerts. Essential trip information should be designed for eventual offline availability.
+
+## Next decision — Pre-Trip Readiness / Trip Overview
+
+Formalize a single readiness view that answers:
+- What is still undecided?
+- Are hotels selected/booked?
+- Is intercity/local transportation planned?
+- Which reservations still need action?
+- Are important itinerary gaps intentional?
+- Is the trip within the planned budget?
+- Do companions have access?
+- Is anything departure-critical still unresolved?
