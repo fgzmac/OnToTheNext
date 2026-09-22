@@ -582,4 +582,50 @@ Why separate them:
 - freshness can be tracked explicitly,
 - the app can explain when information is unknown or stale.
 
-**Recommended direction:** add reusable Source + Evidence Record concepts and keep them separate from user Accept/Deny state.
+**Confirmed direction — D-073:** add reusable Source + Evidence Record concepts and keep them separate from Recommendation/user decision state.
+
+
+## Next decision — Identity versus Trip Membership
+
+**Q-509:** Should a person's identity be separate from their role/access inside a specific Trip?
+
+Recommended model:
+
+### User / Guest Identity
+Represents the person at the product level.
+
+May be:
+- full account,
+- lightweight guest identity,
+- later upgraded guest → account.
+
+### Trip Membership
+Represents that identity's relationship to one Trip.
+
+Conceptual fields:
+- Trip,
+- identity,
+- role: Organizer / Companion,
+- membership status,
+- joined date,
+- access/revocation state,
+- expense participation.
+
+Example:
+
+```text
+User / Guest Identity
+        ↓
+Trip Membership
+├── Trip A → Organizer
+└── Trip B → Companion
+```
+
+Why separate them:
+- the same person can have different roles in different trips,
+- role belongs to the trip, not globally to the account,
+- lightweight guest access can later upgrade without rebuilding the trip relationship,
+- revoked membership does not require deleting the person's identity,
+- expense history can remain linked even after active access ends.
+
+**Recommended direction:** separate User/Guest Identity from Trip Membership.
