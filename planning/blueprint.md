@@ -4,7 +4,7 @@
 **Source:** The app-building blueprint adopted in the planning conversation.  
 **Framework status:** CONFIRMED as the planning process; not approval of every product proposal.  
 **Current section:** 10 — Detailed Feature Specification.  
-**Current section status:** DRAFT — Section 9 approved; Section 10 active.  
+**Current section status:** IN REVIEW — Section 10 closeout prepared; awaiting explicit owner approval.  
 **Last updated:** 2026-09-19.  
 **Next review trigger:** The next planning answer from the project owner.
 
