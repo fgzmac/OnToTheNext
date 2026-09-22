@@ -3,8 +3,8 @@
 **Purpose:** The main planning framework for this project.  
 **Source:** The app-building blueprint adopted in the planning conversation.  
 **Framework status:** CONFIRMED as the planning process; not approval of every product proposal.  
-**Current section:** 5 — Assumptions, Risks, and Early Experiments.  
-**Current section status:** IN REVIEW — Section 5 closeout prepared; awaiting explicit owner approval.  
+**Current section:** 6 — Conceptual Model and System Boundaries.  
+**Current section status:** DRAFT — Section 5 approved; Section 6 active.  
 **Last updated:** 2026-09-19.  
 **Next review trigger:** The next planning answer from the project owner.
 
