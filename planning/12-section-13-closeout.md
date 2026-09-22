@@ -1,6 +1,6 @@
 # Section 13 Closeout — Data and Persistence Planning
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-21.  
 **Purpose:** Lock the Sprint 1 PostgreSQL/Prisma persistence model before moving to testing and release-readiness planning.
 
@@ -151,3 +151,10 @@ Approve Section 13 if this Sprint 1 persistence model is correct.
 Approval advances to **Section 14 — Testing, Completion, and Release Readiness**.
 
 Approval still does not authorize implementation.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-21.  
+**Owner instruction:** “Approve section 13.”  
+**Effect:** Advance to Section 14 — Testing, Completion, and Release Readiness. This approval does not authorize implementation.
