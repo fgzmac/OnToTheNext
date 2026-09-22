@@ -498,4 +498,38 @@ Why this helps:
 - travelers can be excluded cleanly,
 - later settlement calculations become simpler.
 
-**Recommended direction:** Expense + per-traveler Expense Allocations.
+**Confirmed direction — D-071:** shared Expenses use explicit per-traveler Expense Allocations; split methods calculate those stored responsibilities.
+
+
+## Next decision — Sharing versus membership
+
+**Q-507:** Should `Share Presentation`, `Share Link`, and `Companion Invite` be separate concepts?
+
+Recommended model:
+
+### Share Presentation
+The polished, themed itinerary artifact/view:
+- destination styling,
+- trip dates,
+- day highlights,
+- selected hotels/reservations,
+- app link,
+- share-safe content only.
+
+### Share Link
+A link that opens the shared presentation or a read-only trip view.
+
+It should not automatically grant companion membership or expense access.
+
+### Companion Invite
+A unique access token/link used to join the Trip as a Companion.
+
+It grants the permissions defined by the companion model and can be revoked/expired under D-041.
+
+Why keep them separate:
+- someone may receive a beautiful itinerary without joining the trip,
+- companion access has stronger permissions and financial visibility,
+- sharing should never accidentally elevate access,
+- public/read-only sharing can evolve independently from private membership.
+
+**Recommended direction:** keep all three concepts separate.
