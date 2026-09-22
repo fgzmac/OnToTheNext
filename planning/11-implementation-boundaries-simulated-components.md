@@ -175,14 +175,33 @@ Do not build a user-facing "factory reset" feature unless later needed.
 
 **Q-1101:** Should Sprint 1 use a single deterministic prototype-owner identity behind the scenes, rather than implementing real authentication now?
 
-**Recommended direction:** yes.
-
-Reason:
-- matches D-083,
-- keeps personal-use testing simple,
-- allows Trips to have an owner relationship from the start,
-- preserves a clean seam for later User/Trip Membership,
-- avoids wasting Sprint 1 on auth infrastructure.
+**Confirmed direction — D-105:** Sprint 1 uses one deterministic prototype-owner identity behind a clean application/development seam. Real authentication remains deferred.
 
 Important:
 The prototype owner should be isolated in one development/application boundary, not scattered as hard-coded checks throughout the codebase.
+
+
+## Next decision — Seed data
+
+**Q-1102:** Should Sprint 1 include deterministic development seed data for the Japan pilot in addition to supporting the real Create Trip flow?
+
+**Recommended direction:** yes, but only as development/test convenience.
+
+Seed data may include:
+- one Japan Trip,
+- Tokyo / Kyoto / Osaka / Tokyo Segments,
+- generated Days,
+- no fake recommendations/reservations/expenses.
+
+Rules:
+- the app must still work when the database is empty,
+- the real Create Trip flow must remain the primary product path,
+- seed data must be clearly development-only,
+- reseeding should be deterministic.
+
+Why:
+- faster UI/testing cycles,
+- easy regression checks for repeated-city Segments and transfer boundaries,
+- useful for responsive testing without recreating the same trip manually every time.
+
+**Recommended direction:** include deterministic Japan seed data for development, but do not make the product depend on it.
