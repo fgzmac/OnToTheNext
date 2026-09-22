@@ -346,3 +346,20 @@ Approval does not authorize implementation.
 **Approved by owner:** 2026-09-21.  
 **Owner instruction:** “Approve section 3.”  
 **Effect:** Advance to Section 4 — First-Release Scope and Success Measures. This approval does not authorize implementation.
+
+
+## Post-approval navigation amendment — D-057
+
+The owner further simplified navigation after Section 3 approval.
+
+Revised primary navigation target:
+- **Home**
+- **Itinerary**
+- **Discover**
+- **More**
+
+**Map is no longer a separate primary menu item.** It becomes a mode/view within Discover because exploration and geographic context belong to the same user task.
+
+Hotels, Reservations, Expenses, Share Trip, Companion Access, and Trip Settings remain contextual or lower-frequency destinations rather than permanent top-level tabs.
+
+The governing rule is to combine features that naturally belong to the same task whenever doing so reduces clutter without making functionality difficult to find.
