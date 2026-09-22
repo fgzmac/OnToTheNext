@@ -1,6 +1,6 @@
 # Section 7 Closeout — Architecture, Quality, and External Dependencies
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-21.  
 **Purpose:** Consolidate the V1 technical architecture before moving to Section 8 — Lightweight API Capability Inventory.
 
@@ -172,3 +172,10 @@ Approve Section 7 if this technical direction is correct.
 Approval advances the blueprint to **Section 8 — Lightweight API Capability Inventory**.
 
 Approval does not authorize implementation.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-21.  
+**Owner instruction:** “Approve section 7.”  
+**Effect:** Advance to Section 8 — Lightweight API Capability Inventory. This approval does not authorize implementation.
