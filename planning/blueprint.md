@@ -4,7 +4,7 @@
 **Source:** The app-building blueprint adopted in the planning conversation.  
 **Framework status:** CONFIRMED as the planning process; not approval of every product proposal.  
 **Current section:** 3 — User Journeys and Interface Behavior.  
-**Current section status:** DRAFT — Section 2 approved; Section 3 active.  
+**Current section status:** IN REVIEW — Section 3 simplified closeout prepared; awaiting explicit owner approval.  
 **Last updated:** 2026-09-19.  
 **Next review trigger:** The next planning answer from the project owner.
 
@@ -71,7 +71,7 @@ The original long-form blueprint had introductory sections before the product te
 | --- | --- | --- | --- |
 | 1 | 3 | Product Vision and Problem Brief | APPROVED — 2026-09-20 |
 | 2 | 4 | Users, Roles, and Ownership | APPROVED — 2026-09-20 |
-| 3 | 5 | User Journeys and Interface Behavior | DRAFT — current |
+| 3 | 5 | User Journeys and Interface Behavior | IN REVIEW — awaiting owner approval |
 | 4 | 6 | First-Release Scope and Success Measures | NOT STARTED |
 | 5 | 7 | Assumptions, Risks, and Early Experiments | NOT STARTED |
 | 6 | 8 | Conceptual Model and System Boundaries | NOT STARTED |
