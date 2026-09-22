@@ -1,6 +1,6 @@
 # Section 11 Closeout — Detailed API Contract for Current Feature
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-21.  
 **Purpose:** Lock the Sprint 1 internal application contract for Trip / Segment / Day behavior before moving to implementation boundaries and simulated components.
 
@@ -145,3 +145,10 @@ Approve Section 11 if this internal contract is implementation-ready.
 Approval advances to **Section 12 — Implementation Boundaries and Simulated Components**.
 
 Approval still does not authorize coding.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-21.  
+**Owner instruction:** “Approve section 11.”  
+**Effect:** Advance to Section 12 — Implementation Boundaries and Simulated Components. This approval does not authorize implementation.
