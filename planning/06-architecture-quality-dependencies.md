@@ -310,4 +310,35 @@ Next.js / TypeScript App
 └── PostgreSQL
 ```
 
-**Recommended direction:** modular monolith for V1, with provider adapters and clear internal module boundaries.
+**Confirmed direction — D-081:** modular monolith for V1, using one Next.js/TypeScript application, PostgreSQL, provider adapters, and clear internal module boundaries.
+
+
+## Next decision — V1 web/mobile delivery strategy
+
+**Q-602:** Should V1 ship as a responsive web application with installable/PWA behavior before building separate native iOS/Android clients?
+
+Recommended direction:
+
+### V1
+- responsive Next.js web app,
+- mobile layouts treated as first-class,
+- installable/PWA behavior where useful,
+- browser access on desktop/laptop,
+- strong mobile Today experience,
+- deep/share links open the same product,
+- offline-ready architecture with limited initial caching.
+
+### Later, if usage justifies it
+- native iOS/Android clients can use the same backend/domain model.
+
+Why:
+- avoids maintaining separate web + iOS + Android codebases during V1,
+- preserves the approved web-and-mobile product experience,
+- makes Share Trip links easier to open,
+- keeps iteration fast,
+- still allows eventual native apps if App Store distribution or device capabilities become important.
+
+Important:
+This is a delivery/implementation choice, not a downgrade of mobile. Mobile UX remains first-class.
+
+**Recommended direction:** responsive web + PWA-style V1, native apps later if validated.
