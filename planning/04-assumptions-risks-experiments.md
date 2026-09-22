@@ -350,3 +350,50 @@ The app should remain the source of truth for:
 - and the day plan.
 
 **Recommended direction:** use this as Experiment 4.
+
+
+## Experiment priority — D-063
+
+**Confirmed:** On-Trip Today usability is Experiment 4.
+
+The test uses a realistic local day and verifies that the app remains the source of truth for timing, reservations, free time, nearby discovery, and the day plan.
+
+## Next decision — Share Trip usefulness experiment
+
+Test whether the themed itinerary presentation is something users would actually send.
+
+### Proposed comparison
+
+Create three versions of the same trip:
+
+1. **Plain**
+   - simple text/list itinerary
+   - app link
+
+2. **Polished**
+   - destination-themed cover
+   - clean city/day highlights
+   - hotels and major reservations
+   - app link
+
+3. **Rich**
+   - polished theme
+   - stronger photography/art direction
+   - route/map summary
+   - more visual day-by-day presentation
+   - app link
+
+### Questions for tester
+- Which would you actually send to your travel companion?
+- Which is easiest to understand?
+- Which feels most exciting to receive?
+- Is any version too busy?
+- Is anything important missing?
+- Would you prefer text/email/link over a downloadable file?
+
+### Success target
+The preferred version should feel noticeably more useful/exciting than the plain itinerary **without becoming harder to read**.
+
+The result should tell us how much visual/theming effort belongs in V1.
+
+**Recommended direction:** use this as Experiment 5.
