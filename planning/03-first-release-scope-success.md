@@ -284,3 +284,19 @@ Contextual facts may appear elsewhere, but duplicate shortcut/redirect buttons s
 ### Navigation success criterion
 
 After learning the app once, a user should be able to predict where a feature lives without hunting between duplicate entry points.
+
+
+## Section 4 closeout review
+
+A consolidated closeout has been created at `planning/03-section-4-closeout.md`.
+
+It incorporates:
+- Tier A / B / C scope,
+- Share Trip,
+- planning-only hotels,
+- Home-centered utilities,
+- Discover + Map consolidation,
+- one-feature-one-home navigation,
+- and six end-to-end software-test scenarios.
+
+**Section 4 is IN REVIEW pending explicit owner approval.**
