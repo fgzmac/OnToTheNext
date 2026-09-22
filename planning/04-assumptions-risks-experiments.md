@@ -221,3 +221,44 @@ Suggested experiment:
 
 Success signal:
 The user says the app is saving research effort and accepts enough options to start forming a trip without needing to leave and research everything independently.
+
+
+## Experiment priority — D-060
+
+**Confirmed:** Recommendation usefulness is the first validation experiment.
+
+The Japan pilot will be used to test small factual recommendation batches with Accept / Deny, followed by refined batches.
+
+## Next decision — Navigation comprehension experiment
+
+Test whether the simplified structure is immediately understandable:
+
+- Home
+- Itinerary
+- Discover
+
+Canonical homes:
+- Home → Share Trip, Expenses, Travelers
+- Itinerary → day planning and scheduled details
+- Discover → recommendations, Map, nearby discovery, planning-phase hotels
+
+### Proposed test
+
+Give a tester the prototype after minimal orientation and ask them to complete these tasks:
+
+1. Find the map.
+2. Add an expense.
+3. Share the trip.
+4. Change a scheduled activity.
+5. Find a new activity near today's plan.
+6. Find the travelers/access screen.
+
+Do **not** tell them where each feature lives.
+
+### Success target
+
+The user should correctly predict the section for at least **5 of 6 tasks** without hunting through multiple menus.
+
+If multiple users repeatedly miss the same task, adjust the information architecture rather than adding duplicate shortcut buttons everywhere.
+
+**Recommended direction:** use this as the second Section 5 experiment.
