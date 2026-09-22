@@ -1,6 +1,6 @@
 # Section 4 Closeout — First-Release Scope and Success Measures
 
-**Lifecycle status:** IN REVIEW — awaiting explicit owner approval.  
+**Lifecycle status:** APPROVED.  
 **Recorded:** 2026-09-21.  
 **Purpose:** Lock the V1 product boundary and define how the first complete software test will be judged before moving to Section 5 — Assumptions, Risks, and Early Experiments.
 
@@ -258,3 +258,10 @@ Approve Section 4 if this V1 boundary is correct.
 Approval advances the blueprint to **Section 5 — Assumptions, Risks, and Early Experiments**.
 
 Approval does not authorize implementation.
+
+
+## Approval record
+
+**Approved by owner:** 2026-09-21.  
+**Owner instruction:** “Approve section 4.”  
+**Effect:** Advance to Section 5 — Assumptions, Risks, and Early Experiments. This approval does not authorize implementation.
