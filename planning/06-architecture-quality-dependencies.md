@@ -525,4 +525,34 @@ Selection criteria:
 5. Can we replace it later without rewriting product logic?
 6. Does it support the countries/regions we need, starting with Japan and local U.S. testing?
 
-**Recommended direction:** low-cost, capability-driven, adapter-based provider selection; do not lock final vendors until each integration is needed.
+**Confirmed direction — D-088:** low-cost, capability-driven, adapter-based provider selection; specific vendors remain open until each integration is needed.
+
+
+## Next decision — Prototype deployment
+
+**Q-609:** How should the personal prototype be deployed?
+
+**Recommended direction:** use a **managed deployment** for the Next.js app plus managed PostgreSQL.
+
+Goals:
+- minimal server administration,
+- automatic deployments from GitHub,
+- HTTPS by default,
+- simple environment-variable management,
+- easy logs,
+- low or free prototype cost,
+- straightforward rollback,
+- ability to keep the prototype private/restricted where practical.
+
+Avoid for now:
+- self-managed VPS/server maintenance,
+- Kubernetes,
+- multi-region infrastructure,
+- custom load balancers,
+- complex CI/CD pipelines.
+
+Local development remains supported, but a managed hosted environment is useful for mobile testing and Share Trip links.
+
+Exact vendor can be selected later after checking the current free/low-cost options.
+
+**Recommended direction:** managed app hosting + managed PostgreSQL for the prototype.
