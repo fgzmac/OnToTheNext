@@ -386,3 +386,16 @@ A permanent `More` tab is not required for these functions.
 Hotel discovery/comparison is a **planning-phase capability**. Once lodging for a city is selected and reserved, hotel-shopping UI should recede. The confirmed hotel remains available through the itinerary/trip details for address, confirmation, directions, dates, and cost.
 
 Secondary screens must make it easy to go back and forth while preserving the user's context.
+
+
+## Post-approval information-architecture amendment — D-059
+
+Each major feature has one canonical home.
+
+- **Home** owns Share Trip, Expenses, Travelers/Companion Access, and trip-level utilities.
+- **Itinerary** owns day planning and scheduled-item details.
+- **Discover** owns recommendations, nearby exploration, Map, and planning-phase hotel discovery.
+
+Other sections may display relevant facts from these domains, but should not add duplicate redirect buttons or alternate navigation paths to the same feature.
+
+Example: Map lives in Discover. Itinerary may show travel time, but it should not add an additional Map redirect just because geographic context is relevant.
