@@ -1,0 +1,70 @@
+import {beforeEach,afterAll,describe,it,expect} from "vitest";
+import {getPrismaClient} from "@/src/lib/prisma";
+import {createTrip,updateTrip} from "@/src/modules/trips/service";
+import {startDestinationResearch,cancelResearch,publishResearch,reserveCall,asJson} from "@/src/modules/research/service";
+import {runResearchJob} from "@/src/modules/research/worker";
+import {getRecommendationBatch,decideRecommendation} from "@/src/modules/discover/service";
+import {addRecommendationToDay,getItineraryBuilder} from "@/src/modules/itinerary/service";
+import {previewMoveItineraryItem} from "@/src/modules/itinerary/builder-service";
+import {syntheticConfig as config,syntheticHttp} from "./fixtures/research";
+import type {Evaluated} from "@/src/modules/research/types";
+const suite=process.env.TEST_DATABASE_URL?describe:describe.skip;
+const db=process.env.TEST_DATABASE_URL?getPrismaClient():null;
+async function setup(){
+ const result=await createTrip({destinationLabel:"Lisbon",destinationScope:"CITY_BASE",startDate:"2032-04-01",endDate:"2032-04-03",travelerCount:1});
+ if(!result.ok||!result.data)throw new Error("fixture trip failed");
+ const t=result.data,input={tripId:t.trip.id,segmentId:t.segments[0].id,country:"Portugal",language:"en"};
+ const job=await startDestinationResearch(input,config);if(!job.ok)throw new Error(job.error);
+ return {t,input,id:job.id};
+}
+suite("synthetic runtime research application contract",()=>{
+ beforeEach(async()=>{await db!.trip.deleteMany();await db!.researchBudget.deleteMany();await db!.prototypeUser.deleteMany();await db!.evidenceRecord.deleteMany();await db!.source.deleteMany();await db!.place.deleteMany();});
+ afterAll(async()=>{await db?.$disconnect();});
+ it("runs Trip → Brave → permitted reader → Responses → validation → publication → card → one-action Add",async()=>{
+  const s=await setup(),urls:string[]=[],bodies:string[]=[];
+  await runResearchJob(s.id,{config,transport:syntheticHttp({onRequest:(u,b)=>{urls.push(u);if(b)bodies.push(b);}}),delay:async()=>{}});
+  const j=await db!.researchJob.findUniqueOrThrow({where:{id:s.id}});
+  expect(j.state).toBe("PARTIAL");expect(j.published).toBe(1);expect(j.searches).toBeGreaterThan(1);expect(j.documents).toBe(3);
+  expect(urls.some(u=>u.includes("api.openai.com/v1/responses"))).toBe(true);expect(urls.some(u=>new URL(u).hostname.endsWith("reddit.com"))).toBe(false);
+  expect(bodies.join()).not.toContain(s.t.trip.id);
+  expect(await db!.recommendationDecision.count()).toBe(0);expect(await db!.itineraryItem.count()).toBe(0);expect(await db!.reservation.count()).toBe(0);
+  const b=await getRecommendationBatch(s.t.trip.id,s.input.segmentId);if(!b.ok)throw new Error(b.error);
+  expect(b.data.cards).toHaveLength(1);const card=b.data.cards[0];expect(card.photo).toBeNull();expect(card.evidence.every(e=>e.sourceKind==="RUNTIME_STRUCTURED_REFERENCE")).toBe(true);
+  const added=await addRecommendationToDay({tripId:s.t.trip.id,tripSegmentId:s.input.segmentId,recommendationId:card.id,dayId:s.t.days[0].id!});
+  expect(added.ok).toBe(true);expect(await db!.recommendationDecision.count()).toBe(1);expect(await db!.itineraryItem.count()).toBe(1);expect(await db!.reservation.count()).toBe(0);
+ });
+ it("withholds malicious source instructions without executing or scheduling",async()=>{const s=await setup();await runResearchJob(s.id,{config,transport:syntheticHttp({malicious:true}),delay:async()=>{}});expect(await db!.recommendation.count()).toBe(0);expect((await db!.researchCandidate.findFirstOrThrow({where:{identity:{not:{startsWith:"nomination:"}}}})).reasons).toContain("instruction-like content withheld");expect(await db!.itineraryItem.count()).toBe(0);});
+ it("publishes a partial useful set when the bounded search budget ends",async()=>{const s=await setup();await runResearchJob(s.id,{config:{...config,maxSearch:2},transport:syntheticHttp(),delay:async()=>{}});const j=await db!.researchJob.findUniqueOrThrow({where:{id:s.id}});expect(j.state).toBe("PARTIAL");expect(j.published).toBe(1);expect(j.searches).toBe(2);expect(j.reason).toBe("BUDGET_LIMIT");expect(await db!.recommendationDecision.count()).toBe(0);});
+ it("never refunds pilot reservations when a Trip is deleted",async()=>{const s=await setup();expect((await db!.researchBudget.findUniqueOrThrow({where:{approval:config.approval}})).reservedUsd).toBe(1);await db!.trip.delete({where:{id:s.input.tripId}});expect((await db!.researchBudget.findUniqueOrThrow({where:{approval:config.approval}})).reservedUsd).toBe(1);const next=await setup();await cancelResearch(next.input.tripId,next.id);expect((await db!.researchBudget.findUniqueOrThrow({where:{approval:config.approval}})).reservedUsd).toBe(2);});
+ it("reuses identical concurrent requests without multiplying jobs",async()=>{const s=await setup();const jobs=await Promise.all([startDestinationResearch(s.input,config),startDestinationResearch(s.input,config)]);expect(jobs.every(j=>j.ok&&j.id===s.id)).toBe(true);expect(await db!.researchJob.count()).toBe(1);});
+ it("does no work when activation is absent",async()=>{expect(await startDestinationResearch({tripId:"none",segmentId:"none",country:"Portugal",language:"en"},null)).toEqual({ok:false,error:"Research is not connected"});expect(await db!.researchJob.count()).toBe(0);});
+ it("cancels before starting without an HTTP call",async()=>{const s=await setup();await cancelResearch(s.input.tripId,s.id);let called=false;await runResearchJob(s.id,{config,transport:async()=>{called=true;throw Error();}});expect(called).toBe(false);expect(await db!.recommendation.count()).toBe(0);});
+ it("stops interrupted/expired jobs without silently spending again",async()=>{const s=await setup();await db!.researchJob.update({where:{id:s.id},data:{state:"RUNNING",deadline:new Date(0)}});let calls=0;await runResearchJob(s.id,{config,transport:async()=>{calls++;throw Error();}});expect(calls).toBe(0);const retry=await startDestinationResearch(s.input,config);expect(retry.ok&&retry.id!==s.id).toBe(true);expect((await db!.researchJob.findUniqueOrThrow({where:{id:s.id}})).state).toBe("FAILED");});
+ it("does not publish after Trip dates change during network work",async()=>{const s=await setup();let changed=false;const http=syntheticHttp();await runResearchJob(s.id,{config,delay:async()=>{},transport:async input=>{if(!changed){changed=true;await updateTrip({tripId:s.input.tripId,startDate:"2032-04-01",endDate:"2032-04-04",travelerCount:1});}return http(input);}});expect(await db!.recommendation.count()).toBe(0);expect((await db!.researchJob.findUniqueOrThrow({where:{id:s.id}})).reason).toBe("TRIP_CONTEXT_CHANGED");});
+ it("withholds invented references without filling a weak batch",async()=>{const s=await setup();await runResearchJob(s.id,{config,transport:syntheticHttp({invented:true}),delay:async()=>{}});expect(await db!.recommendation.count()).toBe(0);expect((await db!.researchJob.findUniqueOrThrow({where:{id:s.id}})).reason).toContain("Invalid extraction");});
+ it("distinguishes ambiguous place from zero useful results",async()=>{const s=await setup();await runResearchJob(s.id,{config,transport:syntheticHttp({ambiguous:true}),delay:async()=>{}});expect((await db!.researchJob.findUniqueOrThrow({where:{id:s.id}})).reason).toBe("DESTINATION_AMBIGUOUS");expect(await db!.recommendation.count()).toBe(0);});
+ it("rate limits end work without immediate retry or additional charges",async()=>{const s=await setup();await runResearchJob(s.id,{config,transport:syntheticHttp({rateLimit:true}),delay:async()=>{}});const j=await db!.researchJob.findUniqueOrThrow({where:{id:s.id}});expect(j.searches).toBe(1);expect(j.reason).toBe("RATE_LIMIT:120");const retry=await startDestinationResearch(s.input,config);expect(retry.ok).toBe(false);if(!retry.ok)expect(retry.error).toContain("Retry-After");});
+ it("reserves cost/tokens before HTTP, enforcing monetary and request limits",async()=>{const s=await setup();await db!.researchJob.update({where:{id:s.id},data:{state:"RUNNING"}});await expect(reserveCall(s.id,"extractions",config,2)).rejects.toThrow("BUDGET_LIMIT");await reserveCall(s.id,"searches",{...config,maxSearch:1},0.005);await expect(reserveCall(s.id,"searches",{...config,maxSearch:1},0.005)).rejects.toThrow("BUDGET_LIMIT");expect((await db!.researchJob.findUniqueOrThrow({where:{id:s.id}})).searches).toBe(1);});
+ it("publication retry retains batches, decision and scheduled snapshot",async()=>{
+  const s=await setup();await runResearchJob(s.id,{config,transport:syntheticHttp(),delay:async()=>{}});
+  const batch=await getRecommendationBatch(s.input.tripId,s.input.segmentId);if(!batch.ok)throw Error();const r=batch.data.cards[0];
+  await decideRecommendation({tripId:s.input.tripId,tripSegmentId:s.input.segmentId,recommendationId:r.id,outcome:"ACCEPTED"});
+  await addRecommendationToDay({tripId:s.input.tripId,tripSegmentId:s.input.segmentId,recommendationId:r.id,dayId:s.t.days[0].id!});
+  const before=await db!.recommendation.findUnique({where:{id:r.id}}),items=await db!.itineraryItem.findMany(),decisions=await db!.recommendationDecision.findMany();
+  const rows=await db!.researchCandidate.findMany({where:{jobId:s.id}});await db!.researchJob.update({where:{id:s.id},data:{state:"RUNNING"}});
+  expect(await publishResearch(s.id,rows.filter(r=>!r.identity.startsWith("nomination:")).map(r=>r.payload as unknown as Evaluated))).toEqual({published:0,held:0});
+  expect(await db!.recommendation.findUnique({where:{id:r.id}})).toEqual(before);expect(await db!.itineraryItem.findMany()).toEqual(items);expect(await db!.recommendationDecision.findMany()).toEqual(decisions);
+ });
+ it("rejects stale-client Add after source withdrawal without deleting existing plans",async()=>{const s=await setup();await runResearchJob(s.id,{config,transport:syntheticHttp(),delay:async()=>{}});const r=await db!.recommendation.findFirstOrThrow();await db!.researchPlace.update({where:{placeId:r.placeId},data:{withdrawn:true}});expect((await addRecommendationToDay({tripId:s.input.tripId,tripSegmentId:s.input.segmentId,recommendationId:r.id,dayId:s.t.days[0].id!})).ok).toBe(false);expect(await db!.recommendationDecision.count()).toBe(0);});
+ it("uses non-Tokyo persisted event timezone for Add and movement and preserves scheduled history",async()=>{
+  const s=await setup();await runResearchJob(s.id,{config,transport:syntheticHttp(),delay:async()=>{}});
+  const r=await db!.recommendation.findFirstOrThrow();await db!.researchPlace.update({where:{placeId:r.placeId},data:{kind:"EVENT",eventStart:"2032-04-02",eventEnd:"2032-04-02",eventTimeZone:"Europe/Lisbon",eventStatus:"PUBLISHED",observedAt:new Date(),recheckAfter:new Date("2032-04-02")}});
+  const input={tripId:s.input.tripId,tripSegmentId:s.input.segmentId,recommendationId:r.id,dayId:s.t.days[0].id!};
+  expect((await addRecommendationToDay(input)).ok).toBe(false);expect(await db!.recommendationDecision.count()).toBe(0);
+  const added=await addRecommendationToDay({...input,dayId:s.t.days[1].id!});if(!added.ok)throw Error();
+  expect((await previewMoveItineraryItem({tripId:s.input.tripId,itemId:added.data.id,targetDayId:s.t.days[0].id!})).ok).toBe(false);
+  await db!.researchPlace.update({where:{placeId:r.placeId},data:{eventStatus:"CANCELLED",media:asJson({subjectId:"wrong"})}});
+  const b=await getItineraryBuilder(s.input.tripId);expect(b.ok&&b.data.days[1].items[0].eventWarning).toContain("have not been changed");
+  expect(await db!.itineraryItem.count()).toBe(1);
+ });
+});

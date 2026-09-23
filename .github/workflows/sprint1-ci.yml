@@ -9,9 +9,11 @@ on:
       - sprint-4-reservation-workflow
       - sprint-5-today-mode
       - refine/itinerary-builder-basics
+      - feat/cross-destination-discovery
   pull_request:
     branches:
       - main
+      - refine/itinerary-builder-basics
       - sprint-5-today-mode
 
 jobs:

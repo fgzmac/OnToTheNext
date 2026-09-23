@@ -4,6 +4,7 @@ import type { RecommendationBatch, RecommendationCardData } from "@/src/modules/
 import { composerAdd, composerBatch, composerDeny } from "@/src/modules/itinerary/composer-actions";
 import { RecommendationPhoto } from "./recommendation-photo";
 import { ExperienceDetails } from "./experience-details";
+import { DestinationResearch } from "./destination-research";
 import { TripInterests } from "./discover-controls";
 
 export function ComposerIdeas({ tripId, segmentId, dayId, dayNumber, initial, error: initialError, revision }: {
@@ -35,6 +36,7 @@ export function ComposerIdeas({ tripId, segmentId, dayId, dayNumber, initial, er
   const cards = batch ? [...batch.cards, ...batch.accepted.filter(item => !item.scheduledDay && !batch.cards.some(card => card.id === item.id))].filter(item => item.decision !== "DENIED") : [];
   return <section className="composer-ideas stack" aria-label="Ideas for selected day">
     <div><span className="eyebrow">A little inspiration</span><h2>Ideas for {dayNumber ? "Day " + dayNumber : "your day"}</h2></div>
+    <DestinationResearch tripId={tripId} segmentId={segmentId} />
     {batch ? <TripInterests key={batch.interests.join()} tripId={tripId} interests={batch.interests} /> : null}
     {error ? <div role="alert" className="issue error">{error} <button className="secondary" disabled={pending} onClick={() => start(async () => { try { setError(null); await refresh(batch?.page ?? 0); } catch { setError("Recommendations could not be loaded. Try again."); } })}>Retry recommendations</button></div> : null}
     <p role="status" className="composer-feedback">{pending ? "Saving…" : message}</p>
@@ -45,7 +47,7 @@ export function ComposerIdeas({ tripId, segmentId, dayId, dayNumber, initial, er
       <h3 id={"recommendation-" + item.id}>{item.place.name}</h3><p>{item.factualSummary}</p>
       {item.event ? <p className="idea-duration">{item.event.startDate} – {item.event.endDate} · {item.event.timeZone} · Published occurrence, availability unconfirmed</p> : null}
       {item.durationMinutes !== null ? <p className="idea-duration">About {item.durationMinutes} min · planning estimate</p> : null}
-      {item.evidence.some(e => e.sourceKind === "DEVELOPMENT_FIXTURE") ? <small>Synthetic test idea</small> : <small className="muted">Curated · checked {item.evidence.find(e => e.sourceKind === "OFFICIAL_CURATED")?.retrievedAt.slice(0, 10) ?? "date unavailable"}</small>}
+      {item.evidence.some(e => e.sourceKind === "DEVELOPMENT_FIXTURE") ? <small>Synthetic test idea</small> : item.evidence.some(e => e.sourceKind.startsWith("RUNTIME_")) ? <small className="muted">Researched · structured reference · access unverified</small> : <small className="muted">Curated · checked {item.evidence.find(e => e.sourceKind === "OFFICIAL_CURATED")?.retrievedAt.slice(0, 10) ?? "date unavailable"}</small>}
       <div className="idea-actions"><button disabled={pending} onClick={() => act(item, false)}>{"Add to Day " + dayNumber}</button><button className="text-button" disabled={pending} onClick={() => act(item, true)}>Not interested</button></div>
       <ExperienceDetails item={item} /></>}
     </article>)}
