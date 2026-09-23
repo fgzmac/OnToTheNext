@@ -12,7 +12,7 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
       </div>
       <p>{item.factualSummary}</p>
       <dl className="recommendation-facts">
-        {item.durationMinutes !== null ? <><dt>Illustrative duration</dt><dd>{item.durationMinutes} minutes</dd></> : null}
+        {item.durationMinutes !== null ? <><dt>{item.evidence.some(e => e.sourceKind === "DEVELOPMENT_FIXTURE") ? "Illustrative duration" : "Estimated visit duration"}</dt><dd>{item.durationMinutes} minutes</dd></> : null}
         {item.costContext ? <><dt>Cost context</dt><dd>{item.costContext}</dd></> : null}
         {item.logisticsNote ? <><dt>Practical notes</dt><dd>{item.logisticsNote}</dd></> : null}
       </dl>
@@ -23,8 +23,8 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
             <p>Evidence: {evidence.status === "FIXTURE" && evidence.sourceKind === "DEVELOPMENT_FIXTURE" ? "fixture data — not live" : "not verified as current"}</p>
             <details>
               <summary>Evidence details</summary>
-              <p>{evidence.factualText}</p>
-              <p>Catalog record date: {evidence.retrievedAt.slice(0, 10)}. This is not a live verification date.</p>
+              <p>{evidence.factualText}</p>{evidence.sourceUrl ? <a href={evidence.sourceUrl} target="_blank" rel="noopener noreferrer">Official source</a> : null}
+              <p>Observed / record date: {evidence.retrievedAt.slice(0, 10)}. This is not a live verification date.</p>
             </details>
           </div>
         ))}

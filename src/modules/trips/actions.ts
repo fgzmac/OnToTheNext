@@ -39,10 +39,13 @@ function refreshTrip(tripId: string) {
 }
 
 export async function createTripAction(_previous: TripActionState, formData: FormData): Promise<TripActionState> {
+  const choice = text(formData, "destinationChoice");
+  if (!["Tokyo", "Kyoto", "Osaka", "Japan", "OTHER_CITY", "OTHER_REGION"].includes(choice)) return { status: "error", errors: [{ code: "INVALID_DESTINATION", message: "Choose a destination from the list." }], warnings: [] };
   const result = await createTrip({
     name: text(formData, "name") || null,
-    destinationLabel: text(formData, "destinationLabel"),
-    destinationScope: (text(formData, "destinationScope") || "COUNTRY_REGION") as DestinationScope,
+    destinationLabel: choice.startsWith("OTHER") ? text(formData, "destinationLabel") : choice,
+    destinationScope: (choice === "Japan" || choice === "OTHER_REGION" ? "COUNTRY_REGION" : "CITY_BASE") as DestinationScope,
+    startingCity: choice === "Japan" ? text(formData, "startingCity") || null : null,
     startDate: text(formData, "startDate") as DateOnly,
     endDate: text(formData, "endDate") as DateOnly,
     travelerCount: int(formData, "travelerCount", 1),
@@ -50,7 +53,7 @@ export async function createTripAction(_previous: TripActionState, formData: For
   });
 
   if (!result.ok || !result.data) return stateFromResult(result, "Trip created.");
-  redirect(`/trips/${result.data.trip.id}`);
+  redirect(`/trips/${result.data.trip.id}/itinerary`);
 }
 
 export async function updateTripAction(_previous: TripActionState, formData: FormData): Promise<TripActionState> {

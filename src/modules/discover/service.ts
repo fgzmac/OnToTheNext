@@ -1,3 +1,4 @@
+import { provisionSegmentCatalog } from "./catalog-service";
 import { lockPrototypeTrip } from "@/src/lib/trip-lock";
 import type { Prisma } from "@/src/generated/prisma/client";
 import { getPrismaClient } from "@/src/lib/prisma";
@@ -10,6 +11,7 @@ import type { DiscoverResult, RecommendationBatch, RecommendationCardData } from
 const cardInclude = {
   place: { include: { evidence: { include: { source: true }, orderBy: { id: "asc" as const } } } },
   decision: true,
+  scheduledItem: { include: { day: true } },
 } satisfies Prisma.RecommendationInclude;
 
 type CardRecord = Prisma.RecommendationGetPayload<{ include: typeof cardInclude }>;
@@ -17,14 +19,16 @@ type CardRecord = Prisma.RecommendationGetPayload<{ include: typeof cardInclude 
 function cardData(record: CardRecord): RecommendationCardData {
   return {
     id: record.id, tripId: record.tripId, tripSegmentId: record.tripSegmentId,
-    place: { id: record.place.id, name: record.place.name, baseLabel: record.place.baseLabel, category: record.place.category },
+    place: { id: record.place.id, name: record.place.name, baseLabel: record.place.baseLabel, category: record.place.category, location: record.place.address },
     factualSummary: record.factualSummary, durationMinutes: record.durationMinutes,
     costContext: record.costContext, logisticsNote: record.logisticsNote,
     decision: record.decision?.outcome ?? null,
+    scheduledDay: record.scheduledItem ? { id: record.scheduledItem.dayId, number: record.scheduledItem.day.position + 1, itemId: record.scheduledItem.id } : null,
     evidence: record.place.evidence.map(item => ({
       id: item.id, topic: item.topic, factualText: item.factualText,
       retrievedAt: item.retrievedAt.toISOString(), status: item.status,
       sourceName: item.source.name, sourceKind: item.source.kind,
+      sourceUrl: item.source.kind === "OFFICIAL_CURATED" && item.source.name.startsWith("https://") ? item.source.name : null,
     })),
   };
 }
@@ -32,6 +36,7 @@ function cardData(record: CardRecord): RecommendationCardData {
 // All assignment paths lock the same existing Segment row. Under PostgreSQL
 // READ COMMITTED, a waiting retry reads assignments committed by its predecessor.
 async function lockSegment(tx: Prisma.TransactionClient, tripId: string, segmentId: string) {
+  if (!await lockPrototypeTrip(tx, tripId)) return false;
   const rows = await tx.$queryRaw<{ id: string }[]>`
     SELECT s."id" FROM "TripSegment" s JOIN "Trip" t ON t."id" = s."tripId"
     WHERE s."id" = ${segmentId} AND s."tripId" = ${tripId} AND t."ownerId" = ${PROTOTYPE_OWNER_ID}
@@ -57,6 +62,7 @@ export async function getRecommendationBatch(tripId: string, tripSegmentId: stri
   try {
     return await getPrismaClient().$transaction(async tx => {
       if (!await lockSegment(tx, tripId, tripSegmentId)) return { ok: false as const, error: "This destination is unavailable. Choose a destination in this trip." };
+      await provisionSegmentCatalog(tx, tripId, tripSegmentId);
       await ensureInitialBatch(tx, tripId, tripSegmentId);
       const where = { tripId, tripSegmentId };
       const total = await tx.recommendation.count({ where });
@@ -79,7 +85,7 @@ export async function getRecommendationBatch(tripId: string, tripSegmentId: stri
         latestBatch, unassigned, interests: preferences?.discoverInterests ?? [],
         exhausted: total > 0 && unassigned === 0 && page === latestBatch,
       } };
-    }, { isolationLevel: "ReadCommitted" });
+    }, { isolationLevel: "ReadCommitted", timeout: 15_000 });
   } catch {
     return { ok: false, error: "Recommendations could not be loaded. Please try again." };
   }
@@ -109,6 +115,7 @@ export async function requestAnotherRecommendationBatch(input: {
     return await getPrismaClient().$transaction(async tx => {
       const { tripId, tripSegmentId, fromBatch } = input;
       if (!await lockSegment(tx, tripId, tripSegmentId)) return { ok: false as const, error: "This destination is unavailable." };
+      await provisionSegmentCatalog(tx, tripId, tripSegmentId);
       await ensureInitialBatch(tx, tripId, tripSegmentId);
       const where = { tripId, tripSegmentId };
       const max = await tx.recommendation.aggregate({ where, _max: { presentationBatch: true } });

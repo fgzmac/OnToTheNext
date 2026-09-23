@@ -25,11 +25,13 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     const firstNames = await first.getByRole("heading", { level: 3 }).allTextContents();
     const interests = page.locator("details.trip-interests");
     await interests.locator("summary").click();
-    await interests.getByLabel("Architecture & design", { exact: true }).check();
-    await interests.getByLabel("Culture & history", { exact: true }).check();
-    await interests.getByRole("button", { name: "Save interests" }).click();
-    await expect(interests).toContainText("Trip interests saved.");
-    await expect(interests.getByRole("button", { name: "Save interests" })).toBeEnabled();
+    await interests.getByLabel("Architecture & design", { exact: true }).click();
+    await expect(interests.getByLabel("Architecture & design", { exact: true })).toBeChecked();
+    await interests.getByLabel("Culture & history", { exact: true }).click();
+    await expect(interests.getByLabel("Culture & history", { exact: true })).toBeChecked();
+
+    await expect(interests).toContainText("Interests saved for future ideas.");
+    await expect(interests.getByRole("checkbox").first()).toBeEnabled();
     await expect(first.getByRole("heading", { level: 3 })).toHaveText(firstNames);
     await first.getByRole("button", { name: "Accept Contemporary Design Museum", exact: true }).click();
     await first.getByRole("button", { name: "Deny Old Market Food Hall", exact: true }).click();
@@ -49,12 +51,15 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(second.getByRole("heading", { level: 3 })).toHaveText(secondNames);
     await interests.locator("summary").click();
     await expect(interests.getByLabel("Architecture & design", { exact: true })).toBeChecked();
-    await interests.getByLabel("Architecture & design", { exact: true }).uncheck();
-    await interests.getByLabel("Culture & history", { exact: true }).uncheck();
-    await interests.getByLabel("Food & drink", { exact: true }).check();
-    await interests.getByRole("button", { name: "Save interests" }).click();
-    await expect(interests).toContainText("Trip interests saved.");
-    await expect(interests.getByRole("button", { name: "Save interests" })).toBeEnabled();
+    await interests.getByLabel("Architecture & design", { exact: true }).click();
+    await expect(interests.getByLabel("Architecture & design", { exact: true })).not.toBeChecked();
+    await interests.getByLabel("Culture & history", { exact: true }).click();
+    await expect(interests.getByLabel("Culture & history", { exact: true })).not.toBeChecked();
+    await interests.getByLabel("Food & drink", { exact: true }).click();
+    await expect(interests.getByLabel("Food & drink", { exact: true })).toBeChecked();
+
+    await expect(interests).toContainText("Interests saved for future ideas.");
+    await expect(interests.getByRole("checkbox").first()).toBeEnabled();
     await expect(second.getByRole("heading", { level: 3 })).toHaveText(secondNames);
     await expect(interests.getByLabel("Food & drink", { exact: true })).toBeChecked();
     await expect(interests.getByLabel("Architecture & design", { exact: true })).not.toBeChecked();
@@ -69,7 +74,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     const third = page.getByRole("region", { name: "Batch 3 of 3" });
     const thirdNames = ["Twilight Food Court", "Craft Street Arcade", "Canal Evening Promenade", "Listening Room Pavilion"];
     await expect(third.getByRole("heading", { level: 3 })).toHaveText(thirdNames);
-    await expect(page.getByRole("status")).toHaveText("No more fixture recommendations.");
+    await expect(page.getByText("No more recommendations in this catalog.", { exact: true })).toBeVisible();
     await expect(page.getByRole("button", { name: "Show another batch" })).toHaveCount(0);
     await expect(page.getByText(/why this fits you|perfect for you|because you liked|you.ll love|strong match|recommended based on|match score/i)).toHaveCount(0);
     await expect(accepted).toContainText("Accepting an idea does not schedule or book it.");
@@ -78,8 +83,8 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(third.getByRole("heading", { level: 3 })).toHaveText(thirdNames);
     await interests.locator("summary").click();
     await interests.getByRole("button", { name: "Clear interests" }).click();
-    await expect(interests).toContainText("Trip interests saved.");
-    await expect(interests.getByRole("button", { name: "Clear interests" })).toBeEnabled();
+    await expect(interests).toContainText("Interests saved for future ideas.");
+    await expect(interests.getByRole("button", { name: "Clear interests" })).toBeDisabled();
     await expect(interests.getByRole("checkbox", { checked: true })).toHaveCount(0);
     await page.reload();
     await interests.locator("summary").click();
@@ -88,7 +93,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await nav.getByRole("link", { name: "Home", exact: true }).click();
     await expect(page.locator(".segment-card")).toHaveCount(4);
     await nav.getByRole("link", { name: "Itinerary", exact: true }).click();
-    await expect(page.locator(".day-row")).toHaveCount(15);
+    await expect(page.getByLabel("Selected day", { exact: true }).locator("option")).toHaveCount(15);
     await nav.getByRole("link", { name: "Discover", exact: true }).click();
     await expect(first.getByRole("heading", { level: 3 })).toHaveText(firstNames);
   });

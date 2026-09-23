@@ -1,3 +1,4 @@
+import { openItem, closeDetails } from "./composer-helpers";
 import { expect, test } from "@playwright/test";
 import { getPrismaClient } from "@/src/lib/prisma";
 import { seedDemoTrip, DEMO_TRIP_ID } from "../../prisma/seed-data";
@@ -42,7 +43,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(row.getByRole("link", { name: "View itinerary details" })).toHaveAttribute("href", "/trips/" + tripId + "/itinerary#item-" + itemId);
     await row.getByRole("link", { name: "View itinerary details" }).click();
     await expect(page).toHaveURL(new RegExp("#item-" + itemId + "$"));
-    const item = page.locator(".timeline-item").filter({ has: page.getByRole("heading", { name: title, exact: true }) });
+    const item = page.getByRole("dialog");
     await revealBooking(item); await item.getByText("Availability and release evidence", { exact: true }).click();
     await expect(item.getByText("No release information recorded. Availability unknown.", { exact: true })).toBeVisible();
     await item.getByText("Record release observation", { exact: true }).click();
@@ -92,7 +93,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await page.reload(); await expect(item.locator(".reservation-state")).toHaveText("Reservation: Booked");
     const history = await db.reservation.findUniqueOrThrow({ where: { id: reservationId } });
     await item.getByRole("button", { name: "Remove " + title + " from itinerary" }).click(); await expect(item).toHaveCount(0);
-    await nav.getByRole("link", { name: "Home", exact: true }).click(); await page.getByRole("link", { name: "Reservations", exact: true }).click();
+    await closeDetails(page); await nav.getByRole("link", { name: "Home", exact: true }).click(); await page.getByRole("link", { name: "Reservations", exact: true }).click();
     await expect(row).toContainText(title); await expect(row).toContainText("Not attached to an itinerary item"); await expect(row).toContainText("Booked");
     await row.getByText("Manage retained reservation", { exact: true }).click();
     const details = row.getByRole("region", { name: "Reservation details" });
@@ -119,11 +120,11 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     expect(cancelled).toMatchObject({ desiredDate: history.desiredDate, confirmedDate: history.confirmedDate, confirmedStartMinute: history.confirmedStartMinute, confirmationReference: history.confirmationReference, state: "CANCELLED", itineraryItemId: null });
     await capture("retained-cancelled");
     await page.getByRole("link", { name: "Back to Home" }).click(); await nav.getByRole("link", { name: "Itinerary", exact: true }).click();
-    await page.locator(".planning-block-creator > summary").click(); const block = page.getByRole("form", { name: "Add planning block" });
+    await page.getByRole("button",{name:"+ Rest, free time or transport",exact:true}).click(); const block = page.getByRole("form", { name: "Add planning block" });
     await block.getByLabel("Block type", { exact: true }).selectOption("TRANSPORTATION"); await block.getByLabel("Block day", { exact: true }).selectOption({ label: "2030-04-01 · Tokyo" });
     await block.getByLabel("Block time — optional", { exact: true }).fill("12:00"); await block.getByLabel("Mode", { exact: true }).selectOption("TRAIN");
     await block.getByRole("button", { name: "Add block", exact: true }).click();
-    const transport = page.getByRole("article", { name: "Train transportation", exact: true });
+    await expect(page.locator(".timeline-item").filter({hasText:"Train transportation"})).toHaveCount(1); await closeDetails(page); const transport = await openItem(page,"Train transportation");
     await transport.getByText("Add reservation tracking", { exact: true }).click();
     await expect(transport).toContainText("departure context"); const tracking = transport.getByRole("form", { name: "Save reservation tracking" });
     await tracking.getByRole("button", { name: "Save reservation tracking" }).click(); await expect(transport.locator(".reservation-state")).toHaveText("Reservation: Check back");

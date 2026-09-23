@@ -1,3 +1,4 @@
+import { closeDetails } from "./composer-helpers";
 import { expect, test } from "@playwright/test";
 import { getPrismaClient } from "@/src/lib/prisma";
 import { seedDemoTrip, DEMO_TRIP_ID } from "../../prisma/seed-data";
@@ -85,20 +86,20 @@ for (const [device, width, height] of [["desktop",1280,900],["phone",390,844]] a
     await page.goBack(); await page.reload(); await expect(page.getByLabel("Trip day", { exact: true })).toHaveValue(dayId); await expect(next).toContainText(title);
     await item.getByRole("link", { name: "Manage this item in Itinerary", exact: true }).click();
     await expect(page).toHaveURL(new RegExp("#item-" + activityId + "$"));
-    await expect(page.locator(".timeline-item").filter({ has: page.locator("#item-" + activityId) }).getByText("Progress: Pending", { exact: true })).toBeVisible();
-    await nav.getByRole("link", { name: "Home", exact: true }).click(); await expect(next).toContainText(title); await expect(page.getByLabel("Trip day", { exact: true })).toHaveValue(dayId);
+    await expect(page.getByRole("dialog")).toContainText("Progress: Pending");
+    await closeDetails(page); await nav.getByRole("link", { name: "Home", exact: true }).click(); await expect(next).toContainText(title); await expect(page.getByLabel("Trip day", { exact: true })).toHaveValue(dayId);
     await nav.getByRole("link", { name: "Discover", exact: true }).click();
     await page.getByRole("button", { name: "Show another batch", exact: true }).click();
     await page.getByRole("link", { name: "Previous batch", exact: true }).click();
     await page.getByLabel("Trip Segment").selectOption({ index: 1 });
-    await page.getByRole("button", { name: "View destination", exact: true }).click();
-    await nav.getByRole("link", { name: "Home", exact: true }).click(); await expect(next).toContainText(title);
+
+    await closeDetails(page); await nav.getByRole("link", { name: "Home", exact: true }).click(); await expect(next).toContainText(title);
     await page.getByRole("link", { name: "Planning", exact: true }).click();
     await expect(page.getByRole("heading", { name: "Destination sequence", exact: true })).toBeVisible(); await expect(page.getByRole("link", { name: "Reservations", exact: true })).toBeVisible();
     await capture("planning-home");
     await page.getByRole("link", { name: "Reservations", exact: true }).click();
     await page.getByRole("link", { name: "View itinerary details", exact: true }).click();
-    await nav.getByRole("link", { name: "Home", exact: true }).click();
+    await closeDetails(page); await nav.getByRole("link", { name: "Home", exact: true }).click();
     await page.getByRole("link", { name: "Reservations", exact: true }).click();
     await page.getByRole("link", { name: "Back to Home", exact: true }).click();
     await page.getByRole("link", { name: "Today / Day view", exact: true }).click(); await expect(next).toContainText(title);

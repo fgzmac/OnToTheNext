@@ -1,3 +1,4 @@
+import { openItem } from "./composer-helpers";
 import { expect, test } from "@playwright/test";
 import { getPrismaClient } from "@/src/lib/prisma";
 import { seedDemoTrip, DEMO_TRIP_ID } from "../../prisma/seed-data";
@@ -16,14 +17,16 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(page.getByRole("region", { name: "Accepted", exact: true }).getByRole("heading", { name: title })).toBeVisible();
     expect(await prisma.reservation.count({ where: { tripId: DEMO_TRIP_ID } })).toBe(0);
     await nav.getByRole("link", { name: "Itinerary", exact: true }).click();
-    const idea = page.getByRole("region", { name: "Accepted ideas not scheduled" }).getByRole("article", { name: title });
-    await idea.getByLabel("Day for " + title).selectOption({ label: "2030-04-01 · 1. Tokyo" });
-    await idea.getByLabel("Time for " + title).fill("09:30");
-    await idea.getByLabel("Flexibility for " + title).selectOption("FIXED");
-    await idea.getByRole("button", { name: "Add " + title + " to itinerary" }).click();
-    const item = page.locator(".timeline-item").filter({ has: page.getByRole("heading", { name: title, exact: true }) });
+    const idea = page.locator(".idea-card").filter({has:page.getByRole("heading",{name:title,exact:true})});
+    await idea.getByRole("button",{name:"Add to Day 1",exact:true}).click();
+    await expect(page.locator(".timeline-item")).toHaveCount(1);
+    const item = await openItem(page,title);
+    await item.getByRole("button",{name:"Edit "+title,exact:true}).click();
+    const edit=item.getByRole("form",{name:"Edit "+title,exact:true});
+    await edit.getByLabel("Planned start — optional",{exact:true}).fill("09:30");
+    await edit.getByLabel("Planning flexibility",{exact:true}).selectOption("FIXED");
+    await edit.getByRole("button",{name:"Save changes",exact:true}).click();
     await expect(item.locator(".item-time")).toHaveText("09:30");
-    await expect(item.locator(".item-flexibility")).toHaveText("Fixed");
     expect(await prisma.reservation.count({ where: { tripId: DEMO_TRIP_ID } })).toBe(0);
     await item.getByText("Add reservation tracking", { exact: true }).click();
     const form = item.getByRole("form", { name: "Save reservation tracking" });

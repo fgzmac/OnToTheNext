@@ -1,3 +1,5 @@
+import type { Prisma } from "@/src/generated/prisma/client";
+import { catalogPlace } from "@/src/modules/discover/catalog";
 import { detailsInclude, itemEditToken } from "./details-context";
 import { manualActivityToken } from "./details-service";
 import { deriveTimeIssues } from "./planning";
@@ -33,13 +35,7 @@ export async function scheduleAcceptedRecommendation(input: {
       const issue = validatePlanning({ startMinute, durationMinutes: recommendation.durationMinutes, flexibility });
       if (issue) return { ok: false as const, error: issue };
       // The Trip lock serializes append/removal and all structural Day edits.
-      const last = await tx.itineraryItem.aggregate({ where: { dayId: day.id }, _max: { position: true } });
-      const item = await tx.itineraryItem.create({ data: {
-        tripId: input.tripId, dayId: day.id, type: "ACTIVITY", title: recommendation.place.name,
-        sourceRecommendationId: recommendation.id, durationMinutes: recommendation.durationMinutes,
-        startMinute: startMinute as number | null, flexibility: flexibility === "FIXED" ? "FIXED" : "FLEXIBLE",
-        position: (last._max.position ?? -1) + 1,
-      } });
+      const item = await appendRecommendation(tx, recommendation, day.id, startMinute as number | null, flexibility === "FIXED" ? "FIXED" : "FLEXIBLE");
       return { ok: true as const, data: { id: item.id } };
     });
   } catch {
@@ -105,4 +101,45 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
   } catch {
     return failure("PERSISTENCE_FAILURE", "The itinerary could not be loaded. Please try again.");
   }
+}
+
+type ScheduleRecord = Prisma.RecommendationGetPayload<{ include: { place: true } }>;
+async function appendRecommendation(tx: Prisma.TransactionClient, recommendation: ScheduleRecord, dayId: string, startMinute: number | null, flexibility: "FIXED" | "FLEXIBLE") {
+  const last = await tx.itineraryItem.aggregate({ where: { dayId }, _max: { position: true } });
+  return tx.itineraryItem.create({ data: {
+    tripId: recommendation.tripId, dayId, type: "ACTIVITY", title: recommendation.place.name,
+    sourceRecommendationId: recommendation.id, durationMinutes: recommendation.durationMinutes,
+    locationLabel: recommendation.place.address, referenceUrl: catalogPlace(recommendation.placeId)?.url ?? null,
+    startMinute, flexibility, position: (last._max.position ?? -1) + 1,
+  } });
+}
+
+export async function addRecommendationToDay(input: {
+  tripId: string; tripSegmentId: string; recommendationId: string; dayId: string;
+}): Promise<ItineraryResult<{ id: string; dayId: string; dayNumber: number; alreadyScheduled: boolean }>> {
+  try {
+    return await getPrismaClient().$transaction(async tx => {
+      if (!await lockPrototypeTrip(tx, input.tripId)) return failure("NOT_FOUND", "This trip is unavailable.");
+      const day = await tx.day.findFirst({ where: { id: input.dayId, tripId: input.tripId } });
+      if (!day) return failure("WRONG_DAY", "Choose a day in this trip.");
+      if (day.primarySegmentId !== input.tripSegmentId) return failure("WRONG_SEGMENT", "This day’s destination changed. Refresh and choose an idea for its destination.");
+      const recommendation = await tx.recommendation.findFirst({
+        where: { id: input.recommendationId, tripId: input.tripId, tripSegmentId: input.tripSegmentId },
+        include: { place: true, scheduledItem: { include: { day: true } } },
+      });
+      if (!recommendation) return failure("NOT_FOUND", "This recommendation is unavailable in this destination.");
+      if (recommendation.scheduledItem) {
+        const item = recommendation.scheduledItem;
+        return { ok: true as const, data: { id: item.id, dayId: item.dayId, dayNumber: item.day.position + 1, alreadyScheduled: true } };
+      }
+      const issue = validatePlanning({ startMinute: null, durationMinutes: recommendation.durationMinutes, flexibility: "FLEXIBLE" });
+      if (issue) return { ok: false as const, error: issue };
+      // One transaction and the same Trip lock as every scheduling/structural edit.
+      // Any append failure rolls back the decision too; no nested service commit.
+      await tx.recommendationDecision.upsert({ where: { recommendationId: recommendation.id },
+        create: { recommendationId: recommendation.id, outcome: "ACCEPTED" }, update: { outcome: "ACCEPTED" } });
+      const item = await appendRecommendation(tx, recommendation, day.id, null, "FLEXIBLE");
+      return { ok: true as const, data: { id: item.id, dayId: day.id, dayNumber: day.position + 1, alreadyScheduled: false } };
+    });
+  } catch { return failure("PERSISTENCE_FAILURE", "The idea could not be added. Nothing was changed. Please try again."); }
 }

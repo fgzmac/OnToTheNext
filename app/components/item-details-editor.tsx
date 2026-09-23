@@ -32,15 +32,15 @@ function ErrorMessage({ text }: { text: string | null }) {
   useEffect(() => { if (text) ref.current?.focus(); }, [text]);
   return text ? <p ref={ref} tabIndex={-1} role="alert" className="issue error">{text}</p> : null;
 }
-export function AddActivity({ tripId, days, token }: { tripId: string; days: Day[]; token: string }) {
-  const [open, setOpen] = useState(false), [value, setValue] = useState(fresh), [dayId, setDayId] = useState("");
+export function AddActivity({ tripId, days, token, defaultDayId, embedded = false, onCreated }: { tripId: string; days: Day[]; token: string; defaultDayId?: string; embedded?: boolean; onCreated?: () => void }) {
+  const [open, setOpen] = useState(embedded), [value, setValue] = useState(fresh), [dayId, setDayId] = useState(defaultDayId ?? days[0]?.id ?? "");
   const [request, setRequest] = useState(token), [error, setError] = useState<string | null>(null), [saved, setSaved] = useState<string | null>(null);
   const [pending, start] = useTransition(); const button = useRef<HTMLButtonElement>(null), focusCreated = useRef<string | null>(null);
   useEffect(() => { if (focusCreated.current && !pending) { document.getElementById("item-" + focusCreated.current)?.focus(); focusCreated.current = null; } }, [saved, pending]);
-  const cancel = () => { setOpen(false); setError(null); requestAnimationFrame(() => button.current?.focus()); };
+  const cancel = () => { setOpen(false); setError(null); onCreated?.(); requestAnimationFrame(() => button.current?.focus()); };
   return <section className="card stack item-details-editor" aria-label="Add your own activity">
-    <div><button ref={button} type="button" onClick={() => { setValue(fresh()); setDayId(days[0]?.id ?? ""); setRequest(token); setError(null); setSaved(null); setOpen(true); }} disabled={open}>Add activity</button></div>
-    {!open ? <p className="muted">Build your own plan on any Trip Day. No Discover recommendation is needed.</p> : <form aria-label="Add activity" className="stack" onSubmit={e => { e.preventDefault(); start(async () => { const r = await manualActivityAction({ tripId, dayId, token: request, fields: value }); if (!r.ok) setError(r.error.message); else { setOpen(false); setError(null); setSaved(r.data.id); focusCreated.current = r.data.id; } }); }}>
+    {!embedded ? <div><button ref={button} type="button" onClick={() => { setValue(fresh()); setDayId(defaultDayId ?? days[0]?.id ?? ""); setRequest(token); setError(null); setSaved(null); setOpen(true); }} disabled={open}>Add activity</button></div> : null}
+    {!open ? <p className="muted">Build your own plan on any Trip Day. No Discover recommendation is needed.</p> : <form aria-label="Add activity" className="stack" onSubmit={e => { e.preventDefault(); start(async () => { const r = await manualActivityAction({ tripId, dayId, token: request, fields: value }); if (!r.ok) setError(r.error.message); else { setOpen(false); setError(null); setSaved(r.data.id); focusCreated.current = r.data.id; onCreated?.(); } }); }}>
       <fieldset disabled={pending} className="stack details-fields"><legend>New manually entered Activity</legend>
         <label>Activity day<select aria-label="Activity day" value={dayId} onChange={e => setDayId(e.target.value)} required>{days.map(day => <option key={day.id} value={day.id}>{day.date} · {day.base ?? "Unassigned"}</option>)}</select></label>
         <Fields value={value} set={setValue} activity />
@@ -60,7 +60,7 @@ export function EditItem({ tripId, item }: { tripId: string; item: TimelineItem 
   const [preview, setPreview] = useState<EditPreview | null>(null), [error, setError] = useState<string | null>(null), [message, setMessage] = useState<string | null>(null);
   const [pending, start] = useTransition(); const focusSaved = useRef(false); const button = useRef<HTMLButtonElement>(null), region = useRef<HTMLElement>(null);
   useEffect(() => { if (preview) region.current?.focus(); }, [preview]);
-  useEffect(() => { if (focusSaved.current && !pending && !open) { document.getElementById("item-" + item.id)?.focus(); focusSaved.current = false; } }, [pending, open, item.id]);
+  useEffect(() => { if (focusSaved.current && !pending && !open) { if (button.current?.closest("dialog")) button.current.focus(); else document.getElementById("item-" + item.id)?.focus(); focusSaved.current = false; } }, [pending, open, item.id]);
   const cancel = () => { setOpen(false); setPreview(null); setError(null); setMessage("Edit cancelled. Your plan is unchanged."); requestAnimationFrame(() => button.current?.focus()); };
   const submit = () => start(async () => { const r = await itemDetailsAction({ tripId, itemId: item.id, token: preview?.token ?? token, fields: value, confirm: Boolean(preview) });
     if (!r.ok) setError(r.error.message); else if (r.data.preview) { setPreview(r.data.preview); setError(null); } else { setOpen(false); setPreview(null); setError(null); setMessage("Item details saved. Booking and progress are unchanged."); focusSaved.current = true; } });

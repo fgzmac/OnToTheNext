@@ -163,3 +163,145 @@ Meal/Shopping/Custom creation, maps/hotel search/Return to Hotel, further Today
 features, expenses/payments, sharing/export, public deployment/authentication,
 tunnels and new network exposure remain deferred. Those roadmap gaps are
 separate from entering and maintaining a manual itinerary.
+
+## Pass 2 — recommendation-first composer (2026-09-23)
+
+The CEO found Pass 1 too much like a form: too many menus, steps and required
+activity details. Passing technical checks did not establish usability acceptance.
+D-123 records the narrow amendment: Itinerary may embed shared Discover ideas,
+with explicit Add to Day, while standalone Accept still only keeps an idea.
+Ranking, decisions, booking and scheduling retain their existing shared capabilities.
+
+### Product experience and interaction counts
+
+Setup now presents destination, start date and end date, followed by one Start
+planning action into Itinerary. The supported-city selector determines scope;
+a generated name and default traveler count avoid optional typing. Country setup
+creates a starting Segment only on explicit choice. The old form exposed scope
+separately and four HTML-required fields (destination, travelers and two dates).
+The new main flow has three required controls, with optional travelers/details.
+Calendar entry can supply dates without destination text entry.
+
+Desktop places four recommendations beside the selected Day. Phone uses one column
+with a sticky Day selector and View day shortcut. Each Add accepts and schedules
+in one persisted action. Three activities require three Add clicks, zero activity
+detail text entry and zero primary navigation switches. Pass 1 required manual
+activity names or separate Discover Accept then scheduling controls, and had no
+fresh-trip real catalog path.
+
+Day selection follows explicit planDay/Home context, otherwise the first Day,
+never the clock. Item hashes reveal their owning Day and shared detail panel.
+Manual entry and Free Time/Rest/Transportation are secondary controls. Existing
+editing, movement, booking and travel capabilities live in one accessible dialog.
+Rows omit empty/system fields while retaining Fixed, booking attention, conflicts
+and stale travel warnings. Interest chips save directly and retain confirmed state
+on failure.
+
+### Catalog and provenance
+
+The checked-in catalog contains 24 distinct real experiences: eight each for
+Tokyo, Kyoto and Osaka. `src/modules/discover/catalog.ts` retains every official
+source URL, actual observation date (2026-09-23), original factual summary,
+category/interests and verified location or null. Primary sources include operators
+(Senso-ji, Tokyo National Museum, Meiji Jingu, Kyoto temples, Nishiki, Kuromon,
+Sumiyoshi and Umeda Sky Building), GO TOKYO, Osaka Convention & Tourism Bureau,
+and Kyoto Railway Museum's official visitor guide. Descriptions are original.
+
+Only three source-backed planning estimates are supplied: Edo-Tokyo Open Air
+Architectural Museum 120 minutes, Osaka Castle Museum 60 and Kaiyukan 120.
+All other durations remain unknown. Hours, prices, availability, reservation
+requirements, travel times and coordinates are not inferred. No licensed photos
+were available; the intentional image-free cards expose sources in details.
+Nothing is labeled live or provider-confirmed timing.
+
+Shared Segment provisioning uses strict canonical city mapping (case/outer
+whitespace only), actual Segment IDs and append-only evidence versions. Product
+code creates eight Recommendations without a trip-specific seed. Repeated Tokyo
+Segments have independent Recommendation/decision/batch identities. Unsupported
+or ambiguous names get honest coverage text and manual entry; Unassigned Days
+get one destination-context action in Home. Synthetic regression Trips are isolated
+by evidence provenance without product fixture IDs. Database conflict handling
+protects shared Place/Source/Evidence inserts across concurrent Trips. Existing
+recommendation content, decisions, historical batches, scheduled snapshots and
+booking/evidence links remain unchanged during synchronization.
+
+### Atomic addition and data safety
+
+`addRecommendationToDay` locks the owned Trip, validates Day/Segment/Recommendation,
+then accepts and appends in one transaction. Shared append validation creates a
+Flexible Activity with unknown exact start and snapshots known location/source/
+duration. It creates no Reservation. Append failure rolls acceptance back;
+concurrent additions and retries return one item and its actual Day. Standalone
+Accept stays unscheduled, removal retains acceptance, and Deny retains existing
+items and bookings.
+
+All eleven migrations and dependencies remain unchanged. No forward migration is
+needed because Pass 2 has no schema change. Prisma validation/status and read-only
+datasource/schema drift checks pass. Approved reset replayed all eleven migrations
+only in `ontothenext_verify_20260923_composer2` on localhost:5433 as `ontothenext`,
+after checking actual Prisma subprocess identity, matching test/browser URLs and
+Compose/volume ownership. Fresh exact-target CEO approval preceded reset and all
+destructive acceptance setup. Repeated seed full-data SHA-256 was identical:
+`33e4b78da76770dd505edc81887bb7b9f4c675dc7c9d65b3c0ca486c54353e4c`.
+
+Persistent `ontothenext_builder_review`, all pre-existing databases and review
+configuration remain excluded. Fingerprints/configuration hashes are retained in
+ignored `.cache/composer2`. Options resources are outside every command. Web3100,
+PG5433→5432, itinerary Compose/volume and SSD configuration are preserved.
+
+### Acceptance evidence and limitations
+
+Final verification/screenshot results follow below after acceptance. First full
+unit/integration run: 443/444 passed; concurrent shared Place insertion failed.
+Using PostgreSQL conflict handling for shared catalog inserts fixed the race;
+all 15 focused composer integration tests then passed. TypeScript caught a new
+browser assertion querying interests on Trip rather than TripPreferenceProfile;
+the assertion was corrected. A migrations-directory drift command lacked a lock
+file; the correct read-only configured datasource/schema comparison found no drift.
+
+Coverage is limited to these three cities/eight entries each. Catalog observations
+are not live provider availability; photos are absent. Unsaved detail drafts do not
+survive reload. Prototype ownership/authentication, provider integrations, maps,
+payments, sharing/export and public deployment remain outside this pass. Today
+Slice 3 and roadmap work remain paused. Automated acceptance does not substitute
+for CEO usability review.
+
+### Final Pass 2 local verification
+
+- 216 unit + 228 PostgreSQL integration = **444 passed**, zero skipped/failed.
+  All 419 baseline tests remain, with ten catalog unit and fifteen composer
+  integration cases added. The final full rerun passed after the insertion-race fix.
+- **24/24 browser tests passed**, zero skipped/flaky, 3.3 minutes. All 22 baseline
+  business flows remain through the new UI, plus fresh supported-city desktop and
+  390×844 flows. Tests verify one persisted Add action, zero activity typing and
+  zero primary-navigation switches for three activities; no trip-specific catalog
+  seeding is used. Interest failure/retry preserves exact prior preference state.
+- Supplementary additive browser checks covered Kyoto, Osaka, explicit Japan/Kyoto
+  starting context, ambiguous Tokyo/Kyoto with no unrelated ideas, and manual fallback.
+- Prisma generate/validate/status/read-only drift, approved isolated reset/reseed,
+  repeated seed fingerprints, typecheck, lint and production build pass. Generated
+  Next configuration changes are excluded. No dependency/schema changes.
+- First browser run: 19 passed/5 failed. Three failures assumed immediate checkbox
+  state despite confirmed autosave; two travel tests opened an item before navigation
+  completed. Explicit persistence/navigation waits fixed them. A six-test rerun
+  passed five and exposed an assertion requiring an optional preference record;
+  comparing the exact prior record (including null) fixed that test. The final full
+  rerun passed all 24. A small phone sticky-header gap found visually was corrected.
+- Before/after desktop and 390×844 screenshots were visually reviewed for setup,
+  empty Day, populated Day, detail panel and warning/error. Local gallery:
+  `.cache/composer2/review.html`; original baseline captures in `before`, final
+  viewport captures in `after/{desktop,phone}-{setup,empty,populated,detail,error}.png`.
+  Before detail/warning captures show protected Booked editing; after captures show
+  the shared editor and a real invalid-reference error with recoverable draft.
+- All 13 excluded database fingerprints match, including protected review SHA-256
+  `270d3f6f02c653c5136b4be5944b05c8fe5315765930bdeed27059f42cf59342`.
+  `.env` and review launcher/connection configuration hashes match. The verification
+  server stops with acceptance; no E2E or provisioning ran against persistent review.
+- Existing pg concurrent-query deprecation and terminal color warnings remain under
+  D-122's unchanged conditional dependency deferral.
+
+The earlier explicit CEO approval for the disposable GitHub `ontothenext_test`
+service on this refinement branch/dependent PR remains applicable. This is the
+same branch and PR; the current handoff separately requests push and exact-head CI.
+Local approval is restricted to composer2; CI cannot access local databases/volumes.
+Exact-head remote results are reported in PR #6 and the engineering handoff.

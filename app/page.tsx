@@ -17,9 +17,9 @@ export default async function HomePage() {
   return (
     <main className="page-narrow">
       <section className="hero">
-        <span className="eyebrow">Foundation</span>
-        <h1>Plan the trip, not the software.</h1>
-        <p className="lead">Sprint 1 establishes the trip calendar and destination sequence. Recommendations and the rest of the travel experience come after this foundation is trustworthy.</p>
+        <span className="eyebrow">On To The Next</span>
+        <h1>Where are we going?</h1>
+        <p className="lead">Choose a destination and dates. Discover places you’ll love, then build a day at a time.</p>
       </section>
 
       {databaseError ? (
