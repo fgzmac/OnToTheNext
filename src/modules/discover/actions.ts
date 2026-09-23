@@ -15,7 +15,8 @@ export async function recommendationDecisionAction(_previous: DecisionActionStat
   });
   if (!result.ok) return { error: result.error, message: null };
   revalidatePath("/trips/" + tripId + "/discover");
-  return { error: null, message: result.data.outcome === "ACCEPTED" ? "Accepted. Nothing has been scheduled or booked." : "Denied. Your decision is saved." };
+  revalidatePath("/trips/" + tripId + "/itinerary");
+  return { error: null, message: result.data.outcome === "ACCEPTED" ? "Accepted. Scheduling is a separate action in Itinerary." : "Denied. Your decision is saved." };
 }
 
 export async function tripInterestsAction(_previous: DecisionActionState, formData: FormData): Promise<DecisionActionState> {

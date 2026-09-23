@@ -35,6 +35,7 @@ model Trip {
   segments          TripSegment[]
   days              Day[]
   recommendations   Recommendation[]
+  itineraryItems    ItineraryItem[]
   preferenceProfile TripPreferenceProfile?
 
   @@index([ownerId])
@@ -52,6 +53,8 @@ model TripSegment {
   trip          Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
   primaryDays   Day[]    @relation("PrimarySegmentDays")
   recommendations Recommendation[]
+  outgoingItems ItineraryItem[] @relation("TransportationOrigin")
+  incomingItems ItineraryItem[] @relation("TransportationDestination")
 
   @@unique([id, tripId])
 
@@ -70,6 +73,9 @@ model Day {
   trip             Trip         @relation(fields: [tripId], references: [id], onDelete: Cascade)
   primarySegment   TripSegment? @relation("PrimarySegmentDays", fields: [primarySegmentId], references: [id], onDelete: SetNull)
 
+  itineraryItems   ItineraryItem[]
+
+  @@unique([id, tripId])
   @@unique([tripId, date])
   @@unique([tripId, position])
   @@index([primarySegmentId])
@@ -136,6 +142,7 @@ model Recommendation {
   trip            Trip                    @relation(fields: [tripId], references: [id], onDelete: Cascade)
   tripSegment     TripSegment             @relation(fields: [tripSegmentId, tripId], references: [id, tripId], onDelete: Cascade)
   place           Place                   @relation(fields: [placeId], references: [id], onDelete: Restrict)
+  scheduledItem   ItineraryItem?
   decision        RecommendationDecision?
 
   @@unique([tripSegmentId, presentationBatch, presentationOrder])
@@ -174,4 +181,60 @@ model EvidenceRecord {
 
   @@unique([placeId, sourceId, topic])
   @@index([sourceId])
+}
+
+enum ItineraryItemType {
+  ACTIVITY
+  MEAL
+  SHOPPING
+  TRANSPORTATION
+  FREE_TIME
+  HOTEL_REST
+  CUSTOM
+}
+
+enum ItineraryFlexibility {
+  FIXED
+  FLEXIBLE
+}
+
+enum TransportationMode {
+  TRAIN
+  FLIGHT
+  BUS
+  CAR
+  TRANSIT
+  WALK
+  FERRY
+  OTHER
+}
+
+model ItineraryItem {
+  id                     String @id @default(cuid())
+  tripId                 String
+  dayId                  String
+  type                   ItineraryItemType
+  title                  String
+  startMinute            Int?
+  durationMinutes        Int?
+  position               Int
+  flexibility            ItineraryFlexibility @default(FLEXIBLE)
+  notes                  String?
+  sourceRecommendationId String? @unique
+  transportationMode     TransportationMode?
+  originSegmentId        String?
+  destinationSegmentId   String?
+  revision               Int @default(0)
+  originSegment          TripSegment? @relation("TransportationOrigin", fields: [originSegmentId], references: [id], onDelete: SetNull)
+  destinationSegment     TripSegment? @relation("TransportationDestination", fields: [destinationSegmentId], references: [id], onDelete: SetNull)
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  trip                   Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  day                    Day @relation(fields: [dayId, tripId], references: [id, tripId], onDelete: NoAction)
+  sourceRecommendation   Recommendation? @relation(fields: [sourceRecommendationId], references: [id], onDelete: SetNull)
+
+  @@index([originSegmentId])
+  @@index([destinationSegmentId])
+  @@unique([dayId, position])
+  @@index([tripId])
 }

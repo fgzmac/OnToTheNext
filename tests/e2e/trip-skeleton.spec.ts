@@ -59,7 +59,7 @@ test("organizer can create, persist, and navigate a repeated-city trip skeleton"
   await expect(nav.getByRole("link")).toHaveCount(3);
 
   await nav.getByRole("link", { name: "Itinerary" }).click();
-  await expect(page.getByRole("heading", { name: "Your days are ready." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Your day timeline." })).toBeVisible();
   await expect(page.locator(".day-row")).toHaveCount(15);
   await expect(page.locator(".day-row").filter({ hasText: "2031-04-05" })).toContainText("Tokyo");
   await expect(page.locator(".day-row").filter({ hasText: "2031-04-09" })).toContainText("Kyoto");

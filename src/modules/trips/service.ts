@@ -1,3 +1,4 @@
+import { lockPrototypeTrip } from "@/src/lib/trip-lock";
 import type { Prisma } from "@/src/generated/prisma/client";
 import { ensurePrototypeOwner, PROTOTYPE_OWNER_ID } from "@/src/modules/identity/prototype-owner";
 import { getPrismaClient } from "@/src/lib/prisma";
@@ -150,6 +151,18 @@ async function normalizeSegmentPositionsTx(tx: Tx, tripId: string, orderedIds: s
   }
 }
 
+async function assertScheduledDaysRetained(tx: Tx, tripId: string, startDate: string, endDate: string) {
+  const occupied = await tx.day.findMany({
+    where: { tripId, itineraryItems: { some: {} }, OR: [{ date: { lt: toUtcDate(startDate) } }, { date: { gt: toUtcDate(endDate) } }] },
+    select: { date: true }, orderBy: { date: "asc" },
+  });
+  if (occupied.length) throw new TransactionAbort([{
+    code: "ITINERARY_CONTENT_WOULD_BE_REMOVED",
+    message: "These dates still have scheduled itinerary items. Remove their items before shortening the trip: " + occupied.map(day => formatDateOnly(day.date)).join(", ") + ".",
+    dates: occupied.map(day => formatDateOnly(day.date)),
+  }]);
+}
+
 async function regenerateDaysTx(tx: Tx, tripId: string): Promise<Result<TripSkeleton>> {
   const tripRecord = await tx.trip.findUnique({ where: { id: tripId } });
   const segmentRecords = await tx.tripSegment.findMany({ where: { tripId }, orderBy: { position: "asc" } });
@@ -163,6 +176,7 @@ async function regenerateDaysTx(tx: Tx, tripId: string): Promise<Result<TripSkel
   const structuralErrors = validateTripStructure(trip, segments);
   if (structuralErrors.length > 0) throw new TransactionAbort(structuralErrors);
 
+  await assertScheduledDaysRetained(tx, tripId, trip.startDate, trip.endDate);
   const plannedDays = buildDayPlan(trip, segments);
 
   try {
@@ -291,9 +305,11 @@ export async function updateTrip(input: UpdateTripInput): Promise<Result<TripSke
   try {
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
+      if (!await lockPrototypeTrip(tx, input.tripId)) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
       const existing = await tx.trip.findUnique({ where: { id: input.tripId } });
       if (!existing) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
 
+      await assertScheduledDaysRetained(tx, input.tripId, input.startDate, input.endDate);
       const segments = (await tx.tripSegment.findMany({ where: { tripId: input.tripId } })).map(toSegmentShape);
       const proposedTrip: TripShape = {
         ...toTripShape(existing),
@@ -330,6 +346,7 @@ export async function addSegment(input: SegmentInput): Promise<Result<TripSkelet
   try {
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
+      if (!await lockPrototypeTrip(tx, input.tripId)) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
       const tripRecord = await tx.trip.findUnique({ where: { id: input.tripId } });
       if (!tripRecord) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
 
@@ -376,6 +393,7 @@ export async function updateSegment(input: UpdateSegmentInput): Promise<Result<T
   try {
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
+      if (!await lockPrototypeTrip(tx, input.tripId)) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
       const tripRecord = await tx.trip.findUnique({ where: { id: input.tripId } });
       const segmentRecord = await tx.tripSegment.findUnique({ where: { id: input.segmentId } });
       if (!tripRecord || !segmentRecord || segmentRecord.tripId !== input.tripId) {
@@ -416,6 +434,7 @@ export async function reorderSegments(tripId: string, orderedSegmentIds: string[
   try {
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
+      if (!await lockPrototypeTrip(tx, tripId)) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
       const tripRecord = await tx.trip.findUnique({ where: { id: tripId } });
       const existing = await tx.tripSegment.findMany({ where: { tripId }, orderBy: { position: "asc" } });
       if (!tripRecord) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
@@ -448,6 +467,7 @@ export async function removeSegment(tripId: string, segmentId: string): Promise<
   try {
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
+      if (!await lockPrototypeTrip(tx, tripId)) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
       const segment = await tx.tripSegment.findUnique({ where: { id: segmentId } });
       if (!segment || segment.tripId !== tripId) {
         return errorResult([{ code: "NOT_FOUND", message: "Trip segment not found." }]);

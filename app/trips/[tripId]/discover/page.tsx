@@ -65,7 +65,7 @@ export default async function DiscoverPage({ params, searchParams }: {
         </section>
         <section className="card stack accepted-section" aria-labelledby="accepted-heading">
           <h2 id="accepted-heading">Accepted</h2>
-          <p className="muted">Ideas kept for this destination. Nothing has been scheduled or booked.</p>
+          <p className="muted">Ideas kept for this destination. Accepting an idea does not schedule or book it.</p>
           {batch.accepted.length === 0 ? <p>No accepted recommendations for this destination yet.</p> : <ul className="accepted-list">
             {batch.accepted.map(item => <li key={item.id}>
               <h3>{item.place.name}</h3>

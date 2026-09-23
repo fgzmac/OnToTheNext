@@ -1,3 +1,4 @@
+import { lockPrototypeTrip } from "@/src/lib/trip-lock";
 import type { Prisma } from "@/src/generated/prisma/client";
 import { getPrismaClient } from "@/src/lib/prisma";
 import { PROTOTYPE_OWNER_ID } from "@/src/modules/identity/prototype-owner";
@@ -146,6 +147,7 @@ export async function decideRecommendation(input: {
   const outcome = input.outcome;
   try {
     return await getPrismaClient().$transaction(async tx => {
+      if (!await lockPrototypeTrip(tx, input.tripId)) return { ok: false as const, error: "This trip is unavailable." };
       const recommendation = await tx.recommendation.findFirst({
         where: {
           id: input.recommendationId, tripId: input.tripId, tripSegmentId: input.tripSegmentId,

@@ -184,3 +184,46 @@ button:disabled { opacity: .55; cursor: progress; }
 .interest-options label { display: flex; align-items: center; gap: 10px; min-height: 44px; }
 .interest-options input { width: 18px; height: 18px; flex: 0 0 18px; }
 @media (max-width: 720px) { .interest-options { grid-template-columns: 1fr; } }
+
+.itinerary-builder { overflow-wrap: anywhere; }
+.unscheduled-idea + .unscheduled-idea { border-top: 1px solid var(--line); padding-top: 24px; }
+.unscheduled-idea h3 { margin-bottom: 8px; }
+.unscheduled-idea p { margin-bottom: 4px; }
+.scheduling-fields { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; }
+.scheduling-fields > label, .scheduling-fields :is(input, select) { min-width: 0; max-width: 100%; }
+.timeline-day { display: block; padding: 24px; }
+.timeline-day header p, .timeline-day h3 { margin: 4px 0; }
+.timeline-items { list-style: none; margin: 20px 0 0 8px; padding: 0 0 0 22px; border-left: 2px solid var(--accent-soft); }
+.timeline-items li + li { margin-top: 16px; }
+.timeline-item { background: var(--surface-soft); border-radius: 12px; padding: 18px; position: relative; }
+.timeline-item::before { content: ""; position: absolute; left: -29px; top: 24px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+.timeline-item h4 { font-size: 1.12rem; margin: 0; }
+.timeline-item p { margin: 0; }
+.item-time, .item-flexibility { font-weight: 750; }
+.empty-timeline { margin: 16px 0 0; }
+.itinerary-builder :is(button, select, input):focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+@media (max-width: 720px) {
+  .scheduling-fields { grid-template-columns: 1fr; }
+  .timeline-day { padding: 17px; }
+  .timeline-items { padding-left: 17px; margin-left: 4px; }
+  .timeline-item::before { left: -24px; }
+}
+
+.planning-block-creator > summary, .item-movement summary { cursor: pointer; font-weight: 700; min-height: 44px; padding: 10px 0; }
+.planning-block-creator > form { margin-top: 16px; }
+.transport-fields { border: 1px solid var(--line); border-radius: 12px; padding: 16px; min-width: 0; }
+.itinerary-builder textarea { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 12px; font: inherit; resize: vertical; }
+.move-target { margin-top: 12px; }
+.move-preview { padding: 16px; border: 2px solid var(--accent); border-radius: 12px; background: var(--surface); }
+.move-preview h5 { font-size: 1rem; margin: 0; }
+.move-preview:focus { outline: 3px solid var(--accent); outline-offset: 3px; }
+.conflict-list { padding-left: 22px; margin: 8px 0; }
+.conflict-list li + li { margin-top: 10px; }
+.day-conflicts { margin-top: 16px; }
+.day-conflicts h4 { margin: 0; }
+.itinerary-builder :is(select, input, textarea) { min-width: 0; max-width: 100%; }
+@media (max-width: 720px) {
+  .move-preview { padding: 12px; }
+  .movement-buttons { gap: 8px; }
+  .movement-buttons button { flex: 1; padding: 10px; }
+}

@@ -52,12 +52,12 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(denied.locator(".decision-status")).toHaveText("Decision: Denied");
     const accepted = page.getByRole("region", { name: "Accepted", exact: true });
     await expect(accepted.getByRole("heading", { level: 3 })).toHaveText(["Riverside Observation Deck"]);
-    await expect(accepted).toContainText("Nothing has been scheduled or booked.");
+    await expect(accepted).toContainText("Accepting an idea does not schedule or book it.");
     await screenshot("decisions");
 
     await nav.getByRole("link", { name: "Itinerary", exact: true }).click();
     await expect(page.locator(".day-row")).toHaveCount(15);
-    await expect(page.getByText("Riverside Observation Deck")).toHaveCount(0);
+    await expect(page.locator(".timeline-item").filter({ hasText: "Riverside Observation Deck" })).toHaveCount(0);
     await nav.getByRole("link", { name: "Home", exact: true }).click();
     await expect(page.locator(".segment-card")).toHaveCount(4);
     await nav.getByRole("link", { name: "Discover", exact: true }).click();
