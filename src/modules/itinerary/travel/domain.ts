@@ -11,7 +11,7 @@ export type TravelItemContext = {
   id: string; tripId: string; title: string; type: string; progress: string; dayId: string;
   date: string; position: number; startMinute: number | null; durationMinutes: number | null;
   segment: { id: string; label: string; arrival: string; departure: string } | null;
-  originSegmentId: string | null;
+  originSegmentId: string | null; locationLabel?: string | null;
   booking: { id: string; state: string; date: string | null; minute: number | null } | null;
 };
 export type TravelContext = { target: TravelItemContext; source: TravelItemContext | null; tripStart: string; tripEnd: string };

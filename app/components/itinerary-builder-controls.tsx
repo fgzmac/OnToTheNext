@@ -6,17 +6,17 @@ import type { PlanningSegment, SchedulingDay, TimelineItem } from "@/src/modules
 
 type DayChoice = SchedulingDay & { base: string | null };
 const label = (day: DayChoice) => day.date + " · " + (day.base ?? "Unassigned");
-export function AddPlanningBlock({ tripId, days, segments }: { tripId: string; days: DayChoice[]; segments: PlanningSegment[] }) {
+export function AddPlanningBlock({ tripId, days, segments, defaultDayId = "", embedded = false }: { tripId: string; days: DayChoice[]; segments: PlanningSegment[]; defaultDayId?: string; embedded?: boolean }) {
   const [type, setType] = useState<string>("FREE_TIME");
   const [state, action, pending] = useActionState(createPlanningBlockAction, { error: null, message: null });
-  return <details className="card planning-block-creator">
+  return <details className="card planning-block-creator" open={embedded || undefined}>
     <summary>Add planning block</summary>
     <form action={action} className="stack" aria-label="Add planning block">
       <input type="hidden" name="tripId" value={tripId} />
       <p className="muted">Plan Free Time, Hotel / Rest, or Transportation. These blocks do not create bookings.</p>
       <div className="grid grid-2">
         <label>Block type<select aria-label="Block type" name="type" value={type} onChange={event => setType(event.target.value)}>{BLOCK_TYPES.map(value => <option key={value} value={value}>{TYPE_LABELS[value]}</option>)}</select></label>
-        <label>Block day<select aria-label="Block day" name="dayId" required defaultValue=""><option value="" disabled>Choose a day</option>{days.map(day => <option key={day.id} value={day.id}>{label(day)}</option>)}</select></label>
+        <label>Block day<select aria-label="Block day" name="dayId" required defaultValue={defaultDayId}><option value="" disabled>Choose a day</option>{days.map(day => <option key={day.id} value={day.id}>{label(day)}</option>)}</select></label>
         <label>Block time — optional<input name="time" type="time" /></label>
         <label>Duration in minutes{type === "FREE_TIME" ? " — required" : " — optional"}<input name="duration" type="number" min="1" max="2147483647" step="1" required={type === "FREE_TIME"} /></label>
         <label>Block flexibility<select aria-label="Block flexibility" name="flexibility" defaultValue="FLEXIBLE"><option value="FLEXIBLE">Flexible</option><option value="FIXED">Fixed</option></select></label>

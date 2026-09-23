@@ -12,7 +12,7 @@ type CancellationToken = Identity & { purpose: "reservation-cancellation"; finge
 export async function previewReservationCancellation(input: Identity, now = new Date()): Promise<ReservationResult<CancellationPreview>> {
   try { return await getPrismaClient().$transaction(async tx => {
     if (!await lockPrototypeTrip(tx, input.tripId)) return failure("NOT_FOUND", "This trip is unavailable.");
-    const r = await tx.reservation.findFirst({ where: { id: input.reservationId, tripId: input.tripId } });
+    const r = await tx.reservation.findFirst({ where: { id: input.reservationId, tripId: input.tripId }, include: { itineraryItem: true } });
     if (!r) return failure("NOT_FOUND", "This reservation is unavailable.");
     if (r.state === "CANCELLED") return failure("ALREADY_CANCELLED", "Cancellation is already recorded; its original details were preserved.");
     return { ok: true as const, data: { title: r.title, state: r.state, requiresAcknowledgement: r.state === "BOOKED",
@@ -23,10 +23,10 @@ export async function recordReservationCancellation(input: Identity & { token: s
   const token = readActionPreview<CancellationToken>(input.token, now.getTime()), note = optionalText(input.cancellationNote, 2000);
   if (!token || token.purpose !== "reservation-cancellation" || token.tripId !== input.tripId || token.reservationId !== input.reservationId || note === undefined) return failure("STALE_PREVIEW", "Preview the current reservation again before recording cancellation.");
   return mutateReservation(input.tripId, async tx => {
-    const r = await tx.reservation.findFirst({ where: { id: input.reservationId, tripId: input.tripId } });
+    const r = await tx.reservation.findFirst({ where: { id: input.reservationId, tripId: input.tripId }, include: { itineraryItem: true } });
     if (!r) return failure("NOT_FOUND", "This reservation is unavailable.");
     if (r.state === "CANCELLED") return failure("ALREADY_CANCELLED", "Cancellation is already recorded; its original details were preserved.");
-    if (fingerprint(r) !== token.fingerprint) return failure("STALE_PREVIEW", "The reservation changed. Preview it again before recording cancellation.");
+    if (fingerprint(r) !== token.fingerprint) return failure("STALE_PREVIEW", "The reservation or attached itinerary item changed. Preview it again before recording cancellation.");
     if (r.state === "BOOKED" && input.externalCancellationConfirmed !== true) return failure("ACKNOWLEDGEMENT_REQUIRED", "Confirm that cancellation has already been completed or confirmed with the provider.");
     await tx.reservation.update({ where: { id: r.id }, data: { revision: { increment: 1 }, state: "CANCELLED", cancelledAt: now, cancellationNote: note } });
     return { ok: true, data: { id: r.id } };

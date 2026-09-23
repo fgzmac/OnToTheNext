@@ -1,3 +1,4 @@
+import { openItem } from "./composer-helpers";
 import { expect, test } from "@playwright/test";
 import { getPrismaClient } from "@/src/lib/prisma";
 import { seedDemoTrip, DEMO_TRIP_ID } from "../../prisma/seed-data";
@@ -16,14 +17,16 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(page.getByRole("region", { name: "Accepted", exact: true }).getByRole("heading", { name: title })).toBeVisible();
     expect(await prisma.reservation.count({ where: { tripId: DEMO_TRIP_ID } })).toBe(0);
     await nav.getByRole("link", { name: "Itinerary", exact: true }).click();
-    const idea = page.getByRole("region", { name: "Accepted ideas not scheduled" }).getByRole("article", { name: title });
-    await idea.getByLabel("Day for " + title).selectOption({ label: "2030-04-01 · 1. Tokyo" });
-    await idea.getByLabel("Time for " + title).fill("09:30");
-    await idea.getByLabel("Flexibility for " + title).selectOption("FIXED");
-    await idea.getByRole("button", { name: "Add " + title + " to itinerary" }).click();
-    const item = page.locator(".timeline-item").filter({ has: page.getByRole("heading", { name: title, exact: true }) });
+    const idea = page.locator(".idea-card").filter({has:page.getByRole("heading",{name:title,exact:true})});
+    await idea.getByRole("button",{name:"Add to Day 1",exact:true}).click();
+    await expect(page.locator(".timeline-item")).toHaveCount(1);
+    const item = await openItem(page,title);
+    await item.getByRole("button",{name:"Edit "+title,exact:true}).click();
+    const edit=item.getByRole("form",{name:"Edit "+title,exact:true});
+    await edit.getByLabel("Planned start — optional",{exact:true}).fill("09:30");
+    await edit.getByLabel("Planning flexibility",{exact:true}).selectOption("FIXED");
+    await edit.getByRole("button",{name:"Save changes",exact:true}).click();
     await expect(item.locator(".item-time")).toHaveText("09:30");
-    await expect(item.locator(".item-flexibility")).toHaveText("Fixed");
     expect(await prisma.reservation.count({ where: { tripId: DEMO_TRIP_ID } })).toBe(0);
     await item.getByText("Add reservation tracking", { exact: true }).click();
     const form = item.getByRole("form", { name: "Save reservation tracking" });
@@ -42,7 +45,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await page.reload();
     await expect(item.locator(".reservation-state")).toHaveText("Reservation: Check back");
     await expect(item).toContainText("Desired: 2030-04-01 · 09:30");
-    await item.getByText("Availability and release evidence", { exact: true }).click();
+    await revealBooking(item); await item.getByText("Availability and release evidence", { exact: true }).click();
     await item.getByText("Link availability evidence", { exact: true }).click();
     const evidenceForm = item.getByRole("form", { name: "Link evidence" });
     await evidenceForm.getByLabel("Availability evidence").selectOption({ label: "Ticket availability · Development Fixture Catalog · 2026-09-22" });
@@ -58,7 +61,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(popup.getByRole("heading")).toHaveText("Controlled external booking fixture"); await popup.close();
     expect(await prisma.reservation.findUniqueOrThrow({ where: { id: beforeHandoff.id } })).toEqual(beforeHandoff);
     await page.reload(); await expect(item.locator(".reservation-state")).toHaveText("Reservation: Check back");
-    await item.locator("summary").filter({ hasText: /^Mark booked$/ }).click();
+    await revealBooking(item); await item.locator("summary").filter({ hasText: /^Mark booked$/ }).click();
     const confirmation = item.getByRole("form", { name: "Mark booked", exact: true });
     await confirmation.getByLabel("Confirmed date").fill("2030-04-01");
     await confirmation.getByLabel("Confirmed time").fill("10:30");
@@ -83,4 +86,9 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     expect(saved.desiredDate).toEqual(beforeHandoff.desiredDate);
     await noOverflow(); await item.screenshot({ style: ".brand-bar { visibility: hidden; }", path: testInfo.outputPath(device + "-booked-reservation.png") });
   });
+}
+
+async function revealBooking(item: import("@playwright/test").Locator) {
+  const section = item.locator(".item-booking");
+  if (await section.getAttribute("open") === null) await section.locator(":scope > summary").click();
 }

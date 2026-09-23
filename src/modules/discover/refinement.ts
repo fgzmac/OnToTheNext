@@ -43,3 +43,21 @@ export function rankUnassignedRecommendations<T extends RankedCandidate>(
   return candidates.filter(item => item.presentationBatch === null && item.decision === null)
     .sort((a, b) => score(b) - score(a) || a.displayRank - b.displayRank || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
 }
+
+// Only new batches use diversity. Explicit interest overlap remains the first
+// ordering criterion; group identity is content metadata, never a neighborhood.
+export function selectDiverseBatch<T extends RankedCandidate & { diversityGroup?: string }>(
+  candidates: readonly T[], interests: readonly DiscoverInterest[], decisions: readonly DecisionSignal[], size: number,
+): T[] {
+  const remaining = rankUnassignedRecommendations(candidates, interests, decisions);
+  const selected: T[] = [], groups = new Set<string>();
+  const overlap = (item: T) => new Set(item.interestTags.filter(tag => interests.includes(tag))).size;
+  while (remaining.length && selected.length < size) {
+    const highest = Math.max(...remaining.map(overlap));
+    const at = remaining.findIndex(item => overlap(item) === highest && (!item.diversityGroup || !groups.has(item.diversityGroup)));
+    const index = at < 0 ? remaining.findIndex(item => overlap(item) === highest) : at;
+    const [item] = remaining.splice(index, 1); selected.push(item);
+    if (item.diversityGroup) groups.add(item.diversityGroup);
+  }
+  return selected;
+}

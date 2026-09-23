@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { homeContextQuery } from "@/src/modules/trips/home-context";
-import { TripInterests, AnotherBatch } from "@/app/components/discover-controls";
+import { TripInterests, AnotherBatch, DestinationChoice } from "@/app/components/discover-controls";
 import { loadTripSkeleton } from "../load-trip";
 import { getRecommendationBatch } from "@/src/modules/discover/service";
 import { RecommendationCard } from "@/app/components/recommendation-card";
@@ -34,29 +34,17 @@ export default async function DiscoverPage({ params, searchParams }: {
         <h2>Choose experiences for this destination.</h2>
         <p className="muted">Accept keeps an idea here. It does not schedule or book anything.</p>
       </header>
-      <form action={path} method="get" className="card discover-context">
-        {[...new URLSearchParams(homeContext)].map(([name, value]) => <input key={name} type="hidden" name={name} value={value} />)}
-        <label>
-          Trip Segment
-          <select name="segmentId" defaultValue={selected?.id ?? ""} required>
-            {!selected ? <option value="" disabled>Choose a destination</option> : null}
-            {segments.map(segment => <option key={segment.id} value={segment.id}>
-              {segment.position + 1}. {segment.baseName} · {segment.arrivalDate} to {segment.departureDate}
-            </option>)}
-          </select>
-        </label>
-        <button type="submit">View destination</button>
-      </form>
+      <DestinationChoice selectedId={selectedId} segments={segments.map(segment => ({ id: segment.id, label: (segment.position + 1) + ". " + segment.baseName + " · " + segment.arrivalDate + " to " + segment.departureDate }))} />
       {!selected ? <p role="alert" className="issue error">This destination is no longer available. Choose a destination in this trip.</p> : null}
       {result && !result.ok ? <p role="alert" className="issue error">{result.error}</p> : null}
       {batch ? <>
         <TripInterests tripId={tripId} interests={batch.interests} />
         <p className="muted">Future batches use the trip interests and decisions you have provided.</p>
-        {batch.total > 0 ? <p className="issue warning">Development fixtures: imaginary places with illustrative details. No live prices, hours or availability.</p> : null}
+        {batch.cards.some(item => item.evidence.some(e => e.sourceKind === "DEVELOPMENT_FIXTURE")) ? <p className="issue warning">Development fixtures: imaginary places with illustrative details. No live prices, hours or availability.</p> : null}
         <section aria-labelledby="batch-heading" className="stack">
           <h2 id="batch-heading">{batch.total === 0 ? "No recommendations available yet." : "Batch " + (batch.page + 1) + " of " + batch.totalPages}</h2>
-          {batch.total === 0 ? <p>There are no recommendations for this destination yet. Your trip and decisions are saved.</p> : null}
-          {batch.exhausted ? <p className="issue" role="status">No more fixture recommendations.</p> : null}
+          {batch.total === 0 ? <p>Curated ideas currently cover Tokyo, Kyoto and Osaka. Manual planning remains available in Itinerary.</p> : null}
+          {batch.exhausted ? <p className="issue" role="status">No more recommendations in this catalog.</p> : null}
           <div className="grid grid-2 recommendation-grid">
             {batch.cards.map(item => <RecommendationCard key={item.id} recommendation={item} />)}
           </div>

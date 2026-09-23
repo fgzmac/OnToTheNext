@@ -1,3 +1,4 @@
+import { supportedCity } from "@/src/modules/discover/catalog";
 import { lockPrototypeTrip } from "@/src/lib/trip-lock";
 import type { Prisma } from "@/src/generated/prisma/client";
 import { ensurePrototypeOwner, PROTOTYPE_OWNER_ID } from "@/src/modules/identity/prototype-owner";
@@ -41,6 +42,7 @@ export interface CreateTripInput {
   endDate: DateOnly;
   travelerCount: number;
   budgetComfort?: string | null;
+  startingCity?: string | null;
 }
 
 export interface UpdateTripInput {
@@ -249,6 +251,9 @@ export async function createTrip(input: CreateTripInput): Promise<Result<TripSke
   if (!input.destinationLabel.trim()) {
     validationErrors.push({ code: "INVALID_DESTINATION", message: "Destination is required.", field: "destinationLabel" });
   }
+  if (input.startingCity && (input.destinationScope !== "COUNTRY_REGION" || input.destinationLabel !== "Japan" || !supportedCity(input.startingCity))) {
+    validationErrors.push({ code: "INVALID_DESTINATION", message: "Choose an available starting city for Japan." });
+  }
   if (validationErrors.length > 0) return errorResult(validationErrors);
 
   try {
@@ -275,11 +280,11 @@ export async function createTrip(input: CreateTripInput): Promise<Result<TripSke
         },
       });
 
-      if (input.destinationScope === "CITY_BASE") {
+      if (input.destinationScope === "CITY_BASE" || input.startingCity) {
         await tx.tripSegment.create({
           data: {
             tripId: trip.id,
-            baseName: input.destinationLabel.trim(),
+            baseName: input.startingCity ? supportedCity(input.startingCity)! : input.destinationLabel.trim(),
             arrivalDate: toUtcDate(input.startDate),
             departureDate: toUtcDate(input.endDate),
             position: 0,

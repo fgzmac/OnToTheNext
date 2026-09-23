@@ -45,7 +45,7 @@ export default async function TripHomePage({ params, searchParams }: { params: P
         <div className="card-header">
           <div>
             <span className="eyebrow">Route</span>
-            <h2>Destination sequence</h2>
+            <h2 id="destinations">Destination sequence</h2>
             <p className="muted">Transfer days belong to the place where you start the day. The same city can appear more than once.</p>
           </div>
         </div>

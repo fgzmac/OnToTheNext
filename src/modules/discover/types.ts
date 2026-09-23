@@ -2,13 +2,17 @@ export interface RecommendationCardData {
   id: string;
   tripId: string;
   tripSegmentId: string;
-  place: { id: string; name: string; baseLabel: string; category: string };
+  place: { id: string; name: string; baseLabel: string; category: string; location?: string | null };
+  photo?: import("./media").ExperiencePhoto | null;
+  experienceKind?: "VENUE" | "NEIGHBORHOOD" | "EVENT";
+  event?: import("./tokyo-pilot").EventOccurrence;
   factualSummary: string;
   durationMinutes: number | null;
   costContext: string | null;
   logisticsNote: string | null;
   decision: string | null;
-  evidence: { id: string; topic: string; factualText: string; retrievedAt: string; status: string; sourceName: string; sourceKind: string }[];
+  scheduledDay?: { id: string; number: number; itemId: string } | null;
+  evidence: { id: string; topic: string; factualText: string; retrievedAt: string; status: string; sourceName: string; sourceKind: string; sourceUrl?: string | null }[];
 }
 
 export interface RecommendationBatch {
@@ -21,6 +25,7 @@ export interface RecommendationBatch {
   unassigned: number;
   interests: import("@/src/generated/prisma/enums").DiscoverInterest[];
   exhausted: boolean;
+  eventCount?: number;
 }
 
 export type DiscoverResult<T> =

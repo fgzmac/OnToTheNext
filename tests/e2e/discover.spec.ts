@@ -25,7 +25,6 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(nav.getByRole("link")).toHaveText(["Home", "Itinerary", "Discover"]);
     await nav.getByRole("link", { name: "Discover" }).click();
     await page.getByLabel("Trip Segment").selectOption(FIXTURE_SEGMENT_ID);
-    await page.getByRole("button", { name: "View destination" }).click();
     const batch = page.getByRole("region", { name: "Batch 1 of 3" });
     await expect(batch.getByRole("article")).toHaveCount(4);
     await expect(batch.getByText("Source: Development Fixture Catalog")).toHaveCount(6);
@@ -56,7 +55,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await screenshot("decisions");
 
     await nav.getByRole("link", { name: "Itinerary", exact: true }).click();
-    await expect(page.locator(".day-row")).toHaveCount(15);
+    await expect(page.getByLabel("Selected day", { exact: true }).locator("option")).toHaveCount(15);
     await expect(page.locator(".timeline-item").filter({ hasText: "Riverside Observation Deck" })).toHaveCount(0);
     await nav.getByRole("link", { name: "Home", exact: true }).click();
     await expect(page.locator(".segment-card")).toHaveCount(4);
@@ -80,7 +79,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await page.getByRole("link", { name: "Next generated batch" }).click();
     await expect(page.getByRole("heading", { name: "Batch 2 of 3" })).toBeVisible();
     await page.getByRole("button", { name: "Show another batch" }).click();
-    await expect(page.getByRole("status")).toHaveText("No more fixture recommendations.");
+    await expect(page.getByText("No more recommendations in this catalog.", { exact: true })).toBeVisible();
     await expect(page.getByRole("button", { name: "Show another batch" })).toHaveCount(0);
     await expect(accepted.getByRole("heading", { level: 3 })).toHaveText(["Old Market Food Hall"]);
     await screenshot("exhausted");
@@ -92,12 +91,10 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
       /4\. Tokyo.*2030-04-12.*2030-04-15/,
     ]);
     await page.getByLabel("Trip Segment").selectOption("cmg00000000000000000000014");
-    await page.getByRole("button", { name: "View destination" }).click();
     await expect(page.getByRole("heading", { name: "No recommendations available yet." })).toBeVisible();
     await expect(accepted.getByRole("heading", { level: 3 })).toHaveCount(0);
     await screenshot("return-tokyo-empty");
     await page.getByLabel("Trip Segment").selectOption(FIXTURE_SEGMENT_ID);
-    await page.getByRole("button", { name: "View destination" }).click();
     await expect(accepted.getByRole("heading", { level: 3 })).toHaveText(["Old Market Food Hall"]);
   });
 }
