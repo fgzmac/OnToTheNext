@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AddSegmentForm } from "@/app/components/add-segment-form";
 import { SegmentCard } from "@/app/components/segment-card";
 import { TripDetailsForm } from "@/app/components/trip-details-form";
@@ -27,6 +28,8 @@ export default async function TripHomePage({ params }: { params: Promise<{ tripI
       ) : (
         <div className="issue success">Every trip date currently has a destination base.</div>
       )}
+
+      <section aria-label="Trip utilities"><Link className="button secondary" href={"/trips/" + tripId + "/reservations"}>Reservations</Link></section>
 
       <section>
         <div className="card-header">

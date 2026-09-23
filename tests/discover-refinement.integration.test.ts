@@ -176,6 +176,6 @@ integration("Discover stable refinement persistence", () => {
     expect(await prisma!.tripPreferenceProfile.count()).toBe(0);
     expect(await prisma!.place.count()).toBe(12);
     expect(await prisma!.source.count()).toBe(1);
-    expect(await prisma!.evidenceRecord.count()).toBe(12);
+    expect(await prisma!.evidenceRecord.count()).toBe(14);
   });
 });

@@ -72,7 +72,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(order()).toHaveText(["Free time", "Hotel / Rest", transportTitle]);
     await fixedPreview.getByRole("button", { name: "Cancel", exact: true }).click();
     await expect(fixedPreview).toHaveCount(0);
-    await transport.locator("summary").click();
+    await transport.getByLabel("Move " + transportTitle + " to another day", { exact: true }).click();
     await expect(transport.getByLabel("Target day for " + transportTitle).locator("option")).toHaveText(["Choose a day", ...[2, 3, 4, 5].map(day => "2030-04-0" + day + " · Tokyo")]);
     await transport.getByLabel("Target day for " + transportTitle).selectOption({ label: "2030-04-02 · Tokyo" });
     await transport.getByRole("button", { name: "Preview move", exact: true }).click();
@@ -86,7 +86,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await fixedPreview.getByRole("button", { name: "Cancel", exact: true }).click();
     await expect(transport).toBeVisible();
     await expect(dayTwo.locator(".timeline-item")).toHaveCount(0);
-    await transport.locator("summary").click();
+    await transport.getByLabel("Move " + transportTitle + " to another day", { exact: true }).click();
     await transport.getByLabel("Target day for " + transportTitle).selectOption({ label: "2030-04-02 · Tokyo" });
     await transport.getByRole("button", { name: "Preview move", exact: true }).click();
     await fixedPreview.getByRole("button", { name: "Confirm move", exact: true }).click();

@@ -33,6 +33,15 @@ export async function seedDiscoverFixtures(prisma: PrismaClient) {
           retrievedAt: new Date(FIXTURE_RETRIEVED_AT), status: "FIXTURE",
         },
       });
+      if (index === 0) {
+        for (const [topic, factualText] of [
+          ["Ticket availability", "Development fixture: tickets unavailable in this illustrative scenario. Not live inventory."],
+          ["Booking policy", "Development fixture: illustrative advance booking policy. Not live; consult the provider before booking."],
+        ]) await tx.evidenceRecord.upsert({
+          where: { placeId_sourceId_topic: { placeId, sourceId: FIXTURE_SOURCE_ID, topic } }, update: {},
+          create: { placeId, sourceId: FIXTURE_SOURCE_ID, topic, factualText, retrievedAt: new Date(FIXTURE_RETRIEVED_AT), status: "FIXTURE" },
+        });
+      }
       await tx.recommendation.upsert({
         where: { tripSegmentId_placeId: { tripSegmentId: segment.id, placeId } },
         update: {},

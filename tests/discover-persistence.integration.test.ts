@@ -38,13 +38,13 @@ integration("Discover PostgreSQL persistence", () => {
     expect(await prisma!.place.count()).toBe(12);
     expect(await prisma!.recommendation.count()).toBe(12);
     expect(await prisma!.source.count()).toBe(1);
-    expect(await prisma!.evidenceRecord.count()).toBe(12);
+    expect(await prisma!.evidenceRecord.count()).toBe(14);
     expect(await prisma!.recommendationDecision.count()).toBe(0);
     const first = (await batch()).cards[0];
     expect(first.id).not.toBe(first.place.id);
     expect(first.tripId).toBe(DEMO_TRIP_ID);
     expect(first.tripSegmentId).toBe(FIXTURE_SEGMENT_ID);
-    expect(first.evidence).toHaveLength(1);
+    expect(first.evidence).toHaveLength(3);
     expect(first.evidence[0]).toMatchObject({ status: "FIXTURE", sourceKind: "DEVELOPMENT_FIXTURE", sourceName: "Development Fixture Catalog" });
     expect((await prisma!.evidenceRecord.findFirstOrThrow({ where: { placeId: first.place.id } })).sourceId).toBe(FIXTURE_SOURCE_ID);
   });
@@ -132,7 +132,7 @@ integration("Discover PostgreSQL persistence", () => {
     expect(await prisma!.recommendationDecision.count()).toBe(0);
     expect(await prisma!.place.count()).toBe(12);
     expect(await prisma!.source.count()).toBe(1);
-    expect(await prisma!.evidenceRecord.count()).toBe(12);
+    expect(await prisma!.evidenceRecord.count()).toBe(14);
     expect(await prisma!.prototypeUser.count()).toBe(1);
   });
 

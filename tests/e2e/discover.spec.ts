@@ -28,8 +28,8 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await page.getByRole("button", { name: "View destination" }).click();
     const batch = page.getByRole("region", { name: "Batch 1 of 3" });
     await expect(batch.getByRole("article")).toHaveCount(4);
-    await expect(batch.getByText("Source: Development Fixture Catalog")).toHaveCount(4);
-    await expect(batch.getByText("Evidence: fixture data — not live")).toHaveCount(4);
+    await expect(batch.getByText("Source: Development Fixture Catalog")).toHaveCount(6);
+    await expect(batch.getByText("Evidence: fixture data — not live")).toHaveCount(6);
     await expect(page.getByText(/why this fits you|perfect for you|because you liked|you.ll love|strong match|recommended based on|match score/i)).toHaveCount(0);
     const screenshot = async (name: string) => {
       expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
