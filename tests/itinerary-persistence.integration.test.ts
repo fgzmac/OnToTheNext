@@ -186,7 +186,7 @@ integration("Itinerary scheduling and content safety", () => {
     expect(await prisma!.recommendation.count()).toBe(0);
     expect(await prisma!.place.count()).toBe(12);
     expect(await prisma!.source.count()).toBe(1);
-    expect(await prisma!.evidenceRecord.count()).toBe(12);
+    expect(await prisma!.evidenceRecord.count()).toBe(14);
   });
 
   it("allows shrinking empty Days while preserving retained Day IDs", async () => {

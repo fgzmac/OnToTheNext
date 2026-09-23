@@ -36,6 +36,7 @@ model Trip {
   days              Day[]
   recommendations   Recommendation[]
   itineraryItems    ItineraryItem[]
+  reservations      Reservation[]
   preferenceProfile TripPreferenceProfile?
 
   @@index([ownerId])
@@ -179,6 +180,8 @@ model EvidenceRecord {
   source      Source   @relation(fields: [sourceId], references: [id], onDelete: Restrict)
   place       Place    @relation(fields: [placeId], references: [id], onDelete: Cascade)
 
+  reservationLinks ReservationEvidence[]
+
   @@unique([placeId, sourceId, topic])
   @@index([sourceId])
 }
@@ -233,8 +236,56 @@ model ItineraryItem {
   day                    Day @relation(fields: [dayId, tripId], references: [id, tripId], onDelete: NoAction)
   sourceRecommendation   Recommendation? @relation(fields: [sourceRecommendationId], references: [id], onDelete: SetNull)
 
+  reservation Reservation?
+
   @@index([originSegmentId])
   @@index([destinationSegmentId])
   @@unique([dayId, position])
   @@index([tripId])
+}
+
+enum ReservationType {
+  ACTIVITY
+  HOTEL
+  TRANSPORTATION
+}
+enum ReservationState {
+  BOOK_NOW
+  OPENS_LATER
+  CHECK_BACK
+  OPTIONAL
+  NO_RESERVATION_NEEDED
+  BOOKED
+  NEEDS_ATTENTION
+  CANCELLED
+}
+model Reservation {
+  id String @id @default(cuid())
+  tripId String
+  type ReservationType
+  state ReservationState
+  itineraryItemId String? @unique
+  desiredDate DateTime? @db.Date
+  desiredStartMinute Int?
+  confirmedDate DateTime? @db.Date
+  confirmedStartMinute Int?
+  bookingSourceLabel String?
+  bookingUrl String?
+  confirmationReference String?
+  notes String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  itineraryItem ItineraryItem? @relation(fields: [itineraryItemId], references: [id], onDelete: SetNull)
+  evidenceLinks ReservationEvidence[]
+  @@index([tripId])
+}
+model ReservationEvidence {
+  reservationId String
+  evidenceRecordId String
+  createdAt DateTime @default(now())
+  reservation Reservation @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+  evidenceRecord EvidenceRecord @relation(fields: [evidenceRecordId], references: [id], onDelete: Cascade)
+  @@id([reservationId, evidenceRecordId])
+  @@index([evidenceRecordId])
 }

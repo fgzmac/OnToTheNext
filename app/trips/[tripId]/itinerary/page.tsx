@@ -1,3 +1,5 @@
+import { ActivityReservation } from "@/app/components/activity-reservation";
+import { getItineraryReservationContext } from "@/src/modules/reservations/service";
 import { AddPlanningBlock, ItemMovement } from "@/app/components/itinerary-builder-controls";
 import { TYPE_LABELS, MODE_LABELS } from "@/src/modules/itinerary/planning";
 import { notFound } from "next/navigation";
@@ -12,7 +14,7 @@ function prettyDate(dateOnly: string) {
 
 export default async function ItineraryPage({ params }: { params: Promise<{ tripId: string }> }) {
   const { tripId } = await params;
-  const result = await getItineraryBuilder(tripId);
+  const [result, reservationContext] = await Promise.all([getItineraryBuilder(tripId), getItineraryReservationContext(tripId)]);
   if (!result.ok) {
     if (result.error.code === "NOT_FOUND") notFound();
     return <p className="issue error" role="alert">{result.error.message}</p>;
@@ -55,6 +57,10 @@ export default async function ItineraryPage({ params }: { params: Promise<{ trip
               {item.transportationMode ? <p>Mode: {MODE_LABELS[item.transportationMode]}</p> : null}
               {item.notes ? <p>{item.notes}</p> : null}
               <ItemMovement tripId={tripId} dayId={day.id} item={item} days={days} first={itemIndex === 0} last={itemIndex === day.items.length - 1} />
+              {item.type === "ACTIVITY" ? (reservationContext.ok ? (() => {
+                const context = reservationContext.data.find(entry => entry.itemId === item.id);
+                return context ? <ActivityReservation tripId={tripId} context={context} date={day.date} startMinute={item.startMinute} /> : <p role="alert">Reservation context changed. Refresh to continue.</p>;
+              })() : <p role="alert">{reservationContext.error.message}</p>) : null}
               <RemoveScheduledItem tripId={tripId} itemId={item.id} title={item.title} />
             </article>
           </li>)}
