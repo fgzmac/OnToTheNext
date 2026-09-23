@@ -34,6 +34,7 @@ model Trip {
   owner             PrototypeUser          @relation(fields: [ownerId], references: [id], onDelete: Restrict)
   segments          TripSegment[]
   days              Day[]
+  recommendations   Recommendation[]
   preferenceProfile TripPreferenceProfile?
 
   @@index([ownerId])
@@ -50,6 +51,9 @@ model TripSegment {
   updatedAt     DateTime @updatedAt
   trip          Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
   primaryDays   Day[]    @relation("PrimarySegmentDays")
+  recommendations Recommendation[]
+
+  @@unique([id, tripId])
 
   @@unique([tripId, position])
   @@index([tripId, arrivalDate, departureDate])
@@ -79,4 +83,78 @@ model TripPreferenceProfile {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   trip          Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+}
+enum RecommendationOutcome {
+  ACCEPTED
+  DENIED
+  SAVED
+  MUST_DO
+}
+
+model Place {
+  id              String           @id @default(cuid())
+  name            String
+  baseLabel       String
+  category        String
+  address         String?
+  latitude        Float?
+  longitude       Float?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  recommendations Recommendation[]
+  evidence        EvidenceRecord[]
+}
+
+model Recommendation {
+  id              String                  @id @default(cuid())
+  tripId          String
+  tripSegmentId   String
+  placeId         String
+  factualSummary  String
+  durationMinutes Int?
+  costContext     String?
+  logisticsNote   String?
+  displayRank     Int
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+  trip            Trip                    @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  tripSegment     TripSegment             @relation(fields: [tripSegmentId, tripId], references: [id, tripId], onDelete: Cascade)
+  place           Place                   @relation(fields: [placeId], references: [id], onDelete: Restrict)
+  decision        RecommendationDecision?
+
+  @@unique([tripSegmentId, placeId])
+  @@index([tripId, tripSegmentId, displayRank, id])
+}
+
+model RecommendationDecision {
+  id               String                @id @default(cuid())
+  recommendationId String                @unique
+  outcome          RecommendationOutcome
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime              @updatedAt
+  recommendation   Recommendation        @relation(fields: [recommendationId], references: [id], onDelete: Cascade)
+}
+
+model Source {
+  id        String           @id @default(cuid())
+  name      String
+  kind      String
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  evidence  EvidenceRecord[]
+}
+
+model EvidenceRecord {
+  id          String   @id @default(cuid())
+  sourceId    String
+  placeId     String
+  topic       String
+  factualText String
+  retrievedAt DateTime
+  status      String
+  source      Source   @relation(fields: [sourceId], references: [id], onDelete: Restrict)
+  place       Place    @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@unique([placeId, sourceId, topic])
+  @@index([sourceId])
 }

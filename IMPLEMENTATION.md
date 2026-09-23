@@ -1,6 +1,6 @@
-# Sprint 1 local setup
+# Local setup
 
-Sprint 1 runs on the `sprint-1-foundation` branch.
+Discover Core Slice 1 is on `sprint-2-discover-core`, based on accepted Sprint 1. Sprint 2 is not complete.
 
 ## Requirements
 
@@ -56,3 +56,19 @@ The guard verifies URL identity, not permission to delete data or actual server
 ownership. Verify the actual target database/user and owning volume before any
 authorized destructive operation. Never reset normal development data merely to
 run tests. The verifier and command-ordering tests use no database connection.
+
+## Discover Core Slice 1
+
+Apply the additive migration with `npm run db:deploy` against the intended,
+verified development database. Installation does not require a database reset.
+The optional `npm run db:seed` preserves the existing convention of recreating the
+known synthetic Japan demo Trip, then adds eight imaginary Discover recommendations
+to its first Tokyo Segment. Full demo reseeding resets that demo Trip's decisions.
+It does not populate recommendations for normal newly created Trips.
+
+Open the demo Trip, choose Discover, then select the first Tokyo Segment. Two
+four-card batches support Accept/Deny and an Accepted section. All content is
+labeled as development fixtures; acceptance does not schedule or book anything.
+Other Segments demonstrate the empty state. See
+[the Slice 1 implementation record](planning/sprints/sprint-2-discover-core.md)
+for data ownership, verification evidence, and deferred scope.

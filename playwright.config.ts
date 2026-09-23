@@ -7,7 +7,8 @@ export default defineConfig({
   expect: {
     timeout: 10_000,
   },
-  workers: process.env.CI ? 1 : undefined,
+  // Browser suites share one isolated fixture database.
+  workers: 1,
   use: {
     baseURL: "http://127.0.0.1:3100",
     trace: "retain-on-failure",
