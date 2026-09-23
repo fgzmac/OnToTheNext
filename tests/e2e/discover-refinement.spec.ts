@@ -72,7 +72,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(page.getByRole("status")).toHaveText("No more fixture recommendations.");
     await expect(page.getByRole("button", { name: "Show another batch" })).toHaveCount(0);
     await expect(page.getByText(/why this fits you|perfect for you|because you liked|you.ll love|strong match|recommended based on|match score/i)).toHaveCount(0);
-    await expect(accepted).toContainText("Nothing has been scheduled or booked.");
+    await expect(accepted).toContainText("Accepting an idea does not schedule or book it.");
     await screenshot("exhausted");
     await page.reload();
     await expect(third.getByRole("heading", { level: 3 })).toHaveText(thirdNames);

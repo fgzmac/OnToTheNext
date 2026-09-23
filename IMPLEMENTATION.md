@@ -1,6 +1,6 @@
 # Local setup
 
-Discover Core Slices 1 and 2 are on `sprint-2-discover-core`, based on accepted Sprint 1. Milestone implementation is pending TPM/CEO review; PR #2 stays draft.
+Discover Core is accepted and merged through PR #2 (D-120). Itinerary Builder Slice 1 is on `sprint-3-itinerary-builder`, based on current main. Sprint 3 is incomplete; its draft PR is for review and must not be merged yet.
 
 ## Requirements
 
@@ -81,3 +81,21 @@ schedules or books anything. No live provider data is used.
 
 See [the Sprint 2 implementation record](planning/sprints/sprint-2-discover-core.md)
 for ranking rules, ownership, migration preservation, verification, and deferred scope.
+
+## Itinerary Builder Slice 1
+
+Apply the additive migration with `npm run db:deploy` against the verified intended
+development database; an upgrade does not require a reset. Normal seed does not
+schedule recommendations or modify existing itinerary items.
+
+Accept an idea in Discover, open Itinerary, choose a Day owned by that idea's
+Segment, optionally choose a local time, and select Flexible or Fixed. Add to
+itinerary appends an Activity to that Day. Refresh preserves it; Remove preserves
+the Discover decision and makes accepted ideas available to schedule again.
+
+Dates containing scheduled content cannot be removed by shrinking the Trip.
+Remove the relevant items first. Removing a source Segment preserves the scheduled
+item and its Day while detaching the deleted Recommendation reference.
+
+See [the Sprint 3 implementation record](planning/sprints/sprint-3-itinerary-builder.md)
+for constraints, verification and deferred work. Sprint 3 remains incomplete.

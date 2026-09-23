@@ -15,7 +15,8 @@ export type IssueCode =
   | "UNASSIGNED_DATES"
   | "NOT_FOUND"
   | "PERSISTENCE_FAILURE"
-  | "DAY_GENERATION_FAILED";
+  | "DAY_GENERATION_FAILED"
+  | "ITINERARY_CONTENT_WOULD_BE_REMOVED";
 
 export interface DomainIssue {
   code: IssueCode;
