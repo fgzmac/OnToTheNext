@@ -9,6 +9,8 @@ export default defineConfig({
   },
   test: {
     environment: "node",
+    // Integration suites share a verified disposable database.
+    fileParallelism: false,
     include: [
       "src/**/*.test.ts",
       "tests/**/*.integration.test.ts",

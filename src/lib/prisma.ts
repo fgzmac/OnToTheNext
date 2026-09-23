@@ -14,9 +14,8 @@ export function getPrismaClient(): PrismaClient {
   const adapter = new PrismaPg({ connectionString });
   const prisma = new PrismaClient({ adapter });
 
-  if (process.env.NODE_ENV !== "production") {
-    globalForPrisma.prisma = prisma;
-  }
+  // Reuse the pool in production too; services call this factory per request.
+  globalForPrisma.prisma = prisma;
 
   return prisma;
 }

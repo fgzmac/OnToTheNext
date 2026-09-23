@@ -6,9 +6,10 @@ import { formatDateOnly, toUtcDate } from "../src/modules/trips/date-only";
 export const DEMO_TRIP_ID = "cmg00000000000000000000002";
 const date = toUtcDate;
 
-// Replace only the synthetic fixture, atomically. User-created trips are preserved.
-export async function seedDemoTrip(prisma: PrismaClient) {
+// Test fixtures may replace the synthetic Trip; ordinary seeding preserves it.
+export async function seedDemoTrip(prisma: PrismaClient, options: { preserveExisting?: boolean } = {}) {
   await prisma.$transaction(async (tx) => {
+    if (options.preserveExisting && await tx.trip.findUnique({ where: { id: DEMO_TRIP_ID } })) return;
     await tx.prototypeUser.upsert({
       where: { id: PROTOTYPE_OWNER_ID },
       update: { displayName: "Prototype Owner" },

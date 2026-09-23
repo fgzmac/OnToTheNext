@@ -1,9 +1,10 @@
-name: Sprint 1 CI
+name: Application CI
 
 on:
   push:
     branches:
       - sprint-1-foundation
+      - sprint-2-discover-core
   pull_request:
     branches:
       - main
