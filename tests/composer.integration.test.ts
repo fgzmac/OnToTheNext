@@ -26,7 +26,7 @@ integration("recommendation-first composer", () => {
     expect(await db!.recommendation.count({ where: { tripId: id } })).toBe(0);
     const batches = await Promise.all([getRecommendationBatch(id, segment), getRecommendationBatch(id, segment)]);
     expect(batches.every(r => r.ok)).toBe(true);
-    expect(await db!.recommendation.count({ where: { tripId: id } })).toBe(8);
+    expect(await db!.recommendation.count({ where: { tripId: id } })).toBe(city === "Tokyo" ? 24 : 8);
     expect(ok(batches[0]).cards).toHaveLength(4);
     expect(ok(batches[0]).cards.every(c => c.evidence.some(e => e.sourceKind === "OFFICIAL_CURATED" && e.sourceUrl))).toBe(true);
     const before = await db!.place.findMany({ orderBy: { id: "asc" } });
@@ -40,8 +40,8 @@ integration("recommendation-first composer", () => {
     const a = await trip(), b = await trip();
     const results = await Promise.all([getRecommendationBatch(a.trip.id, a.segments[0].id), getRecommendationBatch(b.trip.id, b.segments[0].id)]);
     expect(results.every(r => r.ok)).toBe(true);
-    expect(await db!.place.count()).toBe(8);
-    expect(await db!.recommendation.count()).toBe(16);
+    expect(await db!.place.count()).toBe(24);
+    expect(await db!.recommendation.count()).toBe(48);
   });
   it("atomically accepts, snapshots and appends without booking or invented time", async () => {
     const s = await setup(), r = ok(await addRecommendationToDay(s));
@@ -107,7 +107,7 @@ integration("recommendation-first composer", () => {
     expect(await db!.recommendation.findMany({ where: { tripId: id }, orderBy: { id: "asc" } })).toEqual(history);
     expect(await db!.recommendationDecision.findMany()).toEqual(decision);
     expect(await db!.itineraryItem.findUniqueOrThrow({ where: { id: item.id } })).toEqual(before);
-    expect(await db!.evidenceRecord.count()).toBe(8);
+    expect(await db!.evidenceRecord.count()).toBe(30); // 24 official observations plus six contextual sources, shared across both Segments.
   });
   it("creates an initial country Segment only on explicit validated choice", async () => {
     const a = await createTrip({ destinationLabel: "Japan", destinationScope: "COUNTRY_REGION", startDate: "2032-04-01", endDate: "2032-04-03", travelerCount: 1 });

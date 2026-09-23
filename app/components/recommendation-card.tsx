@@ -1,3 +1,5 @@
+import { RecommendationPhoto } from "./recommendation-photo";
+import { ExperienceDetails } from "./experience-details";
 import type { RecommendationCardData } from "@/src/modules/discover/types";
 import { RecommendationDecision } from "./recommendation-decision";
 
@@ -5,6 +7,7 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
   const item = recommendation;
   return (
     <article className="card recommendation-card" aria-labelledby={"recommendation-" + item.id}>
+      <RecommendationPhoto photo={item.photo} name={item.place.name} />
       <div>
         <span className="eyebrow">{item.place.category}</span>
         <h3 id={"recommendation-" + item.id}>{item.place.name}</h3>
@@ -16,19 +19,9 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
         {item.costContext ? <><dt>Cost context</dt><dd>{item.costContext}</dd></> : null}
         {item.logisticsNote ? <><dt>Practical notes</dt><dd>{item.logisticsNote}</dd></> : null}
       </dl>
-      <div className="recommendation-evidence">
-        {item.evidence.length === 0 ? <p>Evidence: unavailable.</p> : item.evidence.map(evidence => (
-          <div key={evidence.id}>
-            <p>Source: {evidence.sourceName}</p>
-            <p>Evidence: {evidence.status === "FIXTURE" && evidence.sourceKind === "DEVELOPMENT_FIXTURE" ? "fixture data — not live" : "not verified as current"}</p>
-            <details>
-              <summary>Evidence details</summary>
-              <p>{evidence.factualText}</p>{evidence.sourceUrl ? <a href={evidence.sourceUrl} target="_blank" rel="noopener noreferrer">Official source</a> : null}
-              <p>Observed / record date: {evidence.retrievedAt.slice(0, 10)}. This is not a live verification date.</p>
-            </details>
-          </div>
-        ))}
-      </div>
+      {item.event ? <p>{item.event.startDate} – {item.event.endDate} · {item.event.timeZone} · Availability unconfirmed</p> : null}
+      {item.evidence.filter(e => e.sourceKind === "DEVELOPMENT_FIXTURE").map(e => <div key={e.id}><p>Source: {e.sourceName}</p><p>Evidence: {e.status === "FIXTURE" ? "fixture data — not live" : "not verified as current"}</p></div>)}
+      <ExperienceDetails item={item} />
       <RecommendationDecision tripId={item.tripId} tripSegmentId={item.tripSegmentId} recommendationId={item.id} name={item.place.name} outcome={item.decision} />
     </article>
   );

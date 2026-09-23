@@ -13,7 +13,7 @@ for(const [device,width,height] of [["desktop",1280,900],["phone",390,844]] as c
   await page.getByLabel("Destination",{exact:true}).selectOption("Tokyo");await page.getByLabel("Start date").fill("2033-05-01");await page.getByLabel("End date").fill("2033-05-03");
   await page.getByRole("button",{name:"Start planning",exact:true}).click();await expect(page).toHaveURL(/\/trips\/[^/?]+\/itinerary$/);
   tripId=new URL(page.url()).pathname.split("/")[2];
-  expect(await db.recommendation.count({where:{tripId}})).toBe(8);
+  expect(await db.recommendation.count({where:{tripId}})).toBe(24);
   await expect(page.locator(".idea-card")).toHaveCount(4);await expect(page.locator(".idea-card").first()).toContainText("Senso-ji");
   await expect(page.getByText(/Synthetic test idea|Development fixtures/)).toHaveCount(0);await screenshot("empty");
   if(device==="desktop") {

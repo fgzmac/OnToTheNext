@@ -1,3 +1,5 @@
+import { TOKYO_ADDITIONS } from "./tokyo-pilot";
+import type { EventOccurrence, ExperienceSource } from "./tokyo-pilot";
 import type { DiscoverInterest } from "@/src/generated/prisma/enums";
 
 export const SUPPORTED_CITIES = ["Tokyo", "Kyoto", "Osaka"] as const;
@@ -10,13 +12,14 @@ export interface CatalogPlace {
   id: string; city: SupportedCity; name: string; category: string; interests: DiscoverInterest[];
   summary: string; location: string | null; url: string; checkedAt: string;
   durationMinutes: number | null; durationSource?: string;
+  kind?: "VENUE" | "NEIGHBORHOOD" | "EVENT"; diversityGroup?: string; event?: EventOccurrence; sources?: ExperienceSource[];
 }
 const observed = "2026-09-23";
 function entry(city: SupportedCity, slug: string, name: string, category: string, interests: DiscoverInterest[], summary: string, location: string | null, url: string, durationMinutes: number | null = null, durationSource?: string): CatalogPlace {
   return { id: "curated-" + slug, city, name, category, interests, summary, location, url, checkedAt: observed, durationMinutes, durationSource };
 }
 // Original concise descriptions; facts checked against the linked operator/tourism sources.
-// No images are licensed for reuse. Null durations are intentional, not missing defaults.
+// Reusable Tokyo photos and rights are tracked separately in media-manifest.json.
 export const CATALOG: CatalogPlace[] = [
   entry("Tokyo", "sensoji", "Senso-ji", "Temple", ["CULTURE_HISTORY", "SIGHTSEEING_LANDMARKS"], "Explore the temple grounds and gates of Tokyo’s oldest Buddhist temple.", "Asakusa, Taito", "https://www.senso-ji.jp/english/"),
   entry("Tokyo", "shinjuku-gyoen", "Shinjuku Gyoen", "Garden", ["NATURE_OUTDOORS"], "Walk through Japanese, formal and landscape gardens within a large city park.", "11 Naitomachi, Shinjuku", "https://www.gotokyo.org/en/spot/75/"),
@@ -26,6 +29,7 @@ export const CATALOG: CatalogPlace[] = [
   entry("Tokyo", "western-art", "National Museum of Western Art", "Art museum", ["CULTURE_HISTORY", "ARCHITECTURE_DESIGN"], "Browse Western art in the museum’s galleries in Ueno Park.", "7-7 Ueno-koen, Taito", "https://www.nmwa.go.jp/en/"),
   entry("Tokyo", "edo-tokyo-buildings", "Edo-Tokyo Open Air Architectural Museum", "Architecture museum", ["ARCHITECTURE_DESIGN", "CULTURE_HISTORY"], "Explore historic buildings relocated and preserved in an outdoor museum.", "3-7-1 Sakura-cho, Koganei", "https://www.gotokyo.org/en/spot/417/index.html", 120, "https://www.gotokyo.org/book/wp-content/uploads/2025/03/2503_tbf2025_low_EN.pdf"),
   entry("Tokyo", "sumida-aquarium", "Sumida Aquarium", "Aquarium", ["ENTERTAINMENT"], "See penguins and marine habitats, including a tank inspired by the Ogasawara Islands.", "Tokyo Skytree Town, Oshiage", "https://www.gotokyo.org/en/spot/67/"),
+  ...TOKYO_ADDITIONS,
   entry("Kyoto", "kiyomizudera", "Kiyomizu-dera", "Temple", ["CULTURE_HISTORY", "SIGHTSEEING_LANDMARKS"], "Explore the temple’s hillside buildings and views over Kyoto from Mount Otowa.", "Higashiyama", "https://www.kiyomizudera.or.jp/en/"),
   entry("Kyoto", "nishiki", "Nishiki Market", "Food market", ["FOOD_DRINK", "SHOPPING"], "Browse a covered market with shops selling Kyoto foods, pickles and seasonings.", "Nakagyo", "https://www.kyoto-nishiki.or.jp/en/"),
   entry("Kyoto", "tenryuji", "Tenryu-ji", "Temple garden", ["NATURE_OUTDOORS", "CULTURE_HISTORY"], "Walk around Sogen Pond Garden, where surrounding mountains form part of the garden’s scenery.", "Arashiyama", "https://www.tenryuji.com/en/precincts/"),

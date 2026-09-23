@@ -67,10 +67,10 @@ test("organizer can create, persist, and navigate a repeated-city trip skeleton"
   await expect(page.getByLabel("Selected day", { exact: true }).locator("option").filter({ hasText: "2031-04-12" })).toContainText("Osaka");
 
   await nav.getByRole("link", { name: "Discover" }).click();
-  await expect(page.getByRole("heading", { name: "Batch 1 of 2" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Batch 1 of 6" })).toBeVisible();
 
   await page.reload();
-  await expect(page.getByRole("heading", { name: "Batch 1 of 2" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Batch 1 of 6" })).toBeVisible();
 
   await nav.getByRole("link", { name: "Home" }).click();
   await expect(page.getByText("Every trip date currently has a destination base.")).toBeVisible();
@@ -99,7 +99,7 @@ test("organizer can create, persist, and navigate a repeated-city trip skeleton"
       expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
       if (section === "Home") await expect(page.locator(".segment-card")).toHaveCount(4);
       if (section === "Itinerary") await expect(page.getByLabel("Selected day", { exact: true }).locator("option")).toHaveCount(15);
-      if (section === "Discover") await expect(page.getByRole("heading", { name: "Batch 1 of 2" })).toBeVisible();
+      if (section === "Discover") await expect(page.getByRole("heading", { name: "Batch 1 of 6" })).toBeVisible();
       await page.screenshot({ path: testInfo.outputPath(device + "-" + section.toLowerCase() + ".png"), fullPage: true });
     }
   }

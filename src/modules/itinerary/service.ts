@@ -1,3 +1,4 @@
+import { eventMatches, eventReviewWarning } from "@/src/modules/discover/events";
 import type { Prisma } from "@/src/generated/prisma/client";
 import { catalogPlace } from "@/src/modules/discover/catalog";
 import { detailsInclude, itemEditToken } from "./details-context";
@@ -30,6 +31,8 @@ export async function scheduleAcceptedRecommendation(input: {
       const day = await tx.day.findFirst({ where: { id: input.dayId, tripId: input.tripId } });
       if (!day) return failure("WRONG_DAY", "Choose a day in this trip.");
       if (day.primarySegmentId !== recommendation.tripSegmentId) return failure("WRONG_SEGMENT", "Choose a day owned by this idea’s destination segment.");
+      const event = catalogPlace(recommendation.placeId)?.event;
+      if (event && !eventMatches(event, formatDateOnly(day.date))) return failure("WRONG_DAY", "This event has no verified occurrence on the selected Day. Nothing was changed.");
       const startMinute = input.startMinute === undefined ? null : input.startMinute;
       const flexibility = input.flexibility === undefined ? "FLEXIBLE" : input.flexibility;
       const issue = validatePlanning({ startMinute, durationMinutes: recommendation.durationMinutes, flexibility });
@@ -67,7 +70,7 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
       const trip = await tx.trip.findFirst({
         where: { id: tripId, ownerId: PROTOTYPE_OWNER_ID },
         include: { segments: { orderBy: { position: "asc" } }, days: { orderBy: { position: "asc" }, include: {
-          primarySegment: true, itineraryItems: { orderBy: { position: "asc" }, include: { ...detailsInclude, sourceRecommendation: { select: { tripSegmentId: true } } } },
+          primarySegment: true, itineraryItems: { orderBy: { position: "asc" }, include: { ...detailsInclude, sourceRecommendation: { select: { tripSegmentId: true, placeId: true } } } },
         } } },
       });
       if (!trip) return failure("NOT_FOUND", "This trip is unavailable.");
@@ -84,6 +87,7 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
           base: day.primarySegment?.baseName ?? null,
           issues: deriveTimeIssues(day.itineraryItems),
           items: day.itineraryItems.map(item => ({
+            eventWarning: eventReviewWarning(catalogPlace(item.sourceRecommendation?.placeId ?? "")?.event, formatDateOnly(day.date)),
             editToken: itemEditToken(item), enteredManually: item.enteredManually, locationLabel: item.locationLabel, referenceUrl: item.referenceUrl,
             id: item.id, title: item.title, type: item.type, startMinute: item.startMinute, progress: item.progress,
             durationMinutes: item.durationMinutes, position: item.position, flexibility: item.flexibility,
@@ -105,11 +109,13 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
 
 type ScheduleRecord = Prisma.RecommendationGetPayload<{ include: { place: true } }>;
 async function appendRecommendation(tx: Prisma.TransactionClient, recommendation: ScheduleRecord, dayId: string, startMinute: number | null, flexibility: "FIXED" | "FLEXIBLE") {
+  const event = catalogPlace(recommendation.placeId)?.event;
   const last = await tx.itineraryItem.aggregate({ where: { dayId }, _max: { position: true } });
   return tx.itineraryItem.create({ data: {
     tripId: recommendation.tripId, dayId, type: "ACTIVITY", title: recommendation.place.name,
     sourceRecommendationId: recommendation.id, durationMinutes: recommendation.durationMinutes,
     locationLabel: recommendation.place.address, referenceUrl: catalogPlace(recommendation.placeId)?.url ?? null,
+    notes: event ? "Event occurrence: " + event.startDate + " to " + event.endDate + " (" + event.timeZone + "). Observed " + event.observedAt + ". Session/availability unconfirmed." : null,
     startMinute, flexibility, position: (last._max.position ?? -1) + 1,
   } });
 }
@@ -132,6 +138,8 @@ export async function addRecommendationToDay(input: {
         const item = recommendation.scheduledItem;
         return { ok: true as const, data: { id: item.id, dayId: item.dayId, dayNumber: item.day.position + 1, alreadyScheduled: true } };
       }
+      const event = catalogPlace(recommendation.placeId)?.event;
+      if (event && !eventMatches(event, formatDateOnly(day.date))) return failure("WRONG_DAY", "This event has no verified occurrence on the selected Day. Nothing was changed.");
       const issue = validatePlanning({ startMinute: null, durationMinutes: recommendation.durationMinutes, flexibility: "FLEXIBLE" });
       if (issue) return { ok: false as const, error: issue };
       // One transaction and the same Trip lock as every scheduling/structural edit.

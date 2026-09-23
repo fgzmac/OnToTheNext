@@ -18,13 +18,13 @@ export async function composerDeny(input: { tripId: string; tripSegmentId: strin
   if (result.ok) refresh(input.tripId);
   return result;
 }
-export async function composerBatch(tripId: string, tripSegmentId: string, page: number, more = false) {
+export async function composerBatch(tripId: string, tripSegmentId: string, page: number, more = false, dayId?: string) {
   if (more) {
-    const result = await requestAnotherRecommendationBatch({ tripId, tripSegmentId, fromBatch: page });
+    const result = await requestAnotherRecommendationBatch({ tripId, tripSegmentId, fromBatch: page, dayId });
     if (!result.ok) return result;
     page = result.data.page;
   }
-  return getRecommendationBatch(tripId, tripSegmentId, String(page));
+  return getRecommendationBatch(tripId, tripSegmentId, String(page), dayId);
 }
 export async function saveComposerInterests(tripId: string, interests: unknown) {
   const result = await updateTripDiscoverInterests(tripId, interests);

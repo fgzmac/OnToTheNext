@@ -68,7 +68,7 @@ export function ItineraryComposer({ builder, selectedDayId, batch, recommendatio
         {!day.items.length ? <div className="composer-empty"><span aria-hidden="true">＋</span><h3>Your day starts here.</h3><p>Choose an idea to add it to your plan. You can set times later.</p></div> : <ol className="composer-timeline">{day.items.map(row => {
           const reservation = reservations.find(r => r.itemId === row.id)?.reservation;
           const t = travel.find(t => t.itemId === row.id);
-          const warnings = [...(reservation?.attention ?? []), ...(t?.warnings ?? [])];
+          const warnings = [...(row.eventWarning ? [row.eventWarning] : []), ...(reservation?.attention ?? []), ...(t?.warnings ?? [])];
           if (["ACTIVITY", "TRANSPORTATION"].includes(row.type) && (!reservations.some(r => r.itemId === row.id) || !t) && !contextError) warnings.push("Planning details changed. Refresh to review booking and travel.");
           if (t?.status === "NEEDS_REVIEW" && !warnings.length) warnings.push("Travel estimate needs review.");
           return <li key={row.id}><article className="timeline-item compact-item" aria-labelledby={"item-" + row.id}>

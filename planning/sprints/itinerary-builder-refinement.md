@@ -317,3 +317,193 @@ correct named dialog before closing it; every existing context assertion remains
 No application behavior changed. The corrected desktop and phone flows each passed
 twice locally (4/4), and typecheck/lint passed before the normal follow-up commit.
 The subsequent complete exact-head CI results are recorded in PR #6.
+
+## Recommendation quality and real photographs — 2026-09-23
+
+This pass extends the existing composer, preserving its one-action Add and separate
+standalone Accept behavior. Tokyo now has 24 evergreen experiences plus two dated
+event occurrences (26 distinct suggestions when dates qualify). Kyoto and Osaka
+retain their eight existing entries each. No schema, migration, dependency, paid
+provider, Today feature, authentication or deployment change is included.
+
+### Content and source coverage
+
+Required anchors include Imperial Palace **East Gardens** (not access to the inner
+palace), Pokémon Center SHIBUYA (PARCO 6F) and MEGA TOKYO (Sunshine City alpa 2F),
+Shibuya Crossing, SHIBUYA SKY, Akihabara, Ginza, teamLab **Planets in Toyosu**, temple
+and museum visits, and Hama-rikyu with an optional matcha purchase. Market, vintage,
+kitchenware and neighborhood walks add variety. Walks are app-authored,
+self-directed suggestions; optional stops are not separate scheduled activities.
+The source matrix and checked-in catalog record exact URLs and observation dates.
+
+Operator and public tourism sources establish identities and access distinctions.
+Six entries also retain separately labeled local/community context: Hama-rikyu
+(Time Out), Yanaka (WHEN IN TOKYO), Planets barefoot-access discussion, both Pokémon
+branches' stock caveat, and SKY rooftop/weather discussion. Community accounts
+supply attributed perspective, not operator rules. The Pokémon discussion was only
+verified through a limited public search observation; no claim of a full thread
+review is made. Conflicting Planets comfort reports remain conflicting. No articles
+or forum archives are copied. Descriptions are original, and visit durations are
+editorial planning estimates. Prices, inventory, opening times and live availability
+remain unknown rather than inferred from photographs or discussions.
+
+All 24 evergreen Tokyo suggestions have distinct local WebP photographs, totaling
+3,183,522 bytes, each at most 960 pixels wide and under 400 KB. Per-file Commons
+metadata, creator, source page, license/link, capture date, restrictions, conversion
+and place-match review are recorded in `src/modules/discover/media-manifest.json`.
+Attribution is visible on each card, with full title and rights details expandable.
+Full framing is retained with contain sizing. The SHIBUYA storefront's de minimis
+basis requires retaining its surrounding context; characters must not be isolated.
+ShareAlike photograph licenses remain attached to their derivatives.
+
+Planets has a correctly matched **exterior-only** image, visibly labeled; it does
+not show or establish the immersive interior experience. Museum/building exterior
+and courtyard photographs show their stated subject rather than exhibit access.
+Historical street photographs do not imply current stores or conditions. Neither
+2026 event has a cleared event-specific photo: both display an honest missing-photo
+state. Kyoto/Osaka photo coverage is outside this Tokyo pilot. A failed asset keeps
+the card, source details and Add control usable. Research candidates and unlicensed
+originals remain ignored and are excluded from publication.
+
+### Dates, history and ranking
+
+Events are manually observed, not a live event feed: Tokyo Grand Tea Ceremony at
+Hama-rikyu and Roppongi Art Night, both October 31–November 1, 2026. Hama-rikyu dates
+are not confused with the earlier Koganei occurrence. Roppongi's overnight core time
+is descriptive; no exact-time booking is invented. Organizer and dated public notice
+links are retained. Observed September 23; October 7 is an **editorial 14-day recheck
+limit**, not organizer-confirmed availability or a guarantee lasting until then.
+
+The guard validates real calendar dates with round trips (including leap days),
+published status, complete ordered intervals, observation/recheck dates, expiry,
+and selected Day/Segment overlap. Its injectable clock converts the current instant
+into explicit Asia/Tokyo context; a machine's local timezone is not used. Unknown,
+cancelled, stale or invalid occurrences are excluded. Add, standalone scheduling,
+and move confirmation recheck eligibility. Failed Add leaves decisions/items intact;
+exact Add retries preserve an existing item. Saved snapshots and reservations remain
+unchanged after cancellation or staleness, with a review warning instead of deletion
+or movement. Event snapshot notes retain the occurrence/date/zone/observation.
+
+Only new presentation batches apply category diversity within explicit-interest
+priority. Previously presented batch membership/order, decisions and scheduled
+snapshots remain untouched. Normal provisioning adds new candidates to existing
+supported trips and appends evidence versions; it does not seed or replace trips.
+
+Browser acceptance uses an advancing clock anchored on September 23 through a test-only preload,
+with isolated database identity checks. Normal application launches use the actual
+clock. Playwright refuses to reuse an existing server, protecting the persistent
+review environment from accidental test-server reuse.
+
+### Google Places / Photos proposal — not integrated
+
+The local licensed pilot does not require a paid service. A later live-place option
+would use Places text/nearby search or details to resolve identity and request photo
+names, then the Photo Media endpoint for presentation. It would need separate API
+and billing authorization, restricted server credentials, quotas and a measured
+budget. A four-card batch could require up to four details and four photo requests
+before additional search/pagination; actual billable SKUs depend on fields and
+current pricing. No key, billing setup, API call or live-provider implementation is
+included in this pass.
+
+The [Photo documentation](https://developers.google.com/maps/documentation/places/web-service/place-photos)
+requires author attribution when returned and warns that photo names can expire and
+must not be cached. [Places policies](https://developers.google.com/maps/documentation/places/web-service/policies)
+restrict prefetching/storage/caching (with stated exceptions such as place IDs),
+require Google/third-party attribution, and set map/non-map display and public terms
+and privacy requirements. A later implementation must recheck these policies rather
+than copying Google photos into this permanent local manifest. The
+[usage and billing guide](https://developers.google.com/maps/documentation/places/web-service/usage-and-billing)
+describes pay-as-you-go SKUs and field-mask billing. Exact pricing, jurisdictional
+terms, rights, budget and display design require a separate approved integration.
+
+Manual work remains: content research, event rechecks, source interpretation, photo
+selection/place matching and license review. Automated work: idempotent provisioning,
+batch selection, event eligibility, attribution rendering and transactional Add.
+CEO usability acceptance remains pending.
+
+### Verification notes for this pass
+
+Git recovery succeeded with Git 2.55.0.windows.4. Root, origin and branch matched;
+recovery head was `9341036e24feca95c73f46ca49b55534438d9447`. Existing partial catalog,
+24 assets, UI, events and tests were preserved. Every Git command clears inherited
+safe.directory entries and trusts only this exact checkout for that process. No
+persistent Git trust, Windows ownership/permissions or Docker/storage changes were
+made. Normal Git identity was unset; the authorized commit uses the same name/email
+as the four preceding project commits, through command-only settings.
+
+Only `ontothenext_verify_20260923_quality1`, localhost:5433, user `ontothenext`, was
+reset/reseeded with the recorded task-specific consent after Prisma's warning.
+Actual Prisma subprocess, both URL variables, browser inheritance, connected
+current_database/current_user, Compose project `ontothenext` and named volume
+`ontothenext_ontothenext-postgres` were verified. The unchanged guarded runner
+completed with exit **0**, applying all eleven existing migrations. Generate,
+validate, migration status and read-only datasource/schema comparison passed with
+no drift. Repeat-seed fingerprints matched exactly:
+`cfec4cecb09aecd6ac52bab7fc64d64703be8a720b3e6325700efdecbb1810ef`.
+
+The complete local regression rerun passed **241 unit + 238 PostgreSQL integration
+= 479 tests**, no failures or skips. All 444 baseline cases remain. The first run
+passed 478/479; its obsolete eight-evidence assertion was updated to the exact new
+24 official + six contextual observations, retaining every history comparison.
+Typecheck initially caught an integration input property typo; corrected to the
+existing `itineraryItemId` API. Final unit-only revalidation passed 241/241 after
+photo metadata/import updates. Typecheck, lint and production builds passed; Next's
+generated tracked configuration edits were restored from exact prebuild copies.
+
+Browser startup first stopped before tests because the native loader required JSON
+import attributes. That compatibility fix passed all 25 quality unit tests. A later
+run was interrupted after 14 passes/four new-test failures: a duplicate credit-text
+selector and a test-clock subclass whose inherited Date.parse/UTC were lost by
+Next's own wrapper. The proxy clock preserves native descriptors and was verified
+through the actual wrapper; production event logic was not weakened. The following
+run exposed a synthetic evidence-status labeling regression in Discover. The
+original FIXTURE-versus-observation distinction was restored, preserving the
+baseline assertions. These are reported failures, not ignored/flaky retries.
+
+Visual comparison against the preceding text-only desktop/phone captures showed
+that the initial large photo frame added unnecessary scrolling. Final full-frame
+photos use 180px desktop/160px phone; image failures retain the same frame height.
+Exterior-only captions cover Planets, the two museum-building views and Skytree.
+All required anchor cards, credits, loaded first batches, populated Days, missing
+images and event detail/eligibility are captured using disposable fixtures only.
+Persistent CEO review data is never used for automated capture.
+
+The next browser run passed all four new quality flows, including all 24 loaded
+photos and Day-dependent event eligibility. It also reproduced two existing
+Discover assertions affected by the evidence-label regression and a reservation
+cancellation retry blocked by identical preview tokens under the frozen test clock.
+The run was interrupted after those diagnosed failures. The test clock now advances
+from its anchored date using monotonic elapsed time, preserving distinct preview
+expiry instants while keeping event observations reproducible. Its Date.parse/UTC
+and advancing Date.now were checked through Next's actual wrapper. No production
+preview-token logic, expiry checks or baseline assertions were changed. Detail-card
+captures hide only floating page headers so they do not obscure the actual photo;
+normal viewport captures retain the full page chrome.
+The corrected-clock focused run passed 6/6. The next complete run passed 27/28; the final trip-navigation flow still expected two Tokyo batches. Its three exact heading assertions now expect six batches for the 24 evergreen entries. Navigation, reload, repeated-city and date-boundary assertions are unchanged.
+
+### Final local result
+
+- **479/479 unit/integration and 28/28 complete browser tests passed**, zero skips,
+  failures or flaky retries in the final runs. The complete browser run took 4.6
+  minutes; its predecessor's one obsolete batch-count assertion is fixed.
+- All **14 excluded itinerary database fingerprints match** before/after the
+  destructive verification. Protected review SHA-256:
+  `ce821f911889938d80fe7768ab1cbd02b503c0ee49b38339065e3e041ce27b13`.
+  An initial PowerShell join-expression comparison falsely flagged the name set;
+  explicit sorted-name and per-database hash comparisons confirmed exact equality.
+- Local verification server stopped; no port 3100 listener remains. No protected
+  review reset, seed, migration, test setup or automated trip creation occurred.
+  Existing review data and all Options resources were preserved.
+- Final rendered gallery: `.cache/quality/review.html`; 24 PNGs in
+  `.cache/quality/after`, compared against copied prior text-only captures in
+  `before`. Required anchors, phone/desktop populated plans, failed-image Add,
+  source/license detail and dated event gaps were inspected. Detail crops hide
+  floating page headers only; normal viewport screenshots retain them. All 28
+  gallery file references were verified. Gallery/screenshots remain local.
+- Full staged diff reviewed: optimized licensed photographs only; no credentials,
+  absolute personal paths, databases, caches or research originals. No migration,
+  dependencies, workflow, reset guard, global Git, Docker or storage changes.
+- The normal scoped commit/push and exact-head CI results are recorded in draft
+  PR #6 and the engineering handoff. PR #6 keeps its Sprint 5 base; parent PR #5
+  remains unchanged, draft and unmerged. Neither PR is approved for merge, and
+  automated verification does not constitute CEO usability acceptance.

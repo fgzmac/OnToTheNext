@@ -3,6 +3,9 @@ export interface RecommendationCardData {
   tripId: string;
   tripSegmentId: string;
   place: { id: string; name: string; baseLabel: string; category: string; location?: string | null };
+  photo?: import("./media").ExperiencePhoto | null;
+  experienceKind?: "VENUE" | "NEIGHBORHOOD" | "EVENT";
+  event?: import("./tokyo-pilot").EventOccurrence;
   factualSummary: string;
   durationMinutes: number | null;
   costContext: string | null;
@@ -22,6 +25,7 @@ export interface RecommendationBatch {
   unassigned: number;
   interests: import("@/src/generated/prisma/enums").DiscoverInterest[];
   exhausted: boolean;
+  eventCount?: number;
 }
 
 export type DiscoverResult<T> =

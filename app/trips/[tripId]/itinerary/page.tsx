@@ -15,7 +15,7 @@ export default async function ItineraryPage({ params, searchParams }: {
     return <p role="alert" className="issue error">{result.error.message}</p>;
   }
   const day = result.data.days.find(day => day.id === query.planDay) ?? result.data.days.find(day => day.id === query.homeDay || day.date === query.homeDay) ?? result.data.days[0];
-  const recommendations = day?.primarySegmentId ? await getRecommendationBatch(tripId, day.primarySegmentId) : null;
+  const recommendations = day?.primarySegmentId ? await getRecommendationBatch(tripId, day.primarySegmentId, undefined, day.id) : null;
   return <ItineraryComposer builder={result.data} selectedDayId={day?.id ?? ""} batch={recommendations?.ok ? recommendations.data : null}
     recommendationError={recommendations && !recommendations.ok ? recommendations.error : null}
     reservations={reservations.ok ? reservations.data : []} travel={travel.ok ? travel.data : []}
