@@ -83,7 +83,7 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
           base: day.primarySegment?.baseName ?? null,
           issues: deriveTimeIssues(day.itineraryItems),
           items: day.itineraryItems.map(item => ({
-            id: item.id, title: item.title, type: item.type, startMinute: item.startMinute,
+            id: item.id, title: item.title, type: item.type, startMinute: item.startMinute, progress: item.progress,
             durationMinutes: item.durationMinutes, position: item.position, flexibility: item.flexibility,
             notes: item.notes, sourceRecommendationId: item.sourceRecommendationId,
             sourceSegmentId: item.sourceRecommendation?.tripSegmentId ?? null,

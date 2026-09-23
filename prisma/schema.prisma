@@ -213,7 +213,16 @@ enum TransportationMode {
   OTHER
 }
 
+enum ItineraryProgress {
+  PENDING
+  COMPLETED
+  SKIPPED
+}
+
 model ItineraryItem {
+  progress               ItineraryProgress @default(PENDING)
+  progressChangedAt      DateTime? @db.Timestamptz(3)
+  progressActionKey      String?
   id                     String @id @default(cuid())
   tripId                 String
   dayId                  String

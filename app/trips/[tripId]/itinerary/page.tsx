@@ -1,3 +1,4 @@
+import { PROGRESS_LABELS } from "@/src/modules/itinerary/progress";
 import { ActivityReservation } from "@/app/components/activity-reservation";
 import { getItineraryReservationContext } from "@/src/modules/reservations/service";
 import { AddPlanningBlock, ItemMovement } from "@/app/components/itinerary-builder-controls";
@@ -52,6 +53,7 @@ export default async function ItineraryPage({ params }: { params: Promise<{ trip
                 <span className="item-flexibility">{item.flexibility === "FIXED" ? "Fixed" : "Flexible"}</span>
               </div>
               <h4 id={"item-" + item.id}>{item.title}</h4>
+              <p className="muted item-progress">Progress: {PROGRESS_LABELS[item.progress]}</p>
               <p>{TYPE_LABELS[item.type]}{item.durationMinutes !== null ? " · " + item.durationMinutes + " minutes" : ""}</p>
               <p className="muted">{item.type === "ACTIVITY" ? (item.sourceRecommendationId ? "From accepted recommendation" : "Source recommendation no longer available") : "Intentional planning block"}</p>
               {item.transportationMode ? <p>Mode: {MODE_LABELS[item.transportationMode]}</p> : null}

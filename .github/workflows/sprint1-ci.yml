@@ -7,6 +7,7 @@ on:
       - sprint-2-discover-core
       - sprint-3-itinerary-builder
       - sprint-4-reservation-workflow
+      - sprint-5-today-mode
   pull_request:
     branches:
       - main

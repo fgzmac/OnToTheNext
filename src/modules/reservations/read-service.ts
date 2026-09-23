@@ -15,8 +15,8 @@ function evidenceDTO(e: Prisma.EvidenceRecordGetPayload<{ include: typeof eviden
     recheckAfter: r.recheckAfter?.toISOString() ?? null, attribution: r.attribution, sourceUrl: r.sourceUrl, recordedByUser: r.recordedByUser } : null;
   return { id: e.id, topic: e.topic, factualText: e.factualText, retrievedAt: e.retrievedAt.toISOString(), status: e.status, sourceName: e.source.name, sourceKind: e.source.kind, release, warnings: releaseWarnings(release, now) };
 }
-async function workspace(tripId: string, now: Date): Promise<ReservationResult<{ reservations: ReservationDTO[]; items: ActivityReservationContext[] }>> {
-  try { return await getPrismaClient().$transaction(async tx => {
+async function workspace(tripId: string, now: Date, transaction?: Prisma.TransactionClient): Promise<ReservationResult<{ reservations: ReservationDTO[]; items: ActivityReservationContext[] }>> {
+  try { const load = async (tx: Prisma.TransactionClient) => {
     const trip = await tx.trip.findFirst({ where: { id: tripId, ownerId: PROTOTYPE_OWNER_ID }, include: {
       itineraryItems: { include: { day: true, sourceRecommendation: { include: { place: { include: { evidence: { where: { topic: { in: AVAILABILITY_TOPICS } }, include: evidenceInclude, orderBy: [{ retrievedAt: "asc" }, { id: "asc" }] } } } } } } },
       reservations: { include: { evidenceLinks: { include: { evidenceRecord: { include: evidenceInclude } }, orderBy: [{ createdAt: "asc" }, { evidenceRecordId: "asc" }] } } },
@@ -42,11 +42,11 @@ async function workspace(tripId: string, now: Date): Promise<ReservationResult<{
       reservation: reservations.find(r => r.itineraryItemId === i.id) ?? null, sourceAvailable: i.type === "ACTIVITY" && Boolean(i.sourceRecommendation?.placeId),
       availableEvidence: i.type === "ACTIVITY" ? (i.sourceRecommendation?.place.evidence ?? []).map(e => evidenceDTO(e, now)) : [] }]);
     return { ok: true as const, data: { reservations, items } };
-  }, { isolationLevel: "RepeatableRead" }); } catch { return { ok: false, error: { code: "PERSISTENCE_FAILURE", message: "Reservation context could not be loaded. Please refresh." } }; }
+  }; return transaction ? await load(transaction) : await getPrismaClient().$transaction(load, { isolationLevel: "RepeatableRead" }); } catch { return { ok: false, error: { code: "PERSISTENCE_FAILURE", message: "Reservation context could not be loaded. Please refresh." } }; }
 }
 export async function getItineraryReservationContext(tripId: string, now = new Date()): Promise<ReservationResult<ActivityReservationContext[]>> {
   const result = await workspace(tripId, now); return result.ok ? { ok: true, data: result.data.items } : result;
 }
-export async function getTripReservations(tripId: string, now = new Date()): Promise<ReservationResult<ReservationDTO[]>> {
-  const result = await workspace(tripId, now); return result.ok ? { ok: true, data: result.data.reservations } : result;
+export async function getTripReservations(tripId: string, now = new Date(), transaction?: Prisma.TransactionClient): Promise<ReservationResult<ReservationDTO[]>> {
+  const result = await workspace(tripId, now, transaction); return result.ok ? { ok: true, data: result.data.reservations } : result;
 }

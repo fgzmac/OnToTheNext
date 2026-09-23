@@ -1,10 +1,11 @@
-import type { ItineraryFlexibility, ItineraryItemType, TransportationMode } from "@/src/generated/prisma/enums";
+import type { ItineraryFlexibility, ItineraryItemType, TransportationMode, ItineraryProgress } from "@/src/generated/prisma/enums";
 
 export type ItineraryIssueCode = "NOT_FOUND" | "NOT_ACCEPTED" | "WRONG_DAY" | "WRONG_SEGMENT" | "ALREADY_SCHEDULED" | "INVALID_TIME" | "INVALID_DURATION" | "INVALID_FLEXIBILITY" | "INVALID_BLOCK" | "INVALID_TRANSPORTATION" | "ORDER_BOUNDARY" | "FIXED_CONFIRMATION_REQUIRED" | "MOVE_PREVIEW_STALE" | "PERSISTENCE_FAILURE";
 export interface ItineraryIssue { code: ItineraryIssueCode; message: string; }
 export type ItineraryResult<T> = { ok: true; data: T } | { ok: false; error: ItineraryIssue };
 export interface ItineraryActionState { error: ItineraryIssue | null; message: string | null; }
 export interface TimelineItem {
+  progress: ItineraryProgress;
   id: string; title: string; type: ItineraryItemType; startMinute: number | null;
   durationMinutes: number | null; position: number; flexibility: ItineraryFlexibility;
   notes: string | null; sourceRecommendationId: string | null;
