@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TravelSummary } from "./travel-summary";
 import { notFound } from "next/navigation";
 import { getTodayView, type TodayItem } from "@/src/modules/today/service";
 import { TYPE_LABELS } from "@/src/modules/itinerary/planning";
@@ -21,6 +22,7 @@ function Item({ tripId, dayId, date, item, unavailable }: { tripId: string; dayI
       {r.attention.length ? <ul className="issue warning">{r.attention.map(reason => <li key={reason}>{reason}</li>)}</ul> : null}
       {r.confirmationReference ? <details><summary>Private trip booking details</summary><p>Confirmation reference: {r.confirmationReference}</p><p className="muted">A reference is not an admission ticket. Verify entry requirements with your provider.</p></details> : null}
     </div> : <p className="muted">No reservation linked.</p>}
+    {(item.type === "ACTIVITY" || item.type === "TRANSPORTATION") ? <>{item.type === "TRANSPORTATION" ? <p className="muted">Travel estimate to the departure point, separate from the journey duration.</p> : null}<TravelSummary travel={item.travel} unavailable={item.travelUnavailable} /></> : null}
     <Link href={"/trips/" + tripId + "/itinerary?" + query + "#item-" + item.id}>Manage this item in Itinerary</Link>
     <ItineraryProgressControls key={item.token} tripId={tripId} itemId={item.id} token={item.token} progress={item.progress} />
     {item.progressChangedAt ? <details><summary>Progress record</summary><p className="muted">Action recorded (UTC): {item.progressChangedAt}. This is not verified attendance or payment.</p></details> : null}

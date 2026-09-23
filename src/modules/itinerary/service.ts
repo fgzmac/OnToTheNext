@@ -51,6 +51,9 @@ export async function removeItineraryItem(tripId: string, itemId: string): Promi
       if (!await lockPrototypeTrip(tx, tripId)) return failure("NOT_FOUND", "This trip is unavailable.");
       const item = await tx.itineraryItem.findFirst({ where: { id: itemId, tripId } });
       if (!item) return failure("NOT_FOUND", "This scheduled item is unavailable in this trip.");
+      // Keep origin history; the composite FK prevents cross-Trip references.
+      // Detach before deleting a referenced stop, so the target survives for review.
+      await tx.itineraryTravelPlan.updateMany({ where: { tripId, sourceItemId: item.id }, data: { sourceItemId: null } });
       await tx.itineraryItem.delete({ where: { id: item.id } });
       await normalizeDayPositions(tx, item.dayId);
       return { ok: true as const, data: { id: item.id } };

@@ -260,3 +260,13 @@ button:disabled { opacity: .55; cursor: progress; }
 .today-view .checkbox-field { display: flex; align-items: flex-start; gap: .65rem; }
 .today-view input[type="checkbox"] { width: auto; flex: 0 0 auto; margin-top: .3rem; }
 .today-view ul { padding-left: 1.5rem; }
+
+.travel-planning { overflow-wrap: anywhere; min-width: 0; }
+.travel-planning summary { cursor: pointer; font-weight: 700; padding: .6rem 0; }
+.travel-planning > .stack { margin-top: .75rem; }
+.travel-planning select { min-width: 0; }
+.travel-planning .checkbox-field { display: flex; align-items: flex-start; gap: .6rem; }
+.travel-planning input[type="checkbox"] { width: auto; flex: 0 0 auto; }
+.travel-summary { border-left: 3px solid var(--accent); padding-left: .8rem; }
+.travel-summary p { margin-bottom: 0; }
+.travel-summary ul { padding-left: 1.5rem; }
