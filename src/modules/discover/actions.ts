@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { homeContextQuery } from "@/src/modules/trips/home-context";
 import { redirect } from "next/navigation";
 import { decideRecommendation, updateTripDiscoverInterests, requestAnotherRecommendationBatch } from "./service";
 import type { DecisionActionState } from "./types";
@@ -37,5 +38,6 @@ export async function anotherBatchAction(_previous: DecisionActionState, formDat
   });
   if (!result.ok) return { error: result.error, message: null };
   revalidatePath("/trips/" + tripId + "/discover");
-  redirect("/trips/" + tripId + "/discover?segmentId=" + encodeURIComponent(tripSegmentId) + "&page=" + result.data.page);
+  const context = homeContextQuery(formData.get("homeView"), formData.get("homeDay"));
+  redirect("/trips/" + tripId + "/discover?segmentId=" + encodeURIComponent(tripSegmentId) + "&page=" + result.data.page + (context ? "&" + context : ""));
 }

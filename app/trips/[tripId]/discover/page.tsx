@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { homeContextQuery } from "@/src/modules/trips/home-context";
 import { TripInterests, AnotherBatch } from "@/app/components/discover-controls";
 import { loadTripSkeleton } from "../load-trip";
 import { getRecommendationBatch } from "@/src/modules/discover/service";
@@ -7,10 +8,11 @@ import { RecommendationDecision } from "@/app/components/recommendation-decision
 
 export default async function DiscoverPage({ params, searchParams }: {
   params: Promise<{ tripId: string }>;
-  searchParams: Promise<{ segmentId?: string | string[]; page?: string | string[] }>;
+  searchParams: Promise<{ segmentId?: string | string[]; page?: string | string[]; homeView?: string; homeDay?: string }>;
 }) {
   const { tripId } = await params;
   const query = await searchParams;
+  const homeContext = homeContextQuery(query.homeView, query.homeDay);
   const { segments } = await loadTripSkeleton(tripId);
   if (segments.length === 0) {
     return <section className="card stack">
@@ -24,7 +26,7 @@ export default async function DiscoverPage({ params, searchParams }: {
   const result = selected ? await getRecommendationBatch(tripId, selected.id, typeof query.page === "string" ? query.page : undefined) : null;
   const batch = result?.ok ? result.data : null;
   const path = "/trips/" + tripId + "/discover";
-  const batchHref = (page: number) => path + "?segmentId=" + encodeURIComponent(selectedId) + "&page=" + page;
+  const batchHref = (page: number) => path + "?segmentId=" + encodeURIComponent(selectedId) + "&page=" + page + (homeContext ? "&" + homeContext : "");
   return (
     <div className="stack discover">
       <header>
@@ -33,6 +35,7 @@ export default async function DiscoverPage({ params, searchParams }: {
         <p className="muted">Accept keeps an idea here. It does not schedule or book anything.</p>
       </header>
       <form action={path} method="get" className="card discover-context">
+        {[...new URLSearchParams(homeContext)].map(([name, value]) => <input key={name} type="hidden" name={name} value={value} />)}
         <label>
           Trip Segment
           <select name="segmentId" defaultValue={selected?.id ?? ""} required>
@@ -60,7 +63,7 @@ export default async function DiscoverPage({ params, searchParams }: {
           <div className="row">
             {batch.page > 0 ? <Link className="button secondary" href={batchHref(batch.page - 1)}>Previous batch</Link> : null}
             {batch.page < batch.latestBatch ? <Link className="button" href={batchHref(batch.page + 1)}>Next generated batch</Link> : null}
-            {batch.unassigned > 0 && batch.page === batch.latestBatch ? <AnotherBatch tripId={tripId} tripSegmentId={selectedId} fromBatch={batch.page} /> : null}
+            {batch.unassigned > 0 && batch.page === batch.latestBatch ? <AnotherBatch tripId={tripId} tripSegmentId={selectedId} fromBatch={batch.page} homeContext={homeContext} /> : null}
           </div>
         </section>
         <section className="card stack accepted-section" aria-labelledby="accepted-heading">

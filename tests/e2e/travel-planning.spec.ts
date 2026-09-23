@@ -1,0 +1,71 @@
+import { expect, test } from "@playwright/test";
+import { getPrismaClient } from "@/src/lib/prisma";
+import { seedDemoTrip, DEMO_TRIP_ID as tripId } from "../../prisma/seed-data";
+import { seedDiscoverFixtures } from "../../prisma/discover-seed";
+import { decideRecommendation } from "@/src/modules/discover/service";
+import { scheduleAcceptedRecommendation } from "@/src/modules/itinerary/service";
+import { createPlanningBlock, previewMoveItineraryItem, confirmMoveItineraryItem } from "@/src/modules/itinerary/builder-service";
+import { createActivityReservation, markReservationBooked } from "@/src/modules/reservations/service";
+import type { ProgressResult } from "@/src/modules/itinerary/progress-service";
+const db=getPrismaClient(), title="Riverside Observation Deck";
+let firstDay:string,secondDay:string,activityId:string,sourceId:string,trainId:string;
+function ok<T>(r:ProgressResult<T>):T{if(!r.ok)throw Error(r.error.message);return r.data;}
+test.beforeEach(async()=>{
+ await seedDemoTrip(db);await seedDiscoverFixtures(db);
+ const days=await db.day.findMany({where:{tripId},orderBy:{position:"asc"}});firstDay=days[0].id;secondDay=days[1].id;
+ ok(await createPlanningBlock({tripId,dayId:firstDay,type:"FREE_TIME",durationMinutes:45}));
+ const rec=await db.recommendation.findFirstOrThrow({where:{tripId},orderBy:{displayRank:"asc"}});
+ const accepted=await decideRecommendation({tripId,tripSegmentId:rec.tripSegmentId,recommendationId:rec.id,outcome:"ACCEPTED"});if(!accepted.ok)throw Error(accepted.error);
+ activityId=ok(await scheduleAcceptedRecommendation({tripId,recommendationId:rec.id,dayId:firstDay,startMinute:600,flexibility:"FIXED"})).id;
+ sourceId=ok(await createPlanningBlock({tripId,dayId:secondDay,type:"HOTEL_REST",startMinute:540,durationMinutes:40})).id;
+ trainId=ok(await createPlanningBlock({tripId,dayId:secondDay,type:"TRANSPORTATION",transportationMode:"TRAIN",startMinute:15,durationMinutes:120})).id;
+});
+test.afterAll(async()=>{await db.trip.deleteMany({where:{id:tripId}});await db.$disconnect();});
+for(const [device,width,height] of [["desktop",1280,900],["phone",390,844]] as const){
+ test(device+" manual leave-by, reviewed context, basis choice, source conflict and midnight",async({page},testInfo)=>{
+  test.setTimeout(180_000);page.setDefaultTimeout(15_000);await page.setViewportSize({width,height});
+  const nav=page.getByRole("navigation",{name:"Trip navigation"});
+  const card=page.getByRole("article",{name:title,exact:true}),editor=card.locator(".travel-planning");
+  const capture=async(name:string,editorOnly=false)=>{expect(await page.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth)).toBe(false);const options={path:testInfo.outputPath(device+"-"+name+".png"),style:".brand-bar { visibility: hidden; }"};if(editorOnly)await editor.screenshot(options);else await page.screenshot({...options,fullPage:true});};
+  const open=async()=>{if(await editor.getAttribute("open")===null)await editor.getByText("Travel planning",{exact:true}).click();};
+  await page.goto("/trips/"+tripId+"?view=day&day="+firstDay);
+  await expect(page.getByRole("region",{name:"Next in your plan",exact:true})).toContainText("Free time");
+  await expect(card).toContainText("Travel estimate not entered.");
+  await card.getByRole("link",{name:"Manage this item in Itinerary",exact:true}).click();await open();
+  const save=editor.getByRole("form",{name:"Save travel plan",exact:true});
+  await save.getByLabel("Starting context",{exact:true}).selectOption("ENTERED");await save.getByLabel("Starting point label",{exact:true}).fill("Demo meeting point");
+  await save.getByLabel("Estimated travel minutes (0–1440)",{exact:true}).fill("25");await save.getByLabel("Arrival buffer minutes (0–240)",{exact:true}).fill("10");
+  await save.getByLabel("Timing basis",{exact:true}).selectOption("PLANNED");await save.getByLabel("Clock assumptions",{exact:true}).selectOption("SAME_LOCAL_CLOCK");
+  await save.getByRole("button",{name:"Save travel plan",exact:true}).focus();await page.keyboard.press("Enter");
+  await expect(editor.getByText("Estimated leave-by: 2030-04-01 · 09:25",{exact:true})).toBeVisible();await capture("editor",true);
+  await nav.getByRole("link",{name:"Home",exact:true}).click();await expect(page.getByLabel("Trip day",{exact:true})).toHaveValue(firstDay);
+  await expect(card).toContainText("Estimated leave-by: 2030-04-01 · 09:25");await expect(card).toContainText("Manual estimate — not live routing.");await page.reload();await expect(card).toContainText("09:25");await capture("manual-day");
+  const saved=await db.itineraryTravelPlan.findUniqueOrThrow({where:{itemId:activityId}});
+  // A canonical mutation in another session changes the relevant Day context.
+  const move=ok(await previewMoveItineraryItem({tripId,itemId:activityId,targetDayId:secondDay}));ok(await confirmMoveItineraryItem(tripId,move.token));
+  await nav.getByRole("link",{name:"Itinerary",exact:true}).click();await open();await expect(editor.getByText("Travel estimate needs review",{exact:true})).toBeVisible();await expect(editor.locator(".leave-by")).toHaveCount(0);expect((await db.itineraryTravelPlan.findUniqueOrThrow({where:{itemId:activityId}})).travelMinutes).toBe(saved.travelMinutes);
+  await capture("needs-review",true);await editor.getByRole("button",{name:"Reconfirm travel estimate",exact:true}).click();await expect(editor).toContainText("Estimated leave-by: 2030-04-02 · 09:25");
+  const reservationId=ok(await createActivityReservation({tripId,itineraryItemId:activityId,state:"CHECK_BACK"})).id;
+  ok(await markReservationBooked({tripId,reservationId,confirmedDate:"2030-04-02",confirmedStartMinute:630,confirmationReference:"SYNTHETIC-LEAVE-BY"}));
+  await page.reload();await open();await expect(editor).toContainText("Planned and confirmed timing differ");
+  await save.getByLabel("Timing basis",{exact:true}).selectOption("CONFIRMED");await save.getByRole("button",{name:"Save travel plan",exact:true}).click();await expect(editor).toContainText("Estimated leave-by: 2030-04-02 · 09:55");
+  await save.getByLabel("Timing basis",{exact:true}).selectOption("PLANNED");const ack=save.getByRole("checkbox");await expect(ack).toHaveAttribute("required","");
+  const beforeAck=await db.itineraryTravelPlan.findUniqueOrThrow({where:{itemId:activityId}});await save.getByRole("button",{name:"Save travel plan",exact:true}).click();expect(await db.itineraryTravelPlan.findUniqueOrThrow({where:{itemId:activityId}})).toEqual(beforeAck);
+  await ack.focus();await page.keyboard.press("Space");await save.getByLabel("Starting context",{exact:true}).selectOption("EARLIER_ITEM");await save.getByLabel("Earlier planned stop",{exact:true}).selectOption(sourceId);
+  const sourceBefore=await db.itineraryItem.findUniqueOrThrow({where:{id:sourceId}});await save.getByRole("button",{name:"Save travel plan",exact:true}).click();await expect(editor).toContainText("Previous stop is planned to end at 2030-04-02 09:40");await expect(editor).toContainText("leaving at 2030-04-02 09:25");expect(await db.itineraryItem.findUniqueOrThrow({where:{id:sourceId}})).toEqual(sourceBefore);await capture("basis-feasibility",true);
+  const train=page.locator(".timeline-item").filter({has:page.locator("#item-"+trainId)}),trainEditor=train.locator(".travel-planning");await trainEditor.getByText("Travel planning",{exact:true}).click();
+  await expect(trainEditor).toContainText("getting to this departure point");const trainForm=trainEditor.getByRole("form",{name:"Save travel plan",exact:true});
+  await trainForm.getByLabel("Starting context",{exact:true}).selectOption("ENTERED");await trainForm.getByLabel("Starting point label",{exact:true}).fill("Station entrance");await trainForm.getByLabel("Estimated travel minutes (0–1440)",{exact:true}).fill("30");await trainForm.getByLabel("Arrival buffer minutes (0–240)",{exact:true}).fill("10");await trainForm.getByLabel("Timing basis",{exact:true}).selectOption("PLANNED");await trainForm.getByLabel("Clock assumptions",{exact:true}).selectOption("SAME_LOCAL_CLOCK");await trainForm.getByRole("button",{name:"Save travel plan",exact:true}).click();await expect(trainEditor).toContainText("Estimated leave-by: 2030-04-01 · 23:35");
+  await nav.getByRole("link",{name:"Home",exact:true}).click();await page.getByLabel("Trip day",{exact:true}).selectOption(secondDay);await page.getByRole("button",{name:"Show day",exact:true}).click();await expect(card).toContainText("From planned stop: Hotel / Rest");await expect(card).toContainText("09:25");await expect(page.getByText("Estimated leave-by: 2030-04-01 · 23:35",{exact:true})).toBeVisible();await capture("midnight-and-conflict");
+  const planBeforeProgress=await db.itineraryTravelPlan.findUniqueOrThrow({where:{itemId:activityId}}),bookingBefore=await db.reservation.findUniqueOrThrow({where:{id:reservationId}});
+  await card.getByRole("button",{name:"Mark completed",exact:true}).click();await page.getByText("Completed / Skipped (1)",{exact:true}).click();await expect(card).toContainText("Travel estimate inactive");await expect(card.locator(".leave-by")).toHaveCount(0);
+  await card.getByRole("button",{name:"Restore to remaining plan",exact:true}).click();await expect(card).toContainText("Estimated leave-by: 2030-04-02 · 09:25");
+  await card.getByRole("button",{name:"Skip item",exact:true}).click();await card.getByRole("checkbox").check();await card.getByRole("button",{name:"Confirm skip",exact:true}).click();
+  if(await page.locator(".processed-plan").getAttribute("open")===null)await page.getByText("Completed / Skipped (1)",{exact:true}).click();await expect(card).toContainText("Travel estimate inactive");await card.getByRole("button",{name:"Restore to remaining plan",exact:true}).click();
+  expect(await db.itineraryTravelPlan.findUniqueOrThrow({where:{itemId:activityId}})).toEqual(planBeforeProgress);expect(await db.reservation.findUniqueOrThrow({where:{id:reservationId}})).toEqual(bookingBefore);
+  await card.getByRole("link",{name:"Manage this item in Itinerary",exact:true}).click();await open();const itemBeforeClear=await db.itineraryItem.findUniqueOrThrow({where:{id:activityId}});
+  await editor.getByRole("button",{name:"Clear travel plan",exact:true}).click();await expect(editor).toContainText("Travel estimate not entered.");expect(await db.itineraryTravelPlan.findUnique({where:{itemId:activityId}})).toBeNull();expect(await db.reservation.findUniqueOrThrow({where:{id:reservationId}})).toEqual(bookingBefore);
+  expect(await db.itineraryItem.findUniqueOrThrow({where:{id:activityId}})).toEqual({...itemBeforeClear,revision:itemBeforeClear.revision+1,travelPlanActionKey:expect.any(String),updatedAt:expect.any(Date)});
+  await nav.getByRole("link",{name:"Home",exact:true}).click();await expect(page).toHaveURL("/trips/"+tripId+"?view=day&day="+secondDay);await expect(page.getByLabel("Trip day",{exact:true})).toHaveValue(secondDay);await page.reload();await expect(page.getByLabel("Trip day",{exact:true})).toHaveValue(secondDay);await expect(card).toContainText("Travel estimate not entered.");await expect(nav.getByRole("link")).toHaveText(["Home","Itinerary","Discover"]);
+ });
+}

@@ -1,7 +1,12 @@
 # Sprint 4 — Reservation Workflow
 
-**Slices 1 and 2 implemented; local verification passed. TPM/CEO review and
-acceptance remain outstanding. PR #4 remains draft. Do not merge.**
+**Accepted and merged through PR #4.** D-122 records CEO acceptance and merge
+commit `887e393560f326bb469dbc5b013fb9ccad2c9dd2`.
+
+The implementation and verification notes below are historical, pre-acceptance
+records. Their pending-review language is superseded by
+[D-122](../decisions/D-122-sprint-4-reservation-workflow-accepted-and-merged.md).
+Historical results are unchanged; human comprehension testing was not conducted.
 
 ## Objective, authority and baseline
 

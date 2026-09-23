@@ -36,6 +36,7 @@ model Trip {
   days              Day[]
   recommendations   Recommendation[]
   itineraryItems    ItineraryItem[]
+  travelPlans       ItineraryTravelPlan[]
   reservations      Reservation[]
   preferenceProfile TripPreferenceProfile?
 
@@ -213,7 +214,19 @@ enum TransportationMode {
   OTHER
 }
 
+enum ItineraryProgress {
+  PENDING
+  COMPLETED
+  SKIPPED
+}
+
 model ItineraryItem {
+  travelPlanActionKey     String?
+  travelPlan              ItineraryTravelPlan? @relation("TravelTarget")
+  departurePlansFromHere  ItineraryTravelPlan[] @relation("TravelOrigin")
+  progress               ItineraryProgress @default(PENDING)
+  progressChangedAt      DateTime? @db.Timestamptz(3)
+  progressActionKey      String?
   id                     String @id @default(cuid())
   tripId                 String
   dayId                  String
@@ -241,6 +254,7 @@ model ItineraryItem {
 
   @@index([originSegmentId])
   @@index([destinationSegmentId])
+  @@unique([id, tripId])
   @@unique([dayId, position])
   @@index([tripId])
 }
@@ -330,4 +344,37 @@ model ReleaseObservation {
   sourceUrl String?
   recordedByUser Boolean @default(true)
   evidenceRecord EvidenceRecord @relation(fields: [evidenceRecordId], references: [id], onDelete: Cascade)
+}
+
+enum TravelOriginKind {
+  ENTERED
+  EARLIER_ITEM
+}
+enum TravelTimeBasis {
+  PLANNED
+  CONFIRMED
+}
+enum TravelClockContext {
+  SAME_LOCAL_CLOCK
+  REQUIRES_REVIEW
+}
+model ItineraryTravelPlan {
+  itemId           String @id
+  tripId           String
+  originKind       TravelOriginKind
+  sourceItemId     String?
+  originLabel      String
+  travelMinutes    Int
+  bufferMinutes    Int
+  basis            TravelTimeBasis
+  clockContext     TravelClockContext
+  reviewedContext  String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  trip             Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  target           ItineraryItem @relation("TravelTarget", fields: [itemId, tripId], references: [id, tripId], onDelete: Cascade)
+  sourceItem       ItineraryItem? @relation("TravelOrigin", fields: [sourceItemId, tripId], references: [id, tripId], onDelete: NoAction)
+  @@unique([itemId, tripId])
+  @@index([sourceItemId, tripId])
+  @@index([tripId])
 }

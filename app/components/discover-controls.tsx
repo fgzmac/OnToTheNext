@@ -33,12 +33,13 @@ export function TripInterests({ tripId, interests }: { tripId: string; interests
   </details>;
 }
 
-export function AnotherBatch({ tripId, tripSegmentId, fromBatch }: { tripId: string; tripSegmentId: string; fromBatch: number }) {
+export function AnotherBatch({ tripId, tripSegmentId, fromBatch, homeContext = "" }: { tripId: string; tripSegmentId: string; fromBatch: number; homeContext?: string }) {
   const [state, action, pending] = useActionState(anotherBatchAction, { error: null, message: null });
   return <form action={action}>
     <input type="hidden" name="tripId" value={tripId} />
     <input type="hidden" name="tripSegmentId" value={tripSegmentId} />
     <input type="hidden" name="fromBatch" value={fromBatch} />
+    {[...new URLSearchParams(homeContext)].map(([name, value]) => <input key={name} type="hidden" name={name} value={value} />)}
     <button disabled={pending}>{pending ? "Preparing batch…" : "Show another batch"}</button>
     {state.error ? <p role="alert" className="issue error">{state.error}</p> : null}
   </form>;

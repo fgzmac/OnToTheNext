@@ -1,3 +1,6 @@
+import { TravelPlanning } from "@/app/components/travel-planning";
+import { getTravelPlanning } from "@/src/modules/itinerary/travel/service";
+import { PROGRESS_LABELS } from "@/src/modules/itinerary/progress";
 import { ActivityReservation } from "@/app/components/activity-reservation";
 import { getItineraryReservationContext } from "@/src/modules/reservations/service";
 import { AddPlanningBlock, ItemMovement } from "@/app/components/itinerary-builder-controls";
@@ -14,7 +17,7 @@ function prettyDate(dateOnly: string) {
 
 export default async function ItineraryPage({ params }: { params: Promise<{ tripId: string }> }) {
   const { tripId } = await params;
-  const [result, reservationContext] = await Promise.all([getItineraryBuilder(tripId), getItineraryReservationContext(tripId)]);
+  const [result, reservationContext, travelContext] = await Promise.all([getItineraryBuilder(tripId), getItineraryReservationContext(tripId), getTravelPlanning(tripId)]);
   if (!result.ok) {
     if (result.error.code === "NOT_FOUND") notFound();
     return <p className="issue error" role="alert">{result.error.message}</p>;
@@ -52,6 +55,7 @@ export default async function ItineraryPage({ params }: { params: Promise<{ trip
                 <span className="item-flexibility">{item.flexibility === "FIXED" ? "Fixed" : "Flexible"}</span>
               </div>
               <h4 id={"item-" + item.id}>{item.title}</h4>
+              <p className="muted item-progress">Progress: {PROGRESS_LABELS[item.progress]}</p>
               <p>{TYPE_LABELS[item.type]}{item.durationMinutes !== null ? " · " + item.durationMinutes + " minutes" : ""}</p>
               <p className="muted">{item.type === "ACTIVITY" ? (item.sourceRecommendationId ? "From accepted recommendation" : "Source recommendation no longer available") : "Intentional planning block"}</p>
               {item.transportationMode ? <p>Mode: {MODE_LABELS[item.transportationMode]}</p> : null}
@@ -61,6 +65,10 @@ export default async function ItineraryPage({ params }: { params: Promise<{ trip
                 const context = reservationContext.data.find(entry => entry.itemId === item.id);
                 return context ? <ActivityReservation tripId={tripId} context={context} date={day.date} startMinute={item.startMinute} /> : <p role="alert">Reservation context changed. Refresh to continue.</p>;
               })() : <p role="alert">{reservationContext.error.message}</p>) : null}
+              {(item.type === "ACTIVITY" || item.type === "TRANSPORTATION") ? (travelContext.ok ? (() => {
+                const travel = travelContext.data.find(t => t.itemId === item.id);
+                return travel ? <TravelPlanning tripId={tripId} travel={travel} transportation={item.type === "TRANSPORTATION"} /> : <p role="alert">Travel context changed. Refresh to continue.</p>;
+              })() : <p role="alert">Travel planning unavailable. Refresh before editing an estimate.</p>) : null}
               <RemoveScheduledItem tripId={tripId} itemId={item.id} title={item.title} />
             </article>
           </li>)}
