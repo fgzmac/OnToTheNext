@@ -1,6 +1,6 @@
 # Local setup
 
-Discover Core is accepted and merged through PR #2 (D-120). Itinerary Builder Slice 1 is on `sprint-3-itinerary-builder`, based on current main. Sprint 3 is incomplete; its draft PR is for review and must not be merged yet.
+Discover Core is accepted and merged through PR #2 (D-120). Itinerary Builder Slices 1 and 2 are on `sprint-3-itinerary-builder`. Milestone implementation is pending TPM/CEO review; Sprint 3 is not accepted and PR #3 stays draft/unmerged.
 
 ## Requirements
 
@@ -82,7 +82,7 @@ schedules or books anything. No live provider data is used.
 See [the Sprint 2 implementation record](planning/sprints/sprint-2-discover-core.md)
 for ranking rules, ownership, migration preservation, verification, and deferred scope.
 
-## Itinerary Builder Slice 1
+## Itinerary Builder Slices 1 and 2
 
 Apply the additive migration with `npm run db:deploy` against the verified intended
 development database; an upgrade does not require a reset. Normal seed does not
@@ -98,4 +98,19 @@ Remove the relevant items first. Removing a source Segment preserves the schedul
 item and its Day while detaching the deleted Recommendation reference.
 
 See [the Sprint 3 implementation record](planning/sprints/sprint-3-itinerary-builder.md)
-for constraints, verification and deferred work. Sprint 3 remains incomplete.
+for constraints, verification and deferred work. Sprint 3 remains pending acceptance.
+
+Use Add planning block in Itinerary for intentional Free Time, Hotel / Rest and
+manual Transportation. Free Time requires duration. Transport can link distinct
+origin/destination Segments; a transfer uses an origin-owned Day and retains its title
+snapshot if a Segment is deleted. All new blocks append in explicit position order.
+
+Move earlier/later swaps neighbors without changing time. Swaps affecting Fixed items
+require confirmation. Move to another day always shows a preview before Confirm;
+Cancel leaves the plan unchanged. Changed/expired previews require a fresh preview.
+Overlap and past-midnight warnings are derived, factual and nonblocking; they never
+automatically retime, move or remove items. No full time editor is included.
+
+The single-process prototype invalidates previews after a server restart. A future
+multi-process deployment needs shared preview signing configuration. No external
+travel provider, Reservation, Map or booking state is part of this implementation.

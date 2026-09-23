@@ -1,109 +1,178 @@
 # Sprint 3 — Itinerary Builder
 
-**Sprint 3 incomplete. Slice 1 implemented; pending TPM/CEO review. Do not merge.**
+**Slices 1 and 2 implemented; pending TPM/CEO review. Sprint 3 is not accepted.
+PR #3 remains draft. Do not merge.**
 
-## Objective and boundary
+## Objective and baseline
 
-The milestone builds a day-based vertical itinerary. This slice implements only:
-Discover Accept → accepted-unscheduled idea → explicit Day/time/flexibility selection
-→ persisted Activity → Day timeline → refresh → remove → accepted-unscheduled again.
+Milestone 3 turns accepted recommendations into a usable manual, day-based itinerary:
+typed items, intentional planning blocks, ordering and movement, Fixed/Flexible
+planning state, basic conflicts and preview before material moves.
 
-Branch: `sprint-3-itinerary-builder`, created from `origin/main` at
-`21e48239493ababd605840d2bb84905e39ca2bc4`, including merged Sprint 2 / PR #2
-and D-120 acceptance. The checkout was clean before branching. Only
-`fgzmac/OnToTheNext` was modified; Options App remained out of scope.
+Branch: `sprint-3-itinerary-builder`, originally based on `origin/main` at
+`21e48239493ababd605840d2bb84905e39ca2bc4`, including merged Sprint 2 and D-120.
+Slice 1 head `1bfe7c2346c3dd23cc353880e46362726e3e8855` passed TPM review before
+Slice 2. Slice 2 continues that clean branch and existing draft PR #3.
+Only `fgzmac/OnToTheNext` is in scope; Options App resources remain untouched.
 
-Authority: D-047, D-067, D-070, D-075, D-098, D-099, D-104, D-111,
-D-118, D-119, D-120 and the roadmap, journeys, conceptual model and capability inventory.
+Authority reviewed: D-047, D-067, D-070, D-075, D-098, D-099, D-104,
+D-111, D-118, D-120 and roadmap Milestone 3. Later milestone capabilities described
+in broader planning decisions remain excluded by the Slice 2 scope.
 
-## Model and state boundaries
+## Slice 1 preserved
 
-`ItineraryItem` is a distinct Trip/Day-owned planning snapshot with opaque ID,
-type, title, optional startMinute/durationMinutes/notes, explicit position,
-Fixed/Flexible state, nullable sourceRecommendationId and timestamps.
+Discover Accept → accepted-unscheduled → explicitly choose a suitable Day,
+optional local time and Fixed/Flexible → persisted Activity → Day timeline →
+refresh → remove → accepted-unscheduled again.
 
-The enum supports ACTIVITY, MEAL, SHOPPING, TRANSPORTATION, FREE_TIME,
-HOTEL_REST and CUSTOM. Slice 1 creates ACTIVITY only. FLEXIBLE is the default;
-FIXED represents planning intent, never a reservation or payment/completion state.
-Local time is an optional integer from 0 through 1439, independent of timezone.
-Known duration is a positive integer. Title and duration are copied when scheduling.
+Only ACCEPTED recommendations can be scheduled. Acceptance, scheduling and booking
+remain distinct. Decisions do not mutate scheduled items. Removing an item preserves
+Recommendation/Decision/Place/Evidence and makes a still-accepted source schedulable.
+Title/duration are snapshots. Source deletion safely detaches its nullable reference.
 
-Acceptance, scheduling and booking remain distinct. Only ACCEPTED recommendations
-are schedulable; undecided, DENIED, SAVED and MUST_DO are rejected. Decision changes
-do not modify an existing item. Removal deletes only the item and transactionally
-normalizes remaining Day positions; Recommendation/Decision/Place/Evidence survive.
-An accepted source becomes schedulable again after removal.
+The typed ItineraryItem remains the sole planning model. ACTIVITY, MEAL, SHOPPING,
+TRANSPORTATION, FREE_TIME, HOTEL_REST and CUSTOM remain in the enum. Shared fields
+include title, optional startMinute/durationMinutes/notes, explicit Day position,
+Fixed/Flexible, optional sourceRecommendationId and timestamps. Local time remains
+within-day minutes (0–1439), with positive whole-minute duration when known.
+FLEXIBLE is the default; neither state means booked, paid or completed.
 
-The service verifies prototype ownership, Trip identity, and matching
-Day.primarySegmentId / Recommendation.tripSegmentId, including shared transfer dates.
-Repeated city labels never establish identity. A nullable unique source link prevents
-duplicate scheduling. A composite Day/Trip foreign key prevents cross-Trip Day use.
-Unique (dayId, position) ordering appends atomically and never sorts by time.
+## Slice 2 — intentional planning blocks
 
-## Data safety and migration
+`createPlanningBlock` creates exactly FREE_TIME, HOTEL_REST and TRANSPORTATION.
+Free Time requires positive duration; rest and transport allow unknown duration.
+Time and notes are optional. Notes are limited to 2,000 characters. All blocks append
+to the selected Day under the same Trip lock used by scheduling and structural edits.
+No inferred gaps, automatic free-time filling or automatic transport generation exists.
 
-Additive migration: `202609230003_itinerary_slice1`. The preceding three migrations
-are unchanged. It adds the item table, two enums, indexes, foreign keys, and
-minute/duration/position checks without changing existing rows.
+Default titles: Free time, Hotel / Rest, and a mode-based transportation label.
+Known inter-Segment transfers snapshot a title such as Train · Tokyo → Kyoto.
+Transportation modes: TRAIN, FLIGHT, BUS, CAR, TRANSIT, WALK, FERRY, OTHER.
+Nullable origin/destination Segment references are validated against the Trip and
+must differ when both are supplied. Repeated cities retain distinct Segment IDs.
+A known origin must match an assigned Day; providing both references requires an
+origin-owned Day. A lone origin reference may be created on an Unassigned Day.
+References are optional for local transportation. No Reservation or hotel search exists.
 
-Trip date changes that would remove occupied Days return
-`ITINERARY_CONTENT_WOULD_BE_REMOVED` with affected dates and a visible explanation.
-The complete structural transaction rolls back. Empty-Day removal remains allowed.
-A Trip row lock serializes scheduling/removal, structural edits and decision changes.
-A NO ACTION Day foreign key also rejects direct occupied-Day deletion; whole-Trip
-deletion still cascades its owned items and Days together.
+## Ordering and movement
 
-Deleting a Recommendation sets the source link to null. Deleting its Segment may
-cascade the Recommendation, but preserves the scheduled item's title, timing,
-flexibility and Day. Days survive and may become Unassigned under D-111.
-No preview, movement or automatic migration workflow was added.
+Position, never clock time, controls the timeline. Shared normalization maintains
+0...N-1 positions using a disjoint temporary range to avoid unique-key collisions.
+Move earlier/later swaps the immediate neighbor. Boundary controls are disabled;
+there is no wrapping or drag dependency. Planning values are never retimed by reorder.
 
-## UI
+A Flexible-to-Flexible reorder applies directly. Any swap affecting a Fixed item
+(including a Fixed neighbor) first produces a visible preview and requires Confirm.
+This protects Fixed items from indirect movement as well as direct clicks.
 
-Itinerary has a compact accepted-unscheduled section with Segment/date context,
-duration, an explicit suitable-Day selector, optional native time field,
-Fixed/Flexible selector, and Add to itinerary button. The Day timeline renders
-position order with title, time or Time not set, duration, Activity, planning
-flexibility, source indicator, and Remove button.
+Every cross-Day move uses `previewMoveItineraryItem` followed by
+`confirmMoveItineraryItem`. Preview shows item, source/target date and Segment context,
+planning flexibility, end-of-Day placement, and derived target conflicts. Fixed items
+have an explicit warning. Cancel is a no-write action. Confirm locks the Trip,
+validates current ownership/eligibility, moves atomically, normalizes the source,
+and appends to the target while preserving all other planning fields.
 
-The dedicated `getItineraryBuilder` read capability composes the page without
-moving scheduling business state into Home or Discover. Discover retains accepted
-ideas and has no scheduling controls. Home / Itinerary / Discover navigation stays
-unchanged. Standard named controls support keyboard operation and a single-column
-phone form; no gestures or hover are required.
+Sourced Activities can move only within their current Recommendation Segment.
+Detached Activities may move independently. Transportation with an origin can move
+only to origin-owned Days; transportation without an origin and Free Time/Hotel-Rest
+may move to any other same-Trip Day. The current Day and invalid targets are omitted.
+All constraints are rechecked on the server.
+
+## Preview consistency
+
+A signed token binds Trip, item, target, optional reorder direction, context fingerprint
+and a 30-minute expiry. The fingerprint includes the canonical Trip/Segment/Day/item
+snapshot, including target contents and source links. A monotonic item revision
+prevents movement/reordering away and back from reusing an old preview.
+
+Confirmation rejects changed context, expired/invalid tokens and repeated confirmation
+with `MOVE_PREVIEW_STALE`; a new preview is required. New target items therefore cannot
+silently introduce unreviewed conflicts. The check is intentionally conservative:
+unrelated Trip changes can also require a new preview.
+
+The current prototype runs one server process. Its signing key is process-local;
+restarting invalidates outstanding previews safely. Multiple server processes would
+require a shared signing key before deployment to that architecture.
+
+## Derived conflicts
+
+No Conflict table or duplicate conflict state exists. The read model derives:
+- TIME_OVERLAP for known half-open intervals [start, start + duration).
+- PAST_MIDNIGHT when a known interval ends after minute 1440.
+
+Back-to-back intervals do not overlap. Untimed/unknown-duration items are excluded.
+Warnings name the items and times and suggest moving/removing an item or changing
+its planning time later. No full editing screen was added. Past-midnight items remain
+on the selected Day with a warning; they never wrap or generate another item.
+Conflicts are read-only and nonblocking. Users may confirm an overlapping move.
+
+## Persistence and structural safety
+
+Slice 1 migration `202609230003_itinerary_slice1` remains unchanged.
+Slice 2 adds `202609230004_itinerary_builder`: TransportationMode, nullable mode and
+Segment fields with SET NULL foreign keys/indexes, and revision defaulting to zero.
+All earlier migrations and existing planning snapshots are preserved.
+
+The composite Day/Trip foreign key, unique source Recommendation, unique Day position,
+and planning-value constraints remain. Occupied-Day date shrink is blocked for all
+item types with `ITINERARY_CONTENT_WOULD_BE_REMOVED` and full transaction rollback.
+Empty-Day shrink remains supported. The NO ACTION Day foreign key protects against
+direct occupied-Day deletion; whole-Trip deletion cascades its owned content.
+
+Segment deletion preserves Days under D-111 and never deletes items. Recommendation,
+Transportation origin and Transportation destination links detach safely while title,
+time, duration, notes and flexibility survive. Trip locking serializes appends,
+removal, reorder, confirmation, decision edits and structural changes.
+
+## UI and accessibility
+
+One collapsible Add planning block form belongs to Itinerary, with progressively
+revealed Transportation fields. Typed cards show planning data and mode where known.
+Named Move earlier/later buttons, eligible-Day selection, visible preview, Confirm,
+Cancel and Remove use standard controls. Preview receives focus and has an accessible
+heading; conflicts include text and suggestions, not color alone. Mobile forms stack.
+Home / Itinerary / Discover navigation stays unchanged; Discover has no editing controls.
 
 ## Verification
 
-- Prisma generate / validate: passed.
-- Populated Sprint 2 forward migration: passed; every previous row/field preserved,
-  including Accepted and Denied decisions. No ItineraryItems created automatically.
-- Normal seed after upgrade: passed with identical complete database fingerprint.
-- Explicitly approved isolated reset/reseed: passed, four migrations and twelve
-  recommendations, zero ItineraryItems. Normal development was not reset/migrated.
-- Typecheck / lint / production build: passed.
-- Unit tests: 67 passed; PostgreSQL integration tests: 49 passed; skipped: zero.
-  This retains all 85 prior tests and adds 31 scheduling/domain/data-safety cases.
-- Playwright: all 8 browser tests passed, including the 6 prior tests and new desktop
-  (1280 x 900) / phone (390 x 844) scheduling flows. Keyboard add/remove, optional
-  time/default flexibility, persistence, decision independence, visible date-shrink
-  protection and no horizontal overflow passed. Captured form/timeline layouts reviewed.
-- Normal development preservation: complete rows/schema/index/migration fingerprint
+- Prisma generate/validate: passed.
+- Forward migration from populated Slice 1: every old row and field preserved,
+  including two scheduled Activities and Accepted/Denied decisions.
+- Seed: full post-migration fingerprint unchanged; no auto-created blocks.
+- Explicitly approved isolated reset/reseed: passed with five migrations; normal
+  development database was not reset or migrated.
+- Typecheck, lint and production build: passed.
+- Unit tests: 85 passed. PostgreSQL integration tests: 77 passed. Skipped: zero.
+  All 116 prior tests retained; 18 pure and 28 integration cases added.
+- Playwright: all 10 tests passed, preserving all eight prior browser cases and adding
+  desktop (1280 x 900) / phone (390 x 844) block/reorder/preview/conflict flows.
+  Keyboard reorder, preview/cancel/confirm, refresh persistence, Fixed protection,
+  nonblocking overlap and no horizontal overflow verified. Captured layouts reviewed.
+- Normal development preservation: full rows/schema/index/migration fingerprint
   unchanged before/after verification. No Options App resources modified.
-- CI: exact pushed head must be green before Slice 1 is recommended for review.
+- Exact pushed-head CI is required before recommendation; result linked in PR #3.
 
-Integration coverage includes concurrent duplicate and distinct appends, composite
-ownership and uniqueness constraints, wrong Segment / repeated city rejection,
-snapshot persistence through fresh-client reads, decision independence, safe source
-and Segment deletion, whole-Trip cascade, empty-Day shrink, occupied-Day rollback,
-concurrent date changes, failed mutation atomicity and preserving seed behavior.
+Coverage includes manual persistence/fresh-client reread; type/transport validation;
+source detachment; fixed neighbor protection; pure interval/eligibility/order rules;
+read-only preview and Cancel; stale/tampered/duplicate confirmation; atomic move and
+normalization; source/target constraints; read-only conflicts; each manual type's
+occupied-Day protection; and concurrent appends, reorder/removal, duplicate moves,
+and movement versus structural edits.
 
-## Known issues and deferred work
+## Known issues and milestone exit assessment
 
-The existing pg adapter emits a client.query deprecation warning during tests;
-verification passes. No blocker or data-integrity failure is known.
+The existing pg adapter emits a nonblocking client.query deprecation warning.
+Preview expiry/restart and conservative context invalidation require a fresh preview,
+not recovery of persisted data. Time editing is deliberately deferred; warnings do
+not claim an editing feature or automatic resolution.
 
-Sprint 3 remains incomplete. Slice 2 work is deferred: reorder, move-to-Day,
-conflict checks/suggestions and any preview-before-change workflow. No other item
-creation UI, Map, Reservation/booking/payment/completion state, Expenses, Today,
-sharing, provider integrations, routing, weather, transit or automatic itinerary
-generation is implemented. Enum availability is not a completed creation capability.
+Typed Items, Day timeline, accepted-to-scheduled, reorder, move-to-Day, intentional
+Free Time, Hotel/Rest, Transportation, Fixed/Flexible, basic conflict rules and
+preview-before-material-change are implemented. Accepted ≠ Scheduled ≠ Booked.
+
+Itinerary Builder implementation appears milestone-complete pending TPM/CEO review.
+This is an implementation assessment, not Sprint 3 acceptance. PR #3 stays draft.
+
+Meal/Shopping/Custom creation, Reservations, booking/payment/completion states, Map,
+hotel search, Expenses, Today, sharing, external providers, routing/live transit,
+weather and automatic itinerary generation remain out of scope. No next Sprint begun.

@@ -208,3 +208,22 @@ button:disabled { opacity: .55; cursor: progress; }
   .timeline-items { padding-left: 17px; margin-left: 4px; }
   .timeline-item::before { left: -24px; }
 }
+
+.planning-block-creator > summary, .item-movement summary { cursor: pointer; font-weight: 700; min-height: 44px; padding: 10px 0; }
+.planning-block-creator > form { margin-top: 16px; }
+.transport-fields { border: 1px solid var(--line); border-radius: 12px; padding: 16px; min-width: 0; }
+.itinerary-builder textarea { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 12px; font: inherit; resize: vertical; }
+.move-target { margin-top: 12px; }
+.move-preview { padding: 16px; border: 2px solid var(--accent); border-radius: 12px; background: var(--surface); }
+.move-preview h5 { font-size: 1rem; margin: 0; }
+.move-preview:focus { outline: 3px solid var(--accent); outline-offset: 3px; }
+.conflict-list { padding-left: 22px; margin: 8px 0; }
+.conflict-list li + li { margin-top: 10px; }
+.day-conflicts { margin-top: 16px; }
+.day-conflicts h4 { margin: 0; }
+.itinerary-builder :is(select, input, textarea) { min-width: 0; max-width: 100%; }
+@media (max-width: 720px) {
+  .move-preview { padding: 12px; }
+  .movement-buttons { gap: 8px; }
+  .movement-buttons button { flex: 1; padding: 10px; }
+}

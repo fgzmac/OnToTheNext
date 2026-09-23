@@ -1,3 +1,5 @@
+import { deriveTimeIssues } from "./planning";
+import { normalizeDayPositions } from "./ordering";
 import { getPrismaClient } from "@/src/lib/prisma";
 import { lockPrototypeTrip } from "@/src/lib/trip-lock";
 import { PROTOTYPE_OWNER_ID } from "@/src/modules/identity/prototype-owner";
@@ -50,15 +52,7 @@ export async function removeItineraryItem(tripId: string, itemId: string): Promi
       const item = await tx.itineraryItem.findFirst({ where: { id: itemId, tripId } });
       if (!item) return failure("NOT_FOUND", "This scheduled item is unavailable in this trip.");
       await tx.itineraryItem.delete({ where: { id: item.id } });
-      const remaining = await tx.itineraryItem.findMany({ where: { dayId: item.dayId }, orderBy: { position: "asc" } });
-      if (remaining.length) {
-        // Move into a disjoint positive range before assigning contiguous slots.
-        const offset = remaining[remaining.length - 1].position + 1;
-        await tx.itineraryItem.updateMany({ where: { dayId: item.dayId }, data: { position: { increment: offset } } });
-        for (const [position, entry] of remaining.entries()) {
-          await tx.itineraryItem.update({ where: { id: entry.id }, data: { position } });
-        }
-      }
+      await normalizeDayPositions(tx, item.dayId);
       return { ok: true as const, data: { id: item.id } };
     });
   } catch {
@@ -71,8 +65,8 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
     return await getPrismaClient().$transaction(async tx => {
       const trip = await tx.trip.findFirst({
         where: { id: tripId, ownerId: PROTOTYPE_OWNER_ID },
-        include: { days: { orderBy: { position: "asc" }, include: {
-          primarySegment: true, itineraryItems: { orderBy: { position: "asc" } },
+        include: { segments: { orderBy: { position: "asc" } }, days: { orderBy: { position: "asc" }, include: {
+          primarySegment: true, itineraryItems: { orderBy: { position: "asc" }, include: { sourceRecommendation: { select: { tripSegmentId: true } } } },
         } } },
       });
       if (!trip) return failure("NOT_FOUND", "This trip is unavailable.");
@@ -83,13 +77,17 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
       });
       return { ok: true as const, data: {
         tripId,
+        segments: trip.segments.map(segment => ({ id: segment.id, label: (segment.position + 1) + ". " + segment.baseName + " · " + formatDateOnly(segment.arrivalDate) + " to " + formatDateOnly(segment.departureDate) })),
         days: trip.days.map(day => ({
           id: day.id, date: formatDateOnly(day.date), primarySegmentId: day.primarySegmentId,
           base: day.primarySegment?.baseName ?? null,
+          issues: deriveTimeIssues(day.itineraryItems),
           items: day.itineraryItems.map(item => ({
             id: item.id, title: item.title, type: item.type, startMinute: item.startMinute,
             durationMinutes: item.durationMinutes, position: item.position, flexibility: item.flexibility,
             notes: item.notes, sourceRecommendationId: item.sourceRecommendationId,
+            sourceSegmentId: item.sourceRecommendation?.tripSegmentId ?? null,
+            transportationMode: item.transportationMode, originSegmentId: item.originSegmentId, destinationSegmentId: item.destinationSegmentId,
           })),
         })),
         unscheduled: accepted.map(item => ({
