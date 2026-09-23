@@ -176,3 +176,11 @@ button:disabled { opacity: .55; cursor: progress; }
 @media (max-width: 720px) {
   .discover-context { flex-direction: column; align-items: stretch; }
 }
+
+.trip-interests summary { font-weight: 750; cursor: pointer; }
+.trip-interests fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.trip-interests legend { margin-bottom: 12px; font-weight: 650; }
+.interest-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 16px; }
+.interest-options label { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.interest-options input { width: 18px; height: 18px; flex: 0 0 18px; }
+@media (max-width: 720px) { .interest-options { grid-template-columns: 1fr; } }

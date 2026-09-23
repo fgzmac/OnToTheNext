@@ -1,6 +1,6 @@
 # Local setup
 
-Discover Core Slice 1 is on `sprint-2-discover-core`, based on accepted Sprint 1. Sprint 2 is not complete.
+Discover Core Slices 1 and 2 are on `sprint-2-discover-core`, based on accepted Sprint 1. Milestone implementation is pending TPM/CEO review; PR #2 stays draft.
 
 ## Requirements
 
@@ -57,18 +57,27 @@ ownership. Verify the actual target database/user and owning volume before any
 authorized destructive operation. Never reset normal development data merely to
 run tests. The verifier and command-ordering tests use no database connection.
 
-## Discover Core Slice 1
+## Discover Core Slices 1 and 2
 
-Apply the additive migration with `npm run db:deploy` against the intended,
-verified development database. Installation does not require a database reset.
-The optional `npm run db:seed` preserves the existing convention of recreating the
-known synthetic Japan demo Trip, then adds eight imaginary Discover recommendations
-to its first Tokyo Segment. Full demo reseeding resets that demo Trip's decisions.
-It does not populate recommendations for normal newly created Trips.
+Apply migrations with `npm run db:deploy` against the intended, verified development
+database. Installation does not require a reset. The optional `npm run db:seed`
+creates the synthetic Japan demo only when absent and ensures twelve imaginary
+Discover fixtures for its first Tokyo Segment. Repeated seeding preserves the
+existing demo Trip, preferences, decisions, and generated batches. A fresh demo
+has four initial recommendations and eight unassigned candidates. Normal newly
+created Trips work with an empty recommendation catalog.
 
-Open the demo Trip, choose Discover, then select the first Tokyo Segment. Two
-four-card batches support Accept/Deny and an Accepted section. All content is
-labeled as development fixtures; acceptance does not schedule or book anything.
-Other Segments demonstrate the empty state. See
-[the Slice 1 implementation record](planning/sprints/sprint-2-discover-core.md)
-for data ownership, verification evidence, and deferred scope.
+The Slice 2 migration preserves existing Slice 1 rank windows as assigned history.
+On an upgraded eight-card demo, those two batches remain intact; seeding adds four
+unassigned candidates. No existing decision or historical batch is discarded to
+recreate a fresh-start scenario.
+
+Open the demo Trip, choose Discover, then select the first Tokyo Segment. Optional
+“Interests for this trip” controls can save or clear nine typed interests. Accept
+and Deny remain editable. Show another batch explicitly assigns up to four unseen
+candidates using Trip interests and prior Segment decisions. Previous/next generated
+batch navigation reads stable history. Cards remain factual; acceptance never
+schedules or books anything. No live provider data is used.
+
+See [the Sprint 2 implementation record](planning/sprints/sprint-2-discover-core.md)
+for ranking rules, ownership, migration preservation, verification, and deferred scope.

@@ -3,7 +3,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/src/generated/prisma/client";
 import { getPrismaClient } from "@/src/lib/prisma";
 import { createTrip, getTripSkeleton, removeSegment } from "@/src/modules/trips/service";
-import { decideRecommendation, getRecommendationBatch } from "@/src/modules/discover/service";
+import { decideRecommendation, getRecommendationBatch, requestAnotherRecommendationBatch } from "@/src/modules/discover/service";
 import { FIXTURE_SEGMENT_ID, FIXTURE_SOURCE_ID } from "@/src/modules/discover/fixture-catalog";
 import { seedDemoTrip, DEMO_TRIP_ID } from "../prisma/seed-data";
 import { seedDiscoverFixtures } from "../prisma/discover-seed";
@@ -35,10 +35,10 @@ integration("Discover PostgreSQL persistence", () => {
   afterAll(async () => { await prisma?.$disconnect(); });
 
   it("persists distinct Places, Recommendations, Sources and linked fixture Evidence", async () => {
-    expect(await prisma!.place.count()).toBe(8);
-    expect(await prisma!.recommendation.count()).toBe(8);
+    expect(await prisma!.place.count()).toBe(12);
+    expect(await prisma!.recommendation.count()).toBe(12);
     expect(await prisma!.source.count()).toBe(1);
-    expect(await prisma!.evidenceRecord.count()).toBe(8);
+    expect(await prisma!.evidenceRecord.count()).toBe(12);
     expect(await prisma!.recommendationDecision.count()).toBe(0);
     const first = (await batch()).cards[0];
     expect(first.id).not.toBe(first.place.id);
@@ -72,12 +72,14 @@ integration("Discover PostgreSQL persistence", () => {
     await choose(first.cards[0].id, "ACCEPTED");
     await choose(first.cards[1].id, "DENIED");
     const before = await prisma!.recommendationDecision.findMany({ orderBy: { id: "asc" } });
+    expect((await requestAnotherRecommendationBatch({ tripId: DEMO_TRIP_ID, tripSegmentId: FIXTURE_SEGMENT_ID, fromBatch: 0 })).ok).toBe(true);
     const second = await batch("1");
     expect(second.cards).toHaveLength(4);
     expect(second.cards.every(card => !first.cards.some(other => other.id === card.id))).toBe(true);
     expect(second.accepted.map(card => card.id)).toEqual([first.cards[0].id]);
+    await requestAnotherRecommendationBatch({ tripId: DEMO_TRIP_ID, tripSegmentId: FIXTURE_SEGMENT_ID, fromBatch: 1 });
     expect((await batch("2")).exhausted).toBe(true);
-    expect((await batch("2")).cards).toEqual([]);
+    expect((await batch("2")).cards).toHaveLength(4);
     expect(await prisma!.recommendationDecision.findMany({ orderBy: { id: "asc" } })).toEqual(before);
     expect((await batch()).cards.map(card => card.decision)).toEqual(["ACCEPTED", "DENIED", null, null]);
   });
@@ -116,8 +118,8 @@ integration("Discover PostgreSQL persistence", () => {
     const before = await prisma!.recommendationDecision.findMany();
     await seedDiscoverFixtures(prisma!);
     expect(await prisma!.recommendationDecision.findMany()).toEqual(before);
-    expect(await prisma!.place.count()).toBe(8);
-    expect(await prisma!.recommendation.count()).toBe(8);
+    expect(await prisma!.place.count()).toBe(12);
+    expect(await prisma!.recommendation.count()).toBe(12);
     await prisma!.evidenceRecord.update({ where: { id: first.evidence[0].id }, data: { factualText: "Updated synthetic fixture description." } });
     expect((await batch()).cards[0].decision).toBe("DENIED");
     expect((await batch()).cards[0].evidence[0].factualText).toBe("Updated synthetic fixture description.");
@@ -128,9 +130,9 @@ integration("Discover PostgreSQL persistence", () => {
     await prisma!.trip.delete({ where: { id: DEMO_TRIP_ID } });
     expect(await prisma!.recommendation.count()).toBe(0);
     expect(await prisma!.recommendationDecision.count()).toBe(0);
-    expect(await prisma!.place.count()).toBe(8);
+    expect(await prisma!.place.count()).toBe(12);
     expect(await prisma!.source.count()).toBe(1);
-    expect(await prisma!.evidenceRecord.count()).toBe(8);
+    expect(await prisma!.evidenceRecord.count()).toBe(12);
     expect(await prisma!.prototypeUser.count()).toBe(1);
   });
 
@@ -141,7 +143,7 @@ integration("Discover PostgreSQL persistence", () => {
     expect(await prisma!.recommendation.count()).toBe(0);
     expect(await prisma!.recommendationDecision.count()).toBe(0);
     expect((await getTripSkeleton(DEMO_TRIP_ID)).data!.days.map(day => day.id)).toEqual(before);
-    expect(await prisma!.place.count()).toBe(8);
+    expect(await prisma!.place.count()).toBe(12);
     expect(await prisma!.source.count()).toBe(1);
   });
 

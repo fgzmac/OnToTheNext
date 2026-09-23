@@ -78,12 +78,25 @@ model Day {
 model TripPreferenceProfile {
   id            String   @id @default(cuid())
   tripId        String   @unique
+  discoverInterests DiscoverInterest[] @default([])
   budgetComfort String?
   planningNote  String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   trip          Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
 }
+enum DiscoverInterest {
+  SIGHTSEEING_LANDMARKS
+  ARCHITECTURE_DESIGN
+  CULTURE_HISTORY
+  FOOD_DRINK
+  SHOPPING
+  NATURE_OUTDOORS
+  NIGHTLIFE
+  ENTERTAINMENT
+  WELLNESS_RELAXATION
+}
+
 enum RecommendationOutcome {
   ACCEPTED
   DENIED
@@ -95,6 +108,7 @@ model Place {
   id              String           @id @default(cuid())
   name            String
   baseLabel       String
+  interestTags    DiscoverInterest[] @default([])
   category        String
   address         String?
   latitude        Float?
@@ -114,6 +128,8 @@ model Recommendation {
   durationMinutes Int?
   costContext     String?
   logisticsNote   String?
+  presentationBatch Int?
+  presentationOrder Int?
   displayRank     Int
   createdAt       DateTime                @default(now())
   updatedAt       DateTime                @updatedAt
@@ -122,6 +138,7 @@ model Recommendation {
   place           Place                   @relation(fields: [placeId], references: [id], onDelete: Restrict)
   decision        RecommendationDecision?
 
+  @@unique([tripSegmentId, presentationBatch, presentationOrder])
   @@unique([tripSegmentId, placeId])
   @@index([tripId, tripSegmentId, displayRank, id])
 }

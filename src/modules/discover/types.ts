@@ -17,6 +17,9 @@ export interface RecommendationBatch {
   total: number;
   page: number;
   totalPages: number;
+  latestBatch: number;
+  unassigned: number;
+  interests: import("@/src/generated/prisma/enums").DiscoverInterest[];
   exhausted: boolean;
 }
 

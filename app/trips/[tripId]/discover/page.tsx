@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TripInterests, AnotherBatch } from "@/app/components/discover-controls";
 import { loadTripSkeleton } from "../load-trip";
 import { getRecommendationBatch } from "@/src/modules/discover/service";
 import { RecommendationCard } from "@/app/components/recommendation-card";
@@ -46,17 +47,20 @@ export default async function DiscoverPage({ params, searchParams }: {
       {!selected ? <p role="alert" className="issue error">This destination is no longer available. Choose a destination in this trip.</p> : null}
       {result && !result.ok ? <p role="alert" className="issue error">{result.error}</p> : null}
       {batch ? <>
+        <TripInterests tripId={tripId} interests={batch.interests} />
+        <p className="muted">Future batches use the trip interests and decisions you have provided.</p>
         {batch.total > 0 ? <p className="issue warning">Development fixtures: imaginary places with illustrative details. No live prices, hours or availability.</p> : null}
         <section aria-labelledby="batch-heading" className="stack">
-          <h2 id="batch-heading">{batch.total === 0 ? "No recommendations available yet." : batch.exhausted ? "No more fixture recommendations." : "Batch " + (batch.page + 1) + " of " + batch.totalPages}</h2>
+          <h2 id="batch-heading">{batch.total === 0 ? "No recommendations available yet." : "Batch " + (batch.page + 1) + " of " + batch.totalPages}</h2>
           {batch.total === 0 ? <p>There are no recommendations for this destination yet. Your trip and decisions are saved.</p> : null}
-          {batch.exhausted ? <p>You have reached the end of this destination’s development catalog.</p> : null}
+          {batch.exhausted ? <p className="issue" role="status">No more fixture recommendations.</p> : null}
           <div className="grid grid-2 recommendation-grid">
             {batch.cards.map(item => <RecommendationCard key={item.id} recommendation={item} />)}
           </div>
           <div className="row">
             {batch.page > 0 ? <Link className="button secondary" href={batchHref(batch.page - 1)}>Previous batch</Link> : null}
-            {batch.total > 0 && !batch.exhausted ? <Link className="button" href={batchHref(batch.page + 1)}>Show another batch</Link> : null}
+            {batch.page < batch.latestBatch ? <Link className="button" href={batchHref(batch.page + 1)}>Next generated batch</Link> : null}
+            {batch.unassigned > 0 && batch.page === batch.latestBatch ? <AnotherBatch tripId={tripId} tripSegmentId={selectedId} fromBatch={batch.page} /> : null}
           </div>
         </section>
         <section className="card stack accepted-section" aria-labelledby="accepted-heading">

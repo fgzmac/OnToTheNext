@@ -26,13 +26,14 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await nav.getByRole("link", { name: "Discover" }).click();
     await page.getByLabel("Trip Segment").selectOption(FIXTURE_SEGMENT_ID);
     await page.getByRole("button", { name: "View destination" }).click();
-    const batch = page.getByRole("region", { name: "Batch 1 of 2" });
+    const batch = page.getByRole("region", { name: "Batch 1 of 3" });
     await expect(batch.getByRole("article")).toHaveCount(4);
     await expect(batch.getByText("Source: Development Fixture Catalog")).toHaveCount(4);
     await expect(batch.getByText("Evidence: fixture data — not live")).toHaveCount(4);
-    await expect(page.getByText(/why this fits you|perfect for you|you.ll love this because/i)).toHaveCount(0);
+    await expect(page.getByText(/why this fits you|perfect for you|because you liked|you.ll love|strong match|recommended based on|match score/i)).toHaveCount(0);
     const screenshot = async (name: string) => {
       expect(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)).toBe(false);
+      await page.evaluate(() => window.scrollTo(0, 0));
       await page.screenshot({ path: testInfo.outputPath(device + "-" + name + ".png"), fullPage: true });
     };
     await screenshot("batch");
@@ -63,8 +64,8 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(first.locator(".decision-status")).toHaveText("Decision: Accepted");
     await expect(denied.locator(".decision-status")).toHaveText("Decision: Denied");
 
-    await page.getByRole("link", { name: "Show another batch" }).click();
-    const second = page.getByRole("region", { name: "Batch 2 of 2" });
+    await page.getByRole("button", { name: "Show another batch" }).click();
+    const second = page.getByRole("region", { name: "Batch 2 of 3" });
     await expect(second.getByRole("article")).toHaveCount(4);
     await expect(second.getByRole("heading", { level: 3 })).toHaveText(["City Garden Pavilion", "Railway History Gallery", "Craft Street Arcade", "Canal Evening Promenade"]);
     await expect(accepted.getByRole("heading", { level: 3 })).toHaveText(["Riverside Observation Deck"]);
@@ -76,11 +77,11 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(accepted.getByRole("heading", { level: 3 })).toHaveCount(0);
     await denied.getByRole("button", { name: "Accept Old Market Food Hall", exact: true }).click();
     await expect(accepted.getByRole("heading", { level: 3 })).toHaveText(["Old Market Food Hall"]);
-    await page.getByRole("link", { name: "Show another batch" }).click();
-    await expect(page.getByRole("heading", { name: "Batch 2 of 2" })).toBeVisible();
-    await page.getByRole("link", { name: "Show another batch" }).click();
-    await expect(page.getByRole("heading", { name: "No more fixture recommendations." })).toBeVisible();
-    await expect(page.getByRole("link", { name: "Show another batch" })).toHaveCount(0);
+    await page.getByRole("link", { name: "Next generated batch" }).click();
+    await expect(page.getByRole("heading", { name: "Batch 2 of 3" })).toBeVisible();
+    await page.getByRole("button", { name: "Show another batch" }).click();
+    await expect(page.getByRole("status")).toHaveText("No more fixture recommendations.");
+    await expect(page.getByRole("button", { name: "Show another batch" })).toHaveCount(0);
     await expect(accepted.getByRole("heading", { level: 3 })).toHaveText(["Old Market Food Hall"]);
     await screenshot("exhausted");
 

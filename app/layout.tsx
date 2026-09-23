@@ -14,7 +14,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <div className="site-shell">
           <header className="brand-bar">
             <Link className="brand" href="/">On To The Next</Link>
-            <span className="prototype-badge">Sprint 1 prototype</span>
+            <span className="prototype-badge">Prototype</span>
           </header>
           {children}
         </div>
