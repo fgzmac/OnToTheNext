@@ -305,3 +305,15 @@ service on this refinement branch/dependent PR remains applicable. This is the
 same branch and PR; the current handoff separately requests push and exact-head CI.
 Local approval is restricted to composer2; CI cannot access local databases/volumes.
 Exact-head remote results are reported in PR #6 and the engineering handoff.
+
+### CI navigation follow-up
+
+The first exact-head CI checks at `47ee1bc` passed all 444 unit/integration tests
+and the build, but the Today browser flow exposed a navigation race not reproduced
+in the full local run: push passed 22/24; PR passed 23/24. After following a
+Reservation's exact-item link, the test could check for a dialog before navigation
+opened it and then try Home behind the modal. The test now explicitly awaits the
+correct named dialog before closing it; every existing context assertion remains.
+No application behavior changed. The corrected desktop and phone flows each passed
+twice locally (4/4), and typecheck/lint passed before the normal follow-up commit.
+The subsequent complete exact-head CI results are recorded in PR #6.

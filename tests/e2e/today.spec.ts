@@ -99,6 +99,7 @@ for (const [device, width, height] of [["desktop",1280,900],["phone",390,844]] a
     await capture("planning-home");
     await page.getByRole("link", { name: "Reservations", exact: true }).click();
     await page.getByRole("link", { name: "View itinerary details", exact: true }).click();
+    await expect(page.getByRole("dialog", { name: title, exact: true })).toBeVisible();
     await closeDetails(page); await nav.getByRole("link", { name: "Home", exact: true }).click();
     await page.getByRole("link", { name: "Reservations", exact: true }).click();
     await page.getByRole("link", { name: "Back to Home", exact: true }).click();
