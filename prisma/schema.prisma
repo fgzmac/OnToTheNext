@@ -36,6 +36,7 @@ model Trip {
   days              Day[]
   recommendations   Recommendation[]
   itineraryItems    ItineraryItem[]
+  manualActivitySubmissions ManualActivitySubmission[]
   travelPlans       ItineraryTravelPlan[]
   reservations      Reservation[]
   preferenceProfile TripPreferenceProfile?
@@ -221,6 +222,12 @@ enum ItineraryProgress {
 }
 
 model ItineraryItem {
+  enteredManually Boolean @default(false)
+  locationLabel String?
+  referenceUrl String?
+  editActionKey String?
+  editResultContext String?
+  manualSubmission ManualActivitySubmission?
   travelPlanActionKey     String?
   travelPlan              ItineraryTravelPlan? @relation("TravelTarget")
   departurePlansFromHere  ItineraryTravelPlan[] @relation("TravelOrigin")
@@ -376,5 +383,16 @@ model ItineraryTravelPlan {
   sourceItem       ItineraryItem? @relation("TravelOrigin", fields: [sourceItemId, tripId], references: [id, tripId], onDelete: NoAction)
   @@unique([itemId, tripId])
   @@index([sourceItemId, tripId])
+  @@index([tripId])
+}
+
+// A narrow creation receipt makes retries safe even after item deletion.
+model ManualActivitySubmission {
+  id String @id
+  tripId String
+  itemId String? @unique
+  requestHash String
+  trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  item ItineraryItem? @relation(fields: [itemId], references: [id], onDelete: SetNull)
   @@index([tripId])
 }

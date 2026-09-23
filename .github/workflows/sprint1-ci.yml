@@ -8,9 +8,11 @@ on:
       - sprint-3-itinerary-builder
       - sprint-4-reservation-workflow
       - sprint-5-today-mode
+      - refine/itinerary-builder-basics
   pull_request:
     branches:
       - main
+      - sprint-5-today-mode
 
 jobs:
   verify:

@@ -17,7 +17,7 @@ function itemContext(item: Item): TravelItemContext {
   const segment = item.day.primarySegment, booking = item.reservation;
   return { id: item.id, tripId: item.tripId, title: item.title, type: item.type, progress: item.progress, dayId: item.dayId,
     date: formatDateOnly(item.day.date), position: item.position, startMinute: item.startMinute, durationMinutes: item.durationMinutes,
-    originSegmentId: item.originSegmentId, segment: segment ? { id: segment.id, label: segment.baseName, arrival: formatDateOnly(segment.arrivalDate), departure: formatDateOnly(segment.departureDate) } : null,
+    locationLabel: item.locationLabel, originSegmentId: item.originSegmentId, segment: segment ? { id: segment.id, label: segment.baseName, arrival: formatDateOnly(segment.arrivalDate), departure: formatDateOnly(segment.departureDate) } : null,
     booking: booking ? { id: booking.id, state: booking.state, date: booking.confirmedDate ? formatDateOnly(booking.confirmedDate) : null, minute: booking.confirmedStartMinute } : null };
 }
 function context(w: Workspace, item: Item, sourceItemId: string | null): TravelContext {

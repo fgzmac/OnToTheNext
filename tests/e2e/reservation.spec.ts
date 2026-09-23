@@ -42,7 +42,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await page.reload();
     await expect(item.locator(".reservation-state")).toHaveText("Reservation: Check back");
     await expect(item).toContainText("Desired: 2030-04-01 · 09:30");
-    await item.getByText("Availability and release evidence", { exact: true }).click();
+    await revealBooking(item); await item.getByText("Availability and release evidence", { exact: true }).click();
     await item.getByText("Link availability evidence", { exact: true }).click();
     const evidenceForm = item.getByRole("form", { name: "Link evidence" });
     await evidenceForm.getByLabel("Availability evidence").selectOption({ label: "Ticket availability · Development Fixture Catalog · 2026-09-22" });
@@ -58,7 +58,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await expect(popup.getByRole("heading")).toHaveText("Controlled external booking fixture"); await popup.close();
     expect(await prisma.reservation.findUniqueOrThrow({ where: { id: beforeHandoff.id } })).toEqual(beforeHandoff);
     await page.reload(); await expect(item.locator(".reservation-state")).toHaveText("Reservation: Check back");
-    await item.locator("summary").filter({ hasText: /^Mark booked$/ }).click();
+    await revealBooking(item); await item.locator("summary").filter({ hasText: /^Mark booked$/ }).click();
     const confirmation = item.getByRole("form", { name: "Mark booked", exact: true });
     await confirmation.getByLabel("Confirmed date").fill("2030-04-01");
     await confirmation.getByLabel("Confirmed time").fill("10:30");
@@ -83,4 +83,9 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     expect(saved.desiredDate).toEqual(beforeHandoff.desiredDate);
     await noOverflow(); await item.screenshot({ style: ".brand-bar { visibility: hidden; }", path: testInfo.outputPath(device + "-booked-reservation.png") });
   });
+}
+
+async function revealBooking(item: import("@playwright/test").Locator) {
+  const section = item.locator(".item-booking");
+  if (await section.getAttribute("open") === null) await section.locator(":scope > summary").click();
 }

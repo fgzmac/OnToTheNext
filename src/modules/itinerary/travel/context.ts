@@ -4,11 +4,11 @@ import type { TravelContext, TravelInputs, TravelItemContext } from "./domain";
 // unrelated reservation details and shared mutation revisions are excluded.
 export function targetFacts(t: TravelItemContext) {
   return { id: t.id, tripId: t.tripId, title: t.title, type: t.type, dayId: t.dayId, date: t.date,
-    position: t.position, startMinute: t.startMinute, segment: t.segment, originSegmentId: t.originSegmentId, booking: t.booking };
+    position: t.position, startMinute: t.startMinute, segment: t.segment, originSegmentId: t.originSegmentId, booking: t.booking, ...(t.locationLabel ? { locationLabel: t.locationLabel } : {}) };
 }
 export function sourceFacts(s: TravelItemContext | null) {
   return s ? { id: s.id, tripId: s.tripId, title: s.title, dayId: s.dayId, date: s.date, position: s.position,
-    startMinute: s.startMinute, durationMinutes: s.durationMinutes, segment: s.segment, skipped: s.progress === "SKIPPED" } : null;
+    startMinute: s.startMinute, durationMinutes: s.durationMinutes, segment: s.segment, skipped: s.progress === "SKIPPED", ...(s.locationLabel ? { locationLabel: s.locationLabel } : {}) } : null;
 }
 export function reviewedContext(c: TravelContext, input: TravelInputs): string {
   return fingerprint({ target: targetFacts(c.target), tripStart: c.tripStart, tripEnd: c.tripEnd,

@@ -43,7 +43,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await row.getByRole("link", { name: "View itinerary details" }).click();
     await expect(page).toHaveURL(new RegExp("#item-" + itemId + "$"));
     const item = page.locator(".timeline-item").filter({ has: page.getByRole("heading", { name: title, exact: true }) });
-    await item.getByText("Availability and release evidence", { exact: true }).click();
+    await revealBooking(item); await item.getByText("Availability and release evidence", { exact: true }).click();
     await expect(item.getByText("No release information recorded. Availability unknown.", { exact: true })).toBeVisible();
     await item.getByText("Record release observation", { exact: true }).click();
     const form = item.getByRole("form", { name: "Save release observation" });
@@ -83,7 +83,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await context.route("https://example.com/booking", route => route.fulfill({ status: 200, contentType: "text/html", body: "<h1>Controlled booking fixture</h1>" }));
     const popupPromise = page.waitForEvent("popup"); await item.getByRole("link", { name: "Open booking site" }).click(); const popup = await popupPromise; await popup.close();
     expect(await db.reservation.findUniqueOrThrow({ where: { id: reservationId } })).toEqual(beforeHandoff);
-    await item.locator("summary").filter({ hasText: /^Mark booked$/ }).click();
+    await revealBooking(item); await item.locator("summary").filter({ hasText: /^Mark booked$/ }).click();
     const booking = item.getByRole("form", { name: "Mark booked", exact: true });
     await booking.getByLabel("Confirmed date").fill("2030-04-01"); await booking.getByLabel("Confirmed time").fill("10:30");
     await booking.getByLabel("Confirmation reference").fill("SYNTHETIC-S2"); await booking.getByRole("button", { name: "Mark booked", exact: true }).click();
@@ -127,11 +127,16 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await transport.getByText("Add reservation tracking", { exact: true }).click();
     await expect(transport).toContainText("departure context"); const tracking = transport.getByRole("form", { name: "Save reservation tracking" });
     await tracking.getByRole("button", { name: "Save reservation tracking" }).click(); await expect(transport.locator(".reservation-state")).toHaveText("Reservation: Check back");
-    await transport.getByText("Availability and release evidence", { exact: true }).click(); await expect(transport).toContainText("No release information recorded. Availability unknown."); await expect(transport.getByText("Record release observation", { exact: true })).toHaveCount(0);
+    await revealBooking(transport); await transport.getByText("Availability and release evidence", { exact: true }).click(); await expect(transport).toContainText("No release information recorded. Availability unknown."); await expect(transport.getByText("Record release observation", { exact: true })).toHaveCount(0);
     await transport.locator("summary").filter({ hasText: /^Mark booked$/ }).click(); const departure = transport.getByRole("form", { name: "Mark booked", exact: true });
     await departure.getByLabel("Confirmed date").fill("2030-04-01"); await departure.getByLabel("Confirmed time").fill("12:30"); await departure.getByRole("button", { name: "Mark booked", exact: true }).click();
     await expect(transport.locator(".reservation-state")).toHaveText("Reservation: Booked"); await expect(transport.locator(".item-time")).toHaveText("12:00");
     await expect(nav.getByRole("link")).toHaveText(["Home", "Itinerary", "Discover"]); await capture("transportation-booked");
     await transport.screenshot({ path: testInfo.outputPath(device + "-transportation-details.png") });
   });
+}
+
+async function revealBooking(item: import("@playwright/test").Locator) {
+  const section = item.locator(".item-booking");
+  if (await section.getAttribute("open") === null) await section.locator(":scope > summary").click();
 }

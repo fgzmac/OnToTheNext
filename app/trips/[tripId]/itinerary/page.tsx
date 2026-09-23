@@ -1,3 +1,5 @@
+import { AddActivity, EditItem } from "@/app/components/item-details-editor";
+import { STATE_LABELS } from "@/src/modules/reservations/domain";
 import { TravelPlanning } from "@/app/components/travel-planning";
 import { getTravelPlanning } from "@/src/modules/itinerary/travel/service";
 import { PROGRESS_LABELS } from "@/src/modules/itinerary/progress";
@@ -27,8 +29,9 @@ export default async function ItineraryPage({ params }: { params: Promise<{ trip
     <header>
       <span className="eyebrow">Itinerary</span>
       <h2>Your day timeline.</h2>
-      <p className="muted">Choose a day for an accepted idea. Scheduling is separate from accepting an idea or making a booking.</p>
+      <p className="muted">Add your own activities or schedule accepted ideas. Planning stays separate from booking.</p>
     </header>
+    <AddActivity tripId={tripId} days={days} token={result.data.createToken} />
     <section className="card stack" aria-labelledby="unscheduled-heading">
       <h2 id="unscheduled-heading">Accepted ideas not scheduled</h2>
       <p className="muted">Fixed and Flexible describe your plan. Fixed does not mean a reservation is confirmed.</p>
@@ -54,16 +57,18 @@ export default async function ItineraryPage({ params }: { params: Promise<{ trip
                 <span className="item-time">{formatLocalTime(item.startMinute)}</span>
                 <span className="item-flexibility">{item.flexibility === "FIXED" ? "Fixed" : "Flexible"}</span>
               </div>
-              <h4 id={"item-" + item.id}>{item.title}</h4>
+              <h4 tabIndex={-1} id={"item-" + item.id}>{item.title}</h4>
               <p className="muted item-progress">Progress: {PROGRESS_LABELS[item.progress]}</p>
-              <p>{TYPE_LABELS[item.type]}{item.durationMinutes !== null ? " · " + item.durationMinutes + " minutes" : ""}</p>
-              <p className="muted">{item.type === "ACTIVITY" ? (item.sourceRecommendationId ? "From accepted recommendation" : "Source recommendation no longer available") : "Intentional planning block"}</p>
+              <p>{TYPE_LABELS[item.type]}{item.durationMinutes !== null ? " · " + item.durationMinutes + " minutes" : " · Duration not set"}</p>
+              <p className="muted">{item.type === "ACTIVITY" ? (item.enteredManually ? "Manually entered activity · Not provider-verified" : item.sourceRecommendationId ? "From accepted recommendation" : "Itinerary activity · Original source unavailable") : "Intentional planning block"}</p>
               {item.transportationMode ? <p>Mode: {MODE_LABELS[item.transportationMode]}</p> : null}
-              {item.notes ? <p>{item.notes}</p> : null}
+              {item.type === "ACTIVITY" ? <p className="item-location">{item.locationLabel ? "Entered location: " + item.locationLabel : "Location not entered"}</p> : null}
+              {item.notes || item.referenceUrl ? <details className="item-notes"><summary>Notes and reference</summary>{item.notes ? <p>{item.notes}</p> : null}{item.referenceUrl ? <p><a href={item.referenceUrl} target="_blank" rel="noopener noreferrer">Open entered reference</a> · User-entered link; current information is not verified.</p> : null}</details> : null}
+              <EditItem tripId={tripId} item={item} />
               <ItemMovement tripId={tripId} dayId={day.id} item={item} days={days} first={itemIndex === 0} last={itemIndex === day.items.length - 1} />
               {(item.type === "ACTIVITY" || item.type === "TRANSPORTATION") ? (reservationContext.ok ? (() => {
                 const context = reservationContext.data.find(entry => entry.itemId === item.id);
-                return context ? <ActivityReservation tripId={tripId} context={context} date={day.date} startMinute={item.startMinute} /> : <p role="alert">Reservation context changed. Refresh to continue.</p>;
+                return context ? (context.reservation ? <details className="item-booking" open={context.reservation.attention.length > 0}><summary>Reservation details · {STATE_LABELS[context.reservation.state]}</summary><ActivityReservation tripId={tripId} context={context} date={day.date} startMinute={item.startMinute} /></details> : <ActivityReservation tripId={tripId} context={context} date={day.date} startMinute={item.startMinute} />) : <p role="alert">Reservation context changed. Refresh to continue.</p>;
               })() : <p role="alert">{reservationContext.error.message}</p>) : null}
               {(item.type === "ACTIVITY" || item.type === "TRANSPORTATION") ? (travelContext.ok ? (() => {
                 const travel = travelContext.data.find(t => t.itemId === item.id);

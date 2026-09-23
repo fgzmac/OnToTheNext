@@ -5,6 +5,7 @@ export interface ItineraryIssue { code: ItineraryIssueCode; message: string; }
 export type ItineraryResult<T> = { ok: true; data: T } | { ok: false; error: ItineraryIssue };
 export interface ItineraryActionState { error: ItineraryIssue | null; message: string | null; }
 export interface TimelineItem {
+  editToken: string; enteredManually: boolean; locationLabel: string | null; referenceUrl: string | null;
   progress: ItineraryProgress;
   id: string; title: string; type: ItineraryItemType; startMinute: number | null;
   durationMinutes: number | null; position: number; flexibility: ItineraryFlexibility;
@@ -19,6 +20,7 @@ export interface UnscheduledIdea {
 }
 export interface TimeIssue { code: "TIME_OVERLAP" | "PAST_MIDNIGHT"; itemIds: string[]; message: string; }
 export interface ItineraryBuilder {
+  createToken: string;
   tripId: string;
   days: (SchedulingDay & { base: string | null; items: TimelineItem[]; issues: TimeIssue[] })[];
   segments: PlanningSegment[];

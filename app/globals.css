@@ -270,3 +270,16 @@ button:disabled { opacity: .55; cursor: progress; }
 .travel-summary { border-left: 3px solid var(--accent); padding-left: .8rem; }
 .travel-summary p { margin-bottom: 0; }
 .travel-summary ul { padding-left: 1.5rem; }
+
+.item-details-editor, .item-notes, .edit-preview { min-width: 0; overflow-wrap: anywhere; }
+.details-fields { border: 0; padding: 0; margin: 0; min-width: 0; }
+.details-fields legend { font-weight: 700; margin-bottom: .8rem; }
+.item-details-editor select { min-width: 0; }
+.edit-preview { padding: 1rem; border: 1px solid var(--accent); border-radius: 12px; }
+.edit-comparison { margin: 0; }
+.edit-comparison > div { padding: .65rem 0; border-bottom: 1px solid var(--line); }
+.edit-comparison dt { font-weight: 700; }
+.edit-comparison dd { margin-left: 0; white-space: pre-wrap; }
+.item-notes p { white-space: pre-wrap; }
+.item-booking > summary, .item-notes > summary { cursor: pointer; padding: .6rem 0; }
+.timeline-item h4:focus { outline: 2px solid var(--accent); outline-offset: 4px; }

@@ -1,3 +1,5 @@
+import { detailsInclude, itemEditToken } from "./details-context";
+import { manualActivityToken } from "./details-service";
 import { deriveTimeIssues } from "./planning";
 import { normalizeDayPositions } from "./ordering";
 import { getPrismaClient } from "@/src/lib/prisma";
@@ -69,7 +71,7 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
       const trip = await tx.trip.findFirst({
         where: { id: tripId, ownerId: PROTOTYPE_OWNER_ID },
         include: { segments: { orderBy: { position: "asc" } }, days: { orderBy: { position: "asc" }, include: {
-          primarySegment: true, itineraryItems: { orderBy: { position: "asc" }, include: { sourceRecommendation: { select: { tripSegmentId: true } } } },
+          primarySegment: true, itineraryItems: { orderBy: { position: "asc" }, include: { ...detailsInclude, sourceRecommendation: { select: { tripSegmentId: true } } } },
         } } },
       });
       if (!trip) return failure("NOT_FOUND", "This trip is unavailable.");
@@ -79,13 +81,14 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
         orderBy: [{ tripSegment: { position: "asc" } }, { displayRank: "asc" }, { id: "asc" }],
       });
       return { ok: true as const, data: {
-        tripId,
+        tripId, createToken: manualActivityToken(tripId),
         segments: trip.segments.map(segment => ({ id: segment.id, label: (segment.position + 1) + ". " + segment.baseName + " · " + formatDateOnly(segment.arrivalDate) + " to " + formatDateOnly(segment.departureDate) })),
         days: trip.days.map(day => ({
           id: day.id, date: formatDateOnly(day.date), primarySegmentId: day.primarySegmentId,
           base: day.primarySegment?.baseName ?? null,
           issues: deriveTimeIssues(day.itineraryItems),
           items: day.itineraryItems.map(item => ({
+            editToken: itemEditToken(item), enteredManually: item.enteredManually, locationLabel: item.locationLabel, referenceUrl: item.referenceUrl,
             id: item.id, title: item.title, type: item.type, startMinute: item.startMinute, progress: item.progress,
             durationMinutes: item.durationMinutes, position: item.position, flexibility: item.flexibility,
             notes: item.notes, sourceRecommendationId: item.sourceRecommendationId,
