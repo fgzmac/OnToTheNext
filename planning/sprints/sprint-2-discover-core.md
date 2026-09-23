@@ -1,5 +1,7 @@
 # Sprint 2 — Discover Core
 
+**Status:** COMPLETE — CEO/TPM accepted and merged on 2026-09-22.
+
 Current scope: Slice 1 plus Slice 2 (Trip interests and decision-based refinement). Review status and current evidence are recorded in the Slice 2 section below.
 
 ## Discover Core — Slice 1 (historical record)
@@ -140,3 +142,13 @@ All approved Discover Core implementation criteria are covered: recommendations 
 Known low-risk limitation: the existing PostgreSQL adapter emits a pg query-concurrency deprecation warning while verification passes. The old sprint-specific shell label and stale saved-checkbox display are resolved. Normal development still needs the additive migrations before running this branch; preserving it was intentional. Upgraded Slice 1 batches remain historical and therefore have fewer unseen alternatives than a fresh seed. This is fixture interaction validation, not proof of real recommendation quality.
 
 Deferred and not implemented: external providers, Maps, hotels, Reservations, ItineraryItems/scheduling, live logistics/pricing/weather/transit, ML/LLM ranking, embeddings/vector search, permanent User Preference learning, companions, swipe gestures, native apps, or another Sprint. Options App resources remain untouched.
+
+
+## Final acceptance
+
+- CEO/TPM approval: 2026-09-22
+- Accepted branch head: `c11caae998a2c2b2ef2fcf568d83f6b440e1fde6`
+- Merge commit: `2a829b3783bef880d0e6fd3d107b5ae4e156c067`
+- PR #2: MERGED
+- Current-head CI at acceptance: PASS
+- Next milestone: Itinerary Builder
