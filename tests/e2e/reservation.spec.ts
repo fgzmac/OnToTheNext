@@ -42,9 +42,10 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     await page.reload();
     await expect(item.locator(".reservation-state")).toHaveText("Reservation: Check back");
     await expect(item).toContainText("Desired: 2030-04-01 · 09:30");
+    await item.getByText("Availability and release evidence", { exact: true }).click();
     await item.getByText("Link availability evidence", { exact: true }).click();
     const evidenceForm = item.getByRole("form", { name: "Link evidence" });
-    await evidenceForm.getByLabel("Availability evidence").selectOption({ label: "Ticket availability · Development Fixture Catalog" });
+    await evidenceForm.getByLabel("Availability evidence").selectOption({ label: "Ticket availability · Development Fixture Catalog · 2026-09-22" });
     await evidenceForm.getByRole("button", { name: "Link evidence", exact: true }).click();
     await expect(item.locator(".evidence-record")).toContainText("Development fixture · Not live");
     await expect(item.locator(".evidence-record")).toContainText("Ticket availability");

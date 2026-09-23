@@ -57,7 +57,7 @@ export default async function ItineraryPage({ params }: { params: Promise<{ trip
               {item.transportationMode ? <p>Mode: {MODE_LABELS[item.transportationMode]}</p> : null}
               {item.notes ? <p>{item.notes}</p> : null}
               <ItemMovement tripId={tripId} dayId={day.id} item={item} days={days} first={itemIndex === 0} last={itemIndex === day.items.length - 1} />
-              {item.type === "ACTIVITY" ? (reservationContext.ok ? (() => {
+              {(item.type === "ACTIVITY" || item.type === "TRANSPORTATION") ? (reservationContext.ok ? (() => {
                 const context = reservationContext.data.find(entry => entry.itemId === item.id);
                 return context ? <ActivityReservation tripId={tripId} context={context} date={day.date} startMinute={item.startMinute} /> : <p role="alert">Reservation context changed. Refresh to continue.</p>;
               })() : <p role="alert">{reservationContext.error.message}</p>) : null}

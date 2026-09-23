@@ -172,14 +172,15 @@ model Source {
 model EvidenceRecord {
   id          String   @id @default(cuid())
   sourceId    String
-  placeId     String
+  placeId     String?
   topic       String
   factualText String
   retrievedAt DateTime
   status      String
   source      Source   @relation(fields: [sourceId], references: [id], onDelete: Restrict)
-  place       Place    @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  place       Place?   @relation(fields: [placeId], references: [id], onDelete: SetNull)
 
+  releaseObservation ReleaseObservation?
   reservationLinks ReservationEvidence[]
 
   @@unique([placeId, sourceId, topic])
@@ -260,6 +261,10 @@ enum ReservationState {
   CANCELLED
 }
 model Reservation {
+  title String @default("Unlinked activity reservation")
+  revision Int @default(0)
+  cancelledAt DateTime? @db.Timestamptz(3)
+  cancellationNote String?
   id String @id @default(cuid())
   tripId String
   type ReservationType
@@ -288,4 +293,41 @@ model ReservationEvidence {
   evidenceRecord EvidenceRecord @relation(fields: [evidenceRecordId], references: [id], onDelete: Cascade)
   @@id([reservationId, evidenceRecordId])
   @@index([evidenceRecordId])
+}
+
+enum ReleasePrecision {
+  UNKNOWN
+  NOT_ANNOUNCED
+  DATE_ONLY
+  EXACT
+  WINDOW
+}
+enum AvailabilityObservation {
+  UNKNOWN
+  AVAILABLE
+  UNAVAILABLE
+  LIMITED
+}
+enum EvidenceAttribution {
+  OFFICIAL
+  THIRD_PARTY
+  USER_REPORTED
+  DEVELOPMENT_FIXTURE
+}
+model ReleaseObservation {
+  evidenceRecordId String @id
+  availability AvailabilityObservation @default(UNKNOWN)
+  precision ReleasePrecision
+  releaseDate DateTime? @db.Date
+  releaseAt DateTime? @db.Timestamptz(3)
+  sourceTimeZone String?
+  windowStartDate DateTime? @db.Date
+  windowEndDate DateTime? @db.Date
+  windowDescription String?
+  observedAt DateTime @db.Timestamptz(3)
+  recheckAfter DateTime? @db.Timestamptz(3)
+  attribution EvidenceAttribution
+  sourceUrl String?
+  recordedByUser Boolean @default(true)
+  evidenceRecord EvidenceRecord @relation(fields: [evidenceRecordId], references: [id], onDelete: Cascade)
 }
