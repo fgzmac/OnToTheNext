@@ -1,5 +1,7 @@
 # Sprint 3 — Itinerary Builder
 
+**Status:** COMPLETE — CEO/TPM accepted and merged on 2026-09-22.
+
 **Slices 1 and 2 implemented; pending TPM/CEO review. Sprint 3 is not accepted.
 PR #3 remains draft. Do not merge.**
 
@@ -176,3 +178,13 @@ This is an implementation assessment, not Sprint 3 acceptance. PR #3 stays draft
 Meal/Shopping/Custom creation, Reservations, booking/payment/completion states, Map,
 hotel search, Expenses, Today, sharing, external providers, routing/live transit,
 weather and automatic itinerary generation remain out of scope. No next Sprint begun.
+
+
+## Final acceptance
+
+- CEO/TPM approval: 2026-09-22
+- Accepted branch head: `65a57b16de2406a093adad7a85dd07c34ad820aa`
+- Merge commit: `61ea6c94f84ec5e8a30b0c570635d1d003d27584`
+- PR #3: MERGED
+- Current-head CI at acceptance: PASS
+- Next milestone: Reservation Workflow
