@@ -33,7 +33,7 @@ export function verifyContainer(service, container, network, volumes, now = Date
   requireMatch(Number.isFinite(created) && created <= now && now - created < 30 * 60_000, 'service is not fresh');
   requireMatch(container.Mounts.length === 1 && volumes.length === 1, 'unexpected database mounts');
   const mount = container.Mounts[0], volume = volumes[0];
-  requireMatch(mount.Type === 'volume' && /^[a-f0-9]{64}$/.test(mount.Name) && mount.Destination === '/var/lib/postgresql/data' && mount.RW && volume.Name === mount.Name && volume.Driver === 'local' && !Object.keys(volume.Options ?? {}).length && !Object.keys(volume.Labels ?? {}).length, 'only fresh anonymous image volume permitted');
+  requireMatch(mount.Type === 'volume' && /^[a-f0-9]{64}$/.test(mount.Name) && mount.Destination === '/var/lib/postgresql/data' && mount.RW && volume.Name === mount.Name && volume.Driver === 'local' && !Object.keys(volume.Options ?? {}).length && Object.keys(volume.Labels ?? {}).length === 1 && volume.Labels['com.docker.volume.anonymous'] === '', 'only fresh anonymous image volume permitted');
   requireMatch(Date.parse(volume.CreatedAt) >= created - 5000 && Date.parse(volume.CreatedAt) <= now, 'volume predates this service');
 }
 async function main() {
