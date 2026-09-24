@@ -54,7 +54,7 @@ async function main() {
   const db = new pg.Client({ connectionString: process.env.DATABASE_URL });
   await db.connect();
   try {
-    const { rows: [identity] } = await db.query('SELECT current_database() AS database, current_user AS username, current_schema() AS schema, inet_server_addr()::text AS address, inet_server_port() AS port');
+    const { rows: [identity] } = await db.query('SELECT current_database() AS database, current_user AS username, current_schema() AS schema, host(inet_server_addr()) AS address, inet_server_port() AS port');
     const addresses = Object.values(container.NetworkSettings.Networks).map(n => n.IPAddress);
     console.log('CI database connection observation:', JSON.stringify({ ...identity, expectedContainerAddresses: addresses }));
     requireMatch(identity.database === 'ontothenext_test' && identity.username === 'ontothenext' && identity.schema === 'public' && identity.port === 5432 && addresses.includes(identity.address), 'actual database/user/schema/server mismatch');
