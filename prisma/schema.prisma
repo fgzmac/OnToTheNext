@@ -476,3 +476,37 @@ model ResearchBudget {
   approval String @id
   reservedUsd Float @default(0)
 }
+
+// Fixed aggregate account, independent of Trips and approval labels. Integer micro-USD.
+model ProviderPilotBudget {
+  id String @id
+  ceilingMicros Int
+  googleLimitMicros Int
+  googleReservedMicros Int @default(0)
+  searches Int @default(0)
+  details Int @default(0)
+  photos Int @default(0)
+  maxSearch Int
+  maxDetails Int
+  maxPhotos Int
+}
+// No provider payload, address, review, photo resource name or response cache.
+model GoogleOperation {
+  id String @id
+  requestHash String
+  purpose String
+  approval String
+  reservedMicros Int
+  searches Int
+  details Int
+  photos Int
+  state String @default("RESERVED")
+  createdAt DateTime @default(now())
+}
+// Google policy permits place ID retention. Identity/content of Place remains app-owned.
+model GooglePlaceReference {
+  appPlaceId String @id
+  googlePlaceId String
+  identityHash String
+  reviewedAt DateTime @default(now())
+}

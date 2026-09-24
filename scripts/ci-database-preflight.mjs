@@ -15,6 +15,7 @@ export function verifyContext(env, event) {
     requireMatch(event.pull_request?.head?.ref === branch && event.pull_request?.head?.repo?.full_name === env.GITHUB_REPOSITORY && event.pull_request?.base?.ref === 'refine/itinerary-builder-basics', 'dependent PR mismatch');
   }
   requireMatch(env.RESEARCH_ENABLED !== 'approved' && !env.RESEARCH_BRAVE_KEY && !env.RESEARCH_OPENAI_KEY && !env.OPENAI_API_KEY, 'live research/credentials forbidden');
+  requireMatch(env.GOOGLE_PLACES_ENABLED !== 'owner-approved' && !env.GOOGLE_PLACES_API_KEY, 'live Google/credentials forbidden');
   requireMatch(env.DATABASE_URL === env.TEST_DATABASE_URL, 'test URL mismatch');
   const url = new URL(env.DATABASE_URL);
   requireMatch(url.protocol === 'postgresql:' && url.hostname === 'localhost' && url.port === '5433' && url.pathname === '/ontothenext_test' && decodeURIComponent(url.username) === 'ontothenext' && url.search === '?schema=public' && !url.hash, 'connection target mismatch');

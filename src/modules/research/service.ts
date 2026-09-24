@@ -1,3 +1,5 @@
+import { googleConfiguration } from "../google-places/config";
+import { ensureAccount, researchAggregateAvailable } from "../google-places/budget";
 import { createHash } from "node:crypto";
 import type { Prisma } from "@/src/generated/prisma/client";
 import { getPrismaClient } from "@/src/lib/prisma";
@@ -33,8 +35,9 @@ export async function startDestinationResearch(input:{tripId:string;segmentId:st
     if(await tx.researchJob.count({where:{requestKey,createdAt:{gt:new Date(now.getTime()-86400_000)}}})>=3)return {ok:false as const,error:"Research retry limit reached for this context today."};
     // Global approval budget is reserved before queuing; a crash cannot refund unknown provider charges.
     await tx.$executeRaw`SELECT pg_advisory_xact_lock(86732011)`;
+    const google=googleConfiguration(); if(google) await ensureAccount(tx,google);
     const spent=await tx.researchBudget.upsert({where:{approval:config.approval},update:{},create:{approval:config.approval}});
-    if(spent.reservedUsd+config.maxUsd>config.pilotUsd)return {ok:false as const,error:"Approved pilot budget is reserved or exhausted."};
+    if(spent.reservedUsd+config.maxUsd>config.pilotUsd || !await researchAggregateAvailable(tx,config.maxUsd))return {ok:false as const,error:"Approved pilot budget is reserved or exhausted."};
     await tx.researchBudget.update({where:{approval:config.approval},data:{reservedUsd:{increment:config.maxUsd}}});
     const job=await tx.researchJob.create({data:{tripId:input.tripId,segmentId:input.segmentId,requestKey,context:asJson(context),
       approval:config.approval,model:config.model,budgetUsd:config.maxUsd,deadline:new Date(now.getTime()+config.maxSeconds*1000)}});

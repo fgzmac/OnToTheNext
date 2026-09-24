@@ -15,6 +15,7 @@ import { AddPlanningBlock, ItemMovement } from "./itinerary-builder-controls";
 import { RemoveScheduledItem } from "./itinerary-controls";
 import { ActivityReservation } from "./activity-reservation";
 import { TravelPlanning } from "./travel-planning";
+import { GoogleContext } from "./google-context";
 import { DetailPanel } from "./detail-panel";
 import { ComposerIdeas } from "./composer-ideas";
 
@@ -91,6 +92,7 @@ export function ItineraryComposer({ builder, selectedDayId, batch, recommendatio
     {item && owner ? <DetailPanel title={item.title} close={close}>
       <p className="muted">Day {days.indexOf(owner) + 1} · {owner.date} · <span className="item-time">{item.startMinute === null ? "Any time" : formatLocalTime(item.startMinute)}</span></p>
       <p>Progress: {PROGRESS_LABELS[item.progress]} · {item.enteredManually ? "Manually entered" : item.sourceRecommendationId ? "From a recommendation" : "Planning block"}</p>
+      {item.sourceRecommendationId ? <GoogleContext key={item.sourceRecommendationId} tripId={tripId} recommendationId={item.sourceRecommendationId} /> : null}
       <EditItem key={item.id} tripId={tripId} item={item} />
       <ItemMovement key={"move-" + item.id} tripId={tripId} dayId={owner.id} item={item} days={days} first={owner.items[0]?.id === item.id} last={owner.items.at(-1)?.id === item.id} />
       {item.notes ? <p>{item.notes}</p> : null}

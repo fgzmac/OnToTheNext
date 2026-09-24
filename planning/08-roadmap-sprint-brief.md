@@ -327,3 +327,7 @@ The roadmap sequence, first complete software-test target, and Sprint 1 brief ar
 Future sprint briefs should be created incrementally after each milestone is validated.
 
 **Section 9 is ready for closeout review.**
+
+## Japan quality provider sequence — Google enrichment Slice 1
+
+See [Google enrichment implementation and activation handoff](sprints/google-places-enrichment.md). Current priority is worthwhile itineraries, not API connectivity as acceptance. A: explicit Google enrichment of existing independent Japan experiences, then separately approved live evaluation. B: Japanese organizer/local Brave readers with source-specific permissions and real dated-event contracts, removing Wikidata-only assumptions. C: Viator Basic offsite selection. D: distinct Replace and free-time-window suggestions using start/time/next commitment/travel/duration/buffer, preserving breaks and previewing changes. B/C/D, general Today Slice 3 and mobile polish are not implemented by A. Synthetic tests do not establish live quality.
