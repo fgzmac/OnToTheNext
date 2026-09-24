@@ -4,6 +4,7 @@ import type { RecommendationBatch, RecommendationCardData } from "@/src/modules/
 import { composerAdd, composerBatch, composerDeny } from "@/src/modules/itinerary/composer-actions";
 import { RecommendationPhoto } from "./recommendation-photo";
 import { ExperienceDetails } from "./experience-details";
+import { recommendationProvenanceLabel } from "@/src/modules/experiences/provenance";
 import { DestinationResearch } from "./destination-research";
 import { TripInterests } from "./discover-controls";
 
@@ -47,7 +48,7 @@ export function ComposerIdeas({ tripId, segmentId, dayId, dayNumber, initial, er
       <h3 id={"recommendation-" + item.id}>{item.place.name}</h3><p>{item.factualSummary}</p>
       {item.event ? <p className="idea-duration">{item.event.startDate} – {item.event.endDate} · {item.event.timeZone} · Published occurrence, availability unconfirmed</p> : null}
       {item.durationMinutes !== null ? <p className="idea-duration">About {item.durationMinutes} min · planning estimate</p> : null}
-      {item.evidence.some(e => e.sourceKind === "DEVELOPMENT_FIXTURE") ? <small>Synthetic test idea</small> : item.evidence.some(e => e.sourceKind.startsWith("RUNTIME_")) ? <small className="muted">Researched · structured reference · access unverified</small> : <small className="muted">Curated · checked {item.evidence.find(e => e.sourceKind === "OFFICIAL_CURATED")?.retrievedAt.slice(0, 10) ?? "date unavailable"}</small>}
+      <small className="muted">{recommendationProvenanceLabel(item.evidence)}</small>
       <div className="idea-actions"><button disabled={pending} onClick={() => act(item, false)}>{"Add to Day " + dayNumber}</button><button className="text-button" disabled={pending} onClick={() => act(item, true)}>Not interested</button></div>
       <ExperienceDetails item={item} /></>}
     </article>)}

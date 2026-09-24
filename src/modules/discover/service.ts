@@ -1,8 +1,7 @@
-import { runtimeEvent, runtimePhoto } from "../research/runtime";
+import { resolveExperienceMetadata } from "../experiences/metadata";
 import { CATALOG, catalogPlace } from "./catalog";
 import { groupFor } from "./tokyo-pilot";
 import { eventMatches } from "./events";
-import { photoFor } from "./media";
 import { provisionSegmentCatalog } from "./catalog-service";
 import { lockPrototypeTrip } from "@/src/lib/trip-lock";
 import type { Prisma } from "@/src/generated/prisma/client";
@@ -22,10 +21,11 @@ const cardInclude = {
 type CardRecord = Prisma.RecommendationGetPayload<{ include: typeof cardInclude }>;
 
 function cardData(record: CardRecord): RecommendationCardData {
+  const metadata = resolveExperienceMetadata(record.placeId, record.place.research);
   return {
     id: record.id, tripId: record.tripId, tripSegmentId: record.tripSegmentId,
     place: { id: record.place.id, name: record.place.name, baseLabel: record.place.baseLabel, category: record.place.category, location: record.place.address },
-    photo: runtimePhoto(record.place.research) ?? photoFor(record.placeId), experienceKind: (record.place.research?.kind as "VENUE" | "NEIGHBORHOOD" | "EVENT" | undefined) ?? catalogPlace(record.placeId)?.kind ?? "VENUE", event: runtimeEvent(record.place.research) ?? catalogPlace(record.placeId)?.event,
+    photo: metadata.photo, experienceKind: metadata.kind, event: metadata.event, eventReview: metadata.eventReview, neighborhoodAuthorship: metadata.neighborhoodAuthorship,
     factualSummary: record.factualSummary, durationMinutes: record.durationMinutes,
     costContext: record.costContext, logisticsNote: record.logisticsNote,
     decision: record.decision?.outcome ?? null,
@@ -56,12 +56,17 @@ async function eligibleScope(tx: Prisma.TransactionClient, tripId: string, tripS
   const day = dayId ? await tx.day.findFirstOrThrow({ where: { id: dayId, tripId, primarySegmentId: tripSegmentId } }) : null;
   const from = (day?.date ?? segment.arrivalDate).toISOString().slice(0, 10);
   const to = (day?.date ?? segment.departureDate).toISOString().slice(0, 10);
-  const excluded = CATALOG.filter(p => p.event && !eventMatches(p.event, from, to)).map(p => p.id);
   const runtime = await tx.researchPlace.findMany({ where: { place: { recommendations: { some: { tripId, tripSegmentId } } } } });
-  for (const r of runtime) { const event = runtimeEvent(r); if(r.withdrawn || (event && !eventMatches(event,from,to))) excluded.push(r.placeId); }
-  const runtimeCount = runtime.filter(r => { const e=runtimeEvent(r); return e && eventMatches(e,from,to); }).length;
-  return { where: { tripId, tripSegmentId, placeId: { notIn: excluded } },
-    eventCount: runtimeCount + CATALOG.filter(p => p.city.toLowerCase() === segment.baseName.trim().toLowerCase() && p.event && eventMatches(p.event, from, to)).length };
+  const byPlace = new Map(runtime.map(record => [record.placeId, record]));
+  const ids = new Set([...CATALOG.map(p => p.id), ...byPlace.keys()]);
+  const excluded: string[] = [];
+  let eventCount = 0;
+  for (const id of ids) {
+    const metadata = resolveExperienceMetadata(id, byPlace.get(id));
+    if (metadata.unavailable || (metadata.event && !eventMatches(metadata.event, from, to))) excluded.push(id);
+    else if (metadata.event && (byPlace.has(id) || catalogPlace(id)?.city.toLowerCase() === segment.baseName.trim().toLowerCase())) eventCount++;
+  }
+  return { where: { tripId, tripSegmentId, placeId: { notIn: excluded } }, eventCount };
 }
 function rankedData(item: { id: string; displayRank: number; presentationBatch: number | null; place: { id: string; interestTags: DiscoverInterest[] }; decision?: { outcome: string } | null }) {
   const catalog = catalogPlace(item.place.id);

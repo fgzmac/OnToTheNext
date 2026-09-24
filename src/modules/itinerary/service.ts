@@ -1,7 +1,6 @@
-import { runtimeEvent } from "../research/runtime";
+import { resolveExperienceMetadata } from "../experiences/metadata";
 import { eventMatches, eventReviewWarning } from "@/src/modules/discover/events";
 import type { Prisma } from "@/src/generated/prisma/client";
-import { catalogPlace } from "@/src/modules/discover/catalog";
 import { detailsInclude, itemEditToken } from "./details-context";
 import { manualActivityToken } from "./details-service";
 import { deriveTimeIssues } from "./planning";
@@ -32,8 +31,9 @@ export async function scheduleAcceptedRecommendation(input: {
       const day = await tx.day.findFirst({ where: { id: input.dayId, tripId: input.tripId } });
       if (!day) return failure("WRONG_DAY", "Choose a day in this trip.");
       if (day.primarySegmentId !== recommendation.tripSegmentId) return failure("WRONG_SEGMENT", "Choose a day owned by this idea’s destination segment.");
-      const event = runtimeEvent(recommendation.place.research) ?? catalogPlace(recommendation.placeId)?.event;
-      if (recommendation.place.research?.withdrawn) return failure("NOT_FOUND", "Source content was withdrawn. Your saved plan has not been changed.");
+      const metadata = resolveExperienceMetadata(recommendation.placeId, recommendation.place.research);
+      const event = metadata.event;
+      if (metadata.unavailable) return failure("NOT_FOUND", "Source metadata is unavailable. Your saved plan has not been changed.");
       if (event && !eventMatches(event, formatDateOnly(day.date))) return failure("WRONG_DAY", "This event has no verified occurrence on the selected Day. Nothing was changed.");
       const startMinute = input.startMinute === undefined ? null : input.startMinute;
       const flexibility = input.flexibility === undefined ? "FLEXIBLE" : input.flexibility;
@@ -89,7 +89,7 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
           base: day.primarySegment?.baseName ?? null,
           issues: deriveTimeIssues(day.itineraryItems),
           items: day.itineraryItems.map(item => ({
-            eventWarning: eventReviewWarning(runtimeEvent(item.sourceRecommendation?.place.research) ?? catalogPlace(item.sourceRecommendation?.placeId ?? "")?.event, formatDateOnly(day.date)),
+            eventWarning: savedEventWarning(item.sourceRecommendation?.placeId, item.sourceRecommendation?.place.research, formatDateOnly(day.date)),
             editToken: itemEditToken(item), enteredManually: item.enteredManually, locationLabel: item.locationLabel, referenceUrl: item.referenceUrl,
             id: item.id, title: item.title, type: item.type, startMinute: item.startMinute, progress: item.progress,
             durationMinutes: item.durationMinutes, position: item.position, flexibility: item.flexibility,
@@ -111,12 +111,13 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
 
 type ScheduleRecord = Prisma.RecommendationGetPayload<{ include: { place: { include: { research: true } } } }>;
 async function appendRecommendation(tx: Prisma.TransactionClient, recommendation: ScheduleRecord, dayId: string, startMinute: number | null, flexibility: "FIXED" | "FLEXIBLE") {
-  const event = runtimeEvent(recommendation.place.research) ?? catalogPlace(recommendation.placeId)?.event;
+  const metadata = resolveExperienceMetadata(recommendation.placeId, recommendation.place.research);
+  const event = metadata.event;
   const last = await tx.itineraryItem.aggregate({ where: { dayId }, _max: { position: true } });
   return tx.itineraryItem.create({ data: {
     tripId: recommendation.tripId, dayId, type: "ACTIVITY", title: recommendation.place.name,
     sourceRecommendationId: recommendation.id, durationMinutes: recommendation.durationMinutes,
-    locationLabel: recommendation.place.address, referenceUrl: recommendation.place.research?.sourceUrl ?? catalogPlace(recommendation.placeId)?.url ?? null,
+    locationLabel: recommendation.place.address, referenceUrl: metadata.sourceUrl,
     notes: event ? "Event occurrence: " + event.startDate + " to " + event.endDate + " (" + event.timeZone + "). Observed " + event.observedAt + ". Session/availability unconfirmed." : null,
     startMinute, flexibility, position: (last._max.position ?? -1) + 1,
   } });
@@ -140,8 +141,9 @@ export async function addRecommendationToDay(input: {
         const item = recommendation.scheduledItem;
         return { ok: true as const, data: { id: item.id, dayId: item.dayId, dayNumber: item.day.position + 1, alreadyScheduled: true } };
       }
-      const event = runtimeEvent(recommendation.place.research) ?? catalogPlace(recommendation.placeId)?.event;
-      if (recommendation.place.research?.withdrawn) return failure("NOT_FOUND", "Source content was withdrawn. Your saved plan has not been changed.");
+      const metadata = resolveExperienceMetadata(recommendation.placeId, recommendation.place.research);
+      const event = metadata.event;
+      if (metadata.unavailable) return failure("NOT_FOUND", "Source metadata is unavailable. Your saved plan has not been changed.");
       if (event && !eventMatches(event, formatDateOnly(day.date))) return failure("WRONG_DAY", "This event has no verified occurrence on the selected Day. Nothing was changed.");
       const issue = validatePlanning({ startMinute: null, durationMinutes: recommendation.durationMinutes, flexibility: "FLEXIBLE" });
       if (issue) return { ok: false as const, error: issue };
@@ -153,4 +155,9 @@ export async function addRecommendationToDay(input: {
       return { ok: true as const, data: { id: item.id, dayId: day.id, dayNumber: day.position + 1, alreadyScheduled: false } };
     });
   } catch { return failure("PERSISTENCE_FAILURE", "The idea could not be added. Nothing was changed. Please try again."); }
+}
+
+function savedEventWarning(placeId: string | undefined, runtime: Parameters<typeof resolveExperienceMetadata>[1], date: string) {
+  const metadata = resolveExperienceMetadata(placeId ?? "", runtime);
+  return eventReviewWarning(metadata.event, date, undefined, metadata.eventReview);
 }

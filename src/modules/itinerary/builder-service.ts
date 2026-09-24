@@ -1,5 +1,4 @@
-import { runtimeEvent } from "../research/runtime";
-import { catalogPlace } from "@/src/modules/discover/catalog";
+import { resolveExperienceMetadata } from "../experiences/metadata";
 import { eventMatches } from "@/src/modules/discover/events";
 import type { Prisma, ItineraryItemType, TransportationMode } from "@/src/generated/prisma/client";
 import { getPrismaClient } from "@/src/lib/prisma";
@@ -85,7 +84,7 @@ function previewFor(plan: Context, itemId: string, targetDayId: string, directio
   } else if (!isEligibleMoveDay({ ...item, sourceSegmentId: item.sourceRecommendation?.tripSegmentId ?? null }, { ...target, date: formatDateOnly(target.date) })) {
     return failure("WRONG_SEGMENT", "Choose another day owned by this item's source or origin Segment, or any other trip day when it has no Segment constraint.");
   }
-  const event = runtimeEvent(item.sourceRecommendation?.place.research) ?? catalogPlace(item.sourceRecommendation?.placeId ?? "")?.event;
+  const event = resolveExperienceMetadata(item.sourceRecommendation?.placeId ?? "", item.sourceRecommendation?.place.research).event;
   if (!direction && event && !eventMatches(event, formatDateOnly(target.date))) return failure("WRONG_DAY", "This event has no verified occurrence on the target Day. Keep the saved item and check its source.");
   return { ok: true, data: {
     token: signPreview({ tripId: plan.id, itemId, targetDayId, direction, fingerprint: fingerprint(plan) }),
