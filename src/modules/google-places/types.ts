@@ -13,8 +13,11 @@ export interface GooglePlace {
 export interface Author { displayName?: string; uri?: string; photoUri?: string }
 export type Purpose = "identity" | "context" | "reviews" | "photo";
 export interface Candidate { place: GooglePlace; eligible: boolean; reason: string; token?: string }
+export type DetailOutcome = "disabled" | "loading" | "needs_confirmation" | "ambiguous" | "ready" | "unavailable" | "budget_exhausted" | "expired";
+export interface PlaceIdentity { placeId:string; revision:string }
 export interface Enrichment {
+  status?: DetailOutcome; identity?: PlaceIdentity; identityChanged?: boolean; diagnostic?: string; warning?: string;
   message: string; candidates?: Candidate[]; place?: GooglePlace; matched?: boolean;
   photo?: { data: string; authors: Author[]; source?: string }; observedAt?: string;
 }
-export interface GoogleInput { tripId: string; recommendationId: string; requestId: string; purpose: Purpose | "confirm"; token?: string }
+export interface GoogleInput { tripId: string; recommendationId: string; requestId: string; purpose: Purpose | "confirm" | "open"; token?: string; reference?: PlaceIdentity }

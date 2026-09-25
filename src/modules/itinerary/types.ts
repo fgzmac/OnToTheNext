@@ -5,6 +5,7 @@ export interface ItineraryIssue { code: ItineraryIssueCode; message: string; }
 export type ItineraryResult<T> = { ok: true; data: T } | { ok: false; error: ItineraryIssue };
 export interface ItineraryActionState { error: ItineraryIssue | null; message: string | null; }
 export interface TimelineItem {
+  sourceActivity?: import("../discover/types").RecommendationCardData | null;
   eventWarning?: string | null;
   editToken: string; enteredManually: boolean; locationLabel: string | null; referenceUrl: string | null;
   progress: ItineraryProgress;

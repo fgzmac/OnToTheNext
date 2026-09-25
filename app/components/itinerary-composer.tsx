@@ -15,7 +15,8 @@ import { AddPlanningBlock, ItemMovement } from "./itinerary-builder-controls";
 import { RemoveScheduledItem } from "./itinerary-controls";
 import { ActivityReservation } from "./activity-reservation";
 import { TravelPlanning } from "./travel-planning";
-import { GoogleContext } from "./google-context";
+import {ActivityDetails,newDetailSession} from "./experience-details";
+import type {DetailSession} from "@/src/modules/google-places/detail-session";
 import { DetailPanel } from "./detail-panel";
 import { ComposerIdeas } from "./composer-ideas";
 
@@ -25,6 +26,8 @@ export function ItineraryComposer({ builder, selectedDayId, batch, recommendatio
 }) {
   const router = useRouter(), query = useSearchParams();
   const [panel, setPanel] = useState<string | null>(null), [pending, start] = useTransition();
+  const [googleSession,setGoogleSession]=useState<DetailSession|null>(null);
+  useEffect(()=>()=>googleSession?.close(),[googleSession]);
   const { tripId, days } = builder;
   const day = days.find(d => d.id === selectedDayId) ?? days[0];
   const dayNumber = days.findIndex(d => d.id === day?.id) + 1;
@@ -51,11 +54,11 @@ export function ItineraryComposer({ builder, selectedDayId, batch, recommendatio
   const item = owner?.items.find(i => i.id === panel);
   const booking = reservations.find(r => r.itemId === item?.id);
   const estimate = travel.find(t => t.itemId === item?.id);
-  const close = () => { setPanel(null); if (window.location.hash) window.history.replaceState(null, "", window.location.pathname + window.location.search); };
+  const close = () => { googleSession?.close();setGoogleSession(null);setPanel(null); if (window.location.hash) window.history.replaceState(null, "", window.location.pathname + window.location.search); };
   if (!day) return <p>No Trip Days are available.</p>;
   return <div className="itinerary-composer">
     <header className="composer-heading"><div><span className="eyebrow">Make room for what you love</span><h2>Build your days.</h2></div>
-      <label className="day-picker">Selected day<select aria-label="Selected day" value={day.id} disabled={pending} onChange={e => { setPanel(null); selectDay(e.target.value); }}>
+      <label className="day-picker">Selected day<select aria-label="Selected day" value={day.id} disabled={pending} onChange={e => { close(); selectDay(e.target.value); }}>
         {days.map((d, i) => <option key={d.id} value={d.id}>Day {i + 1} · {d.date} · {d.base ?? "Unassigned"}</option>)}
       </select></label><button className="text-button mobile-plan-link" onClick={() => document.getElementById("selected-plan")?.scrollIntoView({ block: "start" })}>{day.items.length} planned · View day ↓</button>
     </header>
@@ -73,7 +76,7 @@ export function ItineraryComposer({ builder, selectedDayId, batch, recommendatio
           if (["ACTIVITY", "TRANSPORTATION"].includes(row.type) && (!reservations.some(r => r.itemId === row.id) || !t) && !contextError) warnings.push("Planning details changed. Refresh to review booking and travel.");
           if (t?.status === "NEEDS_REVIEW" && !warnings.length) warnings.push("Travel estimate needs review.");
           return <li key={row.id}><article className="timeline-item compact-item" aria-labelledby={"item-" + row.id}>
-            <button className="timeline-open" onClick={() => { setPanel(row.id); window.history.replaceState(null, "", window.location.pathname + window.location.search + "#item-" + row.id); }} aria-label={"Open " + row.title}>
+            <button className="timeline-open" onClick={() => { googleSession?.close();setGoogleSession(row.sourceRecommendationId?newDetailSession(tripId,row.sourceRecommendationId):null);setPanel(row.id); window.history.replaceState(null, "", window.location.pathname + window.location.search + "#item-" + row.id); }} aria-label={"Open " + row.title}>
               <span className="item-time">{row.startMinute === null ? "Any time" : formatLocalTime(row.startMinute)}{row.flexibility === "FIXED" ? " · Fixed" : ""}</span>
               <h3 id={"item-" + row.id} tabIndex={-1}>{row.title}</h3>
               {row.durationMinutes !== null || row.locationLabel ? <p className="muted">{[row.durationMinutes !== null ? row.durationMinutes + " min" : null, row.locationLabel].filter(Boolean).join(" · ")}</p> : null}
@@ -92,7 +95,8 @@ export function ItineraryComposer({ builder, selectedDayId, batch, recommendatio
     {item && owner ? <DetailPanel title={item.title} close={close}>
       <p className="muted">Day {days.indexOf(owner) + 1} · {owner.date} · <span className="item-time">{item.startMinute === null ? "Any time" : formatLocalTime(item.startMinute)}</span></p>
       <p>Progress: {PROGRESS_LABELS[item.progress]} · {item.enteredManually ? "Manually entered" : item.sourceRecommendationId ? "From a recommendation" : "Planning block"}</p>
-      {item.sourceRecommendationId ? <GoogleContext key={item.sourceRecommendationId} tripId={tripId} recommendationId={item.sourceRecommendationId} /> : null}
+      {item.eventWarning?<p className="issue warning">{item.eventWarning}</p>:null}
+      {item.sourceActivity ? <ActivityDetails item={item.sourceActivity} session={googleSession} connect={()=>{if(!googleSession&&item.sourceRecommendationId)setGoogleSession(newDetailSession(tripId,item.sourceRecommendationId));}}/> : null}
       <EditItem key={item.id} tripId={tripId} item={item} />
       <ItemMovement key={"move-" + item.id} tripId={tripId} dayId={owner.id} item={item} days={days} first={owner.items[0]?.id === item.id} last={owner.items.at(-1)?.id === item.id} />
       {item.notes ? <p>{item.notes}</p> : null}

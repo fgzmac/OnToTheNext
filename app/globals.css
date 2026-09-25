@@ -401,3 +401,23 @@ body:has(.itinerary-composer) { background: #f4f5f2; color: #24352e; }
 .google-provider-content { border-left: 3px solid #dadce0; padding: .75rem; background: #fff; color: #202124; }
 .google-provider-content figure { margin: .5rem 0; }
 .google-provider-content blockquote { margin: .5rem 0; padding: .5rem; border-left: 2px solid #dadce0; }
+
+/* One shared activity-details surface; useful content precedes optional sources. */
+.activity-tabs { display:flex; gap:8px; border-bottom:1px solid #dfe5de; }
+.activity-tabs button { background:transparent; color:#385647; border:0; border-radius:0; }
+.activity-tabs button[aria-selected="true"] { border-bottom:3px solid #45694f; font-weight:700; }
+.activity-details-actions { position:sticky; bottom:-24px; background:white; padding:14px 0; border-top:1px solid #dfe5de; z-index:1; }
+.activity-google-photo { margin:0; }
+.activity-google-photo > img { display:block; width:100%; max-height:240px; object-fit:contain; background:#f2f1ed; border-radius:10px; }
+.activity-google-photo figcaption { font-size:.75rem; }
+.google-attribution { font-family:Arial,sans-serif; font-size:14px; font-weight:400; color:#5e5e5e; white-space:nowrap; }
+.google-provider-content img { vertical-align:middle; margin-right:8px; }
+.location-choice { padding:12px 0; border-bottom:1px solid #eee; }
+.location-choice button { display:block; margin-top:10px; }
+.activity-rating { font-size:1.05rem; font-weight:600; }
+.activity-details [hidden] { display:none; }
+
+.activity-google-photo > img { max-height:180px; }
+.activity-google-photo figcaption { line-height:1.7; margin-top:6px; }
+.activity-google-photo figcaption p { display:inline; margin:0 .5em 0 0; }
+.activity-tabs { position:relative; margin-bottom:8px; }

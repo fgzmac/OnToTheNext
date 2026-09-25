@@ -91,4 +91,30 @@ suite("Google enrichment durable safety",()=>{
   const r=await enrichGoogle(s.input,deps),i:GoogleInput={...s.input,requestId:randomUUID(),purpose:"confirm",token:r.candidates![0].token};
   await expect(enrichGoogle({...i,token:i.token+"bad"},deps)).rejects.toThrow();await expect(enrichGoogle(i,{...deps,now:()=>new Date("2032-04-02")})).rejects.toThrow();expect(await db!.googlePlaceReference.count()).toBe(0);
  });
+
+ it("opening checks availability/reference without dispatch or accounting, then uses the existing reservation gate",async()=>{
+  const s=await setup(),calls=vi.fn(),deps={configuration:()=>config,client:()=>new GoogleClient("fake",googleHttp(calls),async()=>({type:"image/png",bytes:syntheticPhoto}))};
+  expect((await enrichGoogle({...s.input,purpose:"open"},deps)).status).toBe("needs_confirmation");
+  expect(calls).not.toHaveBeenCalled();expect(await db!.googleOperation.count()).toBe(0);
+  const found=await enrichGoogle(s.input,deps),linked=await enrichGoogle({...s.input,purpose:"confirm",token:found.candidates![0].token},deps);
+  const opening=await enrichGoogle({...s.input,purpose:"open"},deps);expect(opening.identity).toEqual(linked.identity);
+  const before=calls.mock.calls.length;
+  for(const purpose of ["context","photo"] as const)expect((await enrichGoogle({...s.input,purpose,reference:opening.identity,requestId:randomUUID()},deps)).identity).toEqual(opening.identity);
+  expect(calls.mock.calls.length-before).toBe(3);expect(await db!.googleOperation.count()).toBe(3);
+  expect((await db!.providerPilotBudget.findUniqueOrThrow({where:{id:ACCOUNT}})).googleReservedMicros).toBe(82000);
+ });
+ it("stale client revision fails before another reservation or provider request",async()=>{
+  const s=await setup(),client=vi.fn(()=>new GoogleClient("fake",googleHttp())),deps={configuration:()=>config,client};
+  const found=await enrichGoogle(s.input,deps);const linked=await enrichGoogle({...s.input,purpose:"confirm",token:found.candidates![0].token},deps);const calls=client.mock.calls.length;
+  await db!.googlePlaceReference.updateMany({data:{reviewedAt:new Date("2035-01-01")}});
+  const result=await enrichGoogle({...s.input,purpose:"reviews",reference:linked.identity,requestId:randomUUID()},deps);
+  expect(result.identityChanged).toBe(true);expect(result.place).toBeUndefined();expect(client).toHaveBeenCalledTimes(calls);expect(await db!.googleOperation.count()).toBe(1);
+ });
+ it("reference correction during dispatch cannot return mixed identity content",async()=>{
+  const s=await setup(),transport=googleHttp(),deps={configuration:()=>config,client:()=>new GoogleClient("fake",transport)};
+  const found=await enrichGoogle(s.input,deps);const linked=await enrichGoogle({...s.input,purpose:"confirm",token:found.candidates![0].token},deps);
+  const changed=new GoogleClient("fake",async input=>{const result=await transport(input);await db!.googlePlaceReference.updateMany({data:{reviewedAt:new Date("2035-01-01")}});return result;});
+  const result=await enrichGoogle({...s.input,purpose:"context",reference:linked.identity,requestId:randomUUID()},{...deps,client:()=>changed});
+  expect(result.identityChanged).toBe(true);expect(result.place).toBeUndefined();expect(await db!.googleOperation.count({where:{state:"UNCERTAIN"}})).toBe(1);
+ });
 });

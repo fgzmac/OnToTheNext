@@ -21,7 +21,7 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
       </dl>
       {item.event ? <p>{item.event.startDate} – {item.event.endDate} · {item.event.timeZone} · Availability unconfirmed</p> : null}
       {item.evidence.filter(e => e.sourceKind === "DEVELOPMENT_FIXTURE").map(e => <div key={e.id}><p>Source: {e.sourceName}</p><p>Evidence: {e.status === "FIXTURE" ? "fixture data — not live" : "not verified as current"}</p></div>)}
-      <ExperienceDetails item={item} />
+      <ExperienceDetails item={item} actions={<RecommendationDecision tripId={item.tripId} tripSegmentId={item.tripSegmentId} recommendationId={item.id} name={item.place.name} outcome={item.decision} />} />
       <RecommendationDecision tripId={item.tripId} tripSegmentId={item.tripSegmentId} recommendationId={item.id} name={item.place.name} outcome={item.decision} />
     </article>
   );

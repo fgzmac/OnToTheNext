@@ -50,7 +50,7 @@ export function ComposerIdeas({ tripId, segmentId, dayId, dayNumber, initial, er
       {item.durationMinutes !== null ? <p className="idea-duration">About {item.durationMinutes} min · planning estimate</p> : null}
       <small className="muted">{recommendationProvenanceLabel(item.evidence)}</small>
       <div className="idea-actions"><button disabled={pending} onClick={() => act(item, false)}>{"Add to Day " + dayNumber}</button><button className="text-button" disabled={pending} onClick={() => act(item, true)}>Not interested</button></div>
-      <ExperienceDetails item={item} /></>}
+      <ExperienceDetails item={item} onAdd={()=>act(item,false)} dayNumber={dayNumber} pending={pending} /></>}
     </article>)}
     {batch && !cards.length && batch.total > 0 ? <p>No ideas left in this batch. Try another batch or revisit an earlier one.</p> : null}
     {batch ? <div className="row">

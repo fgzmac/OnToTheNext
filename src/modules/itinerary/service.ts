@@ -1,3 +1,4 @@
+import {cardInclude,cardData} from "../discover/service";
 import { resolveExperienceMetadata } from "../experiences/metadata";
 import { eventMatches, eventReviewWarning } from "@/src/modules/discover/events";
 import type { Prisma } from "@/src/generated/prisma/client";
@@ -72,7 +73,7 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
       const trip = await tx.trip.findFirst({
         where: { id: tripId, ownerId: PROTOTYPE_OWNER_ID },
         include: { segments: { orderBy: { position: "asc" } }, days: { orderBy: { position: "asc" }, include: {
-          primarySegment: true, itineraryItems: { orderBy: { position: "asc" }, include: { ...detailsInclude, sourceRecommendation: { select: { tripSegmentId: true, placeId: true, place: { include: { research: true } } } } } },
+          primarySegment: true, itineraryItems: { orderBy: { position: "asc" }, include: { ...detailsInclude, sourceRecommendation: { include: cardInclude } } },
         } } },
       });
       if (!trip) return failure("NOT_FOUND", "This trip is unavailable.");
@@ -93,6 +94,7 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
             editToken: itemEditToken(item), enteredManually: item.enteredManually, locationLabel: item.locationLabel, referenceUrl: item.referenceUrl,
             id: item.id, title: item.title, type: item.type, startMinute: item.startMinute, progress: item.progress,
             durationMinutes: item.durationMinutes, position: item.position, flexibility: item.flexibility,
+            sourceActivity:item.sourceRecommendation?cardData(item.sourceRecommendation):null,
             notes: item.notes, sourceRecommendationId: item.sourceRecommendationId,
             sourceSegmentId: item.sourceRecommendation?.tripSegmentId ?? null,
             transportationMode: item.transportationMode, originSegmentId: item.originSegmentId, destinationSegmentId: item.destinationSegmentId,

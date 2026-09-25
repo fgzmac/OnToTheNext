@@ -32,8 +32,8 @@ for(const [device,width,height] of [["desktop",1280,900],["phone",390,844]] as c
   const card=page.locator(".idea-card").filter({has:page.getByRole("heading",{name:"Synthetic River Gallery",exact:true})});
   await expect(card).toBeVisible();await expect(card.getByRole("img",{name:"Photo unavailable for Synthetic River Gallery"})).toBeVisible();
   await expect(card.getByText("Researched · structured reference · access unverified")).toBeVisible();
-  await card.locator("summary").click();await expect(card.getByText("Runtime research; not live availability",{exact:false}).first()).toBeVisible();
-  await card.screenshot({path:info.outputPath(device+"-research.png")});
+  await card.getByRole("button",{name:"View details",exact:true}).click();const details=page.getByRole("dialog");await details.getByText("Sources",{exact:true}).click();await expect(details.getByText("Runtime research; not live availability",{exact:false}).first()).toBeVisible();
+  await details.screenshot({path:info.outputPath(device+"-research.png")});await details.getByRole("button",{name:"Close details",exact:true}).click();
   // Test-only media metadata and intercepted HTTP; this graphic is not an attraction photograph.
   const asset="https://upload.wikimedia.org/wikipedia/commons/synthetic-contract-only.svg";
   await page.route(asset,route=>route.fulfill({contentType:"image/svg+xml",body:'<svg xmlns="http://www.w3.org/2000/svg" width="480" height="320"><rect width="480" height="320" fill="#dfe8df"/><text x="30" y="150" font-size="24">SYNTHETIC HTTP IMAGE TEST</text></svg>'}));

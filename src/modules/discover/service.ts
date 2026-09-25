@@ -12,7 +12,7 @@ import { selectDiverseBatch, validateDiscoverInterests } from "./refinement";
 import type { DiscoverInterest } from "@/src/generated/prisma/enums";
 import type { DiscoverResult, RecommendationBatch, RecommendationCardData } from "./types";
 
-const cardInclude = {
+export const cardInclude = {
   place: { include: { research: true, evidence: { include: { source: true }, orderBy: { id: "asc" as const } } } },
   decision: true,
   scheduledItem: { include: { day: true } },
@@ -20,7 +20,7 @@ const cardInclude = {
 
 type CardRecord = Prisma.RecommendationGetPayload<{ include: typeof cardInclude }>;
 
-function cardData(record: CardRecord): RecommendationCardData {
+export function cardData(record: CardRecord): RecommendationCardData {
   const metadata = resolveExperienceMetadata(record.placeId, record.place.research);
   return {
     id: record.id, tripId: record.tripId, tripSegmentId: record.tripSegmentId,

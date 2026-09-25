@@ -36,12 +36,13 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
         seen.add(title);
         if (anchors[title]) {
           await card.screenshot({ style: cardCaptureStyle, path: info.outputPath(device + "-" + anchors[title] + ".png") });
-          await card.locator("summary").click();
-          await expect(card.getByText(/· Photograph by .* · Wikimedia Commons/)).toBeVisible();
-          await expect(card.locator('a[href*="commons.wikimedia.org/wiki/File:"]')).toHaveCount(2);
-          if (title === "teamLab Planets TOKYO") await expect(card.getByText("Exterior in Toyosu · interior artworks not shown.")).toBeVisible();
-          if (title === "Imperial Palace East Gardens") await card.screenshot({ style: cardCaptureStyle, path: info.outputPath(device + "-credits.png") });
-          await card.locator("summary").click();
+          await card.getByRole("button",{name:"View details",exact:true}).click();
+          const details=page.getByRole("dialog");await details.getByText("Sources",{exact:true}).click();
+          await expect(details.getByText(/· Photograph by .* · Wikimedia Commons/)).toBeVisible();
+          await expect(details.locator('a[href*="commons.wikimedia.org/wiki/File:"]')).toHaveCount(2);
+          if (title === "teamLab Planets TOKYO") await expect(details.getByText("Exterior in Toyosu · interior artworks not shown.")).toBeVisible();
+          if (title === "Imperial Palace East Gardens") await details.screenshot({ path: info.outputPath(device + "-credits.png") });
+          await details.getByRole("button",{name:"Close details",exact:true}).click();
         }
       }
       if (batch === 0) { await page.evaluate(() => window.scrollTo(0, 0)); await capture(page, info, device + "-first-batch"); await page.screenshot({ path: info.outputPath(device + "-first-batch-full.png"), fullPage: true }); }
@@ -85,11 +86,11 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
     }
     await expect(event).toBeVisible(); await expect(event).toContainText("Asia/Tokyo");
     await expect(event.getByText("No verified reusable photo yet", { exact: true })).toBeVisible();
-    await event.locator("summary").click(); await expect(event).toContainText("availability");
-    await expect(event.locator('a[href="https://2026.tokyo-grand-tea-ceremony.jp/eng/index.html"]')).toHaveCount(1);
-    await event.screenshot({ style: cardCaptureStyle, path: info.outputPath(device + "-event-details.png") });
+    await event.getByRole("button",{name:"View details",exact:true}).click();const details=page.getByRole("dialog");await details.getByText("Sources",{exact:true}).click();await expect(details).toContainText("availability");
+    await expect(details.locator('a[href="https://2026.tokyo-grand-tea-ceremony.jp/eng/index.html"]')).toHaveCount(1);
+    await details.screenshot({ path: info.outputPath(device + "-event-details.png") });
     const name = (await event.locator("h3").textContent())!;
-    await event.getByRole("button", { name: "Add to Day 2", exact: true }).click();
+    await details.getByRole("button", { name: "Add to Day 2", exact: true }).click();
     await expect(page.locator(".timeline-item h3")).toHaveText([name]);
     await page.reload(); await expect(page.getByLabel("Selected day").locator("option:checked")).toContainText("Day 2");
     await expect(page.locator(".timeline-item h3")).toHaveText([name]);

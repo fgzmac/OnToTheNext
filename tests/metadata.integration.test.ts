@@ -1,7 +1,7 @@
 import { beforeEach, afterAll, describe, it, expect, vi } from "vitest";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { ExperienceDetails } from "@/app/components/experience-details";
+import { ExperienceDetails, ActivityDetails } from "@/app/components/experience-details";
 import { getPrismaClient } from "@/src/lib/prisma";
 import { createTrip } from "@/src/modules/trips/service";
 import { getRecommendationBatch, decideRecommendation } from "@/src/modules/discover/service";
@@ -31,7 +31,7 @@ suite("shared metadata in existing application paths",()=>{
   it("rendering, navigation reads and Add never invoke research/search/extraction transport",async()=>{
     const searches=vi.spyOn(adapters,"braveSearch"), reads=vi.spyOn(adapters,"readEntity"), extractions=vi.spyOn(adapters,"extract");
     const s=await setup();
-    expect(renderToStaticMarkup(createElement(ExperienceDetails,{item:s.r}))).toContain("Sources and photo details");
+    expect(renderToStaticMarkup(createElement(ExperienceDetails,{item:s.r}))).toContain("View details");
     await researchStatus(s.tripId,s.tripSegmentId);
     await getRecommendationBatch(s.tripId,s.tripSegmentId,"0",s.t.days[1].id!);
     const added=ok(await addRecommendationToDay(s.input));
@@ -44,7 +44,7 @@ suite("shared metadata in existing application paths",()=>{
     await db!.researchPlace.create({data:{placeId:s.r.place.id,identity:"wikidata:Q3000:EVENT:2032-04-02:2032-04-03",originalName:"Synthetic occurrence",kind:"EVENT",country:"Japan",destinationId:"Q1000",sourceUrl:"https://www.wikidata.org/wiki/Q3000",observedAt:new Date(),recheckAfter:new Date("2032-04-03"),eventStart:"2032-04-02",eventEnd:"2032-04-03",eventTimeZone:"Asia/Tokyo",eventStatus:"PUBLISHED"}});
     const cards=ok(await getRecommendationBatch(s.tripId,s.tripSegmentId,"0",s.t.days[1].id!));
     const card=cards.cards.find(c=>c.id===s.r.id)!;expect(card.event?.startDate).toBe("2032-04-02");expect(card.eventReview).toBe("source-observed");
-    const html=renderToStaticMarkup(createElement(ExperienceDetails,{item:card}));expect(html).toContain("human review not recorded");expect(html).not.toContain("manually checked");
+    const html=renderToStaticMarkup(createElement(ActivityDetails,{item:card,session:null}));expect(html).toContain("human review not recorded");expect(html).not.toContain("manually checked");
     expect((await addRecommendationToDay(s.input)).ok).toBe(false);expect(await db!.recommendationDecision.count()).toBe(0);
     ok(await decideRecommendation({...s.input,outcome:"ACCEPTED"}));
     expect((await scheduleAcceptedRecommendation({tripId:s.tripId,recommendationId:s.r.id,dayId:s.input.dayId})).ok).toBe(false);
@@ -65,8 +65,8 @@ suite("shared metadata in existing application paths",()=>{
     const s=await setup();
     await db!.researchPlace.create({data:{placeId:s.r.place.id,identity:"wikidata:Q3000:NEIGHBORHOOD::",originalName:"Synthetic neighborhood",kind:"NEIGHBORHOOD",country:"Japan",destinationId:"Q1000",sourceUrl:"https://www.wikidata.org/wiki/Q3000",observedAt:new Date(),recheckAfter:new Date("2032-04-03")}});
     const card=ok(await getRecommendationBatch(s.tripId,s.tripSegmentId)).cards.find(c=>c.id===s.r.id)!;
-    const html=renderToStaticMarkup(createElement(ExperienceDetails,{item:card}));expect(html).toContain("Neighborhood recommendation");expect(html).not.toContain("App-authored");
+    const html=renderToStaticMarkup(createElement(ActivityDetails,{item:card,session:null}));expect(html).toContain("Neighborhood recommendation");expect(html).not.toContain("App-authored");
     const unknown={...card,evidence:[{id:"synthetic",topic:"Source",factualText:"Synthetic observation",retrievedAt:"2026-09-23",status:"unknown",sourceName:"Unclassified source",sourceKind:"unknown"}]};
-    expect(renderToStaticMarkup(createElement(ExperienceDetails,{item:unknown}))).toContain("review method not recorded");
+    expect(renderToStaticMarkup(createElement(ActivityDetails,{item:unknown,session:null}))).toContain("review method not recorded");
   });
 });
