@@ -65,3 +65,28 @@ test("overview survives interrupted Reviews; close and keyboard reopen never aut
  await expect(panel.locator(".google-provider-content")).toHaveCount(0);await expect(panel.getByRole("button",{name:"View place details",exact:true})).toBeVisible();
  expect(await db.googleOperation.count()).toBe(currentCalls);await closeDetails(page);
 });
+
+for (const [label,width,height,textScale] of [["wide",1440,900,1],["narrow enlarged text",320,844,1.25]] as const) {
+ test(label+" dusk Logistics, expiry and direct Add preserve request intent",async({page},info)=>{
+  test.setTimeout(120_000);await page.setViewportSize({width,height});
+  await page.route("**/*",route=>{const u=new URL(route.request().url());return ["localhost","127.0.0.1"].includes(u.hostname)?route.continue():route.abort();});
+  await page.clock.install();
+  const created=await createTrip({destinationLabel:"Tokyo",destinationScope:"CITY_BASE",startDate:"2032-04-01",endDate:"2032-04-03",travelerCount:1});if(!created.ok||!created.data)throw Error("fixture");tripId=created.data.trip.id;
+  await page.goto("/trips/"+tripId+"/itinerary");await page.addStyleTag({content:"html{font-size:"+16*textScale+"px}"});
+  const card=page.locator(".idea-card:not(.idea-scheduled)").first(),title=await card.locator("h3").innerText();
+  await card.getByRole("button",{name:"Add to Day 1",exact:true}).click();await expect(page.locator(".timeline-item")).toHaveCount(1);await expect(page.getByRole("dialog")).toHaveCount(0);expect(await db.googleOperation.count()).toBe(0);
+  const trigger=page.getByRole("button",{name:"Open "+title,exact:true});await trigger.click();const panel=page.getByRole("dialog"),google=panel.locator(".google-context");
+  await expect(google.getByRole("button",{name:"Use this location",exact:true})).toBeVisible();await google.getByRole("button",{name:"Use this location",exact:true}).click();await expect(google).toContainText("4.3 / 5");await expect(google.getByText("Loading photo…",{exact:true})).toHaveCount(0);
+  const calls=await db.googleOperation.count();await google.getByRole("tab",{name:"Logistics",exact:true}).click();await expect(google.getByRole("tabpanel",{name:"Logistics",exact:true})).toContainText("Location");expect(await db.googleOperation.count()).toBe(calls);
+  await page.keyboard.press("ArrowLeft");await expect(google.getByRole("tab",{name:"Overview",exact:true})).toBeFocused();
+  await page.keyboard.press("ArrowRight");await expect(google.getByRole("tab",{name:"Logistics",exact:true})).toBeFocused();expect(await db.googleOperation.count()).toBe(calls);
+  await expect(panel.getByRole("button",{name:/Add to Day/})).toHaveCount(0);await expect(panel.locator(".scheduled-status")).toContainText("On Day 1");
+  await page.clock.fastForward(300_001);await expect(google.getByRole("status")).toContainText("Place details need refreshing");await expect(google).not.toContainText("4.3 / 5");await expect(panel.locator(".activity-summary")).not.toBeEmpty();await expect(google.getByRole("button",{name:"Refresh details",exact:true})).toBeEnabled();expect(await db.googleOperation.count()).toBe(calls);
+  await panel.getByText("Sources",{exact:true}).click();await expect(panel.getByRole("button",{name:"Close details",exact:true})).toBeInViewport();
+  expect(await panel.evaluate(n=>n.scrollWidth>n.clientWidth)).toBe(false);expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)).toBe(false);
+  await panel.evaluate(n=>{const label=document.createElement("p");label.textContent="SYNTHETIC UI CHECK — no live provider quality evidence";n.prepend(label);});
+  await page.screenshot({path:info.outputPath(label+"-dusk-expired-saved.png")});
+  await page.keyboard.press("Escape");await expect(page.getByRole("dialog")).toHaveCount(0);await expect(trigger).toBeFocused();
+  expect(await db.itineraryItem.count({where:{tripId}})).toBe(1);expect(await db.reservation.count({where:{tripId}})).toBe(0);
+ });
+}

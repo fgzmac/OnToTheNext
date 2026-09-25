@@ -1,4 +1,5 @@
 import { RecommendationPhoto } from "./recommendation-photo";
+import { ExperienceChips } from "./experience-chips";
 import { ExperienceDetails } from "./experience-details";
 import type { RecommendationCardData } from "@/src/modules/discover/types";
 import { RecommendationDecision } from "./recommendation-decision";
@@ -9,9 +10,9 @@ export function RecommendationCard({ recommendation }: { recommendation: Recomme
     <article className="card recommendation-card" aria-labelledby={"recommendation-" + item.id}>
       <RecommendationPhoto photo={item.photo} name={item.place.name} />
       <div>
-        <span className="eyebrow">{item.place.category}</span>
+
         <h3 id={"recommendation-" + item.id}>{item.place.name}</h3>
-        <p className="muted">{item.place.baseLabel}</p>
+        <p className="activity-location">{item.place.location??item.place.baseLabel}</p><ExperienceChips item={item}/>
       </div>
       <p>{item.factualSummary}</p>
       <dl className="recommendation-facts">

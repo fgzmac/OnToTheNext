@@ -28,7 +28,7 @@ export default async function DiscoverPage({ params, searchParams }: {
   const path = "/trips/" + tripId + "/discover";
   const batchHref = (page: number) => path + "?segmentId=" + encodeURIComponent(selectedId) + "&page=" + page + (homeContext ? "&" + homeContext : "");
   return (
-    <div className="stack discover">
+    <div className="stack discover travel-dusk">
       <header>
         <span className="eyebrow">Discover</span>
         <h2>Choose experiences for this destination.</h2>

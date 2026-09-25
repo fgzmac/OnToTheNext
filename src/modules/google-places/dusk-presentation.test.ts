@@ -1,0 +1,32 @@
+import {describe,it,expect} from "vitest";
+import {createElement,type ComponentType} from "react";
+import type {LocalExperiencePhoto} from "@/src/modules/experiences/types";
+import {renderToStaticMarkup} from "react-dom/server";
+import fs from "node:fs";
+import {ActivityDetails} from "@/app/components/experience-details";
+import {ExperienceChips} from "@/app/components/experience-chips";
+import {GoogleDetailsView} from "@/app/components/google-context";
+import type {RecommendationCardData} from "@/src/modules/discover/types";
+import type {DetailState} from "./detail-session";
+const item:RecommendationCardData={id:"synthetic",tripId:"synthetic",tripSegmentId:"synthetic",place:{id:"synthetic",name:"A long synthetic activity title",baseLabel:"Tokyo",category:"Shopping",location:"Independent neighborhood"},factualSummary:"Independent factual description",durationMinutes:45,logisticsNote:"Check access before visiting.",costContext:"Admission not verified.",decision:null,evidence:[]};
+const state:DetailState={status:"expired",candidates:[],sections:{overview:"idle",reviews:"idle",photo:"idle"}};
+const render=<P extends object>(value:ComponentType<P>,props:NoInfer<P>)=>renderToStaticMarkup(createElement(value,props));
+describe("dusk activity presentation",()=>{
+ it("shows hero before independent summary, with one tab row and secondary sources",()=>{const html=render(ActivityDetails,{item,session:null});expect(html.indexOf("activity-hero")).toBeLessThan(html.indexOf(item.factualSummary));expect(html.match(/role="tablist"/g)).toHaveLength(1);for(const label of ["Overview","Logistics","Reviews","Sources",item.logisticsNote!,item.costContext!])expect(html).toContain(label);expect(html).not.toContain('role="dialog"');});
+ it("uses only supported chips and labels the duration as an estimate",()=>{const html=render(ExperienceChips,{item});expect(html.match(/<li/g)).toHaveLength(2);expect(html).toContain("Shopping");expect(html).toContain("(estimate)");for(const invented of ["Popular","Hidden gem","Best"])expect(html).not.toContain(invented);});
+ it("does not invent a duration for missing data",()=>{const html=render(ExperienceChips,{item:{...item,durationMinutes:null}});expect(html.match(/<li/g)).toHaveLength(1);expect(html).not.toContain(" min");});
+ it("keeps explicit expired state, one refresh and no expired Google content",()=>{const html=render(GoogleDetailsView,{state,tab:"overview",setTab:()=>{},confirm:()=>{},reviews:()=>{},refresh:()=>{},photoFailed:()=>{},summary:createElement("p",null,item.factualSummary)});expect(html).toContain("Place details need refreshing");expect(html.match(/Refresh details/g)).toHaveLength(1);expect(html).toContain(item.factualSummary);expect(html).not.toContain("Google Maps");});
+ it("keeps independent logistics without provider availability",()=>{const html=render(ActivityDetails,{item,session:null});expect(html).toContain("Independent neighborhood");expect(html).toContain("planning estimate");expect(html).not.toContain("fits your schedule");expect(html).not.toContain("map-placeholder");expect(html).not.toContain("Place details aren’t connected.");});
+ it("renders saved status without inventing another Add",()=>{const html=render(ActivityDetails,{item,session:null,actions:createElement("p",null,"On Day 2")});expect(html).toContain("On Day 2");expect(html).not.toContain("Add to Day");});
+ it("preserves full framing, attribution and exterior labels",()=>{const photo:LocalExperiencePhoto={storage:"local",placeId:"synthetic",asset:"/media/tokyo/teamlab-planets.webp",sourcePage:"https://example.invalid/source",title:"Exterior",creator:"Synthetic test author",license:"CC BY-SA 4.0",licenseUrl:"https://creativecommons.org/licenses/by-sa/4.0/",alt:"Exterior fixture",width:960,height:640,observedAt:"2026-09-24",capturedAt:"2026-01-01",changes:"Full framing retained",restrictions:"Do not crop",visualCheck:"Synthetic",caption:"Exterior only; interior artworks not shown."};const html=render(ActivityDetails,{item:{...item,photo},session:null});expect(html.match(/<img/g)).toHaveLength(1);for(const value of ['data-framing="full"',"Exterior only; interior artworks not shown.","Synthetic test author","Do not crop"])expect(html).toContain(value);});
+});
+function luminance(hex:string){const c=hex.replace("#","").match(/../g)!.map(x=>parseInt(x,16)/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4);return c[0]*.2126+c[1]*.7152+c[2]*.0722;}
+const contrast=(a:string,b:string)=>{const l=[luminance(a),luminance(b)].sort((x,y)=>y-x);return(l[0]+.05)/(l[1]+.05);};
+describe("dusk contrast and restricted media",()=>{
+ const css=fs.readFileSync("app/globals.css","utf8").split("/* Dusk discovery:")[1];
+ const value=(name:string)=>css.match(new RegExp("--"+name+":(#[a-f0-9]{6})"))![1];
+ it("normal and secondary text meet 4.5:1 on each opaque surface",()=>{for(const foreground of ["text","muted"])for(const background of ["background","surface","surface-soft"])expect(contrast(value(foreground),value(background))).toBeGreaterThanOrEqual(4.5);});
+ it("teal Add text and selected tabs meet normal-text contrast",()=>{expect(contrast(value("on-accent"),value("accent"))).toBeGreaterThanOrEqual(4.5);expect(contrast(value("accent"),value("surface-soft"))).toBeGreaterThanOrEqual(4.5);});
+ it("restrained translucent brand text passes over both gradient endpoints",()=>{const composite=(under:string)=>"#"+[0,1,2].map(i=>Math.round(parseInt(value("surface").slice(1+i*2,3+i*2),16)*.96+parseInt(under.slice(1+i*2,3+i*2),16)*.04).toString(16).padStart(2,"0")).join("");for(const under of ["#101622","#211d36"])expect(contrast(value("muted"),composite(under))).toBeGreaterThanOrEqual(4.5);});
+ it("restricted media never uses cropping or a visual filter",()=>{expect(css).not.toMatch(/object-fit:\s*cover|filter:\s*(blur|hue-rotate)/);expect(css).toContain("object-fit:contain");expect(css).toContain("prefers-reduced-motion");});
+});

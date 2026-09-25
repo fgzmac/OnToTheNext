@@ -3,6 +3,7 @@ import { useState, useTransition, useEffect } from "react";
 import type { RecommendationBatch, RecommendationCardData } from "@/src/modules/discover/types";
 import { composerAdd, composerBatch, composerDeny } from "@/src/modules/itinerary/composer-actions";
 import { RecommendationPhoto } from "./recommendation-photo";
+import { ExperienceChips } from "./experience-chips";
 import { ExperienceDetails } from "./experience-details";
 import { recommendationProvenanceLabel } from "@/src/modules/experiences/provenance";
 import { DestinationResearch } from "./destination-research";
@@ -44,13 +45,10 @@ export function ComposerIdeas({ tripId, segmentId, dayId, dayNumber, initial, er
     {batch?.total === 0 ? <p>Curated ideas currently cover Tokyo, Kyoto and Osaka. You can still add your own activities here.</p> : null}
     {batch?.eventCount === 0 ? <p className="muted event-coverage">No verified events found for these dates.</p> : null}
     {cards.map(item => <article key={item.id} className={"idea-card" + (item.scheduledDay ? " idea-scheduled" : "")} aria-labelledby={"recommendation-" + item.id}>
-      {item.scheduledDay ? <div className="scheduled-choice"><h3 id={"recommendation-" + item.id}>{item.place.name}</h3><span>On Day {item.scheduledDay.number}</span><button className="text-button" disabled={pending} onClick={() => act(item, true)}>Not interested</button></div> : <><RecommendationPhoto photo={item.photo} name={item.place.name} /><p className="eyebrow">{item.place.category}{item.place.location ? " · " + item.place.location : ""}</p>
-      <h3 id={"recommendation-" + item.id}>{item.place.name}</h3><p>{item.factualSummary}</p>
+      {item.scheduledDay ? <div className="scheduled-choice"><h3 id={"recommendation-" + item.id}>{item.place.name}</h3><span>On Day {item.scheduledDay.number}</span><button className="text-button" disabled={pending} onClick={() => act(item, true)}>Not interested</button></div> : <><RecommendationPhoto photo={item.photo} name={item.place.name} /><h3 id={"recommendation-" + item.id}>{item.place.name}</h3><p className="activity-location">{item.place.location??item.place.baseLabel}</p><ExperienceChips item={item}/><p>{item.factualSummary}</p>
       {item.event ? <p className="idea-duration">{item.event.startDate} – {item.event.endDate} · {item.event.timeZone} · Published occurrence, availability unconfirmed</p> : null}
-      {item.durationMinutes !== null ? <p className="idea-duration">About {item.durationMinutes} min · planning estimate</p> : null}
       <small className="muted">{recommendationProvenanceLabel(item.evidence)}</small>
-      <div className="idea-actions"><button disabled={pending} onClick={() => act(item, false)}>{"Add to Day " + dayNumber}</button><button className="text-button" disabled={pending} onClick={() => act(item, true)}>Not interested</button></div>
-      <ExperienceDetails item={item} onAdd={()=>act(item,false)} dayNumber={dayNumber} pending={pending} /></>}
+      <div className="idea-actions"><button disabled={pending} onClick={() => act(item, false)}>{"Add to Day " + dayNumber}</button><ExperienceDetails item={item} onAdd={()=>act(item,false)} dayNumber={dayNumber} pending={pending} /><button className="text-button" disabled={pending} onClick={() => act(item, true)}>Not interested</button></div></>}
     </article>)}
     {batch && !cards.length && batch.total > 0 ? <p>No ideas left in this batch. Try another batch or revisit an earlier one.</p> : null}
     {batch ? <div className="row">

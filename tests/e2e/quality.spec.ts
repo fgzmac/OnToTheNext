@@ -85,7 +85,7 @@ for (const [device, width, height] of [["desktop", 1280, 900], ["phone", 390, 84
       await expect.poll(() => page.locator(".idea-card h3").allTextContents()).not.toEqual(prior);
     }
     await expect(event).toBeVisible(); await expect(event).toContainText("Asia/Tokyo");
-    await expect(event.getByText("No verified reusable photo yet", { exact: true })).toBeVisible();
+    await expect(event.getByText("Photo unavailable", { exact: true })).toBeVisible();
     await event.getByRole("button",{name:"View details",exact:true}).click();const details=page.getByRole("dialog");await details.getByText("Sources",{exact:true}).click();await expect(details).toContainText("availability");
     await expect(details.locator('a[href="https://2026.tokyo-grand-tea-ceremony.jp/eng/index.html"]')).toHaveCount(1);
     await details.screenshot({ path: info.outputPath(device + "-event-details.png") });
