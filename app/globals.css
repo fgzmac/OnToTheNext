@@ -425,7 +425,7 @@ body:has(.itinerary-composer) { background: #f4f5f2; color: #24352e; }
 /* Dusk discovery: route-scoped tokens; Home and reservation routes keep their palette. */
 .travel-dusk, body:has(.itinerary-composer), body:has(.discover.travel-dusk) {
  --background:#101622; --surface:#192332; --surface-soft:#233043;
- --text:#f2f6fa; --muted:#b7c3d1; --line:#53667d;
+ --text:#f2f6fa; --muted:#b7c3d1; --line:#53667d; --control-line:#71869f;
  --accent:#43d6be; --accent-soft:#193e3e; --on-accent:#10251f;
  --warning:#f5d399; --warning-soft:#403222; --danger:#ffbbc3; --danger-soft:#452b36;
  --radius:18px; --shadow:0 14px 36px rgb(0 0 0 / 18%); color-scheme:dark;
@@ -547,3 +547,5 @@ body:has(.travel-dusk) .trip-meta { color:var(--muted); }
 .travel-dusk .trip-interests summary { color:var(--muted); font-size:.9rem; }
 .travel-dusk .activity-tabs button:hover:not(:disabled) { background:#304158; color:var(--text); }
 .travel-dusk .activity-tabs button[aria-selected="true"]:hover:not(:disabled) { color:var(--accent); }
+
+.travel-dusk :is(input,select,textarea,button.secondary,.button.secondary,button.ghost,.button.ghost), .travel-dusk .interest-options label { border-color:var(--control-line); }

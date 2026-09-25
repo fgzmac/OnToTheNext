@@ -25,7 +25,7 @@ export function GoogleDetailsView({state,tab,setTab,confirm,reviews,refresh,phot
   </figure>:fallbackPhoto}
   {state.sections.photo==="loading"?<p role="status">Loading photo…</p>:state.sections.photo==="unavailable"?<p>Photo unavailable.</p>:state.sections.photo==="budget_exhausted"?<p>Photo allowance reached.</p>:null}</div>
   {summary}
-  {copy?<p role="status">{copy}</p>:null}
+  {copy?<p role="status" className={state.warning?"issue warning":"place-detail-status"}>{copy}</p>:null}
   {state.candidates.length>0?<div className="google-provider-content"><Attribution/>{state.candidates.map(c=><div className="location-choice" key={c.place.id}><strong>{c.place.displayName?.text??"Location"}</strong><p>{c.place.formattedAddress}</p><Link url={c.place.googleMapsUri}>View on Google Maps</Link>
    {c.eligible&&c.token?<button type="button" disabled={busy} onClick={()=>confirm(c.token!)}>Use this location</button>:<p>{c.place.movedPlaceId?"This location has moved.":c.place.businessStatus?.startsWith("CLOSED")?"This location is marked closed.":"We couldn’t verify this location."}</p>}
    {c.place.attributions?.map((a,i)=><p key={i}><Link url={a.providerUri}>{a.provider??"Provider attribution"}</Link></p>)}
