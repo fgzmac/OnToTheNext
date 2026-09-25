@@ -425,7 +425,7 @@ body:has(.itinerary-composer) { background: #f4f5f2; color: #24352e; }
 /* Dusk discovery: route-scoped tokens; Home and reservation routes keep their palette. */
 .travel-dusk, body:has(.itinerary-composer), body:has(.discover.travel-dusk) {
  --background:#101622; --surface:#192332; --surface-soft:#233043;
- --text:#f2f6fa; --muted:#b7c3d1; --line:#53667d; --control-line:#71869f;
+ --text:#ffffff; --muted:#e5eaf1; --line:#53667d; --control-line:#71869f;
  --accent:#43d6be; --accent-soft:#193e3e; --on-accent:#10251f;
  --warning:#f5d399; --warning-soft:#403222; --danger:#ffbbc3; --danger-soft:#452b36;
  --radius:18px; --shadow:0 14px 36px rgb(0 0 0 / 18%); color-scheme:dark;
