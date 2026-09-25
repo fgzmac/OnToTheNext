@@ -13,6 +13,7 @@ export class DetailSession {
  private state=initial(); private listeners=new Set<()=>void>(); private generation=0;
  private begun=false; private closed=false; private confirming=false; private timer:ReturnType<typeof setTimeout>|undefined;
  constructor(private input:{tripId:string;recommendationId:string},private send:(input:GoogleInput)=>Promise<Enrichment>,private now=()=>Date.now()) {}
+ matches(tripId:string,recommendationId:string){return this.input.tripId===tripId&&this.input.recommendationId===recommendationId;}
  snapshot=()=>this.state;
  subscribe=(listener:()=>void)=>{this.listeners.add(listener);return()=>{this.listeners.delete(listener);};};
  private update(patch:Partial<DetailState>){this.state={...this.state,...patch};this.listeners.forEach(fn=>fn());}

@@ -55,4 +55,13 @@ test("overview survives interrupted Reviews; close and keyboard reopen never aut
  const before=await db.googleOperation.count();await google.getByRole("tab",{name:"Reviews",exact:true}).click();await expect(google).toContainText("Reviews aren’t available right now.");await expect(google).toContainText("4.3 / 5");expect(await db.googleOperation.count()).toBe(before);
  await page.keyboard.press("Escape");await expect(page.getByRole("dialog")).toHaveCount(0);await expect(trigger).toBeFocused();await page.keyboard.press("Enter");await expect(google).toContainText("4.3 / 5");await expect(google.getByRole("button",{name:"Use this location",exact:true})).toHaveCount(0);await expect(google.getByText("Loading photo…",{exact:true})).toHaveCount(0);await closeDetails(page);
  expect(await db.googleOperation.count()).toBe(before+2);
+ await card.getByRole("button",{name:"Add to Day 1",exact:true}).click();await expect(page.locator(".timeline-item")).toHaveCount(1);
+ const other=page.locator(".idea-card:not(.idea-scheduled)").first(),otherName=await other.locator("h3").innerText();
+ await other.getByRole("button",{name:"Add to Day 1",exact:true}).click();await expect(page.locator(".timeline-item")).toHaveCount(2);
+ await openItem(page,"Pokémon Center SHIBUYA");await expect(google).toContainText("4.3 / 5");await expect(google.getByText("Loading photo…",{exact:true})).toHaveCount(0);
+ const currentCalls=await db.googleOperation.count(),otherItem=await db.itineraryItem.findFirstOrThrow({where:{tripId,title:otherName}});
+ await page.evaluate(id=>{window.location.hash="item-"+id;},otherItem.id);
+ await expect(page.getByRole("dialog",{name:otherName,exact:true})).toBeVisible();
+ await expect(panel.locator(".google-provider-content")).toHaveCount(0);await expect(panel.getByRole("button",{name:"View place details",exact:true})).toBeVisible();
+ expect(await db.googleOperation.count()).toBe(currentCalls);await closeDetails(page);
 });

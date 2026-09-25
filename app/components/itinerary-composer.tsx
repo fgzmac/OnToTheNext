@@ -41,6 +41,8 @@ export function ItineraryComposer({ builder, selectedDayId, batch, recommendatio
       const id = window.location.hash.replace(/^#item-/, "");
       const owner = days.find(d => d.items.some(item => item.id === id));
       if (!owner) return;
+      const nextItem=owner.items.find(item=>item.id===id);
+      if(googleSession&&!googleSession.matches(tripId,nextItem?.sourceRecommendationId??"")){googleSession.close();setGoogleSession(null);}
       setPanel(id);
       if (owner.id !== selectedDayId) {
         const next = new URLSearchParams(window.location.search); next.set("planDay", owner.id);
@@ -49,7 +51,7 @@ export function ItineraryComposer({ builder, selectedDayId, batch, recommendatio
     };
     reveal(); window.addEventListener("hashchange", reveal);
     return () => window.removeEventListener("hashchange", reveal);
-  }, [days, selectedDayId, tripId, router]);
+  }, [days, selectedDayId, tripId, router, googleSession]);
   const owner = days.find(d => d.items.some(item => item.id === panel));
   const item = owner?.items.find(i => i.id === panel);
   const booking = reservations.find(r => r.itemId === item?.id);
@@ -96,7 +98,7 @@ export function ItineraryComposer({ builder, selectedDayId, batch, recommendatio
       <p className="muted">Day {days.indexOf(owner) + 1} · {owner.date} · <span className="item-time">{item.startMinute === null ? "Any time" : formatLocalTime(item.startMinute)}</span></p>
       <p>Progress: {PROGRESS_LABELS[item.progress]} · {item.enteredManually ? "Manually entered" : item.sourceRecommendationId ? "From a recommendation" : "Planning block"}</p>
       {item.eventWarning?<p className="issue warning">{item.eventWarning}</p>:null}
-      {item.sourceActivity ? <ActivityDetails item={item.sourceActivity} session={googleSession} connect={()=>{if(!googleSession&&item.sourceRecommendationId)setGoogleSession(newDetailSession(tripId,item.sourceRecommendationId));}}/> : null}
+      {item.sourceActivity ? <ActivityDetails key={item.sourceRecommendationId} item={item.sourceActivity} session={googleSession?.matches(tripId,item.sourceRecommendationId??"")?googleSession:null} connect={()=>{if(!googleSession&&item.sourceRecommendationId)setGoogleSession(newDetailSession(tripId,item.sourceRecommendationId));}}/> : null}
       <EditItem key={item.id} tripId={tripId} item={item} />
       <ItemMovement key={"move-" + item.id} tripId={tripId} dayId={owner.id} item={item} days={days} first={owner.items[0]?.id === item.id} last={owner.items.at(-1)?.id === item.id} />
       {item.notes ? <p>{item.notes}</p> : null}
