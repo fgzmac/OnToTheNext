@@ -18,6 +18,7 @@ export interface PlaceIdentity { placeId:string; revision:string }
 export interface Enrichment {
   status?: DetailOutcome; identity?: PlaceIdentity; identityChanged?: boolean; diagnostic?: string; warning?: string;
   message: string; candidates?: Candidate[]; place?: GooglePlace; matched?: boolean;
+  photoSession?: {token:string;expiresAt:number};
   photo?: { data: string; authors: Author[]; source?: string }; observedAt?: string;
 }
-export interface GoogleInput { tripId: string; recommendationId: string; requestId: string; purpose: Purpose | "confirm" | "open"; token?: string; reference?: PlaceIdentity }
+export interface GoogleInput { tripId: string; recommendationId: string; requestId: string; purpose: Purpose | "confirm" | "open"; token?: string; reference?: PlaceIdentity; photoSession?: string; photoPosition?: number }

@@ -14,20 +14,24 @@ function Credits({authors}:{authors:Author[]}){return <>{authors.map((a,i)=>{
 function Attribution({place}:{place?:GooglePlace}){return <><p className="google-attribution" translate="no">Google Maps</p>{place?.attributions?.map((a,i)=><p key={i}><Link url={a.providerUri}>{a.provider??"Provider attribution"}</Link></p>)}</>;}
 export type ActivityTab="overview"|"logistics"|"reviews";
 type PresentationContent={availabilityUnchecked?:boolean;fallbackPhoto?:ReactNode;summary?:ReactNode;overviewContent?:ReactNode;logisticsContent?:ReactNode};
-export function GoogleDetailsView({state,tab,setTab,confirm,reviews,refresh,photoFailed,fallbackPhoto,summary,overviewContent,logisticsContent,availabilityUnchecked}:{state:DetailState;tab:ActivityTab;setTab:(tab:ActivityTab)=>void;confirm:(token:string)=>void;reviews:()=>void;refresh:()=>void;photoFailed:()=>void}&PresentationContent){
+export function GoogleDetailsView({state,tab,setTab,confirm,reviews,refresh,photoFailed,selectPhoto,fallbackPhoto,summary,overviewContent,logisticsContent,availabilityUnchecked}:{state:DetailState;tab:ActivityTab;setTab:(tab:ActivityTab)=>void;confirm:(token:string)=>void;reviews:()=>void;refresh:()=>void;photoFailed:(data?:string,position?:number)=>void;selectPhoto?:(position:number)=>void}&PresentationContent){
  const id=useId(),p=state.overview?.place,r=state.reviews?.place,photo=state.photo?.photo;
  const busy=state.status==="loading"||Object.values(state.sections).includes("loading");
- const copy=state.warning??(state.status==="disabled"?(availabilityUnchecked?"":"Place details aren’t connected."):state.status==="loading"?"Finding place details…":state.status==="unavailable"?"We couldn’t verify this location.":state.status==="budget_exhausted"?"Place details allowance reached.":state.status==="expired"?"Place details need refreshing":state.status==="ambiguous"?"Choose the location that matches this activity.":state.status==="needs_confirmation"?"Check this location before using its details.":"");
+ const copy=state.warning??(state.status==="disabled"?(availabilityUnchecked?"":"Place details aren’t connected."):state.status==="loading"?"Finding place details…":state.status==="unavailable"?"Location check incomplete. Reviews and Google photos are unavailable.":state.status==="budget_exhausted"?"Place details allowance reached.":state.status==="expired"?"Place details need refreshing":state.status==="ambiguous"?"Choose the location that matches this activity.":state.status==="needs_confirmation"?"Check this location before using its details.":"");
  return <section className="google-context stack" aria-label="Activity place details">
   <div className="activity-hero">{photo?<figure className="activity-google-photo">{/* eslint-disable-next-line @next/next/no-img-element */}
-   <img src={photo.data} alt="Google contributor photo of the linked place; current conditions unverified" width={480} height={320} onError={photoFailed}/>
+   <img src={photo.data} alt="Google contributor photo of the linked place; current conditions unverified" width={480} height={320} onError={()=>photoFailed(photo.data,state.gallery?.displayed)}/>
    <figcaption><Attribution place={state.photo?.place}/><Credits authors={photo.authors}/><Link url={photo.source}>Photo on Google Maps</Link></figcaption>
   </figure>:fallbackPhoto}
-  {state.sections.photo==="loading"?<p role="status">Loading photo…</p>:state.sections.photo==="unavailable"?<p>Photo unavailable.</p>:state.sections.photo==="budget_exhausted"?<p>Photo allowance reached.</p>:null}</div>
+  {state.sections.photo==="loading"?<p role="status">Loading photo…</p>:state.sections.photo==="missing"?<p>No photo returned for this position.</p>:state.sections.photo==="unavailable"?<p>Photo unavailable.</p>:state.sections.photo==="budget_exhausted"?<p>Photo allowance reached.</p>:null}</div>
+  {state.overview&&state.gallery&&selectPhoto?<div role="group" aria-label="Google photo positions">
+   {[0,1,2].map(i=><button key={i} type="button" aria-pressed={state.gallery!.displayed===i} disabled={state.gallery!.states.includes("loading")} onClick={()=>selectPhoto(i)}>Photo {i+1}{state.gallery!.states[i]==="idle"?" · Load":""}</button>)}
+   <p className="muted">Up to three attempts. Provider order may change; positions may show the same photo. Contents and current conditions are unverified.</p>
+  </div>:null}
   {summary}
   {copy?<p role="status" className={state.warning?"issue warning":"place-detail-status"}>{copy}</p>:null}
   {state.candidates.length>0?<div className="google-provider-content"><Attribution/>{state.candidates.map(c=><div className="location-choice" key={c.place.id}><strong>{c.place.displayName?.text??"Location"}</strong><p>{c.place.formattedAddress}</p><Link url={c.place.googleMapsUri}>View on Google Maps</Link>
-   {c.eligible&&c.token?<button type="button" disabled={busy} onClick={()=>confirm(c.token!)}>Use this location</button>:<p>{c.place.movedPlaceId?"This location has moved.":c.place.businessStatus?.startsWith("CLOSED")?"This location is marked closed.":"We couldn’t verify this location."}</p>}
+   {c.eligible&&c.token?<button type="button" disabled={busy} onClick={()=>confirm(c.token!)}>Use this location</button>:c.place.movedPlaceId?<p>This location has moved.</p>:c.place.businessStatus?.startsWith("CLOSED")?<p>This location is marked closed.</p>:null}
    {c.place.attributions?.map((a,i)=><p key={i}><Link url={a.providerUri}>{a.provider??"Provider attribution"}</Link></p>)}
   </div>)}</div>:null}
   {p?<div className="google-provider-content activity-place-summary">
@@ -49,15 +53,15 @@ export function GoogleDetailsView({state,tab,setTab,confirm,reviews,refresh,phot
    {state.sections.reviews==="unavailable"?<p role="status">Reviews aren’t available right now.</p>:null}
    {state.sections.reviews==="budget_exhausted"?<p role="status">Review allowance reached.</p>:null}
    {r?<div className="google-provider-content"><Attribution place={r}/><p>Provider relevance order; a sample, not all travelers.</p>
-    {r.reviews?.length?r.reviews.map((review,i)=><blockquote key={i}><Credits authors={review.authorAttribution?[review.authorAttribution]:[]}/><p>{review.rating!==undefined?review.rating+" / 5":""} · {review.publishTime}</p><p>{review.text?.text}</p>{review.originalText&&review.text?.languageCode!==review.originalText.languageCode?<p>Translated display ({review.text?.languageCode??"unknown"}); original ({review.originalText.languageCode??"unknown"}): {review.originalText.text}</p>:null}<Link url={review.googleMapsUri}>Original review on Google Maps</Link></blockquote>):<p>Reviews aren’t available right now.</p>}
+    {r.reviews?.length?r.reviews.map((review,i)=><blockquote key={i}><Credits authors={review.authorAttribution?[review.authorAttribution]:[]}/><p>{review.rating!==undefined?review.rating+" / 5":""} · {review.publishTime}</p><p>{review.text?.text}</p>{review.originalText&&review.text?.languageCode!==review.originalText.languageCode?<p>Translated display ({review.text?.languageCode??"unknown"}); original ({review.originalText.languageCode??"unknown"}): {review.originalText.text}</p>:null}<Link url={review.googleMapsUri}>Original review on Google Maps</Link></blockquote>):<p>No reviews were returned by Google for this request.</p>}
    </div>:null}
   </div>
   {!["disabled","loading","needs_confirmation","ambiguous"].includes(state.status)?<button type="button" className="text-button" disabled={busy} onClick={()=>{setTab("overview");refresh();}}>Refresh details</button>:null}
-  {state.diagnostic?<details><summary>Developer diagnostics</summary><code>{state.diagnostic}</code></details>:null}
+
  </section>;
 }
 export function GoogleContext({session,...content}:{session:DetailSession}&PresentationContent){
  const state=useSyncExternalStore(session.subscribe,session.snapshot,session.snapshot);
  const [tab,setTab]=useState<ActivityTab>("overview");
- return <GoogleDetailsView state={state} tab={tab} setTab={setTab} confirm={t=>void session.confirm(t)} reviews={()=>void session.reviews()} refresh={()=>void session.refresh()} photoFailed={()=>session.photoFailed()} {...content}/>;
+ return <GoogleDetailsView state={state} tab={tab} setTab={setTab} confirm={t=>void session.confirm(t)} reviews={()=>void session.reviews()} refresh={()=>void session.refresh()} photoFailed={(data,position)=>session.photoFailed(data,position)} selectPhoto={position=>void session.selectPhoto(position)} {...content}/>;
 }

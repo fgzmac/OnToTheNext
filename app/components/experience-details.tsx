@@ -16,7 +16,7 @@ export function ActivityDetails({item,session,connect,actions}:{item:Recommendat
  const photo=<RecommendationPhoto photo={item.photo} name={item.place.name}/>;
  const summary=<div className="activity-summary"><p className="activity-location">{item.place.location??item.place.baseLabel}</p><ExperienceChips item={item}/><p>{item.factualSummary}</p>
   {item.event?<p className="issue warning">{item.event.startDate} – {item.event.endDate} · {item.event.timeZone} · Availability unconfirmed</p>:null}</div>;
- const overviewContent=<>{item.logisticsNote?<p>{item.logisticsNote}</p>:null}{item.costContext?<p>{item.costContext}</p>:null}</>;
+ const overviewContent=<>{item.place.id==="curated-teamlab-planets"?<p><a href="https://www.teamlab.art/e/planets/" target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer">See the exhibits</a> · Official works introduction; ticket availability unconfirmed.</p>:null}{item.logisticsNote?<p>{item.logisticsNote}</p>:null}{item.costContext?<p>{item.costContext}</p>:null}</>;
  const logisticsContent=<dl className="activity-logistics"><div><dt>Location</dt><dd>{item.place.location??item.place.baseLabel}</dd></div>
   {item.durationMinutes!==null?<div><dt>Estimated visit</dt><dd>About {item.durationMinutes} minutes · planning estimate</dd></div>:null}</dl>;
  const content={fallbackPhoto:photo,summary,overviewContent,logisticsContent};

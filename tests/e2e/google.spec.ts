@@ -90,3 +90,35 @@ for (const [label,width,height,textScale] of [["wide",1440,900,1],["narrow enlar
   expect(await db.itineraryItem.count({where:{tripId}})).toBe(1);expect(await db.reservation.count({where:{tripId}})).toBe(0);
  });
 }
+
+for(const [label,width,height] of [["desktop",1280,900],["phone",390,844]] as const){
+ test(label+" Planets alternate official identity, exhibit link and bounded gallery",async({page})=>{
+  test.setTimeout(120000);await page.setViewportSize({width,height});
+  await page.route("**/*",r=>{const u=new URL(r.request().url());return ["localhost","127.0.0.1"].includes(u.hostname)?r.continue():r.abort();});
+  const created=await createTrip({destinationLabel:"Tokyo",destinationScope:"CITY_BASE",startDate:"2032-04-01",endDate:"2032-04-03",travelerCount:1});if(!created.ok||!created.data)throw Error("fixture");tripId=created.data.trip.id;
+  await page.goto("/trips/"+tripId+"/itinerary");
+  // Find Planets through the existing paged recommendation controls.
+  const card=page.locator(".idea-card").filter({has:page.getByRole("heading",{name:"teamLab Planets TOKYO",exact:true})});
+  for(let i=0;i<8&&!await card.count();i++){const first=await page.locator(".idea-card h3").first().innerText();await page.getByRole("button",{name:"More ideas",exact:true}).click();await expect(page.locator(".idea-card h3").first()).not.toHaveText(first);}
+  await expect(card).toHaveCount(1);await card.getByRole("button",{name:"View details",exact:true}).click();
+  const panel=page.getByRole("dialog"),google=panel.locator(".google-context");
+  await expect(panel.getByRole("link",{name:"See the exhibits",exact:true})).toHaveAttribute("href","https://www.teamlab.art/e/planets/");
+  await expect(panel).toContainText("Exterior");await expect(google.getByRole("tab",{name:"Reviews",exact:true})).toBeDisabled();
+  await google.getByRole("button",{name:"Use this location",exact:true}).click();
+  await expect(google).toContainText("4.3 / 5");await expect(google.getByText("Loading photo…",{exact:true})).toHaveCount(0);
+  await expect.poll(async()=>await db.googleOperation.count()).toBe(3);
+  for(const number of [2,3]){await google.getByRole("button",{name:"Photo "+number+" · Load",exact:true}).click();await expect(google.getByText("Loading photo…",{exact:true})).toHaveCount(0);}
+  const image=google.getByRole("img",{name:"Google contributor photo of the linked place; current conditions unverified",exact:true});
+  await expect(image).toBeVisible();await expect.poll(()=>image.evaluate((n:HTMLImageElement)=>n.naturalWidth)).toBe(1);
+  await expect(google.getByRole("group",{name:"Google photo positions"})).toContainText("positions may show the same photo");
+  expect(await db.googleOperation.count()).toBe(5);
+  for(const number of [1,2,3]){const button=google.getByRole("button",{name:"Photo "+number,exact:true});await button.focus();await page.keyboard.press("Enter");}
+  expect(await db.googleOperation.count()).toBe(5);
+  await google.getByRole("tab",{name:"Logistics",exact:true}).click();expect(await db.googleOperation.count()).toBe(5);
+  await google.getByRole("tab",{name:"Reviews",exact:true}).click();await expect(google).toContainText("Synthetic translated review");
+  expect(await db.googleOperation.count()).toBe(6);const balance=await db.providerPilotBudget.findUniqueOrThrow({where:{id:"aggregate-pilot"}});
+  expect(balance).toMatchObject({searches:1,details:5,photos:3,googleReservedMicros:161000});
+  await panel.getByRole("button",{name:"Add to Day 1",exact:true}).click();await expect(page.locator(".timeline-item")).toHaveCount(1);expect(await db.googleOperation.count()).toBe(6);
+  await page.reload();expect(await db.itineraryItem.count({where:{tripId}})).toBe(1);expect(await db.googleOperation.count()).toBe(6);
+ });
+}

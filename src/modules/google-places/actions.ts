@@ -6,9 +6,7 @@ export async function googleEnrichmentAction(input:GoogleInput):Promise<Enrichme
  try { return await enrichGoogle(input); }
  catch(error) {
   const code=error instanceof Error ? error.message : "";
-  const status=code==="BUDGET_EXHAUSTED"?"budget_exhausted":code==="MATCH_EXPIRED"?"expired":"unavailable";
-  const diagnostic=process.env.NODE_ENV==="development" && process.env.GOOGLE_PLACES_DIAGNOSTICS==="bounded"
-   && ["BUDGET_EXHAUSTED","DUPLICATE_REQUEST","MATCH_EXPIRED","MATCH_CHANGED","TRIP_UNAVAILABLE"].includes(code) ? code : undefined;
-  return {status,diagnostic,message:status==="budget_exhausted"?"Place details allowance reached.":status==="expired"?"Location confirmation expired.":"Place details are unavailable."};
+  const status=code==="BUDGET_EXHAUSTED"?"budget_exhausted":["MATCH_EXPIRED","PHOTO_SESSION_EXPIRED"].includes(code)?"expired":"unavailable";
+  return {status,message:status==="budget_exhausted"?"Place details allowance reached.":status==="expired"?"Location confirmation expired.":"Place details are unavailable."};
  }
 }

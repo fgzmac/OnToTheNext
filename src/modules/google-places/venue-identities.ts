@@ -2,6 +2,12 @@
 // Reviewed 2026-09-24: each SHIBUYA legacy page redirects to the corresponding
 // current language page. Exact branch paths only; never fetch provider URLs.
 export const VENUE_IDENTITIES: Record<string, { reviewedAt: string; urls: string[] }> = {
+ "curated-teamlab-planets": {reviewedAt:"2026-09-25",urls:[
+  "https://www.teamlab.art/e/planets/",
+  "https://planets.teamlab.art/tokyo/",
+  "https://teamlabplanets.dmm.com/en",
+  "https://teamlabplanets.dmm.com/"
+ ]},
  "curated-pokemon-shibuya": {reviewedAt:"2026-09-24",urls:[
   "https://www.pokemon.co.jp/shop/pokecen/shibuya/",
   "https://www.pokemon.co.jp/shop/en/pokecen/shibuya/",
@@ -34,6 +40,10 @@ export function websiteEvidence(app:{id:string;url:string},actual?:string):Websi
    // Only independently recorded other branches establish a branch conflict.
    for(const [id,record] of Object.entries(VENUE_IDENTITIES))
     if(id!==app.id && record.urls.map(parsed).some(u=>u.host===b.host && u.path===b.path)) return "conflicting";
+   return "insufficient";
+  }
+  if(app.id==="curated-teamlab-planets") {
+   if(b.host==="www.teamlab.art" && b.path.startsWith("/e/") && b.path!==a.path) return "conflicting";
    return "insufficient";
   }
   if(a.host!==b.host) return "conflicting";

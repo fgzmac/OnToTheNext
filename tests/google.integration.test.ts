@@ -28,8 +28,9 @@ suite("Google enrichment durable safety",()=>{
   const s=await setup(city),calls=vi.fn(),http=googleHttp(calls),client=new GoogleClient("fake",http,async()=>({type:"image/png",bytes:syntheticPhoto}));
   const deps={configuration:()=>config,client:()=>client};
   const r=await enrichGoogle(s.input,deps);expect(r.candidates?.filter(c=>c.eligible)).toHaveLength(1);expect(await db!.googlePlaceReference.count()).toBe(0);
-  await enrichGoogle({...s.input,requestId:randomUUID(),purpose:"confirm",token:r.candidates![0].token},deps);
-  for(const purpose of ["context","reviews","photo"] as const){const result=await enrichGoogle({...s.input,requestId:randomUUID(),purpose},deps);expect(result.matched).toBe(true);expect(JSON.stringify(result)).not.toContain("/photos/synthetic");}
+  const linked=await enrichGoogle({...s.input,requestId:randomUUID(),purpose:"confirm",token:r.candidates![0].token},deps);
+  let photoSession:string|undefined;
+  for(const purpose of ["context","reviews","photo"] as const){const result=await enrichGoogle({...s.input,requestId:randomUUID(),purpose,reference:linked.identity,photoSession,photoPosition:0},deps);if(result.photoSession)photoSession=result.photoSession.token;expect(result.matched).toBe(true);expect(JSON.stringify(result)).not.toContain("/photos/synthetic");}
   const count=calls.mock.calls.length,add={tripId:s.t.trip.id,tripSegmentId:s.t.segments[0].id,recommendationId:s.card.id,dayId:s.t.days[0].id!};
   const first=await addRecommendationToDay(add),second=await addRecommendationToDay(add);expect(first.ok && second.ok && first.data.id === second.data.id).toBe(true);expect(first.ok && first.data.alreadyScheduled).toBe(false);expect(second.ok && second.data.alreadyScheduled).toBe(true);expect(calls).toHaveBeenCalledTimes(count);
   const plan=await getItineraryBuilder(s.t.trip.id);expect(plan.ok).toBe(true);expect(await db!.reservation.count({where:{tripId:s.t.trip.id}})).toBe(0);
@@ -84,7 +85,8 @@ suite("Google enrichment durable safety",()=>{
    expect((await enrichGoogle({...s.input,requestId:randomUUID(),purpose:"context"},{...deps,client:()=>client})).message).toContain("unavailable");
   }
   const binary=vi.fn();const noPhoto=new GoogleClient("fake",async i=>{const r=await transport(i);const p=JSON.parse(r.body);delete p.photos;return {...r,body:JSON.stringify(p)};},binary);
-  expect((await enrichGoogle({...s.input,requestId:randomUUID(),purpose:"photo"},{...deps,client:()=>noPhoto})).message).toContain("No Google photo");expect(binary).not.toHaveBeenCalled();
+  const overview=await enrichGoogle({...s.input,requestId:randomUUID(),purpose:"context"},deps);
+  expect((await enrichGoogle({...s.input,requestId:randomUUID(),purpose:"photo",reference:overview.identity,photoSession:overview.photoSession!.token,photoPosition:0},{...deps,client:()=>noPhoto})).message).toContain("No Google photo");expect(binary).not.toHaveBeenCalled();
  });
  it("confirmation rejects tampering and expiry without persisting content",async()=>{
   const s=await setup(),deps={configuration:()=>config,client:()=>new GoogleClient("fake",googleHttp()),now:()=>new Date("2032-04-01")};
@@ -99,7 +101,9 @@ suite("Google enrichment durable safety",()=>{
   const found=await enrichGoogle(s.input,deps),linked=await enrichGoogle({...s.input,purpose:"confirm",token:found.candidates![0].token},deps);
   const opening=await enrichGoogle({...s.input,purpose:"open"},deps);expect(opening.identity).toEqual(linked.identity);
   const before=calls.mock.calls.length;
-  for(const purpose of ["context","photo"] as const)expect((await enrichGoogle({...s.input,purpose,reference:opening.identity,requestId:randomUUID()},deps)).identity).toEqual(opening.identity);
+  const overview=await enrichGoogle({...s.input,purpose:"context",reference:opening.identity,requestId:randomUUID()},deps);
+  expect(overview.identity).toEqual(opening.identity);
+  expect((await enrichGoogle({...s.input,purpose:"photo",reference:opening.identity,photoSession:overview.photoSession!.token,photoPosition:0,requestId:randomUUID()},deps)).identity).toEqual(opening.identity);
   expect(calls.mock.calls.length-before).toBe(3);expect(await db!.googleOperation.count()).toBe(3);
   expect((await db!.providerPilotBudget.findUniqueOrThrow({where:{id:ACCOUNT}})).googleReservedMicros).toBe(82000);
  });
@@ -117,4 +121,19 @@ suite("Google enrichment durable safety",()=>{
   const result=await enrichGoogle({...s.input,purpose:"context",reference:linked.identity,requestId:randomUUID()},{...deps,client:()=>changed});
   expect(result.identityChanged).toBe(true);expect(result.place).toBeUndefined();expect(await db!.googleOperation.count({where:{state:"UNCERTAIN"}})).toBe(1);
  });
+
+ it("three fresh photo positions reserve independently under rapid concurrency and retain missing-photo costs",async()=>{
+  const s=await setup(),calls=vi.fn(),binary=vi.fn(async()=>({type:"image/png",bytes:syntheticPhoto})),deps={configuration:()=>config,client:()=>new GoogleClient("fake",googleHttp(calls),binary)};
+  const found=await enrichGoogle(s.input,deps),linked=await enrichGoogle({...s.input,purpose:"confirm",token:found.candidates![0].token},deps);
+  const overview=await enrichGoogle({...s.input,purpose:"context",reference:linked.identity,requestId:randomUUID()},deps);
+  const results=await Promise.allSettled([0,1,1,2,2,3].map(photoPosition=>enrichGoogle({...s.input,purpose:"photo",photoPosition,photoSession:overview.photoSession!.token,reference:linked.identity,requestId:randomUUID()},deps)));
+  expect(results.filter(r=>r.status==="fulfilled")).toHaveLength(3);
+  const account=await db!.providerPilotBudget.findUniqueOrThrow({where:{id:ACCOUNT}});
+  expect(account).toMatchObject({searches:1,details:4,photos:3,googleReservedMicros:136000});
+  expect(await db!.googleOperation.count()).toBe(5);
+  // First catalog venue supplies one fixture photo: absent positions retain their reservations.
+  expect(binary).toHaveBeenCalledTimes(1);
+  expect(await db!.googleOperation.count({where:{purpose:"photo"}})).toBe(3);
+ });
+
 });
