@@ -9,9 +9,11 @@ on:
       - sprint-4-reservation-workflow
       - sprint-5-today-mode
       - refine/itinerary-builder-basics
+      - feat/cross-destination-discovery
   pull_request:
     branches:
       - main
+      - refine/itinerary-builder-basics
       - sprint-5-today-mode
 
 jobs:
@@ -46,6 +48,11 @@ jobs:
         run: npm ci
       - name: Generate Prisma client
         run: npm run db:generate
+      - name: Verify disposable CI database identity before mutations
+        env:
+          CI_RUNNER_ENVIRONMENT: ${{ runner.environment }}
+          CI_POSTGRES_SERVICE: ${{ toJSON(job.services.postgres) }}
+        run: node --import tsx scripts/ci-database-preflight.mjs
       - name: Apply migrations
         run: npm run db:deploy
       - name: Seed deterministic fixture

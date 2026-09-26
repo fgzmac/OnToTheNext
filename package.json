@@ -20,7 +20,9 @@
     "db:seed": "prisma db seed",
     "db:reset": "tsx scripts/db-reset.ts",
     "postinstall": "prisma generate",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "research:worker": "tsx scripts/research-worker.ts",
+    "research:evaluate": "tsx scripts/research-evaluate.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.10.0",

@@ -1,4 +1,4 @@
-import { catalogPlace } from "@/src/modules/discover/catalog";
+import { resolveExperienceMetadata } from "../experiences/metadata";
 import { eventMatches } from "@/src/modules/discover/events";
 import type { Prisma, ItineraryItemType, TransportationMode } from "@/src/generated/prisma/client";
 import { getPrismaClient } from "@/src/lib/prisma";
@@ -59,7 +59,7 @@ export async function createPlanningBlock(input: {
 async function context(tx: Prisma.TransactionClient, tripId: string) {
   return tx.trip.findFirst({ where: { id: tripId, ownerId: PROTOTYPE_OWNER_ID }, include: {
     segments: { orderBy: { position: "asc" } },
-    days: { orderBy: { position: "asc" }, include: { itineraryItems: { orderBy: { position: "asc" }, include: { sourceRecommendation: { select: { tripSegmentId: true, placeId: true } } } } } },
+    days: { orderBy: { position: "asc" }, include: { itineraryItems: { orderBy: { position: "asc" }, include: { sourceRecommendation: { select: { tripSegmentId: true, placeId: true, place: { include: { research: true } } } } } } } },
   } });
 }
 type Context = NonNullable<Awaited<ReturnType<typeof context>>>;
@@ -84,7 +84,7 @@ function previewFor(plan: Context, itemId: string, targetDayId: string, directio
   } else if (!isEligibleMoveDay({ ...item, sourceSegmentId: item.sourceRecommendation?.tripSegmentId ?? null }, { ...target, date: formatDateOnly(target.date) })) {
     return failure("WRONG_SEGMENT", "Choose another day owned by this item's source or origin Segment, or any other trip day when it has no Segment constraint.");
   }
-  const event = catalogPlace(item.sourceRecommendation?.placeId ?? "")?.event;
+  const event = resolveExperienceMetadata(item.sourceRecommendation?.placeId ?? "", item.sourceRecommendation?.place.research).event;
   if (!direction && event && !eventMatches(event, formatDateOnly(target.date))) return failure("WRONG_DAY", "This event has no verified occurrence on the target Day. Keep the saved item and check its source.");
   return { ok: true, data: {
     token: signPreview({ tripId: plan.id, itemId, targetDayId, direction, fingerprint: fingerprint(plan) }),

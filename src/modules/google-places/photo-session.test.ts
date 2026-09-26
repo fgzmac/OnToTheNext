@@ -1,0 +1,6 @@
+import {it,expect} from "vitest";
+import {PhotoSessions} from "./photo-session";
+it("three positions admitted once, including concurrent clicks",async()=>{const s=new PhotoSessions(),g=s.issue("owned-revision");const r=await Promise.allSettled([0,0,1,2,2].map(async i=>s.claim(g.token,"owned-revision",i)));expect(r.filter(x=>x.status==="fulfilled")).toHaveLength(3);expect(()=>s.claim(g.token,"owned-revision",0)).toThrow("PHOTO_ATTEMPT_LIMIT");});
+it.each([-1,3,100,0.5,NaN,undefined,"1"])("invalid position %s cannot consume or dispatch",i=>{const s=new PhotoSessions(),g=s.issue("owned");expect(()=>s.claim(g.token,"owned",i)).toThrow("PHOTO_POSITION_INVALID");s.claim(g.token,"owned",0);});
+it("unknown/restarted grant and changed linked revision fail closed",()=>{const s=new PhotoSessions(),g=s.issue("owned");expect(()=>s.claim(g.token,"other",0)).toThrow("MATCH_CHANGED");expect(()=>new PhotoSessions().claim(g.token,"owned",0)).toThrow("EXPIRED");});
+it("five minute deadline is fixed despite gallery actions",()=>{let n=100;const s=new PhotoSessions(()=>n),g=s.issue("owned");s.claim(g.token,"owned",0);n=299999;s.claim(g.token,"owned",1);expect(s.validate(g.token,"owned").expiresAt).toBe(g.expiresAt);n=g.expiresAt;expect(()=>s.claim(g.token,"owned",2)).toThrow("EXPIRED");});

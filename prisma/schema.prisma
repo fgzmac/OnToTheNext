@@ -40,6 +40,7 @@ model Trip {
   travelPlans       ItineraryTravelPlan[]
   reservations      Reservation[]
   preferenceProfile TripPreferenceProfile?
+  researchJobs ResearchJob[]
 
   @@index([ownerId])
 }
@@ -114,6 +115,7 @@ enum RecommendationOutcome {
 }
 
 model Place {
+  research ResearchPlace?
   id              String           @id @default(cuid())
   name            String
   baseLabel       String
@@ -172,6 +174,9 @@ model Source {
 }
 
 model EvidenceRecord {
+  sourceUrl String?
+  locator String?
+  permissionBasis String?
   id          String   @id @default(cuid())
   sourceId    String
   placeId     String?
@@ -395,4 +400,113 @@ model ManualActivitySubmission {
   trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
   item ItineraryItem? @relation(fields: [itemId], references: [id], onDelete: SetNull)
   @@index([tripId])
+}
+
+enum ResearchState {
+  QUEUED
+  RUNNING
+  PARTIAL
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+model ResearchJob {
+  id String @id @default(cuid())
+  tripId String
+  segmentId String
+  requestKey String
+  context Json
+  state ResearchState @default(QUEUED)
+  approval String
+  model String
+  budgetUsd Float
+  reservedUsd Float @default(0)
+  searches Int @default(0)
+  documents Int @default(0)
+  extractions Int @default(0)
+  inputTokens Int @default(0)
+  outputTokens Int @default(0)
+  actualInputTokens Int @default(0)
+  actualOutputTokens Int @default(0)
+  requestLog Json @default("[]")
+  published Int @default(0)
+  held Int @default(0)
+  reason String?
+  createdAt DateTime @default(now())
+  startedAt DateTime?
+  finishedAt DateTime?
+  deadline DateTime
+  trip Trip @relation(fields:[tripId], references:[id], onDelete:Cascade)
+  candidates ResearchCandidate[]
+  @@index([state,createdAt])
+  @@index([tripId,segmentId,requestKey])
+}
+model ResearchCandidate {
+  id String @id @default(cuid())
+  jobId String
+  identity String
+  payload Json
+  reasons String[]
+  publishedPlaceId String?
+  job ResearchJob @relation(fields:[jobId],references:[id],onDelete:Cascade)
+  @@unique([jobId,identity])
+}
+model ResearchPlace {
+  placeId String @id
+  identity String @unique
+  originalName String
+  kind String
+  country String
+  destinationId String
+  sourceUrl String
+  observedAt DateTime
+  recheckAfter DateTime
+  eventStart String?
+  eventEnd String?
+  eventTimeZone String?
+  eventStatus String?
+  eventPrecision String?
+  media Json?
+  withdrawn Boolean @default(false)
+  place Place @relation(fields:[placeId],references:[id],onDelete:Cascade)
+}
+
+// No Trip foreign key: deleting a Trip must never refund already reserved spending.
+model ResearchBudget {
+  approval String @id
+  reservedUsd Float @default(0)
+}
+
+// Fixed aggregate account, independent of Trips and approval labels. Integer micro-USD.
+model ProviderPilotBudget {
+  id String @id
+  ceilingMicros Int
+  googleLimitMicros Int
+  googleReservedMicros Int @default(0)
+  searches Int @default(0)
+  details Int @default(0)
+  photos Int @default(0)
+  maxSearch Int
+  maxDetails Int
+  maxPhotos Int
+}
+// No provider payload, address, review, photo resource name or response cache.
+model GoogleOperation {
+  id String @id
+  requestHash String
+  purpose String
+  approval String
+  reservedMicros Int
+  searches Int
+  details Int
+  photos Int
+  state String @default("RESERVED")
+  createdAt DateTime @default(now())
+}
+// Google policy permits place ID retention. Identity/content of Place remains app-owned.
+model GooglePlaceReference {
+  appPlaceId String @id
+  googlePlaceId String
+  identityHash String
+  reviewedAt DateTime @default(now())
 }
