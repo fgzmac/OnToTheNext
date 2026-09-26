@@ -56,8 +56,9 @@ suite("Google enrichment durable safety",()=>{
  it("missing/expired photo and changed identity leave Add usable and charge conservative",async()=>{
   const s=await setup(),normal=new GoogleClient("fake",googleHttp()),deps={configuration:()=>config,client:()=>normal};
   const r=await enrichGoogle(s.input,deps);await enrichGoogle({...s.input,requestId:randomUUID(),purpose:"confirm",token:r.candidates![0].token},deps);
+  const overview=await enrichGoogle({...s.input,requestId:randomUUID(),purpose:"context"},deps);
   const broken=new GoogleClient("fake",googleHttp(),async()=>{throw Error("Expired reference");});
-  expect((await enrichGoogle({...s.input,requestId:randomUUID(),purpose:"photo"},{...deps,client:()=>broken})).message).toContain("unavailable");
+  expect((await enrichGoogle({...s.input,requestId:randomUUID(),purpose:"photo",reference:overview.identity,photoSession:overview.photoSession!.token,photoPosition:0},{...deps,client:()=>broken})).message).toContain("unavailable");
   expect(await db!.googleOperation.count({where:{state:"UNCERTAIN"}})).toBe(1);
   expect((await addRecommendationToDay({tripId:s.t.trip.id,tripSegmentId:s.t.segments[0].id,recommendationId:s.card.id,dayId:s.t.days[0].id!})).ok).toBe(true);
  });
