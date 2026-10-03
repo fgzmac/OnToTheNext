@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FreeTimeIdeas } from "@/app/components/free-time-ideas";
 import { homeContextQuery } from "@/src/modules/trips/home-context";
 import { TripInterests, AnotherBatch, DestinationChoice } from "@/app/components/discover-controls";
 import { loadTripSkeleton } from "../load-trip";
@@ -8,12 +9,13 @@ import { RecommendationDecision } from "@/app/components/recommendation-decision
 
 export default async function DiscoverPage({ params, searchParams }: {
   params: Promise<{ tripId: string }>;
-  searchParams: Promise<{ segmentId?: string | string[]; page?: string | string[]; homeView?: string; homeDay?: string }>;
+  searchParams: Promise<{ segmentId?: string | string[]; page?: string | string[]; gap?: string; homeView?: string; homeDay?: string }>;
 }) {
   const { tripId } = await params;
   const query = await searchParams;
   const homeContext = homeContextQuery(query.homeView, query.homeDay);
   const { segments } = await loadTripSkeleton(tripId);
+  if (query.gap) return <div className="travel-dusk"><FreeTimeIdeas tripId={tripId} dayId={query.gap} /></div>;
   if (segments.length === 0) {
     return <section className="card stack">
       <span className="eyebrow">Discover</span>

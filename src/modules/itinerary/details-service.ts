@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { getPrismaClient } from "@/src/lib/prisma";
-import { lockPrototypeTrip } from "@/src/lib/trip-lock";
+import { lockPrototypeTrip, scheduleLocked } from "@/src/lib/trip-lock";
 import { fingerprint, readActionPreview, signActionPreview } from "./preview-token";
 import { normalizeDayPositions } from "./ordering";
 import { emptyDetails, itemDetails, materialDetailsChange, parseItemDetails, type ItemDetails } from "./details-domain";
@@ -20,6 +20,7 @@ export async function createManualActivity(input: { tripId: string; dayId: strin
   const requestHash = fingerprint({ dayId: input.dayId, details });
   try { return await getPrismaClient().$transaction(async tx => {
     if (!await lockPrototypeTrip(tx, input.tripId)) return fail("NOT_FOUND", "This trip is unavailable.");
+    if (await scheduleLocked(tx, input.tripId)) return fail("ITINERARY_LOCKED", "Itinerary is locked. Use Paste activities to save an idea.");
     const receipt = await tx.manualActivitySubmission.findUnique({ where: { id: token.requestId } });
     if (receipt) {
       if (receipt.tripId !== input.tripId || receipt.requestHash !== requestHash) return fail("DUPLICATE_CONFLICT", "This submission was already used for different details. Reopen Add activity for another item.");
@@ -50,6 +51,7 @@ async function edit(input: EditRequest, confirm: boolean, now: Date): Promise<Pr
     if (item.revision !== token.revision || token.context !== current) return stale();
     const before = itemDetails(item), after = parseItemDetails(input.details, before, item.type);
     if (typeof after === "string") return fail("INVALID_DETAILS", after);
+    if (await scheduleLocked(tx, input.tripId) && (before.startMinute !== after.startMinute || before.durationMinutes !== after.durationMinutes || before.flexibility !== after.flexibility)) return fail("ITINERARY_LOCKED", "Unlock before changing planned time or flexibility. Notes and bookings remain editable.");
     const changesHash = fingerprint(after);
     if (confirm && token.changesHash !== changesHash) return stale();
     if (fingerprint(before) === changesHash) return { ok: true, data: { id: item.id, preview: null } };

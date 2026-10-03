@@ -115,7 +115,7 @@ integration("Reservation follow-up, release evidence and cancellation", () => {
     expect((await updateReservationNotes({ ...r.identity, notes: "Source disappeared, booking retained" })).ok).toBe(true);
   });
   it("derives Booked mismatch/overlap with planned duration without changing any Item field", async () => {
-    const r = await reservation(); await createPlanningBlock({ tripId, dayId: r.item.dayId, type: "FREE_TIME", startMinute: 650, durationMinutes: 45 });
+    const r = await reservation(); await createPlanningBlock({ tripId, dayId: r.item.dayId!, type: "FREE_TIME", startMinute: 650, durationMinutes: 45 });
     const items = await db!.itineraryItem.findMany({ orderBy: { id: "asc" } });
     await markReservationBooked({ ...r.identity, confirmedDate: "2030-04-01", confirmedStartMinute: 630 });
     const row = (await list())[0]; expect(row.state).toBe("BOOKED"); expect(row.attention.join(" ")).toContain("planned duration (not provider-confirmed)");

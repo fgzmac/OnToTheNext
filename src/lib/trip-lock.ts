@@ -9,3 +9,7 @@ export async function lockPrototypeTrip(tx: Prisma.TransactionClient, tripId: st
   `;
   return rows.length === 1;
 }
+
+export async function scheduleLocked(tx: Prisma.TransactionClient, tripId: string): Promise<boolean> {
+  return (await tx.organizerState.findUnique({where:{tripId}}))?.locked ?? false;
+}

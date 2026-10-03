@@ -7,7 +7,7 @@ import { manualActivityToken } from "./details-service";
 import { deriveTimeIssues } from "./planning";
 import { normalizeDayPositions } from "./ordering";
 import { getPrismaClient } from "@/src/lib/prisma";
-import { lockPrototypeTrip } from "@/src/lib/trip-lock";
+import { lockPrototypeTrip, scheduleLocked } from "@/src/lib/trip-lock";
 import { PROTOTYPE_OWNER_ID } from "@/src/modules/identity/prototype-owner";
 import { formatDateOnly } from "@/src/modules/trips/date-only";
 import { isSchedulableDecision, validatePlanning } from "./domain";
@@ -22,6 +22,7 @@ export async function scheduleAcceptedRecommendation(input: {
   try {
     return await getPrismaClient().$transaction(async tx => {
       if (!await lockPrototypeTrip(tx, input.tripId)) return failure("NOT_FOUND", "This trip is unavailable.");
+      if (await scheduleLocked(tx, input.tripId)) return failure("ITINERARY_LOCKED", "Itinerary is locked. Save an idea or unlock before changing the schedule.");
       const recommendation = await tx.recommendation.findFirst({
         where: { id: input.recommendationId, tripId: input.tripId },
         include: { place: { include: { research: true } }, decision: true, scheduledItem: true },
@@ -53,13 +54,15 @@ export async function removeItineraryItem(tripId: string, itemId: string): Promi
   try {
     return await getPrismaClient().$transaction(async tx => {
       if (!await lockPrototypeTrip(tx, tripId)) return failure("NOT_FOUND", "This trip is unavailable.");
-      const item = await tx.itineraryItem.findFirst({ where: { id: itemId, tripId } });
+      if (await scheduleLocked(tx, tripId)) return failure("ITINERARY_LOCKED", "Itinerary is locked. Save an idea or unlock before changing the schedule.");
+      const item = await tx.itineraryItem.findFirst({ where: { id: itemId, tripId }, include: { organizerIdea: true } });
       if (!item) return failure("NOT_FOUND", "This scheduled item is unavailable in this trip.");
       // Keep origin history; the composite FK prevents cross-Trip references.
       // Detach before deleting a referenced stop, so the target survives for review.
       await tx.itineraryTravelPlan.updateMany({ where: { tripId, sourceItemId: item.id }, data: { sourceItemId: null } });
-      await tx.itineraryItem.delete({ where: { id: item.id } });
-      await normalizeDayPositions(tx, item.dayId);
+      if (item.organizerIdea) await tx.itineraryItem.update({where:{id:item.id},data:{dayId:null,position:0,revision:{increment:1}}});
+      else await tx.itineraryItem.delete({ where: { id: item.id } });
+      if (item.dayId) await normalizeDayPositions(tx, item.dayId);
       return { ok: true as const, data: { id: item.id } };
     });
   } catch {
@@ -83,7 +86,7 @@ export async function getItineraryBuilder(tripId: string): Promise<ItineraryResu
         orderBy: [{ tripSegment: { position: "asc" } }, { displayRank: "asc" }, { id: "asc" }],
       });
       return { ok: true as const, data: {
-        tripId, createToken: manualActivityToken(tripId),
+        tripId, locked: await scheduleLocked(tx, tripId), createToken: manualActivityToken(tripId),
         segments: trip.segments.map(segment => ({ id: segment.id, label: (segment.position + 1) + ". " + segment.baseName + " · " + formatDateOnly(segment.arrivalDate) + " to " + formatDateOnly(segment.departureDate) })),
         days: trip.days.map(day => ({
           id: day.id, date: formatDateOnly(day.date), primarySegmentId: day.primarySegmentId,
@@ -116,6 +119,11 @@ async function appendRecommendation(tx: Prisma.TransactionClient, recommendation
   const metadata = resolveExperienceMetadata(recommendation.placeId, recommendation.place.research);
   const event = metadata.event;
   const last = await tx.itineraryItem.aggregate({ where: { dayId }, _max: { position: true } });
+  const retained=await tx.itineraryItem.findUnique({where:{sourceRecommendationId:recommendation.id},include:{reservation:true}});
+  if(retained){
+    if(retained.dayId||retained.reservation?.state==="BOOKED"||retained.flexibility==="FIXED")throw Error("Review the retained item's Move to consequence.");
+    return tx.itineraryItem.update({where:{id:retained.id},data:{dayId,position:(last._max.position??-1)+1,revision:{increment:1}}});
+  }
   return tx.itineraryItem.create({ data: {
     tripId: recommendation.tripId, dayId, type: "ACTIVITY", title: recommendation.place.name,
     sourceRecommendationId: recommendation.id, durationMinutes: recommendation.durationMinutes,
@@ -131,6 +139,7 @@ export async function addRecommendationToDay(input: {
   try {
     return await getPrismaClient().$transaction(async tx => {
       if (!await lockPrototypeTrip(tx, input.tripId)) return failure("NOT_FOUND", "This trip is unavailable.");
+      if (await scheduleLocked(tx, input.tripId)) return failure("ITINERARY_LOCKED", "Itinerary is locked. Save an idea or unlock before changing the schedule.");
       const day = await tx.day.findFirst({ where: { id: input.dayId, tripId: input.tripId } });
       if (!day) return failure("WRONG_DAY", "Choose a day in this trip.");
       if (day.primarySegmentId !== input.tripSegmentId) return failure("WRONG_SEGMENT", "This day’s destination changed. Refresh and choose an idea for its destination.");
@@ -139,9 +148,9 @@ export async function addRecommendationToDay(input: {
         include: { place: { include: { research: true } }, scheduledItem: { include: { day: true } } },
       });
       if (!recommendation) return failure("NOT_FOUND", "This recommendation is unavailable in this destination.");
-      if (recommendation.scheduledItem) {
+      if (recommendation.scheduledItem?.day) {
         const item = recommendation.scheduledItem;
-        return { ok: true as const, data: { id: item.id, dayId: item.dayId, dayNumber: item.day.position + 1, alreadyScheduled: true } };
+        return { ok: true as const, data: { id: item.id, dayId: item.dayId!, dayNumber: item.day!.position + 1, alreadyScheduled: true } };
       }
       const metadata = resolveExperienceMetadata(recommendation.placeId, recommendation.place.research);
       const event = metadata.event;

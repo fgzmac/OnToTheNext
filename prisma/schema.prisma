@@ -21,6 +21,10 @@ model PrototypeUser {
 }
 
 model Trip {
+  organizerState OrganizerState?
+  importBatches ImportBatch[]
+  organizerIdeas OrganizerIdea[]
+  organizerChanges OrganizerChange[]
   id                String                 @id @default(cuid())
   ownerId           String
   name              String?
@@ -227,6 +231,8 @@ enum ItineraryProgress {
 }
 
 model ItineraryItem {
+  organizerIdea OrganizerIdea?
+  period String?
   enteredManually Boolean @default(false)
   locationLabel String?
   referenceUrl String?
@@ -241,7 +247,7 @@ model ItineraryItem {
   progressActionKey      String?
   id                     String @id @default(cuid())
   tripId                 String
-  dayId                  String
+  dayId                  String?
   type                   ItineraryItemType
   title                  String
   startMinute            Int?
@@ -259,7 +265,7 @@ model ItineraryItem {
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
   trip                   Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
-  day                    Day @relation(fields: [dayId, tripId], references: [id, tripId], onDelete: NoAction)
+  day                    Day? @relation(fields: [dayId, tripId], references: [id, tripId], onDelete: NoAction)
   sourceRecommendation   Recommendation? @relation(fields: [sourceRecommendationId], references: [id], onDelete: SetNull)
 
   reservation Reservation?
@@ -275,6 +281,55 @@ enum ReservationType {
   ACTIVITY
   HOTEL
   TRANSPORTATION
+}
+
+// All mutations serialize on the owning Trip row, including lock transitions.
+model OrganizerState {
+  tripId String @id
+  locked Boolean @default(false)
+  revision Int @default(0)
+  trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+}
+
+model ImportBatch {
+  id String @id @default(cuid())
+  tripId String?
+  ownerId String?
+  undatedItems Json?
+  requestHash String
+  originalText String
+  createdAt DateTime @default(now())
+  trip Trip? @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  ideas OrganizerIdea[]
+  @@unique([tripId, requestHash])
+  @@unique([ownerId, requestHash])
+}
+
+model OrganizerIdea {
+  id String @id @default(cuid())
+  tripId String
+  batchId String?
+  itemId String @unique
+  sourceFragment String
+  input Json
+  pending Boolean @default(true)
+  disposition String @default("INCLUDED")
+  revision Int @default(0)
+  trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  batch ImportBatch? @relation(fields: [batchId], references: [id], onDelete: Restrict)
+  item ItineraryItem @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  @@index([tripId])
+}
+
+// Receipts also retain the previous placement for revision-checked ordinary undo.
+model OrganizerChange {
+  id String @id
+  tripId String
+  afterHash String
+  before Json
+  createdAt DateTime @default(now())
+  trip Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  @@index([tripId])
 }
 enum ReservationState {
   BOOK_NOW

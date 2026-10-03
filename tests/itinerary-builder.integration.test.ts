@@ -219,7 +219,7 @@ integration("Itinerary Builder movement and planning blocks", () => {
   it("checks prototype ownership for all new operations", async () => {
     const item = await block(); const p = await preview(item.id); const owner = await db!.prototypeUser.create({ data: { displayName: "Other" } });
     await db!.trip.update({ where: { id: DEMO_TRIP_ID }, data: { ownerId: owner.id } });
-    expect((await createPlanningBlock({ tripId: DEMO_TRIP_ID, dayId: item.dayId, type: "HOTEL_REST" })).ok).toBe(false);
+    expect((await createPlanningBlock({ tripId: DEMO_TRIP_ID, dayId: item.dayId!, type: "HOTEL_REST" })).ok).toBe(false);
     expect((await previewMoveItineraryItem({ tripId: DEMO_TRIP_ID, itemId: item.id, targetDayId: (await day("2030-04-02")).id })).ok).toBe(false);
     expect((await reorderItineraryItem({ tripId: DEMO_TRIP_ID, itemId: item.id, direction: "LATER" })).ok).toBe(false);
     expect((await confirmMoveItineraryItem(DEMO_TRIP_ID, p.token)).ok).toBe(false); expect(await rows()).toEqual([item]);

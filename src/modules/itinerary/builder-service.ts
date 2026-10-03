@@ -2,7 +2,7 @@ import { resolveExperienceMetadata } from "../experiences/metadata";
 import { eventMatches } from "@/src/modules/discover/events";
 import type { Prisma, ItineraryItemType, TransportationMode } from "@/src/generated/prisma/client";
 import { getPrismaClient } from "@/src/lib/prisma";
-import { lockPrototypeTrip } from "@/src/lib/trip-lock";
+import { lockPrototypeTrip, scheduleLocked } from "@/src/lib/trip-lock";
 import { PROTOTYPE_OWNER_ID } from "@/src/modules/identity/prototype-owner";
 import { formatDateOnly } from "@/src/modules/trips/date-only";
 import { validatePlanning } from "./domain";
@@ -33,6 +33,7 @@ export async function createPlanningBlock(input: {
   try {
     return await getPrismaClient().$transaction(async tx => {
       if (!await lockPrototypeTrip(tx, input.tripId)) return failure("NOT_FOUND", "This trip is unavailable.");
+      if (await scheduleLocked(tx, input.tripId)) return failure("ITINERARY_LOCKED", "Itinerary is locked. Save an idea or unlock before changing the schedule.");
       const day = await tx.day.findFirst({ where: { id: input.dayId, tripId: input.tripId } });
       if (!day) return failure("WRONG_DAY", "Choose a day in this trip.");
       const originId = input.originSegmentId || null;
@@ -59,7 +60,7 @@ export async function createPlanningBlock(input: {
 async function context(tx: Prisma.TransactionClient, tripId: string) {
   return tx.trip.findFirst({ where: { id: tripId, ownerId: PROTOTYPE_OWNER_ID }, include: {
     segments: { orderBy: { position: "asc" } },
-    days: { orderBy: { position: "asc" }, include: { itineraryItems: { orderBy: { position: "asc" }, include: { sourceRecommendation: { select: { tripSegmentId: true, placeId: true, place: { include: { research: true } } } } } } } },
+    days: { orderBy: { position: "asc" }, include: { itineraryItems: { orderBy: { position: "asc" }, include: { reservation: true, sourceRecommendation: { select: { tripSegmentId: true, placeId: true, place: { include: { research: true } } } } } } } },
   } });
 }
 type Context = NonNullable<Awaited<ReturnType<typeof context>>>;
@@ -74,7 +75,7 @@ function previewFor(plan: Context, itemId: string, targetDayId: string, directio
   const target = plan.days.find(day => day.id === targetDayId);
   if (!item || !source) return failure("NOT_FOUND", "This scheduled item is unavailable.");
   if (!target) return failure("WRONG_DAY", "Choose another day in this trip.");
-  let fixedWarning = item.flexibility === "FIXED" ? "This item is marked Fixed." : null;
+  let fixedWarning = item.reservation?.state === "BOOKED" ? "Booked item: only itinerary placement changes. The supplier booking and confirmed date/time remain unchanged." : item.flexibility === "FIXED" ? "This item is marked Fixed." : null;
   if (direction) {
     if (target.id !== source.id) return failure("WRONG_DAY", "Reordering stays within one day.");
     const before = source.itineraryItems.map(item => item.id);
@@ -106,13 +107,14 @@ export async function reorderItineraryItem(input: { tripId: string; itemId: stri
   try {
     return await getPrismaClient().$transaction(async tx => {
       if (!await lockPrototypeTrip(tx, input.tripId)) return failure("NOT_FOUND", "This trip is unavailable.");
+      if (await scheduleLocked(tx, input.tripId)) return failure("ITINERARY_LOCKED", "Itinerary is locked. Save an idea or unlock before changing the schedule.");
       const plan = (await context(tx, input.tripId))!;
       const source = plan.days.find(day => day.itineraryItems.some(item => item.id === input.itemId));
       if (!source) return failure("NOT_FOUND", "This scheduled item is unavailable.");
       const before = source.itineraryItems.map(item => item.id);
       const after = reorderIds(before, input.itemId, input.direction);
       if (!after) return failure("ORDER_BOUNDARY", "This item cannot move any further in that direction.");
-      if (requiresFixedConfirmation(source.itineraryItems, before, after)) {
+      if (requiresFixedConfirmation(source.itineraryItems, before, after) || source.itineraryItems.some(i=>i.reservation?.state==="BOOKED" && before.indexOf(i.id)!==after.indexOf(i.id))) {
         const preview = previewFor(plan, input.itemId, source.id, input.direction);
         return preview.ok ? { ok: true as const, data: { preview: preview.data } } : preview;
       }
@@ -127,6 +129,7 @@ export async function confirmMoveItineraryItem(tripId: string, token: string): P
   try {
     return await getPrismaClient().$transaction(async tx => {
       if (!await lockPrototypeTrip(tx, tripId)) return failure("NOT_FOUND", "This trip is unavailable.");
+      if (await scheduleLocked(tx, tripId)) return failure("ITINERARY_LOCKED", "Itinerary is locked. Save an idea or unlock before changing the schedule.");
       const plan = (await context(tx, tripId))!;
       if (!previewStateMatches(expected.fingerprint, fingerprint(plan))) return stale();
       const valid = previewFor(plan, expected.itemId, expected.targetDayId, expected.direction);

@@ -549,3 +549,11 @@ body:has(.travel-dusk) .trip-meta { color:var(--muted); }
 .travel-dusk .activity-tabs button[aria-selected="true"]:hover:not(:disabled) { color:var(--accent); }
 
 .travel-dusk :is(input,select,textarea,button.secondary,.button.secondary,button.ghost,.button.ghost), .travel-dusk .interest-options label { border-color:var(--control-line); }
+.travel-dusk .organizer { border:1px solid var(--control-line); padding:20px; border-radius:16px; background:var(--surface); margin-bottom:28px; }
+.organizer-days { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.organizer-item { padding:14px 0; border-top:1px solid var(--control-line); overflow-wrap:anywhere; }
+.organizer-item p { white-space:pre-wrap; }
+.organizer-fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.import-review { display:grid; gap:12px; }
+.organizer input[type=checkbox] { width:auto; margin-right:6px; }
+@media(max-width:700px){.organizer-days,.organizer-fields{grid-template-columns:1fr}.travel-dusk .organizer{padding:12px}}

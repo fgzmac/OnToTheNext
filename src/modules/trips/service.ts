@@ -1,5 +1,5 @@
 import { supportedCity } from "@/src/modules/discover/catalog";
-import { lockPrototypeTrip } from "@/src/lib/trip-lock";
+import { lockPrototypeTrip, scheduleLocked } from "@/src/lib/trip-lock";
 import type { Prisma } from "@/src/generated/prisma/client";
 import { ensurePrototypeOwner, PROTOTYPE_OWNER_ID } from "@/src/modules/identity/prototype-owner";
 import { getPrismaClient } from "@/src/lib/prisma";
@@ -311,6 +311,7 @@ export async function updateTrip(input: UpdateTripInput): Promise<Result<TripSke
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
       if (!await lockPrototypeTrip(tx, input.tripId)) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
+      if (await scheduleLocked(tx, input.tripId)) return errorResult([{code:"ITINERARY_LOCKED",message:"Unlock the itinerary before changing its dates or destination structure."}]);
       const existing = await tx.trip.findUnique({ where: { id: input.tripId } });
       if (!existing) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
 
@@ -352,6 +353,7 @@ export async function addSegment(input: SegmentInput): Promise<Result<TripSkelet
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
       if (!await lockPrototypeTrip(tx, input.tripId)) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
+      if (await scheduleLocked(tx, input.tripId)) return errorResult([{code:"ITINERARY_LOCKED",message:"Unlock the itinerary before changing its dates or destination structure."}]);
       const tripRecord = await tx.trip.findUnique({ where: { id: input.tripId } });
       if (!tripRecord) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
 
@@ -399,6 +401,7 @@ export async function updateSegment(input: UpdateSegmentInput): Promise<Result<T
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
       if (!await lockPrototypeTrip(tx, input.tripId)) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
+      if (await scheduleLocked(tx, input.tripId)) return errorResult([{code:"ITINERARY_LOCKED",message:"Unlock the itinerary before changing its dates or destination structure."}]);
       const tripRecord = await tx.trip.findUnique({ where: { id: input.tripId } });
       const segmentRecord = await tx.tripSegment.findUnique({ where: { id: input.segmentId } });
       if (!tripRecord || !segmentRecord || segmentRecord.tripId !== input.tripId) {
@@ -440,6 +443,7 @@ export async function reorderSegments(tripId: string, orderedSegmentIds: string[
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
       if (!await lockPrototypeTrip(tx, tripId)) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
+      if (await scheduleLocked(tx, tripId)) return errorResult([{code:"ITINERARY_LOCKED",message:"Unlock the itinerary before changing its dates or destination structure."}]);
       const tripRecord = await tx.trip.findUnique({ where: { id: tripId } });
       const existing = await tx.tripSegment.findMany({ where: { tripId }, orderBy: { position: "asc" } });
       if (!tripRecord) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
@@ -473,6 +477,7 @@ export async function removeSegment(tripId: string, segmentId: string): Promise<
     const prisma = getPrismaClient();
     return await prisma.$transaction(async (tx) => {
       if (!await lockPrototypeTrip(tx, tripId)) return errorResult([{ code: "NOT_FOUND", message: "Trip not found." }]);
+      if (await scheduleLocked(tx, tripId)) return errorResult([{code:"ITINERARY_LOCKED",message:"Unlock the itinerary before changing its dates or destination structure."}]);
       const segment = await tx.tripSegment.findUnique({ where: { id: segmentId } });
       if (!segment || segment.tripId !== tripId) {
         return errorResult([{ code: "NOT_FOUND", message: "Trip segment not found." }]);

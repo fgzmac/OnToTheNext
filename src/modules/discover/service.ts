@@ -29,7 +29,7 @@ export function cardData(record: CardRecord): RecommendationCardData {
     factualSummary: record.factualSummary, durationMinutes: record.durationMinutes,
     costContext: record.costContext, logisticsNote: record.logisticsNote,
     decision: record.decision?.outcome ?? null,
-    scheduledDay: record.scheduledItem ? { id: record.scheduledItem.dayId, number: record.scheduledItem.day.position + 1, itemId: record.scheduledItem.id } : null,
+    scheduledDay: record.scheduledItem?.day ? { id: record.scheduledItem.dayId!, number: record.scheduledItem.day.position + 1, itemId: record.scheduledItem.id } : null,
     evidence: record.place.evidence.map(item => ({
       id: item.id, topic: item.topic, factualText: item.factualText,
       retrievedAt: item.retrievedAt.toISOString(), status: item.status,

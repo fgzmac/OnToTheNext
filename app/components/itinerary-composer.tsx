@@ -19,6 +19,7 @@ import {ActivityDetails,newDetailSession} from "./experience-details";
 import type {DetailSession} from "@/src/modules/google-places/detail-session";
 import { DetailPanel } from "./detail-panel";
 import { ComposerIdeas } from "./composer-ideas";
+import { TripOrganizer } from "./trip-organizer";
 
 export function ItineraryComposer({ builder, selectedDayId, batch, recommendationError, reservations, travel, contextError }: {
   builder: ItineraryBuilder; selectedDayId: string; batch: RecommendationBatch | null; recommendationError: string | null;
@@ -64,8 +65,9 @@ export function ItineraryComposer({ builder, selectedDayId, batch, recommendatio
         {days.map((d, i) => <option key={d.id} value={d.id}>Day {i + 1} · {d.date} · {d.base ?? "Unassigned"}</option>)}
       </select></label><button className="text-button mobile-plan-link" onClick={() => document.getElementById("selected-plan")?.scrollIntoView({ block: "start" })}>{day.items.length} planned · View day ↓</button>
     </header>
+    <TripOrganizer tripId={tripId} revision={String(builder.locked)+days.flatMap(d=>d.items.map(i=>i.editToken)).join()} />
     <div className="composer-columns" aria-busy={pending}>
-      {day.primarySegmentId ? <ComposerIdeas key={day.id} tripId={tripId} segmentId={day.primarySegmentId} dayId={day.id} dayNumber={dayNumber} initial={batch} error={recommendationError} revision={days.flatMap(d => d.items.map(i => i.id)).join(",")} /> :
+      {day.primarySegmentId ? <ComposerIdeas locked={builder.locked} key={day.id} tripId={tripId} segmentId={day.primarySegmentId} dayId={day.id} dayNumber={dayNumber} initial={batch} error={recommendationError} revision={days.flatMap(d => d.items.map(i => i.id)).join(",")} /> :
         <section className="composer-ideas stack"><h2>Where will this day take you?</h2><p>This Day has no destination yet.</p><Link className="button secondary" href={"/trips/" + tripId + (context ? "?" + context : "") + "#destinations"}>Set this Day’s destination in Home</Link></section>}
       <section id="selected-plan" className="composer-plan stack" aria-label="Selected day timeline">
         <header className="row row-between"><div><span className="eyebrow">{day.base ?? "Unassigned"}</span><h2>Day {dayNumber}</h2><p className="muted">{day.date}</p></div><span className="plan-count">{day.items.length} planned</span></header>

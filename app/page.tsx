@@ -20,6 +20,7 @@ export default async function HomePage() {
         <span className="eyebrow">On To The Next</span>
         <h1>Where are we going?</h1>
         <p className="lead">Choose a destination and dates. Discover places you’ll love, then build a day at a time.</p>
+        <Link className="button secondary" href="/organize">Start a list without dates</Link>
       </section>
 
       {databaseError ? (

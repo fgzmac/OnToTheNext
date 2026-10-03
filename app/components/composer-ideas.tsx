@@ -1,4 +1,6 @@
 "use client";
+import { saveOtherIdea } from "@/src/modules/organizer/actions";
+import { useRouter } from "next/navigation";
 import { useState, useTransition, useEffect } from "react";
 import type { RecommendationBatch, RecommendationCardData } from "@/src/modules/discover/types";
 import { composerAdd, composerBatch, composerDeny } from "@/src/modules/itinerary/composer-actions";
@@ -9,9 +11,10 @@ import { recommendationProvenanceLabel } from "@/src/modules/experiences/provena
 import { DestinationResearch } from "./destination-research";
 import { TripInterests } from "./discover-controls";
 
-export function ComposerIdeas({ tripId, segmentId, dayId, dayNumber, initial, error: initialError, revision }: {
-  tripId: string; segmentId: string; dayId: string; dayNumber: number; initial: RecommendationBatch | null; error: string | null; revision: string;
+export function ComposerIdeas({ tripId, segmentId, dayId, dayNumber, initial, error: initialError, revision, locked=false }: {
+  locked?: boolean; tripId: string; segmentId: string; dayId: string; dayNumber: number; initial: RecommendationBatch | null; error: string | null; revision: string;
 }) {
+  const router=useRouter();
   const [batch, setBatch] = useState(initial), [error, setError] = useState(initialError), [message, setMessage] = useState("");
   const [pending, start] = useTransition();
   const refresh = async (page: number, more = false) => {
@@ -27,6 +30,8 @@ export function ComposerIdeas({ tripId, segmentId, dayId, dayNumber, initial, er
         const result = await composerDeny({ tripId, tripSegmentId: segmentId, recommendationId: item.id });
         if (!result.ok) { setError(result.error); return; }
         setMessage("Not interested saved.");
+      } else if (locked) {
+        const r=await saveOtherIdea(tripId,item.id);if(!r.ok){setError(r.error);return;}setMessage("Saved idea to Not scheduled. The locked itinerary is unchanged.");router.refresh();
       } else {
         const result = await composerAdd({ tripId, tripSegmentId: segmentId, recommendationId: item.id, dayId });
         if (!result.ok) { setError(result.error.message); return; }
@@ -48,7 +53,7 @@ export function ComposerIdeas({ tripId, segmentId, dayId, dayNumber, initial, er
       {item.scheduledDay ? <div className="scheduled-choice"><h3 id={"recommendation-" + item.id}>{item.place.name}</h3><span>On Day {item.scheduledDay.number}</span><button className="text-button" disabled={pending} onClick={() => act(item, true)}>Not interested</button></div> : <><RecommendationPhoto photo={item.photo} name={item.place.name} /><h3 id={"recommendation-" + item.id}>{item.place.name}</h3><p className="activity-location">{item.place.location??item.place.baseLabel}</p><ExperienceChips item={item}/><p>{item.factualSummary}</p>
       {item.event ? <p className="idea-duration">{item.event.startDate} – {item.event.endDate} · {item.event.timeZone} · Published occurrence, availability unconfirmed</p> : null}
       <small className="muted">{recommendationProvenanceLabel(item.evidence)}</small>
-      <div className="idea-actions"><button disabled={pending} onClick={() => act(item, false)}>{"Add to Day " + dayNumber}</button><ExperienceDetails item={item} onAdd={()=>act(item,false)} dayNumber={dayNumber} pending={pending} /><button className="text-button" disabled={pending} onClick={() => act(item, true)}>Not interested</button></div></>}
+      <div className="idea-actions"><button disabled={pending} onClick={() => act(item, false)}>{locked?"Save idea":"Add to Day " + dayNumber}</button><ExperienceDetails item={item} onAdd={()=>act(item,false)} dayNumber={dayNumber} pending={pending} /><button className="text-button" disabled={pending} onClick={() => act(item, true)}>Not interested</button></div></>}
     </article>)}
     {batch && !cards.length && batch.total > 0 ? <p>No ideas left in this batch. Try another batch or revisit an earlier one.</p> : null}
     {batch ? <div className="row">
