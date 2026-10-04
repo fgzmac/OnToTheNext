@@ -129,7 +129,7 @@ The main reading flow presents a full sequence of Days with content-derived titl
 periods, concise descriptions and one next decision. Arrival, transfer, departure and
 full-day finishes have explicit purposes. Notes, source roles, original timing and
 placement diagnostics remain in disclosures. Unique exact catalog identity (including
-its own category suffix) permits reuse of an existing independent description; broad
+its own category or city suffix) permits reuse of an existing independent description; broad
 aliases and branch guessing do not. One trip-level notice replaces repeated general
 availability warnings. Specific booking/transport/protection warnings remain visible.
 Titles are derived from current saved items. Moving a stop away from a source outing
@@ -151,7 +151,7 @@ lock, booking preservation, retry and undo paths. No migration or dependency was
 Verification for this correction:
 - Existing baseline tests retained. The obsolete unknown-duration assertion is replaced
   by a same-city-is-not-relationship assertion; supported grouping is tested separately.
-- 17 additional pure cases cover provenance, grouping/sequence, fixed/protected/full-day
+- 18 additional pure cases cover provenance, grouping/sequence, fixed/protected/full-day
   constraints, transfer qualification, eligibility, order and derived content.
 - Three new PostgreSQL cases cover save/move/reopen context, validation and exclusive
   alternative selection; one new browser flow covers rendered grouping and movement.

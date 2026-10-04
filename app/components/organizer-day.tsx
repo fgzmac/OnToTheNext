@@ -18,6 +18,7 @@ export function OrganizerDay({day,items,tripId,locked,pending,onMove,onEarlier,o
       return <article key={i.id} className="organizer-item" draggable={!locked} onDragStart={e=>e.dataTransfer.setData("text/plain",i.id)}>
         <div className="row row-between"><strong>{i.period||"Flexible visit · period to decide"}{i.time?` · ${i.time}`:""}</strong><span className="muted">{i.kind==="PROTECTED"?"Protected":i.fixed?"Supplied fixed time":i.period&&i.period!==i.sourcePeriod?"Suggested period":"Supplied intention"}</span></div>
         <h4>{i.title}</h4>
+        {i.descriptionSource&&i.descriptionSource.description!==description?<p>{i.descriptionSource.description}</p>:null}
         {detached?<p>Only {i.title} from “{i.outing}” is on this Day. Review the source sequence after this placement change; its combined outing description may no longer apply.</p>:description?<p>{description}</p>:<p className="muted">No visit description has been supplied for this item.</p>}
         {i.shortVisit?<p>{i.shortVisit}</p>:null}
         {i.conditionalEvening?<p className="issue warning">Conditional: {i.conditionalEvening}</p>:null}
