@@ -557,3 +557,9 @@ body:has(.travel-dusk) .trip-meta { color:var(--muted); }
 .import-review { display:grid; gap:12px; }
 .organizer input[type=checkbox] { width:auto; margin-right:6px; }
 @media(max-width:700px){.organizer-days,.organizer-fields{grid-template-columns:1fr}.travel-dusk .organizer{padding:12px}}
+
+/* A readable sequence of Days; source detail remains available on disclosure. */
+.organizer-days.readable-itinerary { grid-template-columns: minmax(0, 1fr); }
+.itinerary-day > header h3 { margin-top: .35rem; }
+.itinerary-day .organizer-item { padding: 1rem 0; }
+.itinerary-next { border-left: 3px solid var(--accent, #d8ad82); padding-left: 1rem; }

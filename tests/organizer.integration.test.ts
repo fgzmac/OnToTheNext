@@ -2,6 +2,8 @@ import { afterAll,beforeEach,describe,expect,it } from "vitest";
 import { getPrismaClient } from "@/src/lib/prisma";
 import { createTrip } from "@/src/modules/trips/service";
 import { parsePaste } from "@/src/modules/organizer/domain";
+import { dayContent } from "@/src/modules/organizer/content";
+import { includeIdea } from "@/src/modules/organizer/service";
 import { acceptImport,applyProposal,getOrganizer,previewOrganization,setLock,previewPlacement,undoChange,findGapIdeas } from "@/src/modules/organizer/service";
 import { createPlanningBlock,reorderItineraryItem } from "@/src/modules/itinerary/builder-service";
 import { createManualActivity,manualActivityToken } from "@/src/modules/itinerary/details-service";
@@ -23,4 +25,16 @@ suite("durable organizer and lock transactions",()=>{
  it("ordinary undo is revision checked",async()=>{await add();const result=await applyProposal(id,await proposal(),false);await undoChange(id,result.undo);expect((await getOrganizer(id)).items.every(i=>!i.dayId)).toBe(true);await expect(undoChange(id,result.undo)).rejects.toThrow("stale");});
  it("unconfirmed booked text does not produce a confirmed reservation",async()=>{await add("Port City:\n- Museum booked");expect((await db!.reservation.findFirstOrThrow({where:{tripId:id}})).state).toBe("BOOK_NOW");});
  it("gap search is read only and respects protected time",async()=>{await add("Port City:\n2031-06-02\n- Keep afternoon free\n- Museum");await applyProposal(id,await proposal(),false);const w=await getOrganizer(id),d=w.days.find(x=>x.date==="2031-06-02")!;const before=await db!.itineraryItem.findMany({where:{tripId:id}});await expect(findGapIdeas(id,d.id,"Hotel",90,"Afternoon",false)).rejects.toThrow("protected");await findGapIdeas(id,d.id,"Hotel",90,"Afternoon",true);expect(await db!.itineraryItem.findMany({where:{tripId:id}})).toEqual(before);});
+ it("saves grouped source context, moves one item and derives content from reopened state",async()=>{
+  await add("Port City:\n- Market\nOuting: River outing\nSequence: 1\nDescription: Browse the supplied food stalls.\n- Gallery\nOuting: River outing\nSequence: 2\nDecision: Choose the gallery ticket");
+  const before=await getOrganizer(id),p=await proposal();expect((await getOrganizer(id)).items).toEqual(before.items);expect(p.placements[0].dayId).toBe(p.placements[1].dayId);
+  await applyProposal(id,p,false);const w=await getOrganizer(id),gallery=w.items.find(i=>i.title==="Gallery")!,original=gallery.dayId!;
+  expect(gallery).toMatchObject({period:"Afternoon",sourcePeriod:"",outing:"River outing"});
+  await applyProposal(id,await previewPlacement(id,gallery.id,w.days[3].id,"Afternoon"),false);
+  const reopened=await getOrganizer(id);expect(reopened.items.find(i=>i.id===gallery.id)?.fragment).toContain("Decision: Choose the gallery ticket");
+  expect(dayContent(reopened.days.find(d=>d.id===original)!,reopened.items.filter(i=>i.dayId===original)).next).toBe("");
+  expect(dayContent(reopened.days[3],reopened.items.filter(i=>i.dayId===w.days[3].id)).next).toBe("Choose the gallery ticket");
+ });
+ it("rejects invalid source-context fields before any durable import",async()=>{const values=parsePaste("Port City:\n- Walk");values[0].sequence="not a number";await expect(acceptImport(id,"Source",values,"",false)).rejects.toThrow("sequence");expect(await db!.itineraryItem.count({where:{tripId:id}})).toBe(0);});
+ it("resolves one alternative in place without adding both or changing its source fragment",async()=>{await add("Port City:\n- Coast or Hills");const w=await getOrganizer(id),i=w.items[0];await expect(includeIdea(id,i.id,w.token,"INCLUDED")).rejects.toThrow("Choose one");await includeIdea(id,i.id,w.token,"INCLUDED","Hills");const after=await getOrganizer(id);expect(after.items).toHaveLength(1);expect(after.items[0]).toMatchObject({id:i.id,title:"Hills",fragment:i.fragment,pending:true,alternative:false});});
 });

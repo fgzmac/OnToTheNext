@@ -8,6 +8,7 @@ import { fingerprint, readActionPreview, signActionPreview } from "../itinerary/
 import { normalizeDayPositions } from "../itinerary/ordering";
 import { resolveExperienceMetadata } from "../experiences/metadata";
 import { eventMatches } from "../discover/events";
+import { independentContent } from "./independent-content";
 import { identity, organize, periodsOverlap, gapDurationEligible, PERIODS, type InputItem, type Placement } from "./domain";
 
 async function context(tx:Prisma.TransactionClient, tripId:string) {
@@ -21,8 +22,9 @@ type StoredItem=Context["itineraryItems"][number];
 function data(i:StoredItem):InputItem|null {return i.organizerIdea?.input as InputItem|null;}
 function hash(c:Context){return fingerprint(c);}
 function dto(c:Context) {
-  const days=c.days.map(d=>({id:d.id,date:formatDateOnly(d.date),city:c.segments.find(s=>s.id===d.primarySegmentId)?.baseName??"",transfer:c.segments.some(s=>formatDateOnly(s.arrivalDate)===formatDateOnly(d.date)||formatDateOnly(s.departureDate)===formatDateOnly(d.date))}));
-  const items=c.itineraryItems.map(i=>{const input=data(i);return {id:i.id,title:i.title,city:input?.city??days.find(d=>d.id===i.dayId)?.city??"",date:input?.date??"",time:input?.time??"",period:i.period??input?.period??"",kind:input?.kind??(["FREE_TIME","HOTEL_REST"].includes(i.type)?"PROTECTED":"ACTIVITY"),priority:input?.priority??false,
+  const days=c.days.map((d,index)=>({id:d.id,date:formatDateOnly(d.date),city:c.segments.find(s=>s.id===d.primarySegmentId)?.baseName??"",transfer:c.segments.some(s=>formatDateOnly(s.arrivalDate)===formatDateOnly(d.date)||formatDateOnly(s.departureDate)===formatDateOnly(d.date)),arrivalCity:c.segments.find(s=>formatDateOnly(s.arrivalDate)===formatDateOnly(d.date))?.baseName,departureCity:c.segments.find(s=>formatDateOnly(s.departureDate)===formatDateOnly(d.date))?.baseName,first:index===0,last:index===c.days.length-1}));
+  const items=c.itineraryItems.map(i=>{const input=data(i),independent=independentContent(i.title,input?.city??"");return {id:i.id,title:i.title,city:input?.city??days.find(d=>d.id===i.dayId)?.city??"",date:input?.date??"",time:input?.time??"",period:i.period??input?.period??"",sourcePeriod:input?.period??"",kind:input?.kind??(["FREE_TIME","HOTEL_REST"].includes(i.type)?"PROTECTED":"ACTIVITY"),priority:input?.priority??false,
+    outing:input?.outing??"",area:input?.area??"",sequence:input?.sequence??"",shortVisit:input?.shortVisit??"",conditionalEvening:input?.conditionalEvening??"",description:input?.description||independent?.description||"",decision:input?.decision??"",sourceRole:input?.sourceRole??"Supplied planning input",descriptionSource:input?.description?null:independent,
     alternative:i.organizerIdea?.disposition==="OPTIONAL",excluded:i.organizerIdea?.disposition==="EXCLUDED",dayId:i.dayId,position:i.position,fixed:i.flexibility==="FIXED",bookedDate:i.reservation?.state==="BOOKED"&&i.reservation.confirmedDate?formatDateOnly(i.reservation.confirmedDate):null,
     booking:i.reservation?{id:i.reservation.id,state:i.reservation.state,date:i.reservation.confirmedDate?formatDateOnly(i.reservation.confirmedDate):null,time:i.reservation.confirmedStartMinute,reference:i.reservation.confirmationReference}:null,
     reason:(i.organizerIdea?.input as {outcomeReason?:string}|null)?.outcomeReason??"",notes:i.notes??"",fragment:i.organizerIdea?.sourceFragment??"",pending:i.organizerIdea?.pending??false,imported:Boolean(i.organizerIdea),revision:i.revision,progress:i.progress};});
@@ -38,6 +40,8 @@ export async function setLock(tripId:string,token:string,locked:boolean){return 
 function validateItem(value:InputItem) {
   if(!value || typeof value!=="object")throw Error("Invalid import item.");
   for(const key of ["name","city","date","time","period","notes","url","fragment","kind","booking"] as const)if(typeof value[key]!=="string"||value[key].length>(["notes","fragment"].includes(key)?40000:500))throw Error("Review the input field lengths.");
+  for(const key of ["outing","area","description","decision","sourceRole","sequence","shortVisit","conditionalEvening"] as const)if(value[key]!==undefined&&(typeof value[key]!=="string"||value[key]!.length>2000))throw Error("Keep source context fields within 2,000 characters.");
+  if(value.sequence&&!/^\d{1,3}$/.test(value.sequence))throw Error("Source sequence must be a whole number between 0 and 999.");
   if(!value.name.trim()||!PERIODS.includes(value.period as typeof PERIODS[number])||!["ACTIVITY","NOTE","PROTECTED"].includes(value.kind)||!["","NEED_TICKETS","BOOKED_STATEMENT"].includes(value.booking))throw Error("Review item name, kind, period and booking statement.");
   if(value.date&&!validDate(value.date))throw Error("Use a real calendar date.");
   if(value.time&&!/^([01]\d|2[0-3]):[0-5]\d$/.test(value.time))throw Error("Use a valid 24-hour time.");
@@ -73,12 +77,13 @@ function sourceEligible(i:StoredItem,c:Context,dayId:string) {
   const source=i.sourceRecommendation;
   if(source){const own=c.segments.find(s=>s.id===source.tripSegmentId),target=c.segments.find(s=>s.id===d.primarySegmentId);if(!own||!target||identity(own.baseName)!==identity(target.baseName))throw Error("This activity belongs to a different destination.");
     const m=resolveExperienceMetadata(source.placeId,source.place.research);if(m.unavailable||(m.event&&!eventMatches(m.event,formatDateOnly(d.date))))throw Error("Event or source eligibility needs review for this date.");}
-  const input=data(i);if(input?.city&&identity(input.city)!==identity(c.segments.find(s=>s.id===d.primarySegmentId)?.baseName??""))throw Error("Choose a Day matching the supplied city; no location was guessed.");
+  const input=data(i);if(input?.city&&!c.segments.some(s=>identity(s.baseName)===identity(input.city)&&d.date>=s.arrivalDate&&d.date<=s.departureDate))throw Error("Choose a Day matching the supplied city; no location was guessed.");
 }
 function seal(c:Context,placements:Placement[],warnings:string[]):Proposal {return {placements,warnings,token:signActionPreview({purpose:"organizer-apply",tripId:c.id,hash:hash(c),proposalHash:fingerprint(placements)})};}
 export async function previewOrganization(tripId:string,ids:string[]) {return getPrismaClient().$transaction(async tx=>{const c=await context(tx,tripId),w=dto(c);if(!Array.isArray(ids)||ids.length>150)throw Error("Select up to 150 ideas.");
   const eligible=w.items.filter(i=>i.imported&&!i.dayId&&i.pending).map(i=>i.id);if(ids.some(id=>!eligible.includes(id)))throw Error("Select pending user-supplied ideas; saved placements remain untouched.");
-  const placements=organize(w.items,w.days,ids);return seal(c,placements,["Existing placements, bookings and protected periods stay unchanged.","Periods are tentative; unknown duration and transport are not precise fit evidence."]);},{isolationLevel:"RepeatableRead"});}
+  const checked=w.items.map(i=>{const stored=c.itineraryItems.find(x=>x.id===i.id)!;let eligibilityReason="";const eligibleDays=w.days.filter(d=>{try{sourceEligible(stored,c,d.id);return true;}catch(e){if(identity(d.city)===identity(i.city)||identity(d.arrivalCity??"")===identity(i.city))eligibilityReason=e instanceof Error?e.message:"Source eligibility needs review.";return false;}}).map(d=>d.id);return {...i,eligibleDays,eligibilityReason};});
+  const placements=organize(checked,w.days,ids);return seal(c,placements,["Only selected waiting ideas are proposed. Saved placements and bookings stay unchanged.","Suggested periods are an outline, not verified hours, duration or transport."]);},{isolationLevel:"RepeatableRead"});}
 export async function previewPlacement(tripId:string,itemId:string,dayId:string|null,period:string,index?:number) {return getPrismaClient().$transaction(async tx=>{
   const c=await context(tx,tripId),item=c.itineraryItems.find(i=>i.id===itemId);if(!item)throw Error("Item unavailable.");
   if(!PERIODS.includes(period as typeof PERIODS[number]))throw Error("Invalid period.");
