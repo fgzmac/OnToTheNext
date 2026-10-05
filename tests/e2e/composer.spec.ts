@@ -58,7 +58,7 @@ for(const [device,width,height] of [["desktop",1280,900],["phone",390,844]] as c
   await expect(form.getByRole("alert")).toContainText("HTTP or HTTPS");await expect(form.getByRole("alert")).toBeFocused();await screenshot("error");
   await form.getByLabel("Reference URL — optional",{exact:true}).fill("https://www.meijijingu.or.jp/en/about/");
   await form.getByLabel("Item notes — optional",{exact:true}).fill("Meet at the entrance");await form.getByRole("button",{name:"Save changes",exact:true}).click();
-  await expect(panel.getByRole("status")).toContainText("Item details saved");
+  await expect(panel.locator(".item-details-editor").getByRole("status")).toContainText("Item details saved");
   await page.keyboard.press("Escape");await expect(panel).toHaveCount(0);await expect(page.getByRole("button",{name:"Open "+names[3],exact:true})).toBeFocused();
   await page.reload();await expect(page.getByLabel("Selected day").locator("option:checked")).toContainText("Day 2");
   await expect(page.locator(".timeline-item h3")).toHaveText([names[3]]);

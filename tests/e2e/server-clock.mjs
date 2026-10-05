@@ -25,3 +25,12 @@ globalThis.Date = new Proxy(ActualDate, {
   get(target, key, receiver) { return key === "now" ? now : Reflect.get(target, key, receiver); },
 });
 console.log("Browser test server clock anchored at 2026-09-23T12:00:00Z, advancing (isolated fixtures only)");
+// Synthetic Google requests only. Installed after the actual isolated DB check above;
+// normal development/start/build never imports this browser-test preload.
+const {googleTestConfig,googleHttp,syntheticPhoto}=await import("../fixtures/google.ts");
+let photoRequests=0;
+globalThis[Symbol.for("ontothenext.syntheticGoogle")]={config:googleTestConfig,transport:googleHttp(),binary:async()=>{
+  photoRequests++;
+  if(photoRequests%2===0)throw Error("Synthetic expired media response");
+  return {type:"image/png",bytes:syntheticPhoto};
+}};

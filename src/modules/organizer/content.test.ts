@@ -1,0 +1,11 @@
+import {it,expect} from "vitest";
+import {dayContent} from "./content";
+import {independentContent} from "./independent-content";
+const day={id:"a",date:"2035-04-02",city:"Harbor Town",transfer:false};
+const market={id:"m",title:"Market",period:"Morning",time:"",kind:"ACTIVITY",position:0,outing:"River outing"};
+it("updates the Day title and decision when a saved item moves away",()=>{const gallery={...market,id:"g",title:"Gallery",outing:"",position:1,decision:"Choose the gallery ticket"};expect(dayContent(day,[market,gallery])).toMatchObject({title:"Market + Gallery",next:"Choose the gallery ticket"});expect(dayContent(day,[market])).toMatchObject({title:"Market",next:""});expect(dayContent(day,[]).title).toContain("Unallocated time");});
+it("gives arrival and departure purpose without inventing timing",()=>{expect(dayContent({...day,first:true,transfer:true},[])).toMatchObject({title:"Arrival, check-in and recovery",purpose:expect.stringContaining("Flight timing has not been supplied")});expect(dayContent({...day,last:true,transfer:true},[]).next).toContain("departure airport");});
+it("keeps full-day finish flexible, never creates a second activity",()=>{const plan=dayContent(day,[{...market,period:"Full day"}]);expect(plan).toMatchObject({title:"Market",fullDay:true,evening:expect.stringContaining("no second outing")});});
+it("does not claim provider verification or confirmed booking from a ticket intention",()=>{expect(dayContent(day,[{...market,booking:{state:"BOOK_NOW",date:null}}]).next).toContain("placement is not a booking");});
+it("only reuses unique exact independent identities, keeping branches distinct",()=>{expect(independentContent("Meiji Jingu Shrine","Tokyo")?.description).toContain("wooded");expect(independentContent("Meiji Jingu","Kyoto")).toBeNull();expect(independentContent("teamLab","Tokyo")).toBeNull();expect(independentContent("invented branch","Tokyo")).toBeNull();});
+it("permits a catalog's own city suffix without conflating different named experiences",()=>{expect(independentContent("teamLab Planets","Tokyo")?.description).toContain("body-scale digital artworks");expect(independentContent("teamLab Planets","Osaka")).toBeNull();expect(independentContent("teamLab Borderless","Tokyo")?.sourceUrl).not.toBe(independentContent("teamLab Planets","Tokyo")?.sourceUrl);});

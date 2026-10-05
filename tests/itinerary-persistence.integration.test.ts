@@ -89,7 +89,7 @@ integration("Itinerary scheduling and content safety", () => {
     const rec = await accept(1);
     const owner = await prisma!.prototypeUser.create({ data: { displayName: "Other test owner" } });
     await prisma!.trip.update({ where: { id: DEMO_TRIP_ID }, data: { ownerId: owner.id } });
-    expect((await scheduleAcceptedRecommendation({ tripId: DEMO_TRIP_ID, recommendationId: rec.id, dayId: item.dayId })).ok).toBe(false);
+    expect((await scheduleAcceptedRecommendation({ tripId: DEMO_TRIP_ID, recommendationId: rec.id, dayId: item.dayId! })).ok).toBe(false);
     expect((await getItineraryBuilder(DEMO_TRIP_ID)).ok).toBe(false);
     expect((await removeItineraryItem(DEMO_TRIP_ID, item.id)).ok).toBe(false);
     expect(await prisma!.itineraryItem.count()).toBe(1);
@@ -206,7 +206,7 @@ integration("Itinerary scheduling and content safety", () => {
     expect(result.errors[0]).toMatchObject({ code: "ITINERARY_CONTENT_WOULD_BE_REMOVED", dates: ["2030-04-01"] });
     expect(result.errors[0].message).toContain("scheduled itinerary items");
     expect(await prisma!.trip.findUniqueOrThrow({ where: { id: DEMO_TRIP_ID }, include: { days: { orderBy: { position: "asc" } }, segments: { orderBy: { position: "asc" } }, itineraryItems: true, preferenceProfile: true } })).toEqual(before);
-    await expect(prisma!.day.delete({ where: { id: item.dayId } })).rejects.toMatchObject({ code: "P2003" });
+    await expect(prisma!.day.delete({ where: { id: item.dayId! } })).rejects.toMatchObject({ code: "P2003" });
   });
 
   it("serializes date edits with scheduling so neither ordering can lose content", async () => {
@@ -225,7 +225,7 @@ integration("Itinerary scheduling and content safety", () => {
   it("rejects invalid planning values without partial rows or position changes", async () => {
     const existing = await scheduled();
     const rec = await accept(1);
-    const input = { tripId: DEMO_TRIP_ID, recommendationId: rec.id, dayId: existing.dayId };
+    const input = { tripId: DEMO_TRIP_ID, recommendationId: rec.id, dayId: existing.dayId! };
     for (const fields of [{ startMinute: -1 }, { startMinute: 1440 }, { flexibility: "BOOKED" }]) expect((await scheduleAcceptedRecommendation({ ...input, ...fields })).ok).toBe(false);
     await prisma!.recommendation.update({ where: { id: rec.id }, data: { durationMinutes: 0 } });
     const invalidDuration = await scheduleAcceptedRecommendation(input);

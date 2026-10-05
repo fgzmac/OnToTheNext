@@ -3,9 +3,11 @@ export interface RecommendationCardData {
   tripId: string;
   tripSegmentId: string;
   place: { id: string; name: string; baseLabel: string; category: string; location?: string | null };
-  photo?: import("./media").ExperiencePhoto | null;
-  experienceKind?: "VENUE" | "NEIGHBORHOOD" | "EVENT";
-  event?: import("./tokyo-pilot").EventOccurrence;
+  photo?: import("../experiences/types").ExperiencePhoto | null;
+  experienceKind?: import("../experiences/types").ExperienceKind;
+  eventReview?: import("../experiences/types").EventReview;
+  neighborhoodAuthorship?: import("../experiences/types").ExperienceMetadata["neighborhoodAuthorship"];
+  event?: import("../experiences/types").EventOccurrence;
   factualSummary: string;
   durationMinutes: number | null;
   costContext: string | null;

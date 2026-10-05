@@ -1,10 +1,11 @@
 import type { ItineraryFlexibility, ItineraryItemType, TransportationMode, ItineraryProgress } from "@/src/generated/prisma/enums";
 
-export type ItineraryIssueCode = "NOT_FOUND" | "NOT_ACCEPTED" | "WRONG_DAY" | "WRONG_SEGMENT" | "ALREADY_SCHEDULED" | "INVALID_TIME" | "INVALID_DURATION" | "INVALID_FLEXIBILITY" | "INVALID_BLOCK" | "INVALID_TRANSPORTATION" | "ORDER_BOUNDARY" | "FIXED_CONFIRMATION_REQUIRED" | "MOVE_PREVIEW_STALE" | "PERSISTENCE_FAILURE";
+export type ItineraryIssueCode = "ITINERARY_LOCKED" | "NOT_FOUND" | "NOT_ACCEPTED" | "WRONG_DAY" | "WRONG_SEGMENT" | "ALREADY_SCHEDULED" | "INVALID_TIME" | "INVALID_DURATION" | "INVALID_FLEXIBILITY" | "INVALID_BLOCK" | "INVALID_TRANSPORTATION" | "ORDER_BOUNDARY" | "FIXED_CONFIRMATION_REQUIRED" | "MOVE_PREVIEW_STALE" | "PERSISTENCE_FAILURE";
 export interface ItineraryIssue { code: ItineraryIssueCode; message: string; }
 export type ItineraryResult<T> = { ok: true; data: T } | { ok: false; error: ItineraryIssue };
 export interface ItineraryActionState { error: ItineraryIssue | null; message: string | null; }
 export interface TimelineItem {
+  sourceActivity?: import("../discover/types").RecommendationCardData | null;
   eventWarning?: string | null;
   editToken: string; enteredManually: boolean; locationLabel: string | null; referenceUrl: string | null;
   progress: ItineraryProgress;
@@ -21,6 +22,7 @@ export interface UnscheduledIdea {
 }
 export interface TimeIssue { code: "TIME_OVERLAP" | "PAST_MIDNIGHT"; itemIds: string[]; message: string; }
 export interface ItineraryBuilder {
+  locked: boolean;
   createToken: string;
   tripId: string;
   days: (SchedulingDay & { base: string | null; items: TimelineItem[]; issues: TimeIssue[] })[];

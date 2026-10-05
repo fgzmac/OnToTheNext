@@ -3,6 +3,7 @@ export type DateOnly = string;
 export type DestinationScope = "CITY_BASE" | "COUNTRY_REGION";
 
 export type IssueCode =
+  | "ITINERARY_LOCKED"
   | "INVALID_TRIP_DATE_RANGE"
   | "INVALID_TRAVELER_COUNT"
   | "INVALID_DESTINATION"

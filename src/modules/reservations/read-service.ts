@@ -22,7 +22,7 @@ async function workspace(tripId: string, now: Date, transaction?: Prisma.Transac
       reservations: { include: { evidenceLinks: { include: { evidenceRecord: { include: evidenceInclude } }, orderBy: [{ createdAt: "asc" }, { evidenceRecordId: "asc" }] } } },
     } });
     if (!trip) return { ok: false as const, error: { code: "NOT_FOUND", message: "This trip is unavailable." } };
-    const peers = trip.itineraryItems.map(i => ({ id: i.id, title: i.title, dayId: i.dayId, date: formatDateOnly(i.day.date), segmentId: i.day.primarySegmentId, startMinute: i.startMinute, durationMinutes: i.durationMinutes }));
+    const peers = trip.itineraryItems.filter(i => i.day !== null).map(i => ({ id: i.id, title: i.title, dayId: i.dayId!, date: formatDateOnly(i.day!.date), segmentId: i.day!.primarySegmentId, startMinute: i.startMinute, durationMinutes: i.durationMinutes }));
     const reservations = orderReservations(trip.reservations.map(r => {
       const item = trip.itineraryItems.find(i => i.id === r.itineraryItemId), evidence = r.evidenceLinks.map(link => evidenceDTO(link.evidenceRecord, now));
       const releases = evidence.flatMap(e => e.release ? [e.release] : []);

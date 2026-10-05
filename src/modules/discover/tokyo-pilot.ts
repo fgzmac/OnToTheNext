@@ -1,10 +1,7 @@
 import type { CatalogPlace } from "./catalog";
-export type SourceRole = "official" | "local publication" | "traveler account" | "community" | "editorial estimate";
-export interface ExperienceSource { role: SourceRole; url: string; observedAt: string; summary: string; }
-export interface EventOccurrence {
-  startDate: string | null; endDate: string | null; timeZone: "Asia/Tokyo";
-  status: "PUBLISHED" | "CANCELLED" | "UNKNOWN"; observedAt: string; recheckAfter: string; timeNote?: string;
-}
+import type { ExperienceSource } from "../experiences/types";
+export type { EventOccurrence, ExperienceSource } from "../experiences/types";
+export type SourceRole = ExperienceSource["role"];
 const observedAt = "2026-09-23";
 function place(slug: string, name: string, category: string, group: string, interests: CatalogPlace["interests"], summary: string, location: string, url: string, durationMinutes: number, kind: "VENUE" | "NEIGHBORHOOD" = "VENUE"): CatalogPlace {
   return { id: "curated-" + slug, city: "Tokyo", name, category, diversityGroup: group, interests, summary, location, url, checkedAt: observedAt, durationMinutes, kind };

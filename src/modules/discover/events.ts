@@ -1,4 +1,4 @@
-import type { EventOccurrence } from "./tokyo-pilot";
+import type { EventOccurrence, EventReview } from "../experiences/types";
 export type EventClock = () => Date;
 const systemClock: EventClock = () => new Date();
 function validDate(value: string) {
@@ -15,8 +15,14 @@ export function eventMatches(event: EventOccurrence, start: string, end = start,
       && today <= event.endDate && event.startDate <= end && event.endDate >= start;
   } catch { return false; }
 }
-export function eventReviewWarning(event: EventOccurrence | undefined, date: string, clock: EventClock = systemClock): string | null {
+export function eventReviewWarning(event: EventOccurrence | undefined, date: string, clock: EventClock = systemClock, review: EventReview = "unknown"): string | null {
   if (!event) return null;
   if (!eventMatches(event, date, date, clock)) return "Event dates or source status need review. Your saved item and reservation have not been changed; check the organizer.";
-  return "Event occurrence was manually checked on " + event.observedAt + ". Session access and availability are unconfirmed; check the organizer.";
+  return eventObservationLabel(event, review) + ". Session access and availability are unconfirmed; check the organizer.";
+}
+
+export function eventObservationLabel(event: EventOccurrence, review: EventReview = "unknown"): string {
+  if (review === "human-reviewed") return "Event occurrence was manually checked on " + event.observedAt;
+  if (review === "source-observed") return "Event source observed " + event.observedAt + "; human review not recorded";
+  return "Event observation recorded " + event.observedAt + "; review method unknown";
 }

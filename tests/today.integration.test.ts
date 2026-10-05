@@ -119,7 +119,7 @@ integration("Today composes canonical day/progress/reservation data", () => {
     const a=await block(),i=await input(a.id),p=ok(await previewSkipItineraryItem(i,now));const before=await snapshot();
     for(const override of [{tripId:"other"},{itemId:"other"}]){expect((await markItineraryItemCompleted({...i,...override},now)).ok).toBe(false);expect((await restoreItineraryItemToPending({...i,...override},now)).ok).toBe(false);expect((await previewSkipItineraryItem({...i,...override},now)).ok).toBe(false);expect((await skipItineraryItem({...i,token:p.token,...override},now)).ok).toBe(false);}
     expect(await snapshot()).toEqual(before);const owner=await db!.prototypeUser.create({data:{displayName:"Other owner"}});await db!.trip.update({where:{id:tripId},data:{ownerId:owner.id}});
-    expect((await getTodayView(tripId,a.dayId,now)).ok).toBe(false);expect((await markItineraryItemCompleted(i,now)).ok).toBe(false);expect((await previewSkipItineraryItem(i,now)).ok).toBe(false);expect((await skipItineraryItem({...i,token:p.token},now)).ok).toBe(false);expect((await restoreItineraryItemToPending(i,now)).ok).toBe(false);
+    expect((await getTodayView(tripId,a.dayId!,now)).ok).toBe(false);expect((await markItineraryItemCompleted(i,now)).ok).toBe(false);expect((await previewSkipItineraryItem(i,now)).ok).toBe(false);expect((await skipItineraryItem({...i,token:p.token},now)).ok).toBe(false);expect((await restoreItineraryItemToPending(i,now)).ok).toBe(false);
   });
   it("rejects invalid transitions, tampered/expired tokens and deleted items", async () => {
     const a=await block(),i=await input(a.id);expect((await restoreItineraryItemToPending(i,now)).ok).toBe(false);expect((await skipItineraryItem(i,now)).ok).toBe(false);

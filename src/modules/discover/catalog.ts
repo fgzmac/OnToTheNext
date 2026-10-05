@@ -1,5 +1,5 @@
 import { TOKYO_ADDITIONS } from "./tokyo-pilot";
-import type { EventOccurrence, ExperienceSource } from "./tokyo-pilot";
+import type { EventOccurrence, ExperienceSource } from "../experiences/types";
 import type { DiscoverInterest } from "@/src/generated/prisma/enums";
 
 export const SUPPORTED_CITIES = ["Tokyo", "Kyoto", "Osaka"] as const;

@@ -20,7 +20,7 @@ export function deriveTimeIssues(items: readonly TimedItem[]): TimeIssue[] {
   }
   return issues;
 }
-export function isEligibleMoveDay(item: { type: string; dayId: string; sourceSegmentId: string | null; originSegmentId: string | null }, day: SchedulingDay): boolean {
+export function isEligibleMoveDay(item: { type: string; dayId: string | null; sourceSegmentId: string | null; originSegmentId: string | null }, day: SchedulingDay): boolean {
   if (day.id === item.dayId) return false;
   const segmentId = item.type === "ACTIVITY" ? item.sourceSegmentId : item.type === "TRANSPORTATION" ? item.originSegmentId : null;
   return segmentId === null || day.primarySegmentId === segmentId;

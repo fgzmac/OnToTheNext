@@ -9,14 +9,14 @@ import { contextIssues, deriveDeparture, eligibleOrigin, parseTravelInputs, timi
 import { reviewedContext, sourceFacts, targetFacts } from "./context";
 const include = { day: { include: { primarySegment: true } }, reservation: true, travelPlan: true } as const;
 async function workspace(tx: Prisma.TransactionClient, tripId: string) {
-  return tx.trip.findFirst({ where: { id: tripId, ownerId: PROTOTYPE_OWNER_ID }, include: { itineraryItems: { include, orderBy: [{ day: { position: "asc" } }, { position: "asc" }] } } });
+  return tx.trip.findFirst({ where: { id: tripId, ownerId: PROTOTYPE_OWNER_ID }, include: { itineraryItems: { where: {dayId: {not: null}}, include, orderBy: [{ day: { position: "asc" } }, { position: "asc" }] } } });
 }
 type Workspace = NonNullable<Awaited<ReturnType<typeof workspace>>>;
 type Item = Workspace["itineraryItems"][number];
 function itemContext(item: Item): TravelItemContext {
-  const segment = item.day.primarySegment, booking = item.reservation;
-  return { id: item.id, tripId: item.tripId, title: item.title, type: item.type, progress: item.progress, dayId: item.dayId,
-    date: formatDateOnly(item.day.date), position: item.position, startMinute: item.startMinute, durationMinutes: item.durationMinutes,
+  const segment = item.day!.primarySegment, booking = item.reservation;
+  return { id: item.id, tripId: item.tripId, title: item.title, type: item.type, progress: item.progress, dayId: item.dayId!,
+    date: formatDateOnly(item.day!.date), position: item.position, startMinute: item.startMinute, durationMinutes: item.durationMinutes,
     locationLabel: item.locationLabel, originSegmentId: item.originSegmentId, segment: segment ? { id: segment.id, label: segment.baseName, arrival: formatDateOnly(segment.arrivalDate), departure: formatDateOnly(segment.departureDate) } : null,
     booking: booking ? { id: booking.id, state: booking.state, date: booking.confirmedDate ? formatDateOnly(booking.confirmedDate) : null, minute: booking.confirmedStartMinute } : null };
 }

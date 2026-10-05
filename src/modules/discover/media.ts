@@ -1,3 +1,7 @@
 import manifest from "./media-manifest.json" with { type: "json" };
-export type ExperiencePhoto = typeof manifest[number];
-export function photoFor(placeId: string): ExperiencePhoto | null { return manifest.find(photo => photo.placeId === placeId) ?? null; }
+import type { LocalExperiencePhoto } from "../experiences/types";
+export type { ExperiencePhoto } from "../experiences/types";
+export function photoFor(placeId: string): LocalExperiencePhoto | null {
+  const photo = manifest.find(photo => photo.placeId === placeId);
+  return photo ? { ...photo, storage: "local" } : null;
+}
