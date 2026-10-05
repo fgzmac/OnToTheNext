@@ -166,3 +166,71 @@ This is a bounded deterministic outline improvement, not equivalence to the supp
 conversational planning session or human usability acceptance. Current route feasibility,
 opening calendars, ticket availability, lodging quotes and automatic extraction of
 arbitrary conversational relationships remain unresolved.
+
+## Source-aware ordinary paste import
+
+The import review now parses document sections before activities. Known destination
+headings, dated rows (including dotted month abbreviations), nested descriptions,
+explicit arrow sequences, protected periods and booking negation feed the existing
+organizer. The compatibility parsePaste entry point and both dated/undated review
+surfaces share that parser. Unknown destinations and ambiguous multi-action prose
+remain visible questions/reference notes rather than fabricated activity fields.
+
+Long input is bounded at 120,000 characters, 3,000 lines and 400 extracted items;
+accepted review JSON is also bounded. The server-action body ceiling is finite and
+accommodates Unicode source plus review metadata. Original source, selected items,
+line spans, parent context, source roles, timing roles and owner correction evidence
+use existing ImportBatch text and OrganizerIdea JSON. No migration or dependency
+was added. Save retry identity includes the accepted extraction, so selecting a
+second section is not mistaken for retrying the first. Identical accepted retries
+remain idempotent. Existing items, source snapshots, lock and reservation handling
+are not automatically reinterpreted.
+
+The visible active-section selector suggests a labelled revised plan. Unselected
+versions and reference passages remain available in the original saved document;
+they are not merged into the active itinerary. Absent reliable speaker boundaries,
+source remains unknown; the owner may label the section. Imported dates remain
+proposals, and an explicit reported booking still needs owner confirmation. Opening
+and closing hours, release deadlines and historical examples are not appointment
+times. Explicit admission needs, no booking yet, booking suggestions and reported
+bookings are distinguished. A protected-period note does not imply admission.
+
+Review shows clean names, dates, source sequences, descriptions and questions first.
+Source snippets and per-field evidence are disclosures. Corrections and explicit
+splitting preserve original source; exact conservative catalog enrichment remains
+separate and does not contribute invented relationships. No model, URL fetch,
+provider, new scheduler or catalogue-driven trip generator is involved.
+
+Ordinary-input evidence was captured through the real production review UI, without
+preparing context fields: the compact original retains 14 items and three admission
+needs, with no invented outings; the corrected daily section yields 26 review items
+with inherited city/date context and two explicit sequences. The full conversation
+is accepted above the former 40,000-character ceiling, retains five source sections
+and selects only the labelled revised section (27 items including a route note).
+The accepted full-source import was reopened, organized and locked with zero manual
+field corrections: 14 scheduled items, 10 retained notes, two conditional/optional
+items and one stop held by the existing three-stop outline cap. No booking record
+was generated from uncertain source claims. Browser textareas normalize CRLF to LF;
+the stored document otherwise matches the original, with all line positions retained.
+Private raw input, extraction JSON, rendered evidence, accepted-state audit and
+before/after database fingerprints remain ignored under .cache/importer3/.
+
+Limitations are explicit: mixed-activity prose is not fully segmented, some supporting
+instructions remain section references rather than entity-linked decisions, and
+unknown speaker boundaries require a section-level label. A narrative visit followed
+by shopping/packing can remain a note. A transfer sentence mentioning activities
+in two cities needs a destination/split decision. Prose alternatives/fallbacks remain
+visible without an invented semantic dependency graph. Earliest versus revised
+sections are reviewed by the owner; this does not reconcile real hotel reservations.
+Current availability, transport, missing times and semantic place aliases remain
+outside this structural slice. Suggested periods still do not establish feasibility.
+
+Validation preserves the existing organizer tests and flows. The four obsolete
+negated-booking expectations now require no admission action; the prose-retention
+expectation checks retained reference text. New general tests cover structure,
+provenance, date/time roles, finite limits, long versions, adversarial inert text and
+organizer handoff. Five PostgreSQL cases and two browser flows verify persistence,
+selected-section retries, reload, long input, lock and unchanged booking state in
+the separately authorized disposable CI environment. No local destructive fixtures,
+reset, seed, migration or live provider calls are authorized or used. Exact-head CI
+counts and private evidence are recorded in the PR and owner handoff.

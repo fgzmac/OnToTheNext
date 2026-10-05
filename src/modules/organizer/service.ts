@@ -1,3 +1,5 @@
+import { IMPORT_LIMITS } from "./import-types";
+import { validateImportEnvelope } from "./import-validation";
 import type { Prisma } from "@/src/generated/prisma/client";
 import { getPrismaClient } from "@/src/lib/prisma";
 import { lockPrototypeTrip } from "@/src/lib/trip-lock";
@@ -27,7 +29,7 @@ function dto(c:Context) {
     outing:input?.outing??"",area:input?.area??"",sequence:input?.sequence??"",shortVisit:input?.shortVisit??"",conditionalEvening:input?.conditionalEvening??"",description:input?.description||independent?.description||"",decision:input?.decision??"",sourceRole:input?.sourceRole??"Supplied planning input",descriptionSource:independent,
     alternative:i.organizerIdea?.disposition==="OPTIONAL",excluded:i.organizerIdea?.disposition==="EXCLUDED",dayId:i.dayId,position:i.position,fixed:i.flexibility==="FIXED",bookedDate:i.reservation?.state==="BOOKED"&&i.reservation.confirmedDate?formatDateOnly(i.reservation.confirmedDate):null,
     booking:i.reservation?{id:i.reservation.id,state:i.reservation.state,date:i.reservation.confirmedDate?formatDateOnly(i.reservation.confirmedDate):null,time:i.reservation.confirmedStartMinute,reference:i.reservation.confirmationReference}:null,
-    reason:(i.organizerIdea?.input as {outcomeReason?:string}|null)?.outcomeReason??"",notes:i.notes??"",fragment:i.organizerIdea?.sourceFragment??"",pending:i.organizerIdea?.pending??false,imported:Boolean(i.organizerIdea),revision:i.revision,progress:i.progress};});
+    reason:(i.organizerIdea?.input as {outcomeReason?:string}|null)?.outcomeReason??"",notes:i.notes??"",fragment:i.organizerIdea?.sourceFragment??"",source:input?.source??null,pending:i.organizerIdea?.pending??false,imported:Boolean(i.organizerIdea),revision:i.revision,progress:i.progress};});
   return {tripId:c.id,locked:c.organizerState?.locked??false,revision:c.organizerState?.revision??0,token:signActionPreview({purpose:"organizer-state",tripId:c.id,hash:hash(c)}),days,items};
 }
 export type OrganizerWorkspace=ReturnType<typeof dto>;
@@ -37,9 +39,9 @@ async function mutate<T>(tripId:string,fn:(tx:Prisma.TransactionClient,c:Context
 async function bump(tx:Prisma.TransactionClient,tripId:string,locked?:boolean) {await tx.organizerState.upsert({where:{tripId},create:{tripId,locked:locked??false,revision:1},update:{revision:{increment:1},...(locked===undefined?{}:{locked})}});}
 function unlocked(c:Context){if(c.organizerState?.locked)throw Error("Itinerary is locked. Ideas and bookings can still be saved; unlock before changing placements.");}
 export async function setLock(tripId:string,token:string,locked:boolean){return mutate(tripId,async(tx,c)=>{verify(token,c);await bump(tx,tripId,locked);});}
-function validateItem(value:InputItem) {
+export function validateItem(value:InputItem) {
   if(!value || typeof value!=="object")throw Error("Invalid import item.");
-  for(const key of ["name","city","date","time","period","notes","url","fragment","kind","booking"] as const)if(typeof value[key]!=="string"||value[key].length>(["notes","fragment"].includes(key)?40000:500))throw Error("Review the input field lengths.");
+  for(const key of ["name","city","date","time","period","notes","url","fragment","kind","booking"] as const)if(typeof value[key]!=="string"||value[key].length>(["notes","fragment"].includes(key)?IMPORT_LIMITS.characters:500))throw Error("Review the input field lengths.");
   for(const key of ["outing","area","description","decision","sourceRole","sequence","shortVisit","conditionalEvening"] as const)if(value[key]!==undefined&&(typeof value[key]!=="string"||value[key]!.length>2000))throw Error("Keep source context fields within 2,000 characters.");
   if(value.sequence&&!/^\d{1,3}$/.test(value.sequence))throw Error("Source sequence must be a whole number between 0 and 999.");
   if(!value.name.trim()||!PERIODS.includes(value.period as typeof PERIODS[number])||!["ACTIVITY","NOTE","PROTECTED"].includes(value.kind)||!["","NEED_TICKETS","BOOKED_STATEMENT"].includes(value.booking))throw Error("Review item name, kind, period and booking statement.");
@@ -49,10 +51,11 @@ function validateItem(value:InputItem) {
   return value;
 }
 export async function acceptImport(tripId:string,text:string,values:InputItem[],repeatKey:string,confirmBooked:boolean) {
-  if(typeof text!=="string"||!text.trim()||text.length>40000||!Array.isArray(values)||!values.length||values.length>150||typeof repeatKey!=="string"||repeatKey.length>80)throw Error("Invalid import size.");
+  validateImportEnvelope(text,values);
+  if(typeof repeatKey!=="string"||repeatKey.length>80)throw Error("Invalid import size.");
   values.forEach(validateItem);
   return mutate(tripId,async(tx,c)=>{
-    const requestHash=fingerprint({text,repeatKey});
+    const requestHash=fingerprint({text,repeatKey,...(values.some(v=>v.source)?{accepted:values}:{})});
     const previous=await tx.importBatch.findUnique({where:{tripId_requestHash:{tripId,requestHash}}});if(previous)return {alreadySaved:true};
     const batch=await tx.importBatch.create({data:{tripId,requestHash,originalText:text}});
     const seen=new Set(c.itineraryItems.map(i=>identity(i.title)+"|"+identity(data(i)?.city??"")+"|"+(data(i)?.date??"")));
@@ -80,7 +83,7 @@ function sourceEligible(i:StoredItem,c:Context,dayId:string) {
   const input=data(i);if(input?.city&&!c.segments.some(s=>identity(s.baseName)===identity(input.city)&&d.date>=s.arrivalDate&&d.date<=s.departureDate))throw Error("Choose a Day matching the supplied city; no location was guessed.");
 }
 function seal(c:Context,placements:Placement[],warnings:string[]):Proposal {return {placements,warnings,token:signActionPreview({purpose:"organizer-apply",tripId:c.id,hash:hash(c),proposalHash:fingerprint(placements)})};}
-export async function previewOrganization(tripId:string,ids:string[]) {return getPrismaClient().$transaction(async tx=>{const c=await context(tx,tripId),w=dto(c);if(!Array.isArray(ids)||ids.length>150)throw Error("Select up to 150 ideas.");
+export async function previewOrganization(tripId:string,ids:string[]) {return getPrismaClient().$transaction(async tx=>{const c=await context(tx,tripId),w=dto(c);if(!Array.isArray(ids)||ids.length>IMPORT_LIMITS.items)throw Error("Select up to 400 ideas.");
   const eligible=w.items.filter(i=>i.imported&&!i.dayId&&i.pending).map(i=>i.id);if(ids.some(id=>!eligible.includes(id)))throw Error("Select pending user-supplied ideas; saved placements remain untouched.");
   const checked=w.items.map(i=>{const stored=c.itineraryItems.find(x=>x.id===i.id)!;let eligibilityReason="";const eligibleDays=w.days.filter(d=>{try{sourceEligible(stored,c,d.id);return true;}catch(e){if(identity(d.city)===identity(i.city)||identity(d.arrivalCity??"")===identity(i.city))eligibilityReason=e instanceof Error?e.message:"Source eligibility needs review.";return false;}}).map(d=>d.id);return {...i,eligibleDays,eligibilityReason};});
   const placements=organize(checked,w.days,ids);return seal(c,placements,["Only selected waiting ideas are proposed. Saved placements and bookings stay unchanged.","Suggested periods are an outline, not verified hours, duration or transport."]);},{isolationLevel:"RepeatableRead"});}

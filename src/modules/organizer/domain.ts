@@ -1,8 +1,11 @@
+import { parseDocument } from "./import-document";
+import type { ImportSource } from "./import-types";
 import { validDate } from "../reservations/domain";
 
 export const PERIODS = ["", "Early morning", "Morning", "Afternoon", "Evening", "Afternoon & Evening", "Full day"] as const;
 export function periodsOverlap(a:string,b:string){if(!a||!b||a==="Full day"||b==="Full day")return true;const parts=(s:string)=>s==="Afternoon & Evening"?["Afternoon","Evening"]:s==="Early morning"?["Morning"]:[s];return parts(a).some(p=>parts(b).includes(p));}
 export type InputItem = {
+  source?: ImportSource;
   name: string; city: string; date: string; time: string; period: string; notes: string;
   kind: "ACTIVITY" | "NOTE" | "PROTECTED"; priority: boolean; alternative: boolean;
   booking: "" | "NEED_TICKETS" | "BOOKED_STATEMENT"; url: string; fragment: string; excluded: boolean;
@@ -20,42 +23,10 @@ export function suppliedDate(text: string, year?: number): string {
   const date = `${m[3] || year}-${String(months.findIndex(x=>x.startsWith(m[1].toLowerCase()))+1).padStart(2,"0")}-${m[2].padStart(2,"0")}`;
   return validDate(date) ? date : "";
 }
-/** Bounded line parser. No network, HTML execution, model or inferred venue identity. */
+/** The compatibility entry point uses the same section-aware parser as the review UI. */
 export function parsePaste(text: string, cities: string[] = [], year?: number): InputItem[] {
-  if (text.length > 40000) throw Error("Paste up to 40,000 characters at a time.");
-  let city = "", date = "";
-  const result: InputItem[] = [];
-  for (const raw of text.split(/\r?\n/)) {
-    const fragment = raw.trim(); if (!fragment) continue;
-    const line = fragment.replace(/^\s*(?:[-*•]|\d+[.)])\s+/, "").replace(/^#{1,6}\s*/, "");
-    const context = line.match(/^(Outing|Area|Description|Decision|Source role|Sequence|Short visit|Conditional evening):\s*(.+)$/i);
-    if(context && result.length) {
-      const keys:Record<string,keyof InputItem>={outing:"outing",area:"area",description:"description",decision:"decision","source role":"sourceRole",sequence:"sequence","short visit":"shortVisit","conditional evening":"conditionalEvening"};
-      const previous=result[result.length-1];
-      Object.assign(previous,{[keys[context[1].toLowerCase()]]:context[2].trim()});
-      previous.fragment += "\n"+fragment;
-      continue;
-    }
-    const cleanHeading = line.replace(/:$/, "").trim();
-    const knownCity = cities.find(c=>identity(c)===identity(cleanHeading));
-    const headingDate = suppliedDate(line,year);
-    if (knownCity || (/[:：]$/.test(line) && !/https?:/.test(line) && line.length<70 && !headingDate)) { const next=knownCity ?? cleanHeading;if(identity(next)!==identity(city))date="";city=next; continue; }
-    if (headingDate && /^(?:Day\s+\d+\s*[-:·]?\s*)?(?:\d{4}-\d\d-\d\d|[A-Za-z]+\s+\d)/i.test(line) && line.length<90 && !/booked|tickets|https?:/i.test(line)) {
-      const headingCity=cities.find(c=>line.toLowerCase().includes(c.toLowerCase()));
-      // A date-only/date-and-city heading supplies context; activity-bearing lines remain items.
-      const remainder=line.replace(/^Day\s+\d+\s*[-:·]?\s*/i,"").replace(/\d{4}-\d\d-\d\d|[A-Za-z]+\s+\d{1,2}(?:,?\s+\d{4})?/,"").replace(/[-:·,]/g,"").trim();
-      if (!remainder || (headingCity && identity(remainder)===identity(headingCity))) {date=headingDate;if(headingCity)city=headingCity;continue;}
-    }
-    const url = line.match(/https?:\/\/[^\s<>]+/)?.[0] ?? "";
-    const timeMatch=line.match(/\b([01]?\d|2[0-3]):([0-5]\d)\b/);
-    const period=/full[ -]day/i.test(line)?"Full day":/afternoon.*evening/i.test(line)?"Afternoon & Evening":/early morning/i.test(line)?"Early morning":/afternoon/i.test(line)?"Afternoon":/evening/i.test(line)?"Evening":/morning/i.test(line)?"Morning":"";
-    const kind=/\b(keep .*(free|clear)|protected|rest time)\b/i.test(line)?"PROTECTED":/^(note|remember|unknown|unresolved|if |maybe |please |ignore |system:)/i.test(line) || line.length>240 ?"NOTE":"ACTIVITY";
-    result.push({name:line.replace(url,"").trim().slice(0,240)||"Link / note",city,date:headingDate||date,time:timeMatch?`${timeMatch[1].padStart(2,"0")}:${timeMatch[2]}`:"",period,kind,
-      priority:/\b(must[ -]do|priority)\b/i.test(line),alternative:/\bor\b|\boptional\b/i.test(line),booking:/\b(not(?:\s+\w+){0,3}\s+booked|no(?:\s+\w+){0,3}\s+booked|nothing booked|need tickets|to book|unbooked)\b/i.test(line)?"NEED_TICKETS":/\bbooked\b|\bconfirmed reservation\b/i.test(line)?"BOOKED_STATEMENT":"",url,notes:line,fragment,excluded:false});
-  }
-  if(result.length>150)throw Error("Review up to 150 lines per import.");
-  if(!result.length && text.trim())result.push({name:"Planning note",city,date,time:"",period:"",kind:"NOTE",priority:false,alternative:false,booking:"",url:"",notes:text,fragment:text,excluded:false});
-  return result;
+  const doc = parseDocument(text,cities,year);
+  return doc.sections.find(s=>s.id===doc.suggested)?.items ?? [];
 }
 /** Known full-day intentions cannot be advertised as a short-gap fit. */
 export function gapDurationEligible(period:string, notes:string, duration:number|null, minutes:number) {
